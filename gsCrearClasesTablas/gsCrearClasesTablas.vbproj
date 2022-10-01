@@ -19,6 +19,8 @@
 	  <RepositoryType>git</RepositoryType>
 	  <NeutralLanguage>es</NeutralLanguage>
 	  <OptionStrict>On</OptionStrict>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageReleaseNotes>Primera versión del proyecto usando .NET 6.0 (net6.0-windows)</PackageReleaseNotes>
 
   </PropertyGroup>
 
@@ -30,6 +32,13 @@
     <Import Include="System.Data" />
     <Import Include="System.Drawing" />
     <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
