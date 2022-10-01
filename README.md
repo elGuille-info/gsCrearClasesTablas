@@ -5,6 +5,7 @@ Versión para .NET 6.0 para Windows basado en el código publicado en: [CrearCla
 
 Mira en el blog para saber más y los enlaces a las versiones anteriores: [Generar las clases (de VB o C#) de una tabla de SQL Server o Access (mdb)](https://www.elguillemola.com/generar-las-clases-de-una-tabla-de-sql-server-o-access-mdb/)
 
+
 _**Nota:**_
 
 >Este proyecto utiliza net6.0-windows en el proyecto principal (el de la interfaz del usuario porque utiliza WindowsForms.<br>
