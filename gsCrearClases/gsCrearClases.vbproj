@@ -13,7 +13,7 @@
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>es</NeutralLanguage>
     <AssemblyVersion>3.0.2</AssemblyVersion>
-    <FileVersion>3.0.2.0</FileVersion>
+    <FileVersion>3.0.2.1</FileVersion>
     <OptionStrict>On</OptionStrict>
     <PackageReleaseNotes>
 		05-oct-22: Revisión para compilar como net6.0 sin indicar que es para Windows.

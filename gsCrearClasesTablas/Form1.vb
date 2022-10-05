@@ -84,7 +84,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.1.1"
+            s = "3.0.2.1"
         End Try
 
         Return s
@@ -96,6 +96,10 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Dim ts As TimeSpan = Nothing
+
+        ' Actualizar la versión de los settings para no perder los valores anteriores. (05/oct/22 12.17)
+        My.Settings.Upgrade()
+        My.Settings.Save()
 
         ' centrar el formulario horizontalmente
         Me.Left = (Screen.PrimaryScreen.Bounds.Width - Me.Width) \ 2
