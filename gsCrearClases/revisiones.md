@@ -37,8 +37,8 @@
 '   Tipo:= "Revisión", _
 '   Clases:= "Proyecto", _
 '   Miembro:= "", _
-'   Motivo:= "Cambio de versión para compilar con .NET 6.0.", _
-'   Solucion:= "", _
+'   Motivo:= "Creo nuevo proyecto para usar con .NET 6.0.", _
+'   Solucion:= "Cambio de versión para compilar con .NET 6.0.", _
 '   Comentarios:= "")>
 
 '<revision("1.1.0.14", _

@@ -4,9 +4,9 @@
 ' Inicialmente se usará código de VB para crear el de C#
 ' al menos en lo que a los tipos de datos, tipos de métodos, etc.
 '
-' Nota: Ver las revisiones en Revisiones.txt
+' Nota: Ver las revisiones en Revisiones.md
 '
-' ©Guillermo 'guille' Som, 2004, 2007, 2018, 2019
+' ©Guillermo 'guille' Som, 2004, 2007, 2018-2022
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
