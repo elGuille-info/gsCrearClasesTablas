@@ -8,6 +8,17 @@
 ### Revisiones de 2022
 
 ```
+'<revision("3.0.2.0", _
+'   FechaModificacion:= "05/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "05/Oct/2022", _
+'   Tipo:= "Revisión", _
+'   Clases:= "", _
+'   Miembro:= "", _
+'   Motivo:= "Quitar que sea solo para Windows.", _
+'   Solucion:= "", _
+'   Comentarios:= "La DLL gsCrearClases ya no depende de Windows al quitar las referencias de los paquetes NuGet.")>
+
 '<revision("3.0.1.1", _
 '   FechaModificacion:= "05/Oct/2022", _
 '   Tester:= "elGuille", _
