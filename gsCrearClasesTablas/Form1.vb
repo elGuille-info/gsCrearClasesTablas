@@ -51,6 +51,7 @@
 '
 '   3.0.0   01-oct-2022 Proyecto creado con .NET 6.0
 '   3.0.0.1 05-oct-2022 Ajustes en los tamaños.
+'   3.0.0.2             El valor fijo de VersionDLL.
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -81,7 +82,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "2.1.0.8"
+            s = "3.0.0.2"
         End Try
 
         Return s
