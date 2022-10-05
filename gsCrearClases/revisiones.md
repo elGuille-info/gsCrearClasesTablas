@@ -8,6 +8,17 @@
 ### Revisiones de 2022
 
 ```
+'<revision("3.0.0.2", _
+'   FechaModificacion:= "05/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "05/Oct/2022", _
+'   Tipo:= "Revisión", _
+'   Clases:= "ConversorTipos", _
+'   Miembro:= "", _
+'   Motivo:= "Quito la clase ConversorTipos del proyecto gsCrearClases.", _
+'   Solucion:= "", _
+'   Comentarios:= "Esa clase no se utiliza.")>
+
 '<revision("3.0.0.1", _
 '   FechaModificacion:= "05/Oct/2022", _
 '   Tester:= "elGuille", _

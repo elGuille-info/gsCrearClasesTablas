@@ -13,14 +13,18 @@
     <RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>es</NeutralLanguage>
-    <AssemblyVersion>3.0.1</AssemblyVersion>
-    <FileVersion>3.0.0.1</FileVersion>
+    <AssemblyVersion>3.0.2</AssemblyVersion>
+    <FileVersion>3.0.0.2</FileVersion>
     <OptionStrict>On</OptionStrict>
     <PackageReleaseNotes>Primera versión del proyecto usando .NET 6.0 (net6.0-windows)</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+
+  <ItemGroup>
+    <Compile Remove="ConversorTipos.vb" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\README.md">

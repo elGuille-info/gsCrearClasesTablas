@@ -50,6 +50,7 @@
 '   2.1.0.8             Creo el fichero elGuille_compartido.snk para firmar los ensamblados.
 '
 '   3.0.0   01-oct-2022 Proyecto creado con .NET 6.0
+'   3.0.0.1 05-oct-2022 Ajustes en los tamaños.
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On

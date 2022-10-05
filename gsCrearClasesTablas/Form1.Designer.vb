@@ -22,16 +22,6 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        'Me.SuspendLayout()
-        '
-        ''Form1
-        ''
-        'Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
-        'Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        'Me.ClientSize = New System.Drawing.Size(689, 756)
-        'Me.Name = "Form1"
-        'Me.Text = "Form1"
-        'Me.ResumeLayout(False)
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.btnGuardar = New System.Windows.Forms.Button()
@@ -89,10 +79,10 @@ Partial Class Form1
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnGuardar.Location = New System.Drawing.Point(579, 680)
-        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnGuardar.Location = New System.Drawing.Point(965, 1188)
+        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(99, 22)
+        Me.btnGuardar.Size = New System.Drawing.Size(165, 42)
         Me.btnGuardar.TabIndex = 13
         Me.btnGuardar.Text = "&Guardar"
         Me.toolTip1.SetToolTip(Me.btnGuardar, " Guardar la clase generada (se guardará con el nombre de la tabla y la extensión " &
@@ -101,18 +91,17 @@ Partial Class Form1
         'cboTablas
         '
         Me.cboTablas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboTablas.Location = New System.Drawing.Point(128, 262)
-        Me.cboTablas.Margin = New System.Windows.Forms.Padding(2)
+        Me.cboTablas.Location = New System.Drawing.Point(208, 483)
+        Me.cboTablas.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cboTablas.Name = "cboTablas"
-        Me.cboTablas.Size = New System.Drawing.Size(202, 21)
+        Me.cboTablas.Size = New System.Drawing.Size(334, 33)
         Me.cboTablas.TabIndex = 5
         '
         'Label3
         '
-        Me.Label3.Location = New System.Drawing.Point(17, 262)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label3.Location = New System.Drawing.Point(23, 483)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(107, 19)
+        Me.Label3.Size = New System.Drawing.Size(178, 37)
         Me.Label3.TabIndex = 4
         Me.Label3.Text = "Tablas:"
         Me.toolTip1.SetToolTip(Me.Label3, " Lista de las tablas de la base de datos ")
@@ -120,10 +109,10 @@ Partial Class Form1
         'btnMostrarTablas
         '
         Me.btnMostrarTablas.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnMostrarTablas.Location = New System.Drawing.Point(341, 262)
-        Me.btnMostrarTablas.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnMostrarTablas.Location = New System.Drawing.Point(563, 483)
+        Me.btnMostrarTablas.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnMostrarTablas.Name = "btnMostrarTablas"
-        Me.btnMostrarTablas.Size = New System.Drawing.Size(115, 22)
+        Me.btnMostrarTablas.Size = New System.Drawing.Size(192, 42)
         Me.btnMostrarTablas.TabIndex = 6
         Me.btnMostrarTablas.Text = "Mostrar &tablas"
         Me.toolTip1.SetToolTip(Me.btnMostrarTablas, " Mostrar las tablas que contiene la base de datos indicada ")
@@ -133,13 +122,13 @@ Partial Class Form1
         Me.txtCodigo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtCodigo.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCodigo.Location = New System.Drawing.Point(11, 425)
-        Me.txtCodigo.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtCodigo.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.txtCodigo.Location = New System.Drawing.Point(18, 797)
+        Me.txtCodigo.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtCodigo.Multiline = True
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCodigo.Size = New System.Drawing.Size(550, 302)
+        Me.txtCodigo.Size = New System.Drawing.Size(914, 477)
         Me.txtCodigo.TabIndex = 12
         Me.txtCodigo.Text = "TextBox1"
         Me.txtCodigo.WordWrap = False
@@ -148,30 +137,29 @@ Partial Class Form1
         '
         Me.btnGenerarClase.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnGenerarClase.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnGenerarClase.Location = New System.Drawing.Point(256, 79)
-        Me.btnGenerarClase.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnGenerarClase.Location = New System.Drawing.Point(427, 152)
+        Me.btnGenerarClase.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnGenerarClase.Name = "btnGenerarClase"
-        Me.btnGenerarClase.Size = New System.Drawing.Size(103, 22)
+        Me.btnGenerarClase.Size = New System.Drawing.Size(172, 42)
         Me.btnGenerarClase.TabIndex = 5
         Me.btnGenerarClase.Text = "Generar &Clase"
         Me.toolTip1.SetToolTip(Me.btnGenerarClase, " Generar el código de la clase en el lenguaje indicado ")
         '
         'Label5
         '
-        Me.Label5.Location = New System.Drawing.Point(17, 319)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label5.Location = New System.Drawing.Point(23, 592)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(107, 19)
+        Me.Label5.Size = New System.Drawing.Size(178, 37)
         Me.Label5.TabIndex = 9
         Me.Label5.Text = "Clase:"
         Me.toolTip1.SetToolTip(Me.Label5, " Nombre de la clase a generar (por defecto tendrá el mismo nombre que la tabla) ")
         '
         'txtClase
         '
-        Me.txtClase.Location = New System.Drawing.Point(128, 319)
-        Me.txtClase.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtClase.Location = New System.Drawing.Point(208, 592)
+        Me.txtClase.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtClase.Name = "txtClase"
-        Me.txtClase.Size = New System.Drawing.Size(176, 20)
+        Me.txtClase.Size = New System.Drawing.Size(291, 31)
         Me.txtClase.TabIndex = 10
         Me.txtClase.Text = "TextBox1"
         '
@@ -179,20 +167,19 @@ Partial Class Form1
         '
         Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnSalir.Location = New System.Drawing.Point(579, 706)
-        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSalir.Location = New System.Drawing.Point(965, 1238)
+        Me.btnSalir.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(99, 21)
+        Me.btnSalir.Size = New System.Drawing.Size(165, 40)
         Me.btnSalir.TabIndex = 14
         Me.btnSalir.Text = "Salir"
         Me.toolTip1.SetToolTip(Me.btnSalir, " Terminar la aplicación ")
         '
         'Label7
         '
-        Me.Label7.Location = New System.Drawing.Point(17, 292)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label7.Location = New System.Drawing.Point(23, 541)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(107, 19)
+        Me.Label7.Size = New System.Drawing.Size(178, 37)
         Me.Label7.TabIndex = 7
         Me.Label7.Text = "Cadena select:"
         Me.toolTip1.SetToolTip(Me.Label7, " Cadena de selección de los elementos a usar por la clase (SELECT * FROM <tabla> " &
@@ -200,10 +187,10 @@ Partial Class Form1
         '
         'txtSelect
         '
-        Me.txtSelect.Location = New System.Drawing.Point(128, 292)
-        Me.txtSelect.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtSelect.Location = New System.Drawing.Point(208, 541)
+        Me.txtSelect.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtSelect.Name = "txtSelect"
-        Me.txtSelect.Size = New System.Drawing.Size(330, 20)
+        Me.txtSelect.Size = New System.Drawing.Size(547, 31)
         Me.txtSelect.TabIndex = 8
         Me.txtSelect.Text = "Select * From"
         '
@@ -219,20 +206,19 @@ Partial Class Form1
         Me.grbAccess.Controls.Add(Me.txtNombreBase)
         Me.grbAccess.Controls.Add(Me.Label8)
         Me.grbAccess.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.grbAccess.Location = New System.Drawing.Point(13, 8)
-        Me.grbAccess.Margin = New System.Windows.Forms.Padding(2)
+        Me.grbAccess.Location = New System.Drawing.Point(22, 15)
+        Me.grbAccess.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.grbAccess.Name = "grbAccess"
-        Me.grbAccess.Padding = New System.Windows.Forms.Padding(2)
-        Me.grbAccess.Size = New System.Drawing.Size(660, 103)
+        Me.grbAccess.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.grbAccess.Size = New System.Drawing.Size(1100, 189)
         Me.grbAccess.TabIndex = 0
         Me.grbAccess.TabStop = False
         '
         'Label4
         '
-        Me.Label4.Location = New System.Drawing.Point(13, 72)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label4.Location = New System.Drawing.Point(22, 138)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(107, 19)
+        Me.Label4.Size = New System.Drawing.Size(178, 37)
         Me.Label4.TabIndex = 5
         Me.Label4.Text = "Password:"
         Me.toolTip1.SetToolTip(Me.Label4, " Si la base está protegida con contraseña, escíbela aquí ")
@@ -241,19 +227,18 @@ Partial Class Form1
         '
         Me.txtAccessPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtAccessPassword.Location = New System.Drawing.Point(124, 72)
-        Me.txtAccessPassword.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtAccessPassword.Location = New System.Drawing.Point(207, 138)
+        Me.txtAccessPassword.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtAccessPassword.Name = "txtAccessPassword"
-        Me.txtAccessPassword.Size = New System.Drawing.Size(434, 20)
+        Me.txtAccessPassword.Size = New System.Drawing.Size(721, 31)
         Me.txtAccessPassword.TabIndex = 6
         Me.txtAccessPassword.Text = "TextBox1"
         '
         'Label6
         '
-        Me.Label6.Location = New System.Drawing.Point(13, 49)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Location = New System.Drawing.Point(22, 94)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(107, 19)
+        Me.Label6.Size = New System.Drawing.Size(178, 37)
         Me.Label6.TabIndex = 3
         Me.Label6.Text = "Provider:"
         Me.toolTip1.SetToolTip(Me.Label6, " El proveedor de la base de datos (normalmente: Provider: (Microsoft.Jet.OLEDB.4." &
@@ -263,10 +248,10 @@ Partial Class Form1
         '
         Me.txtProvider.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtProvider.Location = New System.Drawing.Point(124, 49)
-        Me.txtProvider.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtProvider.Location = New System.Drawing.Point(207, 94)
+        Me.txtProvider.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtProvider.Name = "txtProvider"
-        Me.txtProvider.Size = New System.Drawing.Size(434, 20)
+        Me.txtProvider.Size = New System.Drawing.Size(721, 31)
         Me.txtProvider.TabIndex = 4
         Me.txtProvider.Text = "TextBox2"
         '
@@ -274,10 +259,10 @@ Partial Class Form1
         '
         Me.btnExaminar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnExaminar.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnExaminar.Location = New System.Drawing.Point(566, 23)
-        Me.btnExaminar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnExaminar.Location = New System.Drawing.Point(943, 44)
+        Me.btnExaminar.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnExaminar.Name = "btnExaminar"
-        Me.btnExaminar.Size = New System.Drawing.Size(80, 22)
+        Me.btnExaminar.Size = New System.Drawing.Size(133, 42)
         Me.btnExaminar.TabIndex = 2
         Me.btnExaminar.Text = "&Examinar..."
         Me.toolTip1.SetToolTip(Me.btnExaminar, " Seleccionar la base de datos ")
@@ -287,19 +272,18 @@ Partial Class Form1
         Me.txtNombreBase.AllowDrop = True
         Me.txtNombreBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtNombreBase.Location = New System.Drawing.Point(124, 23)
-        Me.txtNombreBase.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtNombreBase.Location = New System.Drawing.Point(207, 44)
+        Me.txtNombreBase.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtNombreBase.Name = "txtNombreBase"
-        Me.txtNombreBase.Size = New System.Drawing.Size(434, 20)
+        Me.txtNombreBase.Size = New System.Drawing.Size(721, 31)
         Me.txtNombreBase.TabIndex = 1
         Me.txtNombreBase.Text = "txtNombreBase"
         '
         'Label8
         '
-        Me.Label8.Location = New System.Drawing.Point(13, 23)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label8.Location = New System.Drawing.Point(22, 44)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(107, 19)
+        Me.Label8.Size = New System.Drawing.Size(178, 37)
         Me.Label8.TabIndex = 0
         Me.Label8.Text = "Base de datos:"
         Me.toolTip1.SetToolTip(Me.Label8, " Base de datos ")
@@ -319,21 +303,21 @@ Partial Class Form1
         Me.grbSQL.Controls.Add(Me.Label2)
         Me.grbSQL.Controls.Add(Me.Label1)
         Me.grbSQL.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.grbSQL.Location = New System.Drawing.Point(13, 114)
-        Me.grbSQL.Margin = New System.Windows.Forms.Padding(2)
+        Me.grbSQL.Location = New System.Drawing.Point(22, 212)
+        Me.grbSQL.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.grbSQL.Name = "grbSQL"
-        Me.grbSQL.Padding = New System.Windows.Forms.Padding(2)
-        Me.grbSQL.Size = New System.Drawing.Size(660, 137)
+        Me.grbSQL.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.grbSQL.Size = New System.Drawing.Size(1100, 250)
         Me.grbSQL.TabIndex = 2
         Me.grbSQL.TabStop = False
         '
         'chkUsarSQLEXpress
         '
         Me.chkUsarSQLEXpress.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.chkUsarSQLEXpress.Location = New System.Drawing.Point(530, -2)
-        Me.chkUsarSQLEXpress.Margin = New System.Windows.Forms.Padding(2)
+        Me.chkUsarSQLEXpress.Location = New System.Drawing.Point(910, -1)
+        Me.chkUsarSQLEXpress.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkUsarSQLEXpress.Name = "chkUsarSQLEXpress"
-        Me.chkUsarSQLEXpress.Size = New System.Drawing.Size(126, 19)
+        Me.chkUsarSQLEXpress.Size = New System.Drawing.Size(184, 37)
         Me.chkUsarSQLEXpress.TabIndex = 9
         Me.chkUsarSQLEXpress.Text = "Usar SQLEXPRESS"
         Me.toolTip1.SetToolTip(Me.chkUsarSQLEXpress, "Marca esta casilla para usar '.\SQLEXPRESS' en el Data source y 'Seguridad Integr" &
@@ -342,10 +326,10 @@ Partial Class Form1
         'chkSeguridadSQL
         '
         Me.chkSeguridadSQL.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.chkSeguridadSQL.Location = New System.Drawing.Point(13, 76)
-        Me.chkSeguridadSQL.Margin = New System.Windows.Forms.Padding(2)
+        Me.chkSeguridadSQL.Location = New System.Drawing.Point(22, 146)
+        Me.chkSeguridadSQL.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkSeguridadSQL.Name = "chkSeguridadSQL"
-        Me.chkSeguridadSQL.Size = New System.Drawing.Size(427, 19)
+        Me.chkSeguridadSQL.Size = New System.Drawing.Size(712, 37)
         Me.chkSeguridadSQL.TabIndex = 4
         Me.chkSeguridadSQL.Text = "Usar seguridad de SQL, sino la seguridad integrada (Integrated Security) "
         Me.toolTip1.SetToolTip(Me.chkSeguridadSQL, " Marca esta opción para indicar el usuario y el password de la base de datos sino" &
@@ -354,30 +338,30 @@ Partial Class Form1
         'txtPassword
         '
         Me.txtPassword.Enabled = False
-        Me.txtPassword.Location = New System.Drawing.Point(316, 103)
-        Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtPassword.Location = New System.Drawing.Point(527, 198)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPassword.Size = New System.Drawing.Size(112, 20)
+        Me.txtPassword.Size = New System.Drawing.Size(184, 31)
         Me.txtPassword.TabIndex = 8
         '
         'txtUserId
         '
         Me.txtUserId.Enabled = False
-        Me.txtUserId.Location = New System.Drawing.Point(111, 103)
-        Me.txtUserId.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtUserId.Location = New System.Drawing.Point(185, 198)
+        Me.txtUserId.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtUserId.Name = "txtUserId"
-        Me.txtUserId.Size = New System.Drawing.Size(116, 20)
+        Me.txtUserId.Size = New System.Drawing.Size(191, 31)
         Me.txtUserId.TabIndex = 6
         '
         'txtInitialCatalog
         '
         Me.txtInitialCatalog.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtInitialCatalog.Location = New System.Drawing.Point(124, 49)
-        Me.txtInitialCatalog.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtInitialCatalog.Location = New System.Drawing.Point(207, 94)
+        Me.txtInitialCatalog.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtInitialCatalog.Name = "txtInitialCatalog"
-        Me.txtInitialCatalog.Size = New System.Drawing.Size(434, 20)
+        Me.txtInitialCatalog.Size = New System.Drawing.Size(721, 31)
         Me.txtInitialCatalog.TabIndex = 3
         Me.txtInitialCatalog.Text = "Downloads"
         '
@@ -385,20 +369,19 @@ Partial Class Form1
         '
         Me.txtDataSource.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtDataSource.Location = New System.Drawing.Point(124, 23)
-        Me.txtDataSource.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtDataSource.Location = New System.Drawing.Point(207, 44)
+        Me.txtDataSource.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtDataSource.Name = "txtDataSource"
-        Me.txtDataSource.Size = New System.Drawing.Size(434, 20)
+        Me.txtDataSource.Size = New System.Drawing.Size(721, 31)
         Me.txtDataSource.TabIndex = 1
         Me.txtDataSource.Text = "(local)\NETSDK"
         '
         'labelPassw
         '
         Me.labelPassw.Enabled = False
-        Me.labelPassw.Location = New System.Drawing.Point(235, 107)
-        Me.labelPassw.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.labelPassw.Location = New System.Drawing.Point(392, 206)
         Me.labelPassw.Name = "labelPassw"
-        Me.labelPassw.Size = New System.Drawing.Size(77, 19)
+        Me.labelPassw.Size = New System.Drawing.Size(128, 37)
         Me.labelPassw.TabIndex = 7
         Me.labelPassw.Text = "Password:"
         Me.toolTip1.SetToolTip(Me.labelPassw, " La contraseña para la base de SQL Server ")
@@ -406,30 +389,27 @@ Partial Class Form1
         'labelUser
         '
         Me.labelUser.Enabled = False
-        Me.labelUser.Location = New System.Drawing.Point(30, 107)
-        Me.labelUser.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.labelUser.Location = New System.Drawing.Point(50, 206)
         Me.labelUser.Name = "labelUser"
-        Me.labelUser.Size = New System.Drawing.Size(77, 19)
+        Me.labelUser.Size = New System.Drawing.Size(128, 37)
         Me.labelUser.TabIndex = 5
         Me.labelUser.Text = "User id:"
         Me.toolTip1.SetToolTip(Me.labelUser, " El ID de usuario ")
         '
         'Label2
         '
-        Me.Label2.Location = New System.Drawing.Point(13, 49)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Location = New System.Drawing.Point(22, 94)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(107, 19)
+        Me.Label2.Size = New System.Drawing.Size(178, 37)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Initial catalog:"
         Me.toolTip1.SetToolTip(Me.Label2, " La base de datos de SQL Server ")
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(13, 23)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Location = New System.Drawing.Point(22, 44)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(107, 19)
+        Me.Label1.Size = New System.Drawing.Size(178, 37)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Data source:"
         Me.toolTip1.SetToolTip(Me.Label1, " El servidor de SQL a utilizar ")
@@ -439,20 +419,20 @@ Partial Class Form1
         Me.Panel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.optCS)
         Me.Panel1.Controls.Add(Me.optVB)
-        Me.Panel1.Location = New System.Drawing.Point(256, 52)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel1.Location = New System.Drawing.Point(427, 100)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(103, 23)
+        Me.Panel1.Size = New System.Drawing.Size(172, 44)
         Me.Panel1.TabIndex = 4
         '
         'optCS
         '
         Me.optCS.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.optCS.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.optCS.Location = New System.Drawing.Point(55, 2)
-        Me.optCS.Margin = New System.Windows.Forms.Padding(2)
+        Me.optCS.Location = New System.Drawing.Point(92, 4)
+        Me.optCS.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.optCS.Name = "optCS"
-        Me.optCS.Size = New System.Drawing.Size(40, 19)
+        Me.optCS.Size = New System.Drawing.Size(67, 37)
         Me.optCS.TabIndex = 1
         Me.optCS.Text = "&C#"
         Me.toolTip1.SetToolTip(Me.optCS, " Para generar el código para C# ")
@@ -461,10 +441,10 @@ Partial Class Form1
         '
         Me.optVB.Checked = True
         Me.optVB.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.optVB.Location = New System.Drawing.Point(6, 2)
-        Me.optVB.Margin = New System.Windows.Forms.Padding(2)
+        Me.optVB.Location = New System.Drawing.Point(10, 4)
+        Me.optVB.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.optVB.Name = "optVB"
-        Me.optVB.Size = New System.Drawing.Size(40, 19)
+        Me.optVB.Size = New System.Drawing.Size(67, 37)
         Me.optVB.TabIndex = 0
         Me.optVB.TabStop = True
         Me.optVB.Text = "&VB"
@@ -473,10 +453,10 @@ Partial Class Form1
         'optAccess
         '
         Me.optAccess.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.optAccess.Location = New System.Drawing.Point(25, 4)
-        Me.optAccess.Margin = New System.Windows.Forms.Padding(2)
+        Me.optAccess.Location = New System.Drawing.Point(42, 8)
+        Me.optAccess.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.optAccess.Name = "optAccess"
-        Me.optAccess.Size = New System.Drawing.Size(197, 23)
+        Me.optAccess.Size = New System.Drawing.Size(328, 44)
         Me.optAccess.TabIndex = 1
         Me.optAccess.Text = "Usar base de datos de &Access"
         Me.toolTip1.SetToolTip(Me.optAccess, " Para usar una base de Access (OleDb) " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Se usará el DataAdapter)")
@@ -485,10 +465,10 @@ Partial Class Form1
         '
         Me.optSQL.Checked = True
         Me.optSQL.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.optSQL.Location = New System.Drawing.Point(25, 110)
-        Me.optSQL.Margin = New System.Windows.Forms.Padding(2)
+        Me.optSQL.Location = New System.Drawing.Point(42, 212)
+        Me.optSQL.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.optSQL.Name = "optSQL"
-        Me.optSQL.Size = New System.Drawing.Size(222, 23)
+        Me.optSQL.Size = New System.Drawing.Size(370, 44)
         Me.optSQL.TabIndex = 3
         Me.optSQL.TabStop = True
         Me.optSQL.Text = "Usar base de datos de &SQL Server"
@@ -499,10 +479,10 @@ Partial Class Form1
         Me.chkUsarCommandBuilder.Checked = True
         Me.chkUsarCommandBuilder.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkUsarCommandBuilder.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.chkUsarCommandBuilder.Location = New System.Drawing.Point(24, 33)
-        Me.chkUsarCommandBuilder.Margin = New System.Windows.Forms.Padding(2)
+        Me.chkUsarCommandBuilder.Location = New System.Drawing.Point(40, 63)
+        Me.chkUsarCommandBuilder.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkUsarCommandBuilder.Name = "chkUsarCommandBuilder"
-        Me.chkUsarCommandBuilder.Size = New System.Drawing.Size(133, 19)
+        Me.chkUsarCommandBuilder.Size = New System.Drawing.Size(222, 37)
         Me.chkUsarCommandBuilder.TabIndex = 1
         Me.chkUsarCommandBuilder.Text = "usar CommandBuilder"
         Me.toolTip1.SetToolTip(Me.chkUsarCommandBuilder, " Si se debe usar CommandBuilder para generar el código UPDATE, INSERT o DELETE ")
@@ -512,10 +492,10 @@ Partial Class Form1
         Me.chkUsarAddWithValue.Checked = True
         Me.chkUsarAddWithValue.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkUsarAddWithValue.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.chkUsarAddWithValue.Location = New System.Drawing.Point(6, 56)
-        Me.chkUsarAddWithValue.Margin = New System.Windows.Forms.Padding(2)
+        Me.chkUsarAddWithValue.Location = New System.Drawing.Point(10, 108)
+        Me.chkUsarAddWithValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkUsarAddWithValue.Name = "chkUsarAddWithValue"
-        Me.chkUsarAddWithValue.Size = New System.Drawing.Size(126, 19)
+        Me.chkUsarAddWithValue.Size = New System.Drawing.Size(210, 37)
         Me.chkUsarAddWithValue.TabIndex = 2
         Me.chkUsarAddWithValue.Text = "usar AddWithValue"
         Me.toolTip1.SetToolTip(Me.chkUsarAddWithValue, " Si se utiliza AddWithValue o Add  para añadir los valores a los parámetros del c" &
@@ -526,10 +506,10 @@ Partial Class Form1
         Me.chkUsarDataAdapter.AutoSize = True
         Me.chkUsarDataAdapter.Checked = True
         Me.chkUsarDataAdapter.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkUsarDataAdapter.Location = New System.Drawing.Point(6, 12)
-        Me.chkUsarDataAdapter.Margin = New System.Windows.Forms.Padding(2)
+        Me.chkUsarDataAdapter.Location = New System.Drawing.Point(10, 23)
+        Me.chkUsarDataAdapter.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkUsarDataAdapter.Name = "chkUsarDataAdapter"
-        Me.chkUsarDataAdapter.Size = New System.Drawing.Size(239, 17)
+        Me.chkUsarDataAdapter.Size = New System.Drawing.Size(386, 29)
         Me.chkUsarDataAdapter.TabIndex = 0
         Me.chkUsarDataAdapter.Text = "usar DataAdpater en lugar de cmd.Execute..."
         Me.toolTip1.SetToolTip(Me.chkUsarDataAdapter, "Marca esta opción si quieres usar DataAdapter en vez de ExecuteNonQuery en UPDATE" &
@@ -542,10 +522,10 @@ Partial Class Form1
         Me.chkUsarOverrides.Checked = True
         Me.chkUsarOverrides.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkUsarOverrides.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.chkUsarOverrides.Location = New System.Drawing.Point(6, 79)
-        Me.chkUsarOverrides.Margin = New System.Windows.Forms.Padding(2)
+        Me.chkUsarOverrides.Location = New System.Drawing.Point(10, 152)
+        Me.chkUsarOverrides.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkUsarOverrides.Name = "chkUsarOverrides"
-        Me.chkUsarOverrides.Size = New System.Drawing.Size(126, 19)
+        Me.chkUsarOverrides.Size = New System.Drawing.Size(210, 37)
         Me.chkUsarOverrides.TabIndex = 3
         Me.chkUsarOverrides.Text = "usar Overrides"
         Me.toolTip1.SetToolTip(Me.chkUsarOverrides, "Usar Overrides los métodos Actualizar, Crear y Borrar.")
@@ -560,18 +540,22 @@ Partial Class Form1
         Me.grbOpciones.Controls.Add(Me.chkUsarDataAdapter)
         Me.grbOpciones.Controls.Add(Me.Panel1)
         Me.grbOpciones.Controls.Add(Me.btnGenerarClase)
-        Me.grbOpciones.Location = New System.Drawing.Point(309, 314)
+        Me.grbOpciones.Location = New System.Drawing.Point(510, 583)
+        Me.grbOpciones.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.grbOpciones.Name = "grbOpciones"
-        Me.grbOpciones.Size = New System.Drawing.Size(364, 106)
+        Me.grbOpciones.Padding = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.grbOpciones.Size = New System.Drawing.Size(607, 204)
         Me.grbOpciones.TabIndex = 11
         Me.grbOpciones.TabStop = False
         '
         'StatusStrip1
         '
+        Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LabelInfo, Me.LabelVersion})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 732)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 1298)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(689, 24)
+        Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(2, 0, 23, 0)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1148, 36)
         Me.StatusStrip1.TabIndex = 15
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -579,7 +563,7 @@ Partial Class Form1
         '
         Me.LabelInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.LabelInfo.Name = "LabelInfo"
-        Me.LabelInfo.Size = New System.Drawing.Size(558, 19)
+        Me.LabelInfo.Size = New System.Drawing.Size(993, 29)
         Me.LabelInfo.Spring = True
         Me.LabelInfo.Text = "©Guillermo Som (elGuille), 2004-2007, 2018-2022"
         Me.LabelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -589,23 +573,15 @@ Partial Class Form1
         Me.LabelVersion.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left
         Me.LabelVersion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.LabelVersion.Name = "LabelVersion"
-        Me.LabelVersion.Size = New System.Drawing.Size(85, 19)
+        Me.LabelVersion.Size = New System.Drawing.Size(130, 29)
         Me.LabelVersion.Text = "v3.0.0 (3.0.0.0)"
-        '
-        ''Form1
-        ''
-        'Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
-        'Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        'Me.ClientSize = New System.Drawing.Size(689, 756)
-        'Me.Name = "Form1"
-        'Me.Text = "Form1"
         '
         'Form1
         '
         Me.AllowDrop = True
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(689, 756)
+        Me.ClientSize = New System.Drawing.Size(1148, 1334)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.grbOpciones)
         Me.Controls.Add(Me.optSQL)
@@ -623,8 +599,8 @@ Partial Class Form1
         Me.Controls.Add(Me.grbAccess)
         Me.Controls.Add(Me.grbSQL)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.MinimumSize = New System.Drawing.Size(594, 555)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.MinimumSize = New System.Drawing.Size(975, 1016)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Crear clases de una base de datos Access o SQL Server"
