@@ -25,6 +25,7 @@ Namespace elGuille.Util.Developer
     End Enum
 
     Public Class ConvLang
+
         Public Shared Lang As eLenguaje
         ' las comprobaciones se harán sin tener en cuenta mayúsculas/minúsculas
         Private Shared tiposVB() As String = {"", "short", "integer", "long", "string", "object", "double", "single", "date", "decimal", "boolean", "byte", "char"}
@@ -290,7 +291,9 @@ Namespace elGuille.Util.Developer
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} {1} {2}{{", modificador(modif), Tipo(elTipo), nombre)
             Else 'If Lang = eLenguaje.eVBNET Then
-                Return String.Format("{0} Property {1}() As {2}", modif, nombre, elTipo)
+                ' Le quito los paréntesis, ya que en las propiedades de VB no son necesarios. v3.0.0.1 (05/oct/22 10.32)
+                Return String.Format("{0} Property {1} As {2}", modif, nombre, elTipo)
+                'Return String.Format("{0} Property {1}() As {2}", modif, nombre, elTipo)
             End If
         End Function
         Public Shared Function [Property](ByVal modif As String, ByVal elTipo As String, ByVal index As String, ByVal tipoIndex As String) As String
@@ -304,7 +307,9 @@ Namespace elGuille.Util.Developer
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} {1} {2}{{", modificador(modif), Tipo(elTipo), nombre)
             Else 'If Lang = eLenguaje.eVBNET Then
-                Return String.Format("{0} ReadOnly Property {1}() As {2}", modif, nombre, elTipo)
+                'Return String.Format("{0} ReadOnly Property {1}() As {2}", modif, nombre, elTipo)
+                ' Le quito los paréntesis, ya que en las propiedades de VB no son necesarios. v3.0.0.1 (05/oct/22 10.35)
+                Return String.Format("{0} ReadOnly Property {1} As {2}", modif, nombre, elTipo)
             End If
         End Function
         Public Shared Function PropertyRead(ByVal modif As String, ByVal elTipo As String, ByVal index As String, ByVal tipoIndex As String) As String
@@ -318,7 +323,9 @@ Namespace elGuille.Util.Developer
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} {1} {2}{{", modificador(modif), Tipo(elTipo), nombre)
             Else 'If Lang = eLenguaje.eVBNET Then
-                Return String.Format("{0} WriteOnly Property {1}() As {2}", modif, nombre, elTipo)
+                'Return String.Format("{0} WriteOnly Property {1}() As {2}", modif, nombre, elTipo)
+                ' Le quito los paréntesis, ya que en las propiedades de VB no son necesarios. v3.0.0.1 (05/oct/22 10.35)
+                Return String.Format("{0} WriteOnly Property {1} As {2}", modif, nombre, elTipo)
             End If
         End Function
         Public Shared Function PropertyWrite(ByVal modif As String, ByVal elTipo As String, ByVal index As String, ByVal tipoIndex As String) As String
@@ -342,8 +349,8 @@ Namespace elGuille.Util.Developer
                 Return String.Format("{0} Sub {1}()", modif, nombre)
             End If
         End Function
-        Public Shared Function [Sub](ByVal modif As String, ByVal nombre As String, _
-                                     ByVal vNombre As String, ByVal vTipo As String, _
+        Public Shared Function [Sub](ByVal modif As String, ByVal nombre As String,
+                                     ByVal vNombre As String, ByVal vTipo As String,
                                      ByVal ParamArray vars() As String) As String
             ' los parámetros opcionales (paramarray) se usará para indicar el nombre de la variable y el tipo separados por coma
             ' en caso de usar ByRef (ref en C#) indicarlo en el nombre de la variable: ... uno, String, ByRef dos, Integer
@@ -378,8 +385,8 @@ Namespace elGuille.Util.Developer
                 Return String.Format("{0} Function {1}() As {2}", modif, nombre, elTipo)
             End If
         End Function
-        Public Shared Function [Function](ByVal modif As String, ByVal nombre As String, ByVal elTipo As String, _
-                                          ByVal vNombre As String, ByVal vTipo As String, _
+        Public Shared Function [Function](ByVal modif As String, ByVal nombre As String, ByVal elTipo As String,
+                                          ByVal vNombre As String, ByVal vTipo As String,
                                           ByVal ParamArray vars() As String) As String
             '
             If elTipo = "" OrElse elTipo.ToLower = "void" OrElse elTipo.ToLower = "sub" Then

@@ -8,6 +8,28 @@
 ### Revisiones de 2022
 
 ```
+'<revision("3.0.0.1", _
+'   FechaModificacion:= "05/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "05/Oct/2022", _
+'   Tipo:= "Revisión", _
+'   Clases:= "ConvLang", _
+'   Miembro:= "[Property]", _
+'   Motivo:= "Las propiedades de Visual Basic no hace falta que tengan paréntesis.", _
+'   Solucion:= "Quitarle los paréntesis cuando no tengan parámetros.", _
+'   Comentarios:= "El funcionamiento en VB es igual con o sin paréntesis, pero es mejor no ponerlos.")>
+
+'<revision("3.0.0.0", _
+'   FechaModificacion:= "01/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "01/Oct/2022", _
+'   Tipo:= "Revisión", _
+'   Clases:= "Proyecto", _
+'   Miembro:= "", _
+'   Motivo:= "Cambio de versión para compilar con .NET 6.0.", _
+'   Solucion:= "", _
+'   Comentarios:= "")>
+
 '<revision("1.1.0.14", _
 '   FechaModificacion:= "01/Oct/2022", _
 '   Tester:= "elGuille", _

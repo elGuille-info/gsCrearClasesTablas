@@ -24,6 +24,7 @@ Imports System.Data.OleDb
 Imports elGuille.Util.Developer
 
 Namespace elGuille.Util.Developer.Data
+
     Public Class CrearClase
         '
         Protected Shared mDataTable As New DataTable
@@ -90,12 +91,12 @@ Namespace elGuille.Util.Developer.Data
 
         '
         ' estos métodos sólo se usarán desde las clases derivadas
-        Protected Shared Function GenerarClaseOleDb(ByVal lang As eLenguaje, _
-                                                    ByVal usarCommandBuilder As Boolean, _
-                                                    ByVal nombreClase As String, _
-                                                    ByVal baseDeDatos As String, _
-                                                    ByVal cadenaSelect As String, _
-                                                    ByVal password As String, _
+        Protected Shared Function GenerarClaseOleDb(ByVal lang As eLenguaje,
+                                                    ByVal usarCommandBuilder As Boolean,
+                                                    ByVal nombreClase As String,
+                                                    ByVal baseDeDatos As String,
+                                                    ByVal cadenaSelect As String,
+                                                    ByVal password As String,
                                                     ByVal provider As String) As String
             esSQL = False
             If provider = "" Then
@@ -119,14 +120,14 @@ Namespace elGuille.Util.Developer.Data
             Return generarClase()
         End Function
         '
-        Protected Shared Function GenerarClaseSQL(ByVal lang As eLenguaje, _
-                                                  ByVal usarCommandBuilder As Boolean, _
-                                                  ByVal nombreClase As String, _
-                                                  ByVal dataSource As String, _
-                                                  ByVal initialCatalog As String, _
-                                                  ByVal cadenaSelect As String, _
-                                                  ByVal userId As String, _
-                                                  ByVal password As String, _
+        Protected Shared Function GenerarClaseSQL(ByVal lang As eLenguaje,
+                                                  ByVal usarCommandBuilder As Boolean,
+                                                  ByVal nombreClase As String,
+                                                  ByVal dataSource As String,
+                                                  ByVal initialCatalog As String,
+                                                  ByVal cadenaSelect As String,
+                                                  ByVal userId As String,
+                                                  ByVal password As String,
                                                   ByVal usarSeguridadSQL As Boolean) As String
             esSQL = True
             CrearClase.lang = lang
@@ -1527,11 +1528,11 @@ Namespace elGuille.Util.Developer.Data
         End Function
         '
         Private Shared Function tipoSQL(ByVal elTipo As String) As String
-            Dim aCTS() As String = {"System.Boolean", "System.Int16", "System.Int32", "System.Int64", _
-                                    "System.Decimal", "System.Single", "System.Double", "System.Byte", _
+            Dim aCTS() As String = {"System.Boolean", "System.Int16", "System.Int32", "System.Int64",
+                                    "System.Decimal", "System.Single", "System.Double", "System.Byte",
                                     "System.DateTime", "System.Guid", "System.Object"}
-            Dim aSQL() As String = {"Bit", "SmallInt", "Int", "BigInt", _
-                                    "Decimal", "Real", "Float", "TinyInt", _
+            Dim aSQL() As String = {"Bit", "SmallInt", "Int", "BigInt",
+                                    "Decimal", "Real", "Float", "TinyInt",
                                     "DateTime", "UniqueIdentifier", "Variant"}
             Dim i As Integer = Array.IndexOf(aCTS, elTipo)
             If i > -1 Then
@@ -1541,11 +1542,11 @@ Namespace elGuille.Util.Developer.Data
         End Function
         '
         Private Shared Function tipoOleDb(ByVal elTipo As String) As String
-            Dim aCTS() As String = {"System.Byte[]", "System.Boolean", "System.Int16", "System.Int32", "System.Int64", _
-                                    "System.Decimal", "System.Single", "System.Double", "System.Byte", _
+            Dim aCTS() As String = {"System.Byte[]", "System.Boolean", "System.Int16", "System.Int32", "System.Int64",
+                                    "System.Decimal", "System.Single", "System.Double", "System.Byte",
                                     "System.DateTime", "System.Guid", "System.Object", "System.String"}
-            Dim aOle() As String = {"LongVarBinary", "Boolean", "SmallInt", "Integer", "BigInt", _
-                                    "Decimal", "Single", "Double", "UnsignedTinyInt", _
+            Dim aOle() As String = {"LongVarBinary", "Boolean", "SmallInt", "Integer", "BigInt",
+                                    "Decimal", "Single", "Double", "UnsignedTinyInt",
                                     "Date", "Guid", "Variant", "VarWChar"}
             Dim i As Integer = Array.IndexOf(aCTS, elTipo)
             If i > -1 Then

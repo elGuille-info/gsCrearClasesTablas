@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>elGuille</Authors>
-    <Description>Generar clases a partir de tablas de bases de datos. Para .NET 6.0  (revisión del 1-oct-2022)</Description>
+    <Description>Generar clases a partir de tablas de bases de datos. Para .NET 6.0  (revisión del 5-oct-2022)</Description>
     <Copyright>©Guillermo 'guille' Som, 2007, 2018-2022</Copyright>
     <PackageProjectUrl>https://www.elguillemola.com/generar-las-clases-de-una-tabla-de-sql-server-o-access-mdb/</PackageProjectUrl>
     <Title>gsCrearClases</Title>
@@ -13,8 +13,8 @@
     <RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>es</NeutralLanguage>
-    <AssemblyVersion>3.0.0</AssemblyVersion>
-    <FileVersion>3.0.0.0</FileVersion>
+    <AssemblyVersion>3.0.1</AssemblyVersion>
+    <FileVersion>3.0.0.1</FileVersion>
     <OptionStrict>On</OptionStrict>
     <PackageReleaseNotes>Primera versión del proyecto usando .NET 6.0 (net6.0-windows)</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
