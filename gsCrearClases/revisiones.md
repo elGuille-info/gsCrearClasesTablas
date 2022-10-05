@@ -8,6 +8,28 @@
 ### Revisiones de 2022
 
 ```
+'<revision("3.0.1.1", _
+'   FechaModificacion:= "05/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "05/Oct/2022", _
+'   Tipo:= "Revisión", _
+'   Clases:= "Todas", _
+'   Miembro:= "", _
+'   Motivo:= "Quitar los ByVal de los parámetros.", _
+'   Solucion:= "", _
+'   Comentarios:= "No es necesario indicar los párametros ByVal.")>
+
+'<revision("3.0.1.0", _
+'   FechaModificacion:= "05/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "05/Oct/2022", _
+'   Tipo:= "Revisión", _
+'   Clases:= "CrearClasesOleDb y CrearClasesSQL", _
+'   Miembro:= "", _
+'   Motivo:= "Quitarlas porque son específicas de la aplicación cliente.", _
+'   Solucion:= "Las quito del proyecto gsCrearClases y las muevo a gsCrearClasesTabla.", _
+'   Comentarios:= "Esas clases se utilizan en la app con la interfaz del usaurio y así se quitan las dependencias de NuGet.")>
+
 '<revision("3.0.0.2", _
 '   FechaModificacion:= "05/Oct/2022", _
 '   Tester:= "elGuille", _

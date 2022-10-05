@@ -52,6 +52,8 @@
 '   3.0.0   01-oct-2022 Proyecto creado con .NET 6.0
 '   3.0.0.1 05-oct-2022 Ajustes en los tamaños.
 '   3.0.0.2             El valor fijo de VersionDLL.
+'   3.0.1.0             Muevo las clases CrearClaseSQL y CrearClasesOleDb a este proyecto.
+'   3.0.1.1             Quito los ByVal.
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -60,9 +62,9 @@ Option Infer On
 Imports System
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic
-'
-Imports elGuille.Util.Developer.Data
+
 Imports elGuille.Util.Developer
+Imports elGuille.Util.Developer.Data
 
 Public Class Form1
 
@@ -82,7 +84,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.0.2"
+            s = "3.0.1.1"
         End Try
 
         Return s
@@ -92,7 +94,7 @@ Public Class Form1
 
     Private inicializando As Boolean = True
 
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Dim ts As TimeSpan = Nothing
 
         ' centrar el formulario horizontalmente
@@ -160,15 +162,15 @@ Public Class Form1
         btnGuardar.Enabled = False
     End Sub
     '
-    Private Sub Form1_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
+    Private Sub Form1_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
         guardarCfg()
     End Sub
     '
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(sender As System.Object, e As System.EventArgs) Handles btnSalir.Click
         Close()
     End Sub
     '
-    Private Sub cboTablas_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboTablas.SelectedIndexChanged
+    Private Sub cboTablas_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboTablas.SelectedIndexChanged
         txtSelect.Text = "SELECT * FROM " & cboTablas.Text
         Dim i As Integer = cboTablas.Text.IndexOf(".")
         ' Si la tabla contiene espacios,                            (02/Nov/04)
@@ -181,7 +183,7 @@ Public Class Form1
         End If
     End Sub
     '
-    Private Sub btnMostrarTablas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMostrarTablas.Click
+    Private Sub btnMostrarTablas_Click(sender As System.Object, e As System.EventArgs) Handles btnMostrarTablas.Click
         guardarCfg()
 
         ' No tener en cuenta la cadena select para mostrar las tablas
@@ -223,7 +225,7 @@ Public Class Form1
         End If
     End Sub
     '
-    Private Sub btnGenerarClase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerarClase.Click
+    Private Sub btnGenerarClase_Click(sender As System.Object, e As System.EventArgs) Handles btnGenerarClase.Click
         ' generar la clase a partir de la tabla seleccionada
         If txtSelect.Text = "" Then
             MessageBox.Show("Debes especificar la cadena de selección de datos",
@@ -282,7 +284,7 @@ Public Class Form1
         End If
     End Sub
     '
-    Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
+    Private Sub btnGuardar_Click(sender As System.Object, e As System.EventArgs) Handles btnGuardar.Click
         ' guarda la clase en un fichero .vb o .cs
         Dim sFic As String = Application.StartupPath & "\" & txtClase.Text
         If optVB.Checked Then
@@ -295,7 +297,7 @@ Public Class Form1
         sw.Close()
     End Sub
     '
-    Private Sub chkSeguridadSQL_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSeguridadSQL.CheckedChanged
+    Private Sub chkSeguridadSQL_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkSeguridadSQL.CheckedChanged
         Dim b As Boolean = chkSeguridadSQL.Checked
         labelUser.Enabled = b
         labelPassw.Enabled = b
@@ -303,7 +305,7 @@ Public Class Form1
         txtPassword.Enabled = b
     End Sub
     '
-    Private Sub optAccess_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optAccess.CheckedChanged
+    Private Sub optAccess_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles optAccess.CheckedChanged
         If inicializando Then Return
         grbAccess.Enabled = optAccess.Checked
         ' Con Access usar DataAdapter
@@ -311,7 +313,7 @@ Public Class Form1
             chkUsarDataAdapter.Checked = True
         End If
     End Sub
-    Private Sub optSQL_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optSQL.CheckedChanged
+    Private Sub optSQL_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles optSQL.CheckedChanged
         If inicializando Then Return
         grbSQL.Enabled = optSQL.Checked
         ' Al cambiar a SQL seleccionar automáticamente Execute... es decir, desmarcar DataAdapter
@@ -321,15 +323,15 @@ Public Class Form1
     End Sub
     '
     Private Sub txtNombreBase_DragOver(
-                    ByVal sender As Object,
-                    ByVal e As System.Windows.Forms.DragEventArgs) _
+                    sender As Object,
+                    e As System.Windows.Forms.DragEventArgs) _
                     Handles txtNombreBase.DragOver, MyBase.DragOver
         e.Effect = DragDropEffects.Copy
     End Sub
     '
     Private Sub txtNombreBase_DragDrop(
-                    ByVal sender As Object,
-                    ByVal e As System.Windows.Forms.DragEventArgs) _
+                    sender As Object,
+                    e As System.Windows.Forms.DragEventArgs) _
                     Handles txtNombreBase.DragDrop, MyBase.DragDrop
         Dim archivos() As String
         '
@@ -340,7 +342,7 @@ Public Class Form1
         End If
     End Sub
     '
-    Private Sub btnExaminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExaminar.Click
+    Private Sub btnExaminar_Click(sender As System.Object, e As System.EventArgs) Handles btnExaminar.Click
         With New OpenFileDialog
             .Title = "Seleccionar base de datos"
             .Filter = "Bases de Access (*.mdb)|*.mdb"

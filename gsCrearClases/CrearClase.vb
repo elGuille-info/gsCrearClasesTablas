@@ -91,13 +91,13 @@ Namespace elGuille.Util.Developer.Data
 
         '
         ' estos métodos sólo se usarán desde las clases derivadas
-        Protected Shared Function GenerarClaseOleDb(ByVal lang As eLenguaje,
-                                                    ByVal usarCommandBuilder As Boolean,
-                                                    ByVal nombreClase As String,
-                                                    ByVal baseDeDatos As String,
-                                                    ByVal cadenaSelect As String,
-                                                    ByVal password As String,
-                                                    ByVal provider As String) As String
+        Protected Shared Function GenerarClaseOleDb(lang As eLenguaje,
+                                                    usarCommandBuilder As Boolean,
+                                                    nombreClase As String,
+                                                    baseDeDatos As String,
+                                                    cadenaSelect As String,
+                                                    password As String,
+                                                    provider As String) As String
             esSQL = False
             If provider = "" Then
                 provider = "Microsoft.Jet.OLEDB.4.0"
@@ -120,15 +120,15 @@ Namespace elGuille.Util.Developer.Data
             Return generarClase()
         End Function
         '
-        Protected Shared Function GenerarClaseSQL(ByVal lang As eLenguaje,
-                                                  ByVal usarCommandBuilder As Boolean,
-                                                  ByVal nombreClase As String,
-                                                  ByVal dataSource As String,
-                                                  ByVal initialCatalog As String,
-                                                  ByVal cadenaSelect As String,
-                                                  ByVal userId As String,
-                                                  ByVal password As String,
-                                                  ByVal usarSeguridadSQL As Boolean) As String
+        Protected Shared Function GenerarClaseSQL(lang As eLenguaje,
+                                                  usarCommandBuilder As Boolean,
+                                                  nombreClase As String,
+                                                  dataSource As String,
+                                                  initialCatalog As String,
+                                                  cadenaSelect As String,
+                                                  userId As String,
+                                                  password As String,
+                                                  usarSeguridadSQL As Boolean) As String
             esSQL = True
             CrearClase.lang = lang
             CrearClase.usarCommandBuilder = usarCommandBuilder
@@ -1527,7 +1527,7 @@ Namespace elGuille.Util.Developer.Data
             Return sb.ToString
         End Function
         '
-        Private Shared Function tipoSQL(ByVal elTipo As String) As String
+        Private Shared Function tipoSQL(elTipo As String) As String
             Dim aCTS() As String = {"System.Boolean", "System.Int16", "System.Int32", "System.Int64",
                                     "System.Decimal", "System.Single", "System.Double", "System.Byte",
                                     "System.DateTime", "System.Guid", "System.Object"}
@@ -1541,7 +1541,7 @@ Namespace elGuille.Util.Developer.Data
             Return "SqlDbType.Int"
         End Function
         '
-        Private Shared Function tipoOleDb(ByVal elTipo As String) As String
+        Private Shared Function tipoOleDb(elTipo As String) As String
             Dim aCTS() As String = {"System.Byte[]", "System.Boolean", "System.Int16", "System.Int32", "System.Int64",
                                     "System.Decimal", "System.Single", "System.Double", "System.Byte",
                                     "System.DateTime", "System.Guid", "System.Object", "System.String"}

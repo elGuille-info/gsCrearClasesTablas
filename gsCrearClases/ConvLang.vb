@@ -43,7 +43,7 @@ Namespace elGuille.Util.Developer
         ''' El parámetro puede incluir más de uno (separado por espacio)
         ''' por ejemplo: Public Shared
         ''' </summary>
-        Private Shared Function modificador(ByVal modif As String) As String
+        Private Shared Function modificador(modif As String) As String
             ' el parámetro puede incluir más de uno (separado por espacio)
             ' por ejemplo: Public Shared
             If Lang = eLenguaje.eVBNET Then Return modif
@@ -114,7 +114,7 @@ Namespace elGuille.Util.Developer
         End Function
         ' esta sobrecarga la uso para indicar si se pone o no el comentario
         ' (para cuando las opciones son opcionales)
-        Public Shared Function Comentario(ByVal poner As Boolean) As String
+        Public Shared Function Comentario(poner As Boolean) As String
             If Lang = eLenguaje.eCS Then
                 If poner Then
                     Return "//"
@@ -129,21 +129,21 @@ Namespace elGuille.Util.Developer
                 End If
             End If
         End Function
-        Public Shared Function Comentario(ByVal coment As String) As String
+        Public Shared Function Comentario(coment As String) As String
             If Lang = eLenguaje.eCS Then
                 Return "//" & coment
             Else 'If Lang = eLenguaje.eVBNET Then
                 Return "'" & coment
             End If
         End Function
-        Public Shared Function [Imports](ByVal espacio As String) As String
+        Public Shared Function [Imports](espacio As String) As String
             If Lang = eLenguaje.eCS Then
                 Return "using " & espacio & ";"
             Else 'If Lang = eLenguaje.eVBNET Then
                 Return "Imports " & espacio
             End If
         End Function
-        Public Shared Function [Class](ByVal modif As String, ByVal nombre As String) As String
+        Public Shared Function [Class](modif As String, nombre As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} class {1}{{", modificador(modif), nombre)
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -158,10 +158,10 @@ Namespace elGuille.Util.Developer
             End If
         End Function
         '
-        Public Shared Function Constructor(ByVal nombreClase As String) As String
+        Public Shared Function Constructor(nombreClase As String) As String
             Return Constructor("", nombreClase)
         End Function
-        Public Shared Function Constructor(ByVal modif As String, ByVal nombreClase As String) As String
+        Public Shared Function Constructor(modif As String, nombreClase As String) As String
             If Lang = eLenguaje.eCS Then
                 If modif = "" Then modif = "Friend"
                 Return String.Format("{0} {1}(){{", modificador(modif), nombreClase)
@@ -173,7 +173,7 @@ Namespace elGuille.Util.Developer
                 End If
             End If
         End Function
-        Public Shared Function Constructor(ByVal modif As String, ByVal nombreClase As String, ByVal var As String, ByVal elTipo As String) As String
+        Public Shared Function Constructor(modif As String, nombreClase As String, var As String, elTipo As String) As String
             If Lang = eLenguaje.eCS Then
                 If modif = "" Then modif = "Friend"
                 Return String.Format("{0} {1}({2}){{", modificador(modif), nombreClase, Variable(var, elTipo))
@@ -243,7 +243,7 @@ Namespace elGuille.Util.Developer
                 Return "Catch"
             End If
         End Function
-        Public Shared Function [Catch](ByVal var As String, ByVal elTipo As String) As String
+        Public Shared Function [Catch](var As String, elTipo As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("}}catch({0}){{", Variable(var, elTipo))
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -272,7 +272,7 @@ Namespace elGuille.Util.Developer
                 Return "End Get"
             End If
         End Function
-        Public Shared Function [Set](ByVal elTipo As String) As String
+        Public Shared Function [Set](elTipo As String) As String
             If Lang = eLenguaje.eCS Then
                 Return "set{"
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -287,7 +287,7 @@ Namespace elGuille.Util.Developer
             End If
         End Function
         '
-        Public Shared Function [Property](ByVal modif As String, ByVal elTipo As String, ByVal nombre As String) As String
+        Public Shared Function [Property](modif As String, elTipo As String, nombre As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} {1} {2}{{", modificador(modif), Tipo(elTipo), nombre)
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -296,14 +296,14 @@ Namespace elGuille.Util.Developer
                 'Return String.Format("{0} Property {1}() As {2}", modif, nombre, elTipo)
             End If
         End Function
-        Public Shared Function [Property](ByVal modif As String, ByVal elTipo As String, ByVal index As String, ByVal tipoIndex As String) As String
+        Public Shared Function [Property](modif As String, elTipo As String, index As String, tipoIndex As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} {1} this[{2} {3}]{{", modificador(modif), Tipo(elTipo), Tipo(tipoIndex), index)
             Else 'If Lang = eLenguaje.eVBNET Then
                 Return String.Format("{0} Default Property Item({1} As {2}) As {3}", modif, index, tipoIndex, elTipo)
             End If
         End Function
-        Public Shared Function PropertyRead(ByVal modif As String, ByVal elTipo As String, ByVal nombre As String) As String
+        Public Shared Function PropertyRead(modif As String, elTipo As String, nombre As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} {1} {2}{{", modificador(modif), Tipo(elTipo), nombre)
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -312,14 +312,14 @@ Namespace elGuille.Util.Developer
                 Return String.Format("{0} ReadOnly Property {1} As {2}", modif, nombre, elTipo)
             End If
         End Function
-        Public Shared Function PropertyRead(ByVal modif As String, ByVal elTipo As String, ByVal index As String, ByVal tipoIndex As String) As String
+        Public Shared Function PropertyRead(modif As String, elTipo As String, index As String, tipoIndex As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} {1} this[{2} {3}]{{", modificador(modif), Tipo(elTipo), Tipo(tipoIndex), index)
             Else 'If Lang = eLenguaje.eVBNET Then
                 Return String.Format("{0} Default ReadOnly Property Item({1} As {2}) As {3}", modif, index, tipoIndex, elTipo)
             End If
         End Function
-        Public Shared Function PropertyWrite(ByVal modif As String, ByVal elTipo As String, ByVal nombre As String) As String
+        Public Shared Function PropertyWrite(modif As String, elTipo As String, nombre As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} {1} {2}{{", modificador(modif), Tipo(elTipo), nombre)
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -328,7 +328,7 @@ Namespace elGuille.Util.Developer
                 Return String.Format("{0} WriteOnly Property {1} As {2}", modif, nombre, elTipo)
             End If
         End Function
-        Public Shared Function PropertyWrite(ByVal modif As String, ByVal elTipo As String, ByVal index As String, ByVal tipoIndex As String) As String
+        Public Shared Function PropertyWrite(modif As String, elTipo As String, index As String, tipoIndex As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} {1} this[{2} {3}]{{", modificador(modif), Tipo(elTipo), Tipo(tipoIndex), index)
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -342,16 +342,16 @@ Namespace elGuille.Util.Developer
                 Return "End Property"
             End If
         End Function
-        Public Shared Function [Sub](ByVal modif As String, ByVal nombre As String) As String
+        Public Shared Function [Sub](modif As String, nombre As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} void {1}(){{", modificador(modif), nombre)
             Else 'If Lang = eLenguaje.eVBNET Then
                 Return String.Format("{0} Sub {1}()", modif, nombre)
             End If
         End Function
-        Public Shared Function [Sub](ByVal modif As String, ByVal nombre As String,
-                                     ByVal vNombre As String, ByVal vTipo As String,
-                                     ByVal ParamArray vars() As String) As String
+        Public Shared Function [Sub](modif As String, nombre As String,
+                                     vNombre As String, vTipo As String,
+                                     ParamArray vars() As String) As String
             ' los parámetros opcionales (paramarray) se usará para indicar el nombre de la variable y el tipo separados por coma
             ' en caso de usar ByRef (ref en C#) indicarlo en el nombre de la variable: ... uno, String, ByRef dos, Integer
             Dim sb As New System.Text.StringBuilder
@@ -373,7 +373,7 @@ Namespace elGuille.Util.Developer
                 Return "End Sub"
             End If
         End Function
-        Public Shared Function [Function](ByVal modif As String, ByVal nombre As String, ByVal elTipo As String) As String
+        Public Shared Function [Function](modif As String, nombre As String, elTipo As String) As String
             '
             If elTipo = "" OrElse elTipo.ToLower = "void" OrElse elTipo.ToLower = "sub" Then
                 Return [Sub](modif, nombre)
@@ -385,9 +385,9 @@ Namespace elGuille.Util.Developer
                 Return String.Format("{0} Function {1}() As {2}", modif, nombre, elTipo)
             End If
         End Function
-        Public Shared Function [Function](ByVal modif As String, ByVal nombre As String, ByVal elTipo As String,
-                                          ByVal vNombre As String, ByVal vTipo As String,
-                                          ByVal ParamArray vars() As String) As String
+        Public Shared Function [Function](modif As String, nombre As String, elTipo As String,
+                                          vNombre As String, vTipo As String,
+                                          ParamArray vars() As String) As String
             '
             If elTipo = "" OrElse elTipo.ToLower = "void" OrElse elTipo.ToLower = "sub" Then
                 Return [Sub](modif, nombre, vNombre, vTipo, vars)
@@ -413,7 +413,7 @@ Namespace elGuille.Util.Developer
             End If
         End Function
         '
-        Public Shared Function [If](ByVal var As String, ByVal comp As String, ByVal valor As String) As String
+        Public Shared Function [If](var As String, comp As String, valor As String) As String
             If Lang = eLenguaje.eCS Then
                 Dim i As Integer = Array.IndexOf(compVB, comp)
                 If i > -1 Then comp = compCS(i)
@@ -422,7 +422,7 @@ Namespace elGuille.Util.Developer
                 Return String.Format("If {0} {1} {2} Then", var, comp, valor)
             End If
         End Function
-        Public Shared Function [ElseIf](ByVal var As String, ByVal comp As String, ByVal valor As String) As String
+        Public Shared Function [ElseIf](var As String, comp As String, valor As String) As String
             If Lang = eLenguaje.eCS Then
                 Dim i As Integer = Array.IndexOf(compVB, comp)
                 If i > -1 Then comp = compCS(i)
@@ -446,7 +446,7 @@ Namespace elGuille.Util.Developer
             End If
         End Function
         '
-        Public Shared Function [End](ByVal param As String) As String
+        Public Shared Function [End](param As String) As String
             If Lang = eLenguaje.eCS Then
                 Return "}"
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -454,21 +454,21 @@ Namespace elGuille.Util.Developer
             End If
         End Function
         '
-        Public Shared Function [ForEach](ByVal var As String, ByVal elTipo As String, ByVal donde As String) As String
+        Public Shared Function [ForEach](var As String, elTipo As String, donde As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("foreach({0} {1} in {2}){{", Tipo(elTipo), var, donde)
             Else 'If Lang = eLenguaje.eVBNET Then
                 Return String.Format("For Each {0} As {1} In {2}", var, elTipo, donde)
             End If
         End Function
-        Public Shared Function [For](ByVal var As String, ByVal ini As String, ByVal fin As String) As String
+        Public Shared Function [For](var As String, ini As String, fin As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("for({0} = {1}; {0} <= {2}; {0}++){{", var, ini, fin)
             Else 'If Lang = eLenguaje.eVBNET Then
                 Return String.Format("For {0} = {1} To {2}", var, ini, fin)
             End If
         End Function
-        Public Shared Function [For](ByVal var As String, ByVal ini As String, ByVal fin As String, ByVal incr As String) As String
+        Public Shared Function [For](var As String, ini As String, fin As String, incr As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("for({0} = {1}; {0} <= {2}; {0} + {3}){{", var, ini, fin, incr)
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -482,7 +482,7 @@ Namespace elGuille.Util.Developer
                 Return "Next"
             End If
         End Function
-        Public Shared Function [Next](ByVal param As String) As String
+        Public Shared Function [Next](param As String) As String
             If Lang = eLenguaje.eCS Then
                 Return "}"
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -490,14 +490,14 @@ Namespace elGuille.Util.Developer
             End If
         End Function
         '
-        Public Shared Function [Return](ByVal valor As String) As String
+        Public Shared Function [Return](valor As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("return {0};", comprobarParam(valor))
             Else 'If Lang = eLenguaje.eVBNET Then
                 Return "Return " & valor
             End If
         End Function
-        Public Shared Function [Exit](ByVal salirDe As String) As String
+        Public Shared Function [Exit](salirDe As String) As String
             If Lang = eLenguaje.eCS Then
                 If "function sub property operator".IndexOf(salirDe.ToLower) > -1 Then
                     Return "return;"
@@ -553,7 +553,7 @@ Namespace elGuille.Util.Developer
             End If
         End Function
 
-        Public Shared Function Asigna(ByVal var As String, ByVal valor As String) As String
+        Public Shared Function Asigna(var As String, valor As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} = {1};", comprobarParam(var), comprobarParam(valor))
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -564,14 +564,14 @@ Namespace elGuille.Util.Developer
                 End If
             End If
         End Function
-        Public Shared Function AsignaNew(ByVal var As String, ByVal valor As String) As String
+        Public Shared Function AsignaNew(var As String, valor As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} = new {1};", comprobarParam(var), comprobarParam(valor))
             Else 'If Lang = eLenguaje.eVBNET Then
                 Return String.Format("{0} = New {1}", var, valor)
             End If
         End Function
-        Public Shared Function AsignaNew(ByVal var As String, ByVal valor As String, ByVal param As String) As String
+        Public Shared Function AsignaNew(var As String, valor As String, param As String) As String
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} = new {1}({2});", comprobarParam(var), comprobarParam(valor), comprobarParam(param))
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -579,7 +579,7 @@ Namespace elGuille.Util.Developer
             End If
         End Function
         '
-        Public Shared Function Instruccion(ByVal cod As String) As String
+        Public Shared Function Instruccion(cod As String) As String
             If Lang = eLenguaje.eCS Then
                 Return comprobarParam(cod) & ";"
             Else 'If Lang = eLenguaje.eVBNET Then
@@ -594,7 +594,7 @@ Namespace elGuille.Util.Developer
             End If
         End Function
         '
-        Public Shared Function Tipo(ByVal elTipo As String) As String
+        Public Shared Function Tipo(elTipo As String) As String
             ' Si no se indica el tipo, devolver una cadena vacía. (01/oct/22 08.38)
             'If String.IsNullOrWhiteSpace(elTipo) Then Return ""
 
@@ -612,7 +612,7 @@ Namespace elGuille.Util.Developer
             Return elTipo
         End Function
         '
-        Public Shared Function Variable(ByVal nombre As String, ByVal elTipo As String) As String
+        Public Shared Function Variable(nombre As String, elTipo As String) As String
             ' El tipo de datos lo daremos en formato VB
             If Lang = eLenguaje.eCS Then
                 Return String.Format("{0} {1}", Tipo(elTipo), nombre)
@@ -620,10 +620,10 @@ Namespace elGuille.Util.Developer
                 Return String.Format("{0} As {1}", nombre, elTipo)
             End If
         End Function
-        Public Shared Function DeclaraVariable(ByVal modif As String, ByVal nombre As String, ByVal elTipo As String) As String
+        Public Shared Function DeclaraVariable(modif As String, nombre As String, elTipo As String) As String
             Return Variable(modif, nombre, elTipo)
         End Function
-        Public Shared Function Variable(ByVal modif As String, ByVal nombre As String, ByVal elTipo As String) As String
+        Public Shared Function Variable(modif As String, nombre As String, elTipo As String) As String
             If Lang = eLenguaje.eCS Then
                 If modif = "" OrElse modif.ToLower = "dim" Then
                     Return String.Format("{0} {1};", Tipo(elTipo), nombre)
@@ -638,10 +638,10 @@ Namespace elGuille.Util.Developer
                 End If
             End If
         End Function
-        Public Shared Function DeclaraVariable(ByVal modif As String, ByVal nombre As String, ByVal elTipo As String, ByVal valor As String) As String
+        Public Shared Function DeclaraVariable(modif As String, nombre As String, elTipo As String, valor As String) As String
             Return Variable(modif, nombre, elTipo, valor)
         End Function
-        Public Shared Function Variable(ByVal modif As String, ByVal nombre As String, ByVal elTipo As String, ByVal valor As String) As String
+        Public Shared Function Variable(modif As String, nombre As String, elTipo As String, valor As String) As String
             If Lang = eLenguaje.eCS Then
                 If modif = "" OrElse modif.ToLower = "dim" Then
                     Return String.Format("{0} {1} = {2};", Tipo(elTipo), nombre, comprobarParam(valor))
@@ -665,10 +665,10 @@ Namespace elGuille.Util.Developer
                 End If
             End If
         End Function
-        Public Shared Function DeclaraVariableNew(ByVal modif As String, ByVal nombre As String, ByVal elTipo As String) As String
+        Public Shared Function DeclaraVariableNew(modif As String, nombre As String, elTipo As String) As String
             Return VariableNew(modif, nombre, elTipo)
         End Function
-        Public Shared Function VariableNew(ByVal modif As String, ByVal nombre As String, ByVal elTipo As String) As String
+        Public Shared Function VariableNew(modif As String, nombre As String, elTipo As String) As String
             If Lang = eLenguaje.eCS Then
                 If modif = "" OrElse modif.ToLower = "dim" Then
                     If elTipo.IndexOf("(") > -1 Then
@@ -691,10 +691,10 @@ Namespace elGuille.Util.Developer
                 End If
             End If
         End Function
-        Public Shared Function DeclaraVariableNewParam(ByVal modif As String, ByVal nombre As String, ByVal elTipo As String) As String
+        Public Shared Function DeclaraVariableNewParam(modif As String, nombre As String, elTipo As String) As String
             Return VariableNewParam(modif, nombre, elTipo)
         End Function
-        Public Shared Function VariableNewParam(ByVal modif As String, ByVal nombre As String, ByVal elTipo As String) As String
+        Public Shared Function VariableNewParam(modif As String, nombre As String, elTipo As String) As String
             If Lang = eLenguaje.eCS Then
                 If modif = "" OrElse modif.ToLower = "dim" Then
                     Return String.Format("{0} {1} = new {0};", Tipo(elTipo), nombre)
@@ -709,10 +709,10 @@ Namespace elGuille.Util.Developer
                 End If
             End If
         End Function
-        Public Shared Function DeclaraVariableNewParam(ByVal modif As String, ByVal nombre As String, ByVal elTipo As String, ByVal param As String) As String
+        Public Shared Function DeclaraVariableNewParam(modif As String, nombre As String, elTipo As String, param As String) As String
             Return VariableNewParam(modif, nombre, elTipo, param)
         End Function
-        Public Shared Function VariableNewParam(ByVal modif As String, ByVal nombre As String, ByVal elTipo As String, ByVal param As String) As String
+        Public Shared Function VariableNewParam(modif As String, nombre As String, elTipo As String, param As String) As String
             If Lang = eLenguaje.eCS Then
                 If modif = "" OrElse modif.ToLower = "dim" Then
                     Return String.Format("{0} {1} = new {0}({2});", Tipo(elTipo), nombre, comprobarParam(param))
@@ -729,7 +729,7 @@ Namespace elGuille.Util.Developer
         End Function
         '
         ' comprobar si tiene New...
-        Private Shared Function comprobarParam(ByVal var As String) As String
+        Private Shared Function comprobarParam(var As String) As String
             ' por ejemplo, en un parámetro se puede indicar "New LosQueSea"
             If Lang = eLenguaje.eCS Then
                 ' Habría que comprobar si hay más de una instrucción en la cadena a evaluar. (01/oct/22 10.24)
