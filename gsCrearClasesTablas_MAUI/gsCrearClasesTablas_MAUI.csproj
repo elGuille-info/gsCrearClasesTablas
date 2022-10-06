@@ -71,4 +71,8 @@
 	  <Compile Remove="CrearClaseSQL.cs" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\gsCrearClases_CS\gsCrearClases_CS.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -8,6 +8,14 @@ Mira en el blog para saber más y los enlaces a las versiones anteriores: [Gener
 <br>
 <br>
 
+_**Nota 06-oct-22 21.16:**_
+>He creado el proyecto de gsCrearClases en C# para poder usarlo sin problemas con la app móvil (he probado con iOS).<br>
+>Resulta que al compilar la pp para iOS (iPhone) daba error indicando que no encontraba esto: C:\Program Files\dotnet\packs\Microsoft.iOS.Sdk\15.4.447\tools\msbuild\iOS\Xamarin.iOS.VB.targets.<br>
+>Al estar generado el proyecto en C#, ya no da ese error.<br>
+>En ambos casos, no utiliza esa DLL (aún).
+<br>
+<br>
+
 _**Nota:**_
 
 >Este proyecto utiliza net6.0-windows en el proyecto principal (el de la interfaz del usuario porque utiliza WindowsForms.<br>
@@ -24,3 +32,5 @@ _**Nota:**_
 >A ver si te puedo poner la captura.<br>
 
 ![El error en Visual Studio 2022](https://github.com/elGuille-info/gsCrearClasesTablas/blob/master/Screenshot%202022-10-06%20182150.png)
+
+
