@@ -1,5 +1,8 @@
 ﻿# gsCrearClasesTablas_MAUI
 
+El proyecto para móvil de crear tablas (en principio solo será para SQL Server)
+
+<br>
 
 ### Nota sobre worloads de ios
 Al crear el proyecto me daba error de que no estaba instalado el workload para ios (o algo  así)
@@ -10,10 +13,10 @@ dotnet workload install ios
 ```
 Según parece se instalaba el del SDK de la versión 7.
 
-La forma de arreglarlo ha sido:
-1- Te pones en el directorio del proyecto.
-2- dotnet workload restore gsCrearClasesTablas_MAUI.csproj
- y con esto funciona todo bien.
+La forma de arreglarlo ha sido:<br>
+1- Te pones en el directorio del proyecto.<br>
+2- dotnet workload restore gsCrearClasesTablas_MAUI.csproj<br>
+ y con esto funciona todo bien.<br>
 
  Ahora al ejecutar dotnet --version me muestra la 6.0.401 en vez de la pre-release de .NET 7: (7.0.100-rc.1.22431.12)
  >Lo que no sé es lo que hice para que se cambiara al 6.0.401
