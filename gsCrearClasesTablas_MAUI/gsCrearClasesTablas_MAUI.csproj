@@ -75,4 +75,10 @@
 	  <ProjectReference Include="..\gsCrearClases_CS\gsCrearClases_CS.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="MainPage_ori.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

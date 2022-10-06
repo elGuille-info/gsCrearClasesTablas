@@ -4,11 +4,146 @@
              xmlns:local="clr-namespace:gsCrearClasesTablas_MAUI"
              x:Class="gsCrearClasesTablas_MAUI.App">
     <Application.Resources>
-        <ResourceDictionary>
+        <Color x:Key="AccentLight">#b6f1ff</Color>
+        <Color x:Key="AzulUWP">#0077df</Color>
+        <Color x:Key="RojoOscuro">#8b0000</Color>
+        <Color x:Key="Amarillo">#ffff00</Color>
+        <Color x:Key="Oro">#ffd700</Color>
+        <Color x:Key="OroOscuro">#daa520</Color>
+        <Color x:Key="AZulLight">#e0E8ff</Color>
+        <Color x:Key="ColorGris16">#161616</Color>
+        <Color x:Key="ColorGris64">#646464</Color>
+        <Color x:Key="ColorGris80">#808080</Color>
+        <Color x:Key="ColorGrisD3">#d3d3d3</Color>
+        <!-- Defino el color usado en las etiquetas, etc cuando está deshabilitado v1.30.0.4 (20/sep/22 10.49) -->
+        <Color x:Key="GrisDeshabilitado">#7A7A7A</Color>
+
+        <Color x:Key="ColorOscuro">#161616</Color>
+        <Color x:Key="ColorOscuro2">#003391</Color>
+
+        <!-- Colores usados por AppShell y App -->
+        <Color x:Key="Primary">#2196F3</Color>
+        <Color x:Key="Accent">#96d1ff</Color>
+        <!--<Color x:Key="AccentLight">#b6f1ff</Color>-->
+        <!-- -->
+        <!--<Color x:Key="ColorAzul1">#0073cf</Color>
+        <Color x:Key="ColorAzul2">#0043b1</Color>-->
+        <!--<Color x:Key="ColorAzul1">Black</Color>-->
+        <Color x:Key="ColorAzul1">#161616</Color>
+        <Color x:Key="ColorAzul2">#646464</Color>
+        <Color x:Key="ColorAzul3">#1976D2</Color>
+        <Color x:Key="ColorAzul4">#003391</Color>
+        <Color x:Key="AZulImg4">#C6E1ff</Color>
+        <Color x:Key="AZulImg5">#505050</Color>
+        <Color x:Key="AZulImg5Light">#e0E8ff</Color>
+        <Color x:Key="ColorBlanco">White</Color>
+        <Color x:Key="ColorBlanco1">Whitesmoke</Color>
+        <Color x:Key="ColorBlancoGris">#f3f3f3</Color>
+        <Color x:Key="ColorBlancoAviso">LightPink</Color>
+        <Color x:Key="ColorBlanco2">Azure</Color>
+        <Color x:Key="ColorRojo">Firebrick</Color>
+        <Color x:Key="ColorAmarillo">Yellow</Color>
+        <Color x:Key="ColorGrisNegro">#161616</Color>
+        <Color x:Key="ColorGris32">#323232</Color>
+        <!-- -->
+        <!--<Color x:Key="AppTextColor">#0073cf</Color>
+        <Color x:Key="AppBackgroundColor">White</Color>
+        <Color x:Key="NavigationBarColor">#0063b1</Color>
+        <Color x:Key="NavigationBarTextColor">Yellow</Color>-->
+        <!-- -->
+        <!-- Colores para cuando está deshabilitado (16/sep/22) 
+             <Color x:Key="SwitchUWPUnToggled">#A034C759</Color>
+        -->
+        <Color x:Key="SwitchUWPUnToggled">#9034C759</Color>
+        <Color x:Key="SwitchUWPUnToggledDark">#A034C759</Color>
+        <Color x:Key="SwitchAndroidUnToggled">#904A5C8C</Color>
+        <Color x:Key="SwitchAndroidUnToggledDark">#A04A5C8C</Color>
+        <!-- Los colores Un es para el tristate Indeterminate -->
+        <Color x:Key="SwitchAndroidThumb">#DAE1FD</Color>
+        <Color x:Key="SwitchAndroid">#4A5C8C</Color>
+        <Color x:Key="SwitchAndroidUn">#DAE1FD</Color>
+        <!-- Los colores antes de v1.10.28.3 (02/sep/22 18.22) -->
+        <Color x:Key="SwitchAndroidR">#FA3F7E</Color>
+        <Color x:Key="SwitchAndroidUnR">#FFBFCE</Color>
+        <!-- -->
+        <Color x:Key="SwitchiOS">#34C759</Color>
+        <Color x:Key="SwitchiOSUn">#20F0A0</Color>
+        <Color x:Key="SwitchUWPAzul">#0077DF</Color>
+        <Color x:Key="SwitchUWPUnAzul">#A0CAFF</Color>
+        <Color x:Key="SwitchUWPDarkAzul">#96d1ff</Color>
+        <Color x:Key="SwitchUWP">#34C759</Color>
+        <Color x:Key="SwitchUWPUn">#20F0A0</Color>
+        <Color x:Key="SwitchUWPDark">#34C759</Color>
+        <Color x:Key="CheckUWP">#0077DF</Color>
+        <Color x:Key="CheckUWPUn">#A0CAFF</Color>
+        <Color x:Key="CheckUWPDark">#96d1ff</Color>
+        <!-- Black -->
+        <Color x:Key="TextColorOscuro">#003391</Color>
+        <Color x:Key="TextColorOscuroAviso">Firebrick</Color>
+        <!-- Los colores de los botones de alquiler, ruta y cupones -->
+        <Color x:Key="BotonAlquiler">Chocolate</Color>
+        <!--<Color x:Key="BotonAlquilerDark">SaddleBrown</Color>-->
+        <Color x:Key="BotonRuta">Goldenrod</Color>
+        <!--<Color x:Key="BotonRutaDark">DarkGoldenrod</Color>-->
+        <Color x:Key="BotonOtras">LightSkyBlue</Color>
+        <Color x:Key="BotonCupon">CornflowerBlue</Color>
+        <!-- Los colores de las opciones de Ventas Playa -->
+        <Color x:Key="SeleccionarReservaParaSalida">DarkMagenta</Color>
+        <Color x:Key="NuevaSalida">DarkCyan</Color>
+        <Color x:Key="VueltaSalida">DarkGreen</Color>
+        <Color x:Key="EditarSalida">MediumBlue</Color>
+        <Color x:Key="NuevaReserva">#09BCBC</Color>
+        <Color x:Key="NuevaReservaSinPago">Red</Color>
+        <Color x:Key="PreReserva">Goldenrod</Color>
+        <Color x:Key="PreReservaDark">Gold</Color>
+        <Color x:Key="ConfirmarReserva">Green</Color>
+        <Color x:Key="ModificarReserva">DeepSkyBlue</Color>
+        <Color x:Key="FondoEtiquetas">AliceBlue</Color>
+        <Color x:Key="BuscarReservas">CornflowerBlue</Color>
+        <Color x:Key="BuscarClientes">DarkGoldenRod</Color>
+        <Color x:Key="RecuperarReservas">Steelblue</Color>
+        <!-- -->
+        <Color x:Key="G01Boton01">#f0df50</Color>
+        <Color x:Key="G01Boton02">LightGoldenrodYellow</Color>
+        <Color x:Key="G01Boton03">Gold</Color>
+        <Color x:Key="G01Boton04">Cornsilk</Color>
+        <Color x:Key="G02Boton01">MediumBlue</Color>
+        <Color x:Key="G02Boton02">CornflowerBlue</Color>
+        <Color x:Key="G02Boton03">DeepSkyBlue</Color>
+        <Color x:Key="G02Boton04">SkyBlue</Color>
+        <Color x:Key="G03Boton01">DarkCyan</Color>
+        <Color x:Key="G03Boton02">#09BCBC</Color>
+        <Color x:Key="G03Boton03">DarkGreen</Color>
+        <Color x:Key="G03Boton04">Green</Color>
+        <Color x:Key="G04Boton01">DarkMagenta</Color>
+        <Color x:Key="G04Boton02">Red</Color>
+        <Color x:Key="G04Boton03">Chocolate</Color>
+        <Color x:Key="G04Boton04">Salmon</Color>
+        <Color x:Key="G05Boton01">#003391</Color>
+        <Color x:Key="G05Boton02">DarkBlue</Color>
+        <Color x:Key="G05Boton03">Darkred</Color>
+        <Color x:Key="G05Boton04">SaddleBrown</Color>
+        <!-- Colores basados en SteelBlue: #4682b4 -->
+        <Color x:Key="G06Boton01">#466284</Color>
+        <Color x:Key="G06Boton02">#265284</Color>
+        <Color x:Key="G06Boton03">#203264</Color>
+        <Color x:Key="G06Boton04">#004070</Color>
+        <!-- Para Editor y Entry -->
+        <!-- Transparent-->
+        <Color x:Key="IWBackReadOnly0Light">White</Color>
+        <Color x:Key="IWBackReadOnly0Dark">#202020</Color>
+        <Color x:Key="IWBackReadOnly1Light">Azure</Color>
+        <Color x:Key="IWBackReadOnly1Dark">Teal</Color>
+        <Color x:Key="IWTextReadOnly0Light">#161616</Color>
+        <Color x:Key="IWTextReadOnly0Dark">White</Color>
+        <Color x:Key="IWTextReadOnly1Light">DarkGreen</Color>
+        <Color x:Key="IWTextReadOnly1Dark">Azure</Color>
+        
+        <!--<ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        </ResourceDictionary>-->
     </Application.Resources>
 </Application>

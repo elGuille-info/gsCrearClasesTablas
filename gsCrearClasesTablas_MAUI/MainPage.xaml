@@ -2,40 +2,141 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="gsCrearClasesTablas_MAUI.MainPage">
-
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
-
+    <ContentPage.Resources>
+        <Style TargetType="{x:Type Frame}">
+            <Setter Property="Margin" Value="6"/>
+            <Setter Property="BorderColor" Value="{StaticResource ColorGrisNegro}"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="HasShadow" Value="True"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark={StaticResource ColorGrisNegro}}"/>
+        </Style>
+        <Style TargetType="{x:Type Picker}" >
+            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="FontSize" Value="Micro" />
+            <!--<Setter Property="TextTransform" Value="Uppercase"/>-->
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="TitleColor" Value="{StaticResource ColorBlanco}"/>
+        </Style>
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="HeightRequest" Value="35"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Color" Value="{OnPlatform Android={StaticResource SwitchAndroid}, iOS={StaticResource SwitchiOS}, UWP={StaticResource CheckUWP}}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Style.Triggers>
+                <Trigger TargetType="CheckBox"
+                         Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Color" Value="{StaticResource GrisDeshabilitado}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type Entry}" ApplyToDerivedTypes="True" CanCascade="True">
+            <Setter Property="ClearButtonVisibility" Value="WhileEditing"/>
+            <Setter Property="ReturnType" Value="Next"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource ColorAzul1},Dark={StaticResource ColorBlanco}}"/>
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=Transparent, Dark=#202020}"/>
+            <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light=LightGray,Dark=Gainsboro}"/>
+            <Style.Triggers>
+                <Trigger TargetType="Entry" Property="IsEnabled" Value="False">
+                    <Setter Property="FontAttributes" Value="Italic"/>
+                </Trigger>
+                <Trigger TargetType="Entry" Property="IsEnabled" Value="True">
+                    <Setter Property="FontAttributes" Value="None"/>
+                </Trigger>
+                <Trigger TargetType="Entry" Property="IsReadOnly" Value="True">
+                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource IWBackReadOnly1Light}, Dark={StaticResource IWBackReadOnly1Dark}}" />
+                    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource IWTextReadOnly1Light},Dark={StaticResource IWTextReadOnly1Dark}}"/>
+                    <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light=LightGray,Dark=Gainsboro}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type Label}" ApplyToDerivedTypes="True" CanCascade="True">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource ColorAzul1},Dark={StaticResource ColorBlanco}}"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <!--<Setter Property="WidthRequest" Value="150"/>-->
+            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="FontSize" Value="{OnIdiom Phone=Small, Tablet=Small, Default=Micro}"/>
+            <Setter Property="HorizontalOptions" Value="Start" />
+        </Style>
+        <Style TargetType="{x:Type Button}" ApplyToDerivedTypes="True" CanCascade="True">
+            <Setter Property="FontSize" Value="{OnIdiom Phone=Small, Tablet=Small, Default=Micro}"/>
+            <Setter Property="TextColor" Value="{StaticResource ColorBlanco}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorAzul3}"/>
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="MinimumHeightRequest" Value="50"/>
+            <Setter Property="BorderColor" Value="{StaticResource ColorGris32}"/>
+            <Setter Property="BorderWidth" Value="1"/>
+            <Style.Triggers>
+                <Trigger TargetType="Button" Property="IsEnabled" Value="True" >
+                    <Setter Property="TextColor" Value="White" />
+                </Trigger>
+                <Trigger TargetType="Button" Property="IsEnabled" Value="False" >
+                    <Setter Property="TextColor" Value="{StaticResource ColorGrisNegro}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+        <StackLayout x:Name="grbTitulo" BackgroundColor="{StaticResource Accent}"
+                     VerticalOptions="Start" HorizontalOptions="Fill">
+            <Label Text="Crear Clases" TextColor="{StaticResource ColorAzul3}"
+                   FontSize="Subtitle" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+        </StackLayout>
+        <ScrollView Margin="0,10,0,0">
+            <StackLayout Margin="40,10" Spacing="6">
+                <StackLayout>
+                    <Label Text="Base de datos de SQL Server"/>
+                    <StackLayout Orientation="{OnIdiom Phone=Vertical, Default=Horizontal}" Spacing="8">
+                        <Label Text="Data source:"/>
+                        <Entry x:Name="txtDataSource" WidthRequest="400"/>
+                    </StackLayout>
+                    <StackLayout Orientation="{OnIdiom Phone=Vertical, Default=Horizontal}" Spacing="8">
+                        <Label Text="Initial catalog:"/>
+                        <Entry x:Name="txtInitialCatalog" WidthRequest="400"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox x:Name="chkSeguridadSQL"/>
+                            <Label Text="Usar seguridad de SQL, sino la seguridad integrada (Integrated Security)"></Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="12" Margin="12,0,0,0">
+                            <StackLayout Spacing="8">
+                                <Label Text="User id:"/>
+                                <Entry x:Name="txtUserId" WidthRequest="100"/>
+                            </StackLayout>
+                            <StackLayout Spacing="8">
+                                <Label Text="Password:"/>
+                                <Entry x:Name="txtPassword" IsPassword="True" WidthRequest="100" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="StartAndExpand">
+                        <StackLayout Orientation="Horizontal" Spacing="8">
+                            <Label Text="Tablas:" WidthRequest="100"/>
+                            <Picker x:Name="cboTablas" WidthRequest="200" />
+                        </StackLayout>
+                        <Button x:Name="btnMostrarTablas" Text="Mostrar tablas"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="8">
+                        <Label Text="Cadena select:" WidthRequest="100"/>
+                        <Entry x:Name="txtSelect" WidthRequest="300"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="8">
+                        <Label Text="Clase:" WidthRequest="100"/>
+                        <Entry x:Name="txtClase" WidthRequest="200"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout>
+                    
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </VerticalStackLayout>
 </ContentPage>
