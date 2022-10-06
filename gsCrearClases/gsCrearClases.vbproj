@@ -26,7 +26,6 @@
   <ItemGroup>
     <Compile Remove="ConversorTipos.vb" />
     <Compile Remove="CrearClaseOleDb.vb" />
-    <Compile Remove="CrearClaseSQL.vb" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +33,10 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
 </Project>

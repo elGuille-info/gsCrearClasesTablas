@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!--<Nullable>enable</Nullable>-->
+	  <Authors>elGuille</Authors>
+	  <Description>Generar clases a partir de tablas de bases de datos. Para .NET 6.0  (revisión del 5-oct-2022)</Description>
+	  <Copyright>©Guillermo 'guille' Som, 2007, 2018-2022</Copyright>
+	  <PackageProjectUrl>https://www.elguillemola.com/generar-las-clases-de-una-tabla-de-sql-server-o-access-mdb/</PackageProjectUrl>
+	  <Title>gsCrearClases</Title>
+	  <RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <NeutralLanguage>es</NeutralLanguage>
+	  <AssemblyVersion>3.0.2</AssemblyVersion>
+	  <FileVersion>3.0.2.1</FileVersion>
+	  <PackageReleaseNotes>
+		  06-oct-22: Convertida a C#.
+		  05-oct-22: Revisión para compilar como net6.0 sin indicar que es para Windows.
+		  Primera versión del proyecto usando .NET 6.0 (net6.0-windows)
+	  </PackageReleaseNotes>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Link="README.md">
+      <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+	</ItemGroup>
+</Project>

@@ -47,7 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\gsCrearClases\gsCrearClases.vbproj" />
+    <ProjectReference Include="..\gsCrearClases_CS\gsCrearClases_CS.csproj" />
   </ItemGroup>
 
   <ItemGroup>
