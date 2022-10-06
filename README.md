@@ -21,5 +21,6 @@ _**Nota:**_
 >Según parece la versión de Android no soporta el SqlConnection/SqlDataAdapter, cosa extraña porque en otro proyecto de Xamarin los uso con el mismo paquete de NuGet: System.Data.SqlClient Versión 4.8.3. (incluso es la versión 4.8.2)
 
 >Aunque el error lo da para todos los proyectos, en el de Windows e iOS dice que está disponible.
->A ver si te puedo poner la captura.
+>A ver si te puedo poner la captura.<br>
 
+![El error en Visual Studio 2022](https://github.com/elGuille-info/gsCrearClasesTablas/blob/master/Screenshot%202022-10-06%20182150.png)
