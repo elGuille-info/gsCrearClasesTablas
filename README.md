@@ -33,5 +33,5 @@ _**Nota:**_
 >A ver si te puedo poner la captura.<br>
 
 ![El error en Visual Studio 2022](https://github.com/elGuille-info/gsCrearClasesTablas/blob/master/Screenshot%202022-10-06%20182150.png)
-
+<br>
 
