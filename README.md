@@ -12,7 +12,6 @@ _**Nota 06-oct-22 21.16:**_
 >He creado el proyecto de gsCrearClases en C# para poder usarlo sin problemas con la app móvil (he probado con iOS).<br>
 >Resulta que al compilar la pp para iOS (iPhone) daba error indicando que no encontraba esto:<br>
 C:\Program Files\dotnet\packs\Microsoft.iOS.Sdk\15.4.447\tools\msbuild\iOS\Xamarin.iOS.VB.targets.<br>
-<br>
 >Al estar generado el proyecto en C#, ya no da ese error.<br>
 >En ambos casos, no utiliza esa DLL (aún).
 <br>
