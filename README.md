@@ -18,3 +18,6 @@ _**Nota:**_
 >Si alguna vez me da por crear este proyecto para "mobile" (ya sea Windows, Android o iOS) seguramente tendría que prescindir de la conversión de bases de tipo Access (.mdb), al menos en las versiones para Androi e iOS, pero eso aún no me lo he planteado, aunque nunca se sabe si crearé el proyecto para .NET MAUI 🤔<br>
 >Pues... ya me he decidido... al menos el proyecto está creado 😉
 
+>Según parece la versión de Android no soporta el SqlConnection/SqlDataAdapter, cosa extraña porque en otro proyecto de Xamarin los uso con el mismo paquete de NuGet: System.Data.SqlClient Versión 4.8.3. (incluso es la versión 4.8.2)
+
+
