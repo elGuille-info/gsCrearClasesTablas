@@ -15,6 +15,6 @@ _**Nota:**_
 >Los paquetes de Nuget son: System.Data.OleDb Versión 6.0.0 y System.Data.SqlClient Versión 4.8.3.<br>
 >La librería (o biblioteca) de clases utiliza net6.0 porque ya no tiene referenciada System.Data.OleDb Versión 6.0.0.<br>
 
->Si alguna vez me da por crear este proyecto para "mobile" (ya sea Windows, Android o iOS) seguramente tendría que prescindir de la conversión de bases de tipo Access (.mdb), al menos en las versiones para Androi e iOS, pero eso aún no me lo he planteado, aunque nunca se sabe si crearé el proyecto para .NET MAUI 🤔
+>Si alguna vez me da por crear este proyecto para "mobile" (ya sea Windows, Android o iOS) seguramente tendría que prescindir de la conversión de bases de tipo Access (.mdb), al menos en las versiones para Androi e iOS, pero eso aún no me lo he planteado, aunque nunca se sabe si crearé el proyecto para .NET MAUI 🤔<br>
 >Pues... ya me he decidido... al menos el proyecto está creado 😉
 
