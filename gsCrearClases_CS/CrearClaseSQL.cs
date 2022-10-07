@@ -127,13 +127,19 @@ namespace elGuille.Util.Developer.Data
                 //nomTablas = new string[i + 1];
                 for (i = 0; i <= dt.Rows.Count - 1; i++)
                 {
+                    var tableName = dt.Rows[i]["TABLE_NAME"].ToString();
+                    // Comprobar que la tabla tenga texto.
+                    //  Por si es por esto por lo que no se muestra en el picker de Maui.
+                    // Pero se ve que no es esto... :-/
+                    if (string.IsNullOrWhiteSpace(tableName))
+                    {
+                        continue;
+                    }
                     // si el valor de TABLE_SCHEMA no es dbo, es que es una tabla de un usuario particular
                     if (dt.Rows[i]["TABLE_SCHEMA"].ToString().ToLower() != "dbo")
-                        nomTablas.Add(dt.Rows[i]["TABLE_SCHEMA"].ToString() + "." + dt.Rows[i]["TABLE_NAME"].ToString());
-                    //nomTablas[i] = dt.Rows[i]["TABLE_SCHEMA"].ToString() + "." + dt.Rows[i]["TABLE_NAME"].ToString();
+                        nomTablas.Add(dt.Rows[i]["TABLE_SCHEMA"].ToString() + "." + tableName);
                     else
-                        nomTablas.Add(dt.Rows[i]["TABLE_NAME"].ToString());
-                    //nomTablas[i] = dt.Rows[i]["TABLE_NAME"].ToString();
+                        nomTablas.Add(tableName);
                 }
             }
             // 

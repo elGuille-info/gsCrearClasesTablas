@@ -155,8 +155,12 @@
                             <StackLayout Orientation="Horizontal" Spacing="8">
                                 <Label Text="Tablas:" WidthRequest="100"/>
                                 <!-- Title="Selecciona la tabla a convertir"-->
-                                <Picker x:Name="cboTablas" WidthRequest="300"
-                                        SelectedIndexChanged="cboTablas_SelectedIndexChanged"/>
+                                <!--<Picker x:Name="cboTablas" WidthRequest="300"
+                                        SelectedIndexChanged="cboTablas_SelectedIndexChanged"/>-->
+                                <StackLayout BackgroundColor="WhiteSmoke">
+                                    <ListView x:Name="cboTablas" WidthRequest="300" HeightRequest="40" 
+                                              ItemSelected="cboTablas_ItemSelected" />
+                                </StackLayout>
                             </StackLayout>
                             <Button x:Name="btnMostrarTablas" Text="Mostrar tablas"
                                     Clicked="btnMostrarTablas_Clicked"/>

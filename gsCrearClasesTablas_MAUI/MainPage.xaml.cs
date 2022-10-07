@@ -95,21 +95,38 @@ namespace gsCrearClasesTablas_MAUI
             cboTablas.ItemsSource = nomTablas;
 
             cboTablas.IsEnabled = true;
-            if (cboTablas.Items.Count > 0)
-                cboTablas.SelectedIndex = 0;
+            //if (cboTablas.Items.Count > 0)
+            //    cboTablas.SelectedIndex = 0;
+            
+            // Seleccionar el primer elemento.
+            cboTablas.SelectedItem = nomTablas[0];
 
             cboTablas.Focus();
         }
 
-        private void cboTablas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //if (cboTablas.ItemsSource == null || cboTablas.SelectedIndex < 0)
-            if (cboTablas.SelectedIndex < 0)
-            {
-                return;
-            }
+        //private void cboTablas_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    //if (cboTablas.ItemsSource == null || cboTablas.SelectedIndex < 0)
+        //    if (cboTablas.SelectedIndex < 0)
+        //    {
+        //        return;
+        //    }
 
-            string laTabla = cboTablas.SelectedItem.ToString();
+        //    string laTabla = cboTablas.SelectedItem.ToString();
+        //    txtSelect.Text = "SELECT * FROM " + laTabla;
+        //    int i = laTabla.IndexOf(".");
+        //    // Si la tabla contiene espacios,                            (02/Nov/04)
+        //    // sustituirlos por guiones bajos.
+        //    // Bug reportado por David Sans
+        //    if (i > -1)
+        //        txtClase.Text = laTabla.Substring(i + 1).Replace(" ", "_");
+        //    else
+        //        txtClase.Text = laTabla.Replace(" ", "_");
+        //}
+
+        private void cboTablas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            string laTabla = e.SelectedItem.ToString();
             txtSelect.Text = "SELECT * FROM " + laTabla;
             int i = laTabla.IndexOf(".");
             // Si la tabla contiene espacios,                            (02/Nov/04)
