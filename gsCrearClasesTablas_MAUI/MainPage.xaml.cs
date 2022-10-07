@@ -115,26 +115,6 @@ namespace gsCrearClasesTablas_MAUI
             cboTablas.Focus();
         }
 
-        //private void cboTablas_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //if (cboTablas.ItemsSource == null || cboTablas.SelectedIndex < 0)
-        //    if (cboTablas.SelectedIndex < 0)
-        //    {
-        //        return;
-        //    }
-
-        //    string laTabla = cboTablas.SelectedItem.ToString();
-        //    txtSelect.Text = "SELECT * FROM " + laTabla;
-        //    int i = laTabla.IndexOf(".");
-        //    // Si la tabla contiene espacios,                            (02/Nov/04)
-        //    // sustituirlos por guiones bajos.
-        //    // Bug reportado por David Sans
-        //    if (i > -1)
-        //        txtClase.Text = laTabla.Substring(i + 1).Replace(" ", "_");
-        //    else
-        //        txtClase.Text = laTabla.Replace(" ", "_");
-        //}
-
         private void cboTablas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (cboTablas.SelectedItem == null)
@@ -163,15 +143,15 @@ namespace gsCrearClasesTablas_MAUI
             txtClase.Text = txtClase.Text.Replace(" ", "_");
 
             // Lo asigno en la clase base ya que son métodos compartidos (22/Mar/19)
-            CrearClase.UsarDataAdapter = chkUsarDataAdapter.IsChecked;
-            if (chkUsarDataAdapter.IsChecked == false)
+            CrearClase.UsarDataAdapter = chkUsarDataAdapter.IsToggled;
+            if (chkUsarDataAdapter.IsToggled == false)
                 chkUsarCommandBuilder.IsEnabled = false;
-            CrearClase.UsarAddWithValue = chkUsarAddWithValue.IsChecked;
-            CrearClase.UsarOverrides = chkUsarOverrides.IsChecked;
+            CrearClase.UsarAddWithValue = chkUsarAddWithValue.IsToggled;
+            CrearClase.UsarOverrides = chkUsarOverrides.IsToggled;
 
             // Si no está habilitado es que no se utiliza                (07/Abr/19)
             // ya que solo se usa con DataAdapter
-            bool usarCB = chkUsarCommandBuilder.IsChecked;
+            bool usarCB = chkUsarCommandBuilder.IsToggled;
             if (chkUsarCommandBuilder.IsEnabled == false)
                 usarCB = false;
 
@@ -227,26 +207,26 @@ namespace gsCrearClasesTablas_MAUI
                 sTmp = "1";
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
-                chkUsarDataAdapter.IsChecked = sTmp == "1";
+                chkUsarDataAdapter.IsToggled = sTmp == "1";
                 sTmp = "1";
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
-                chkUsarCommandBuilder.IsChecked = sTmp == "1";
+                chkUsarCommandBuilder.IsToggled = sTmp == "1";
                 sTmp = "1";
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
-                chkUsarAddWithValue.IsChecked = sTmp == "1";
+                chkUsarAddWithValue.IsToggled = sTmp == "1";
                 sTmp = "1";
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
-                chkUsarOverrides.IsChecked = sTmp == "1";
+                chkUsarOverrides.IsToggled = sTmp == "1";
                 sTmp = "1";
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
                 optVB.IsToggled = sTmp == "1";
                 //optCS.IsToggled = ! optVB.IsToggled;
             }
-            chkUsarCommandBuilder.IsEnabled = chkUsarDataAdapter.IsChecked;
+            chkUsarCommandBuilder.IsEnabled = chkUsarDataAdapter.IsToggled;
         }
         /// <summary>
         /// Guardar los valores en la configuración (local).
@@ -261,10 +241,10 @@ namespace gsCrearClasesTablas_MAUI
                 sw.WriteLine(chkSeguridadSQL.IsChecked ? "1" : "0");
                 sw.WriteLine(txtUserId.Text);
                 sw.WriteLine(txtPassword.Text);
-                sw.WriteLine(chkUsarDataAdapter.IsChecked ? "1" : "0");
-                sw.WriteLine(chkUsarCommandBuilder.IsChecked ? "1" : "0");
-                sw.WriteLine(chkUsarAddWithValue.IsChecked ? "1" : "0");
-                sw.WriteLine(chkUsarOverrides.IsChecked ? "1" : "0");
+                sw.WriteLine(chkUsarDataAdapter.IsToggled ? "1" : "0");
+                sw.WriteLine(chkUsarCommandBuilder.IsToggled ? "1" : "0");
+                sw.WriteLine(chkUsarAddWithValue.IsToggled ? "1" : "0");
+                sw.WriteLine(chkUsarOverrides.IsToggled ? "1" : "0");
                 sw.WriteLine(optVB.IsToggled ? "1" : "0");
             }
         }
@@ -308,22 +288,22 @@ namespace gsCrearClasesTablas_MAUI
 
         private void UsarDataAdapterTapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            chkUsarDataAdapter.IsChecked = !chkUsarDataAdapter.IsChecked;
+            chkUsarDataAdapter.IsToggled = !chkUsarDataAdapter.IsToggled;
         }
 
         private void UsarCommandBuilderTapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            chkUsarCommandBuilder.IsChecked = !chkUsarCommandBuilder.IsChecked;
+            chkUsarCommandBuilder.IsToggled = !chkUsarCommandBuilder.IsToggled;
         }
 
         private void UsarAddWithValueTapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            chkUsarAddWithValue.IsChecked = !chkUsarAddWithValue.IsChecked;
+            chkUsarAddWithValue.IsToggled = !chkUsarAddWithValue.IsToggled;
         }
 
         private void UsarOverridesTapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            chkUsarOverrides.IsChecked = !chkUsarOverrides.IsChecked;
+            chkUsarOverrides.IsToggled = !chkUsarOverrides.IsToggled;
         }
 
         private void SQLTapGestureRecognizer_Tapped(object sender, EventArgs e)

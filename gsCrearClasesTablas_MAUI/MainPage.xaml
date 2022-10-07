@@ -159,7 +159,6 @@
                                  PropertyChanged="grbOpciones_PropertyChanged">
                         <StackLayout Style="{StaticResource StackConMargen}" >
                             <StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="chkUsarDataAdapter" IsChecked="False"/>
                                 <Label Text="Usar DataAdpater en lugar de cmd.Execute">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
@@ -177,25 +176,9 @@
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarDataAdapterTapGestureRecognizer_Tapped"/>
                                     </Label.GestureRecognizers>
                                 </Label>
+                                <Switch x:Name="chkUsarDataAdapter" IsToggled="False"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" Margin="12,0,0,0">
-                                <CheckBox x:Name="chkUsarCommandBuilder" IsEnabled="False">
-                                    <!-- Los DataTrigger parece que no hacen caso... ¡funciona poniéndolo al revés! -->
-                                    <CheckBox.Triggers>
-                                        <DataTrigger TargetType="CheckBox"
-                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
-                                                     Value="False">
-                                            <Setter Property="IsEnabled" Value="False" />
-                                            <!--<Setter Property="Color" Value="{OnPlatform Android={StaticResource SwitchAndroid}, iOS={StaticResource SwitchiOS}, WinUI={StaticResource CheckUWP}}"/>-->
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="CheckBox"
-                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
-                                                     Value="True">
-                                            <Setter Property="IsEnabled" Value="True" />
-                                            <!--<Setter Property="Color" Value="{StaticResource GrisDeshabilitado}" />-->
-                                        </DataTrigger>
-                                    </CheckBox.Triggers>
-                                </CheckBox>
                                 <Label Text="Usar CommandBuilder" IsEnabled="False">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
@@ -213,9 +196,22 @@
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarCommandBuilderTapGestureRecognizer_Tapped"/>
                                     </Label.GestureRecognizers>
                                 </Label>
+                                <Switch x:Name="chkUsarCommandBuilder" IsEnabled="False">
+                                    <Switch.Triggers>
+                                        <DataTrigger TargetType="Switch"
+                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsToggled}"
+                                                     Value="False">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Switch"
+                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsToggled}"
+                                                     Value="True">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </DataTrigger>
+                                    </Switch.Triggers>
+                                </Switch>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="chkUsarAddWithValue"/>
                                 <Label Text="Usar AddWithValue">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
@@ -233,11 +229,11 @@
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarAddWithValueTapGestureRecognizer_Tapped"/>
                                     </Label.GestureRecognizers>
                                 </Label>
+                                <Switch x:Name="chkUsarAddWithValue"/>
                             </StackLayout>
                             <Label Text="Si se utiliza AddWithValue o Add  para añadir los valores a los parámetros del comando."
                                     FontSize="13" Margin="12,0,0,0"/>
                             <StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="chkUsarOverrides"/>
                                 <Label Text="Usar Overrides los métodos Actualizar, Crear y Borrar.">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
@@ -255,6 +251,7 @@
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarOverridesTapGestureRecognizer_Tapped"/>
                                     </Label.GestureRecognizers>
                                 </Label>
+                                <Switch x:Name="chkUsarOverrides"/>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout Style="{StaticResource StackConMargen}">
@@ -267,7 +264,7 @@
                                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="VBTapGestureRecognizer_Tapped"/>
                                         </Label.GestureRecognizers>
                                     </Label>
-                                    <Switch x:Name="optVB" IsToggled="True" Margin="12,0,0,0">
+                                    <Switch x:Name="optVB" IsToggled="True">
                                         <Switch.Triggers>
                                             <DataTrigger TargetType="Switch"
                                                          Binding="{Binding Source={x:Reference optCS}, Path=IsToggled}"
@@ -288,7 +285,7 @@
                                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CSTapGestureRecognizer_Tapped"/>
                                         </Label.GestureRecognizers>
                                     </Label>
-                                    <Switch x:Name="optCS" Margin="12,0,0,0">
+                                    <Switch x:Name="optCS">
                                         <Switch.Triggers>
                                             <DataTrigger TargetType="Switch"
                                                          Binding="{Binding Source={x:Reference optVB}, Path=IsToggled}"

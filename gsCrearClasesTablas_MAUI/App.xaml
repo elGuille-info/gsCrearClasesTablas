@@ -180,8 +180,9 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <!--<Style TargetType="Switch">
-            <Setter Property="ThumbColor" Value="White" />
+        <Style TargetType="Switch">
+            <Setter Property="Margin" Value="12,0,0,0"/>
+            <!--<Setter Property="ThumbColor" Value="White" />
             <Setter Property="OnColor" Value="{OnPlatform Android={StaticResource SwitchAndroid}, iOS={StaticResource SwitchiOS}, WinUI={StaticResource CheckUWP}}"/>
             <Style.Triggers>
                 <Trigger TargetType="Switch"
@@ -194,8 +195,8 @@
                          Value="False">
                     <Setter Property="OnColor" Value="{StaticResource GrisDeshabilitado}" />
                 </Trigger>
-            </Style.Triggers>
-        </Style>-->
+            </Style.Triggers>-->
+        </Style>
 
         <Style TargetType="{x:Type Entry}" ApplyToDerivedTypes="True" CanCascade="True">
             <Setter Property="ClearButtonVisibility" Value="WhileEditing"/>
