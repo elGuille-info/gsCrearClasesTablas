@@ -3,110 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="gsCrearClasesTablas_MAUI.MainPage"
              Appearing="ContentPage_Appearing">
-    <ContentPage.Resources>
-        <Style TargetType="{x:Type Frame}">
-            <Setter Property="Margin" Value="6"/>
-            <Setter Property="BorderColor" Value="{StaticResource ColorGrisNegro}"/>
-            <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="HasShadow" Value="True"/>
-            <Setter Property="Padding" Value="12"/>
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark={StaticResource ColorGrisNegro}}"/>
-        </Style>
-        <Style TargetType="{x:Type Picker}" >
-            <Setter Property="FontAttributes" Value="None" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-            <Setter Property="VerticalOptions"  Value="Start" />
-            <Setter Property="TitleColor" Value="{AppThemeBinding Light=SteelBlue, Dark=White}"/>
-            <!--<Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}"/>-->
-            <!--<Setter Property="BackgroundColor" Value="{AppThemeBinding Light=Transparent, Dark=SteelBlue}"/>-->
-            <Setter Property="TextColor" Value="SteelBlue"/>
-            <Setter Property="BackgroundColor" Value="Transparent"/>
-            <Setter Property="HeightRequest" Value="35"/>
-            <Setter Property="Margin" Value="6,0,0,0"/>
-            <Setter Property="Shadow" Value="True" />
-        </Style>
-        <Style TargetType="{x:Type CheckBox}">
-            <Setter Property="HeightRequest" Value="35"/>
-            <Setter Property="BackgroundColor" Value="Transparent"/>
-            <Setter Property="Color" Value="{OnPlatform Android={StaticResource SwitchAndroid}, iOS={StaticResource SwitchiOS}, UWP={StaticResource CheckUWP}}"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-            <Style.Triggers>
-                <Trigger TargetType="CheckBox"
-                         Property="IsEnabled"
-                         Value="False">
-                    <Setter Property="Color" Value="{StaticResource GrisDeshabilitado}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style TargetType="{x:Type Entry}" ApplyToDerivedTypes="True" CanCascade="True">
-            <Setter Property="ClearButtonVisibility" Value="WhileEditing"/>
-            <Setter Property="ReturnType" Value="Next"/>
-            <Setter Property="HeightRequest" Value="35"/>
-            <!--<Setter Property="FontSize" Value="{OnIdiom Phone=Small, Tablet=Small, Default=Micro}"/>-->
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontAttributes" Value="None" />
-            <Setter Property="HorizontalOptions" Value="Fill"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource ColorAzul1},Dark={StaticResource ColorBlanco}}"/>
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=Transparent, Dark=#202020}"/>
-            <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light=LightGray,Dark=Gainsboro}"/>
-            <Style.Triggers>
-                <Trigger TargetType="Entry" Property="IsEnabled" Value="False">
-                    <Setter Property="FontAttributes" Value="Italic"/>
-                </Trigger>
-                <Trigger TargetType="Entry" Property="IsEnabled" Value="True">
-                    <Setter Property="FontAttributes" Value="None"/>
-                </Trigger>
-                <Trigger TargetType="Entry" Property="IsReadOnly" Value="True">
-                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource IWBackReadOnly1Light}, Dark={StaticResource IWBackReadOnly1Dark}}" />
-                    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource IWTextReadOnly1Light},Dark={StaticResource IWTextReadOnly1Dark}}"/>
-                    <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light=LightGray,Dark=Gainsboro}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="EntryText" TargetType="{x:Type Entry}">
-            <Setter Property="Keyboard" Value="Text"/>
-            <Setter Property="WidthRequest" Value="150"/>
-        </Style>
-        <Style TargetType="{x:Type Label}" ApplyToDerivedTypes="True" CanCascade="True">
-            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource ColorAzul1},Dark={StaticResource ColorBlanco}}"/>
-            <Setter Property="BackgroundColor" Value="Transparent"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-            <!--<Setter Property="WidthRequest" Value="150"/>-->
-            <Setter Property="FontAttributes" Value="None" />
-            <!--<Setter Property="FontSize" Value="{OnIdiom Phone=Small, Tablet=Small, Default=Micro}"/>-->
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="HorizontalOptions" Value="Start" />
-        </Style>
-        <Style TargetType="{x:Type Button}" ApplyToDerivedTypes="True" CanCascade="True">
-            <!--<Setter Property="FontSize" Value="{OnIdiom Phone=Small, Tablet=Small, Default=Micro}"/>-->
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="TextColor" Value="{StaticResource ColorBlanco}"/>
-            <Setter Property="BackgroundColor" Value="{StaticResource ColorAzul3}"/>
-            <Setter Property="CornerRadius" Value="4" />
-            <Setter Property="HorizontalOptions" Value="Start"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="HeightRequest" Value="40"/>
-            <Setter Property="BorderColor" Value="{StaticResource ColorGris32}"/>
-            <Setter Property="BorderWidth" Value="1"/>
-            <Style.Triggers>
-                <Trigger TargetType="Button" Property="IsEnabled" Value="True" >
-                    <Setter Property="TextColor" Value="White" />
-                </Trigger>
-                <Trigger TargetType="Button" Property="IsEnabled" Value="False" >
-                    <Setter Property="TextColor" Value="{StaticResource ColorGrisNegro}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="StackConMargen" TargetType="{x:Type StackLayout}">
-            <!--<Setter Property="Orientation" Value="Vertical"/>
-            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-            <Setter Property="VerticalOptions" Value="EndAndExpand"/>-->
-            <Setter Property="Spacing" Value="8"/>
-            <Setter Property="Margin" Value="0,8"/>
-        </Style>
-    </ContentPage.Resources>
     <ScrollView Margin="0" Padding="4" Orientation="Both">
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout BackgroundColor="{StaticResource Accent}"
@@ -121,7 +17,23 @@
                     <StackLayout>
                         <StackLayout Orientation="Horizontal" Spacing="8">
                             <CheckBox x:Name="optSQL" IsChecked="True" IsEnabled="False"/>
-                            <Label Text="Usar Base de datos de SQL Server"/>
+                            <Label Text="Usar Base de datos de SQL Server">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding Source={x:Reference optSQL}, Path=IsEnabled}"
+                                                 Value="False">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding Source={x:Reference optSQL}, Path=IsEnabled}"
+                                                 Value="True">
+                                        <Setter Property="IsEnabled" Value="True" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SQLTapGestureRecognizer_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </StackLayout>
                         <StackLayout Orientation="{OnIdiom Phone=Vertical, Default=Horizontal}" Style="{StaticResource StackConMargen}">
                             <Label Text="Data source:" WidthRequest="100"/>
@@ -134,15 +46,70 @@
                         <StackLayout Style="{StaticResource StackConMargen}">
                             <StackLayout Orientation="Horizontal">
                                 <CheckBox x:Name="chkSeguridadSQL"/>
-                                <Label Text="Usar seguridad de SQL, sino la seguridad integrada (Integrated Security)"></Label>
+                                <Label Text="Usar seguridad de SQL, sino la seguridad integrada (Integrated Security)">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference chkSeguridadSQL}, Path=IsEnabled}"
+                                                     Value="False">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference chkSeguridadSQL}, Path=IsEnabled}"
+                                                     Value="True">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SeguridadSQLTapGestureRecognizer_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
-                            <StackLayout Orientation="Horizontal" Spacing="12" Margin="12,0,0,0">
+                            <StackLayout Orientation="Horizontal" Spacing="12" Margin="12,0,0,0"
+                                         PropertyChanged="StackLayout_PropertyChanged">
+                                <StackLayout.Triggers>
+                                    <DataTrigger TargetType="StackLayout"
+                                                 Binding="{Binding Source={x:Reference chkSeguridadSQL}, Path=IsChecked}"
+                                                 Value="False">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="StackLayout"
+                                                 Binding="{Binding Source={x:Reference chkSeguridadSQL}, Path=IsChecked}"
+                                                 Value="True">
+                                        <Setter Property="IsEnabled" Value="True" />
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
                                 <StackLayout Spacing="8">
-                                    <Label Text="User id:"/>
+                                    <Label Text="User id:">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference txtUserId}, Path=IsEnabled}"
+                                                         Value="False">
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference txtUserId}, Path=IsEnabled}"
+                                                         Value="True">
+                                                <Setter Property="IsEnabled" Value="True" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
                                     <Entry x:Name="txtUserId" Style="{StaticResource EntryText}"/>
                                 </StackLayout>
                                 <StackLayout Spacing="8">
-                                    <Label Text="Password:"/>
+                                    <Label Text="Password:">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference txtPassword}, Path=IsEnabled}"
+                                                         Value="False">
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference txtPassword}, Path=IsEnabled}"
+                                                         Value="True">
+                                                <Setter Property="IsEnabled" Value="True" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
                                     <Entry x:Name="txtPassword" IsPassword="True" Style="{StaticResource EntryText}" />
                                 </StackLayout>
                             </StackLayout>
@@ -158,12 +125,23 @@
                                 <!--<Picker x:Name="cboTablas" WidthRequest="300"
                                         SelectedIndexChanged="cboTablas_SelectedIndexChanged"/>-->
                                 <StackLayout BackgroundColor="WhiteSmoke">
-                                    <ListView x:Name="cboTablas" WidthRequest="300" HeightRequest="40" 
-                                              ItemSelected="cboTablas_ItemSelected" />
+                                    <ListView x:Name="cboTablas" WidthRequest="300" HeightRequest="70" 
+                                              VerticalOptions="StartAndExpand"
+                                              ItemSelected="cboTablas_ItemSelected">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <Label Text="{Binding .}" HeightRequest="25" />
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
                                 </StackLayout>
                             </StackLayout>
                             <Button x:Name="btnMostrarTablas" Text="Mostrar tablas"
                                     Clicked="btnMostrarTablas_Clicked"/>
+                            <Button x:Name="btnLimpiar" Text="Limpiar"
+                                    Clicked="btnLimpiar_Clicked"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Spacing="8">
                             <Label Text="Cadena select:" WidthRequest="100"/>
@@ -176,32 +154,119 @@
                     </StackLayout>
                 </Frame>
                 <Frame>
-                    <StackLayout Orientation="Horizontal" Style="{StaticResource StackConMargen}">
+                    <StackLayout x:Name="grbOpciones" Orientation="Horizontal" 
+                                 Style="{StaticResource StackConMargen}" 
+                                 PropertyChanged="grbOpciones_PropertyChanged">
                         <StackLayout Style="{StaticResource StackConMargen}" >
                             <StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="chkUsarDataAdapter"/>
-                                <Label Text="Usar DataAdpater en lugar de cmd.Execute"></Label>
+                                <CheckBox x:Name="chkUsarDataAdapter" IsChecked="False"/>
+                                <Label Text="Usar DataAdpater en lugar de cmd.Execute">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsEnabled}"
+                                                     Value="False">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsEnabled}"
+                                                     Value="True">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarDataAdapterTapGestureRecognizer_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" Margin="12,0,0,0">
-                                <CheckBox x:Name="chkUsarCommandBuilder"/>
-                                <Label Text="Usar CommandBuilder"></Label>
+                                <CheckBox x:Name="chkUsarCommandBuilder" IsEnabled="False">
+                                    <!-- Los DataTrigger parece que no hacen caso... ¡funciona poniéndolo al revés! -->
+                                    <CheckBox.Triggers>
+                                        <DataTrigger TargetType="CheckBox"
+                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
+                                                     Value="False">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                            <!--<Setter Property="Color" Value="{OnPlatform Android={StaticResource SwitchAndroid}, iOS={StaticResource SwitchiOS}, WinUI={StaticResource CheckUWP}}"/>-->
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="CheckBox"
+                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
+                                                     Value="True">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                            <!--<Setter Property="Color" Value="{StaticResource GrisDeshabilitado}" />-->
+                                        </DataTrigger>
+                                    </CheckBox.Triggers>
+                                </CheckBox>
+                                <Label Text="Usar CommandBuilder" IsEnabled="False">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference chkUsarCommandBuilder}, Path=IsEnabled}"
+                                                     Value="False">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference chkUsarCommandBuilder}, Path=IsEnabled}"
+                                                     Value="True">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarCommandBuilderTapGestureRecognizer_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
                                 <CheckBox x:Name="chkUsarAddWithValue"/>
-                                <Label Text="Usar AddWithValue"></Label>
+                                <Label Text="Usar AddWithValue">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference chkUsarAddWithValue}, Path=IsEnabled}"
+                                                     Value="False">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference chkUsarAddWithValue}, Path=IsEnabled}"
+                                                     Value="True">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarAddWithValueTapGestureRecognizer_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
                             <Label Text="Si se utiliza AddWithValue o Add  para añadir los valores a los parámetros del comando."
                                     FontSize="13" Margin="12,0,0,0"/>
                             <StackLayout Orientation="Horizontal">
                                 <CheckBox x:Name="chkUsarOverrides"/>
-                                <Label Text="Usar Overrides los métodos Actualizar, Crear y Borrar."></Label>
+                                <Label Text="Usar Overrides los métodos Actualizar, Crear y Borrar.">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference chkUsarOverrides}, Path=IsEnabled}"
+                                                     Value="False">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Source={x:Reference chkUsarOverrides}, Path=IsEnabled}"
+                                                     Value="True">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarOverridesTapGestureRecognizer_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout Style="{StaticResource StackConMargen}">
-                            <StackLayout x:Name="Panel1" Orientation="Horizontal">
+                            <StackLayout x:Name="Panel1" Orientation="Horizontal" 
+                                         PropertyChanged="Panel1_PropertyChanged">
                                 <Label Text="Lenguaje:"/>
                                 <StackLayout Orientation="Horizontal" Margin="12,0,0,0">
-                                    <Label Text="Visual Basic "/>
+                                    <Label Text="Visual Basic ">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="VBTapGestureRecognizer_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
                                     <Switch x:Name="optVB" IsToggled="True" Margin="12,0,0,0">
                                         <Switch.Triggers>
                                             <DataTrigger TargetType="Switch"
@@ -218,7 +283,11 @@
                                     </Switch>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Margin="0">
-                                    <Label Text="C# " />
+                                    <Label Text="C# ">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CSTapGestureRecognizer_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
                                     <Switch x:Name="optCS" Margin="12,0,0,0">
                                         <Switch.Triggers>
                                             <DataTrigger TargetType="Switch"

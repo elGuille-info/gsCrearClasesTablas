@@ -45,6 +45,11 @@ namespace gsCrearClasesTablas_MAUI
                 //LabelVersion.Text = $"  {AppInfo.ProductName} - v{AppInfo.ProductVersion} ({AppInfo.FileVersion})  ";
                 LabelVersion.Text = $"  {AppInfo.ProductName} - v{AppInfo.ProductMajorPart}.{AppInfo.ProductMinorPart}.{AppInfo.ProductBuildPart} ({AppInfo.FileVersion})  ";
 
+                grbOpciones.IsEnabled = false;
+                btnGenerarClase.IsEnabled = false;
+                Panel1.IsEnabled = false;
+                btnLimpiar.IsEnabled = false;
+
                 LeerConfig();
                 LaPrimeraVez = false;
             }
@@ -54,6 +59,8 @@ namespace gsCrearClasesTablas_MAUI
         {
             GuardarConfig();
 
+            btnLimpiar.IsEnabled = false;
+
             // No tener en cuenta la cadena select para mostrar las tablas
             txtSelect.Text = "";
             if (optSQL.IsChecked)
@@ -61,6 +68,7 @@ namespace gsCrearClasesTablas_MAUI
             //else
             //    CrearClaseOleDb.Conectar(this.txtNombreBase.Text, txtSelect.Text, txtProvider.Text, txtAccessPassword.Text);
             // 
+            grbOpciones.IsEnabled = CrearClase.Conectado;
             btnGenerarClase.IsEnabled = CrearClase.Conectado;
             Panel1.IsEnabled = CrearClase.Conectado;
             //btnGuardar.IsEnabled = CrearClase.Conectado;
@@ -82,11 +90,14 @@ namespace gsCrearClasesTablas_MAUI
             // 
             if ((nomTablas == null) || nomTablas[0].StartsWith("ERROR"))
             {
+                grbOpciones.IsEnabled = false;
                 btnGenerarClase.IsEnabled = false;
                 Panel1.IsEnabled = false;
                 //btnGuardar.Enabled = false;
                 return;
             }
+
+            btnLimpiar.IsEnabled = true;
 
             //foreach (string s in nomTablas)
             //{
@@ -126,6 +137,9 @@ namespace gsCrearClasesTablas_MAUI
 
         private void cboTablas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            if (cboTablas.SelectedItem == null)
+                return;
+
             string laTabla = e.SelectedItem.ToString();
             txtSelect.Text = "SELECT * FROM " + laTabla;
             int i = laTabla.IndexOf(".");
@@ -179,11 +193,6 @@ namespace gsCrearClasesTablas_MAUI
         /// </summary>
         private void LeerConfig()
         {
-            //if (string.IsNullOrWhiteSpace(FicConfig))
-            //{
-            //    var FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-            //    FicConfig = Path.Combine(FolderPath, $"{App.AppName}.txt");
-            //}
             if (!File.Exists(FicConfig))
             {
                 return;
@@ -237,18 +246,13 @@ namespace gsCrearClasesTablas_MAUI
                 optVB.IsToggled = sTmp == "1";
                 //optCS.IsToggled = ! optVB.IsToggled;
             }
+            chkUsarCommandBuilder.IsEnabled = chkUsarDataAdapter.IsChecked;
         }
         /// <summary>
         /// Guardar los valores en la configuración (local).
         /// </summary>
         private void GuardarConfig()
         {
-            //if (string.IsNullOrWhiteSpace(FicConfig))
-            //{
-            //    var FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-            //    FicConfig = Path.Combine(FolderPath, $"{App.AppName}.txt");
-            //}
-
             using (var sw = new StreamWriter(FicConfig, false, System.Text.Encoding.Default))
             {
                 sw.WriteLine(optSQL.IsChecked ? "1" : "0");
@@ -263,6 +267,92 @@ namespace gsCrearClasesTablas_MAUI
                 sw.WriteLine(chkUsarOverrides.IsChecked ? "1" : "0");
                 sw.WriteLine(optVB.IsToggled ? "1" : "0");
             }
+        }
+
+        private void grbOpciones_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsEnabled")
+            {
+                //App.HabilitarContenedor(grbOpciones, grbOpciones.IsEnabled, limpiar: false);
+                // ¡En los checkBox Funciona asignado el valor al revés! ???
+                // Los colores... ¡OJÚ!
+                chkUsarDataAdapter.IsEnabled = grbOpciones.IsEnabled;
+                //chkUsarCommandBuilder.IsEnabled = grbOpciones.IsEnabled;
+                chkUsarAddWithValue.IsEnabled = grbOpciones.IsEnabled;
+                chkUsarOverrides.IsEnabled = grbOpciones.IsEnabled;
+
+                Panel1.IsEnabled = grbOpciones.IsEnabled;
+                //btnGenerarClase.IsEnabled = grbOpciones.IsEnabled;
+            }
+        }
+
+        private void Panel1_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsEnabled")
+            {
+                optCS.IsEnabled = Panel1.IsEnabled;
+                optVB.IsEnabled = Panel1.IsEnabled;
+            }
+        }
+
+        private void StackLayout_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsEnabled")
+            {
+                if (txtUserId == null) return;
+
+                txtUserId.IsEnabled = (sender as StackLayout).IsEnabled;
+                txtPassword.IsEnabled = txtUserId.IsEnabled;
+            }
+        }
+
+        private void UsarDataAdapterTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            chkUsarDataAdapter.IsChecked = !chkUsarDataAdapter.IsChecked;
+        }
+
+        private void UsarCommandBuilderTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            chkUsarCommandBuilder.IsChecked = !chkUsarCommandBuilder.IsChecked;
+        }
+
+        private void UsarAddWithValueTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            chkUsarAddWithValue.IsChecked = !chkUsarAddWithValue.IsChecked;
+        }
+
+        private void UsarOverridesTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            chkUsarOverrides.IsChecked = !chkUsarOverrides.IsChecked;
+        }
+
+        private void SQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            optSQL.IsChecked = !optSQL.IsChecked;
+        }
+
+        private void SeguridadSQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            chkSeguridadSQL.IsChecked = !chkSeguridadSQL.IsChecked;
+        }
+
+        private void VBTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            optVB.IsToggled = !optVB.IsToggled;
+        }
+
+        private void CSTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            optCS.IsToggled = !optCS.IsToggled;
+        }
+
+        private void btnLimpiar_Clicked(object sender, EventArgs e)
+        {
+            cboTablas.ItemsSource = null;
+            grbOpciones.IsEnabled = false;
+            txtSelect.Text = "";
+            txtClase.Text = "";
+            btnLimpiar.IsEnabled = false;
         }
     }
 }

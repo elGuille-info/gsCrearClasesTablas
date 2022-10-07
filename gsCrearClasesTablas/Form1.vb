@@ -56,6 +56,7 @@
 '   3.0.1.1             Quito los ByVal.
 '   3.0.2.0 06-oct-2022 Usando la DLL con el código en C#.
 '   3.0.3.0 07-oct-2022 Guardar los datos en la configuración local (como en móvil)
+'   3.0.3.2             Habilitar el grupo de grbOpciones según haya tablas en la lista
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -176,9 +177,10 @@ Public Class Form1
         chkUsarDataAdapter.Checked = My.Settings.UsarExecuteScalar
         chkUsarOverrides.Checked = My.Settings.usarOverrides
         '
+        btnGuardar.Enabled = False
+        grbOpciones.Enabled = btnGuardar.Enabled
         btnGenerarClase.Enabled = False
         Panel1.Enabled = False
-        btnGuardar.Enabled = False
     End Sub
     '
     Private Sub Form1_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
@@ -213,9 +215,10 @@ Public Class Form1
             CrearClaseOleDb.Conectar(Me.txtNombreBase.Text, txtSelect.Text, txtProvider.Text, txtAccessPassword.Text)
         End If
         '
+        btnGuardar.Enabled = CrearClase.Conectado
+        grbOpciones.Enabled = btnGuardar.Enabled
         btnGenerarClase.Enabled = CrearClase.Conectado
         Panel1.Enabled = CrearClase.Conectado
-        btnGuardar.Enabled = CrearClase.Conectado
         '
         If CrearClase.Conectado = False Then Return
         '
@@ -227,9 +230,10 @@ Public Class Form1
         End If
         '
         If (nomTablas Is Nothing) OrElse nomTablas(0).StartsWith("ERROR") Then
+            btnGuardar.Enabled = False
+            grbOpciones.Enabled = btnGuardar.Enabled
             btnGenerarClase.Enabled = False
             Panel1.Enabled = False
-            btnGuardar.Enabled = False
             'Return
         End If
         '
