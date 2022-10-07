@@ -54,6 +54,8 @@
 '   3.0.0.2             El valor fijo de VersionDLL.
 '   3.0.1.0             Muevo las clases CrearClaseSQL y CrearClasesOleDb a este proyecto.
 '   3.0.1.1             Quito los ByVal.
+'   3.0.2.0 06-oct-2022 Usando la DLL con el código en C#.
+'   3.0.3.0 07-oct-2022 Guardar los datos en la configuración local (como en móvil)
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -65,8 +67,18 @@ Imports Microsoft.VisualBasic
 
 Imports elGuille.Util.Developer
 Imports elGuille.Util.Developer.Data
+Imports System.IO
 
 Public Class Form1
+
+    ''' <summary>
+    ''' El path local de la aplicación.
+    ''' </summary>
+    Private Property FolderPath As String
+    ''' <summary>
+    ''' El fichero de configuración.
+    ''' </summary>
+    Private Property FicConfig As String
 
     ''' <summary>
     ''' Devuelve el valor de FileVersion usando FileVersionInfo.
@@ -84,7 +96,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.2.1"
+            s = "3.0.3.1"
         End Try
 
         Return s
@@ -96,6 +108,9 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Dim ts As TimeSpan = Nothing
+
+        FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
+        FicConfig = Path.Combine(FolderPath, "gsCrearClasesTablas.txt")
 
         ' Actualizar la versión de los settings para no perder los valores anteriores. (05/oct/22 12.17)
         My.Settings.Upgrade()
@@ -393,6 +408,21 @@ Public Class Form1
         '
         My.Settings.CopyrightAutor = "Guillermo Som (elGuille)"
         My.Settings.CopyrightVersion = My.Application.Info.Version.ToString
+
+        ' Guardar los valore por compatibilidad con la app móvil (.NET MAUI)
+        Using sw = New StreamWriter(FicConfig, False, System.Text.Encoding.Default)
+            sw.WriteLine(If(optSQL.Checked, "1", "0"))
+            sw.WriteLine(txtDataSource.Text)
+            sw.WriteLine(txtInitialCatalog.Text)
+            sw.WriteLine(If(chkSeguridadSQL.Checked, "1", "0"))
+            sw.WriteLine(txtUserId.Text)
+            sw.WriteLine(txtPassword.Text)
+            sw.WriteLine(If(chkUsarDataAdapter.Checked, "1", "0"))
+            sw.WriteLine(If(chkUsarCommandBuilder.Checked, "1", "0"))
+            sw.WriteLine(If(chkUsarAddWithValue.Checked, "1", "0"))
+            sw.WriteLine(If(chkUsarOverrides.Checked, "1", "0"))
+            sw.WriteLine(If(optVB.Checked, "1", "0"))
+        End Using
     End Sub
 
     Private Sub chkUsarDataAdapter_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsarDataAdapter.CheckedChanged
@@ -415,4 +445,19 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub GuardarConfig()
+        Using sw = New StreamWriter(FicConfig, False, System.Text.Encoding.Default)
+            sw.WriteLine(If(optSQL.Checked, "1", "0"))
+            sw.WriteLine(txtDataSource.Text)
+            sw.WriteLine(txtInitialCatalog.Text)
+            sw.WriteLine(If(chkSeguridadSQL.Checked, "1", "0"))
+            sw.WriteLine(txtUserId.Text)
+            sw.WriteLine(txtPassword.Text)
+            sw.WriteLine(If(chkUsarDataAdapter.Checked, "1", "0"))
+            sw.WriteLine(If(chkUsarCommandBuilder.Checked, "1", "0"))
+            sw.WriteLine(If(chkUsarAddWithValue.Checked, "1", "0"))
+            sw.WriteLine(If(chkUsarOverrides.Checked, "1", "0"))
+            sw.WriteLine(If(optVB.Checked, "1", "0"))
+        End Using
+    End Sub
 End Class

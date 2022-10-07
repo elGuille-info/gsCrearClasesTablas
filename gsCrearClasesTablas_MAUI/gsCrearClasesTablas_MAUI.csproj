@@ -13,14 +13,28 @@
 
 		<!-- Display name -->
 		<ApplicationTitle>gsCrearClasesTablas_MAUI</ApplicationTitle>
+		<Title>gsCrearClasesTablas_MAUI</Title>
+		<!-- Versions -->
+		<ApplicationDisplayVersion>3.0.3</ApplicationDisplayVersion>
+		<ApplicationVersion>3</ApplicationVersion>
+		<Version>3.0.3</Version>
+		<FileVersion>3.0.3.1</FileVersion>
+		<Copyright>©Guillermo Som (elGuille), 2022</Copyright>
+		<Description>Generar clases a partir de una tabla de una base de datos de SQL Server. Usando .NET MAUI con .NET 6.0  (revisión del 7-oct-2022)</Description>
+		<Authors>elGuille</Authors>
+		<PackageProjectUrl>https://www.elguillemola.com/generar-las-clases-de-una-tabla-de-sql-server-o-access-mdb/</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<NeutralLanguage>es</NeutralLanguage>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes>
+			07-oct-22: Con funcionalidad como la app de escritorio.
+			06-oct-22: Usando la DLL gsCrearClases_CS creada en C#.
+		</PackageReleaseNotes>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.elguille.gscrearclasestablas_maui</ApplicationId>
 		<ApplicationIdGuid>9A72A84F-D563-491F-9F78-61C55FEFDD96</ApplicationIdGuid>
-
-		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>

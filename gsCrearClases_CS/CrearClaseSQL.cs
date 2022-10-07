@@ -89,10 +89,18 @@ namespace elGuille.Util.Developer.Data
              // 
             return "";
         }
-        // 
-        public static string[] NombresTablas()
+
+        //public static string[] NombresTablas()
+        
+        /// <summary>
+        /// Devuelve un array con los nombres de las tablas.
+        /// </summary>
+        /// <remarks>Devolver una lista en vez de un array.</remarks>
+        public static List<string> NombresTablas()
         {
-            string[] nomTablas = null;
+            //string[] nomTablas = null;
+            List<string> nomTablas = new();
+
             DataTable dt = new DataTable();
             int i;
             SqlConnection dbConnection = new SqlConnection(cadenaConexion);
@@ -103,8 +111,9 @@ namespace elGuille.Util.Developer.Data
             }
             catch (Exception ex)
             {
-                nomTablas = new string[1];
-                nomTablas[0] = "ERROR: " + ex.Message;
+                //nomTablas = new string[1];
+                //nomTablas[0] = "ERROR: " + ex.Message;
+                nomTablas.Add("ERROR: " + ex.Message);
                 Conectado = false;
                 return nomTablas;
             }
@@ -115,14 +124,16 @@ namespace elGuille.Util.Developer.Data
             i = dt.Rows.Count - 1;
             if (i > -1)
             {
-                nomTablas = new string[i + 1];
+                //nomTablas = new string[i + 1];
                 for (i = 0; i <= dt.Rows.Count - 1; i++)
                 {
                     // si el valor de TABLE_SCHEMA no es dbo, es que es una tabla de un usuario particular
                     if (dt.Rows[i]["TABLE_SCHEMA"].ToString().ToLower() != "dbo")
-                        nomTablas[i] = dt.Rows[i]["TABLE_SCHEMA"].ToString() + "." + dt.Rows[i]["TABLE_NAME"].ToString();
+                        nomTablas.Add(dt.Rows[i]["TABLE_SCHEMA"].ToString() + "." + dt.Rows[i]["TABLE_NAME"].ToString());
+                    //nomTablas[i] = dt.Rows[i]["TABLE_SCHEMA"].ToString() + "." + dt.Rows[i]["TABLE_NAME"].ToString();
                     else
-                        nomTablas[i] = dt.Rows[i]["TABLE_NAME"].ToString();
+                        nomTablas.Add(dt.Rows[i]["TABLE_NAME"].ToString());
+                    //nomTablas[i] = dt.Rows[i]["TABLE_NAME"].ToString();
                 }
             }
             // 
