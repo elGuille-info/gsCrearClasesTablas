@@ -55,7 +55,7 @@
 '   3.0.1.0             Muevo las clases CrearClaseSQL y CrearClasesOleDb a este proyecto.
 '   3.0.1.1             Quito los ByVal.
 '   3.0.2.0 06-oct-2022 Usando la DLL con el código en C#.
-'   3.0.3.0 07-oct-2022 Guardar los datos en la configuración local (como en móvil)
+'   3.0.3.0 08-oct-2022 Guardar los datos en la configuración local (como en móvil)
 '   3.0.3.2             Habilitar el grupo de grbOpciones según haya tablas en la lista
 '------------------------------------------------------------------------------
 Option Strict On
@@ -97,7 +97,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.3.1"
+            s = "3.0.3.2"
         End Try
 
         Return s

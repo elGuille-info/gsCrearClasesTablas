@@ -15,12 +15,12 @@
         /// <summary>
         /// La versión del fichero (la revisión)
         /// </summary>
-        public static string AppFileVersion { get; } = "3.0.3.1";
+        public static string AppFileVersion { get; } = "3.0.3.2";
 
         /// <summary>
         /// La fecha de última actualización
         /// </summary>
-        public static string AppFechaVersion { get; } = "07-oct-2022";
+        public static string AppFechaVersion { get; } = "08-oct-2022";
 
         // Intentar no pasar de estas marcas: 60 caracteres. 2         3         4         5         6
         //                                ---------|---------|---------|---------|---------|---------|
