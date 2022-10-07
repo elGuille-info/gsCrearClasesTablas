@@ -6,7 +6,7 @@
     <ScrollView Margin="0" Padding="4" Orientation="Both">
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout BackgroundColor="{StaticResource Accent}"
-                         VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                         VerticalOptions="Start">
                 <Label Text="Crear Clases de Tablas" TextColor="{StaticResource ColorAzul3}"
                        FontSize="Subtitle" FontAttributes="Bold"
                        HorizontalOptions="FillAndExpand"

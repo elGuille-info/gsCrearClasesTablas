@@ -11,6 +11,7 @@ namespace gsCrearClasesTablas_MAUI
         /// El path local de la aplicación.
         /// </summary>
         private string FolderPath { get; set; }
+
         /// <summary>
         /// El fichero de configuración.
         /// </summary>
@@ -57,6 +58,11 @@ namespace gsCrearClasesTablas_MAUI
 
         private void btnMostrarTablas_Clicked(object sender, EventArgs e)
         {
+            // Para ver el tamaño de la ventana:
+            // el ancho más adecuado es 1170, con un alto de 1150
+            // Lo pongo en 1700x1800 en Windows (1118,66 x 1114,66).
+            txtCodigo.Text = $"Tamaño de la ventana: Width: {Width}, Height: {Height}";
+
             GuardarConfig();
 
             btnLimpiar.IsEnabled = false;
