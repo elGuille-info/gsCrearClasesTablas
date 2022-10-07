@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 
+using elGuille.Util.Developer;
 using elGuille.Util.Developer.Data;
 
 namespace gsCrearClasesTablas_MAUI
@@ -64,6 +65,8 @@ namespace gsCrearClasesTablas_MAUI
             Panel1.IsEnabled = CrearClase.Conectado;
             //btnGuardar.IsEnabled = CrearClase.Conectado;
             // 
+            //  No se puede usar Clear si está con data source.
+            //cboTablas.Items.Clear();
             cboTablas.ItemsSource = null;
             cboTablas.IsEnabled = false;
 
@@ -82,25 +85,26 @@ namespace gsCrearClasesTablas_MAUI
                 btnGenerarClase.IsEnabled = false;
                 Panel1.IsEnabled = false;
                 //btnGuardar.Enabled = false;
+                return;
             }
 
-            cboTablas.IsEnabled = true;
-
-            //  No se puede usar Clear si está con data source.
-            //cboTablas.Items.Clear();
-            cboTablas.ItemsSource = nomTablas;
-            //if (nomTablas != null)
+            //foreach (string s in nomTablas)
             //{
-            //    for (int i = 0; i <= nomTablas.Length - 1; i++)
-            //        cboTablas.Items.Add(nomTablas[i]);
+            //    cboTablas.Items.Add(s);
             //}
+            cboTablas.ItemsSource = nomTablas;
+
+            cboTablas.IsEnabled = true;
             if (cboTablas.Items.Count > 0)
                 cboTablas.SelectedIndex = 0;
+
+            cboTablas.Focus();
         }
 
         private void cboTablas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboTablas.ItemsSource == null || cboTablas.SelectedIndex < 0)
+            //if (cboTablas.ItemsSource == null || cboTablas.SelectedIndex < 0)
+            if (cboTablas.SelectedIndex < 0)
             {
                 return;
             }
@@ -119,7 +123,38 @@ namespace gsCrearClasesTablas_MAUI
 
         private void btnGenerarClase_Clicked(object sender, EventArgs e)
         {
+            txtCodigo.Text = "";
+            GuardarConfig();
+            // 
+            // Si la tabla contiene espacios,                            (02/Nov/04)
+            // sustituirlos por guiones bajos.
+            // Bug reportado por David Sans
+            txtClase.Text = txtClase.Text.Replace(" ", "_");
 
+            // Lo asigno en la clase base ya que son métodos compartidos (22/Mar/19)
+            CrearClase.UsarDataAdapter = chkUsarDataAdapter.IsChecked;
+            if (chkUsarDataAdapter.IsChecked == false)
+                chkUsarCommandBuilder.IsEnabled = false;
+            CrearClase.UsarAddWithValue = chkUsarAddWithValue.IsChecked;
+            CrearClase.UsarOverrides = chkUsarOverrides.IsChecked;
+
+            // Si no está habilitado es que no se utiliza                (07/Abr/19)
+            // ya que solo se usa con DataAdapter
+            bool usarCB = chkUsarCommandBuilder.IsChecked;
+            if (chkUsarCommandBuilder.IsEnabled == false)
+                usarCB = false;
+
+            if (optVB.IsToggled)
+            {
+                if (optSQL.IsChecked)
+                    txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, cboTablas.SelectedItem.ToString(), txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
+                //else
+                //    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
+            }
+            else if (optSQL.IsChecked)
+                txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, cboTablas.SelectedItem.ToString(), txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
+            //else
+            //    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
         }
 
         /// <summary>
@@ -183,7 +218,7 @@ namespace gsCrearClasesTablas_MAUI
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
                 optVB.IsToggled = sTmp == "1";
-                optCS.IsToggled = ! optVB.IsToggled;
+                //optCS.IsToggled = ! optVB.IsToggled;
             }
         }
         /// <summary>
