@@ -7,7 +7,7 @@ Proyecto para generar las clases convertido a C# a partir del código de Visual 
 
 Ahora utiliza Microsoft.Data.SqlClient 5.0.1 en lugar de System.Data.SqlClient Versión 4.8.3.
 La razón es (según dicen):
->System.Data.SqlClient is in servicing mode and is not updating on regular basis, but for addressing security issues and important updates. We suggest using Microsoft.Data.SqlClient as active ADO.NET library which gets updated and implements new features.
+>System.Data.SqlClient is in servicing mode and is not updating on regular basis, but for addressing security issues and important updates. We suggest using Microsoft.Data.SqlClient as active ADO.NET library which gets updated and implements new features.<br>
 >[JRahnama commented on Jan 19](https://github.com/dotnet/SqlClient/issues/1479#issuecomment-1016700827)
 
 
