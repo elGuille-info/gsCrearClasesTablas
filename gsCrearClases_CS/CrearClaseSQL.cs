@@ -51,6 +51,16 @@ namespace elGuille.Util.Developer.Data
             return Conectar(dataSource, initialCatalog, cadenaSelect, "", "", false);
         }
 
+        /// <summary>
+        /// Conectar con el servidor de SQL Server.
+        /// </summary>
+        /// <param name="dataSource">El servidor de SQL Server.</param>
+        /// <param name="initialCatalog">La base de datos.</param>
+        /// <param name="cadenaSelect">Opcional, la cadena de selección.</param>
+        /// <param name="userId">El usuario con acceso a la base de datos.</param>
+        /// <param name="password">El password del usaurio.</param>
+        /// <param name="seguridadSQL">True si se usa la seguridad integrada de Windows.</param>
+        /// <remarks>añado TrustServerCertificate=True; a la cadena de conexión.</remarks>
         public static string Conectar(string dataSource, string initialCatalog, string cadenaSelect, string userId, string password, bool seguridadSQL)
         {
             // si se produce algún error, se devuelve una cadena empezando por ERROR
@@ -104,11 +114,11 @@ namespace elGuille.Util.Developer.Data
         }
 
         //public static string[] NombresTablas()
-        
+
         /// <summary>
-        /// Devuelve un array con los nombres de las tablas.
+        /// Devuelve una colección de tipo string con los nombres de las tablas.
         /// </summary>
-        /// <remarks>Devolver una lista en vez de un array.</remarks>
+        /// <remarks>Antes usaba un array de tipo string.</remarks>
         public static List<string> NombresTablas()
         {
             //string[] nomTablas = null;

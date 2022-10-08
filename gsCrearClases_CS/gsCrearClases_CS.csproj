@@ -12,9 +12,10 @@
 	  <RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
 	  <NeutralLanguage>es</NeutralLanguage>
-	  <AssemblyVersion>3.0.3</AssemblyVersion>
-	  <FileVersion>3.0.3.0</FileVersion>
+	  <AssemblyVersion>3.0.4</AssemblyVersion>
+	  <FileVersion>3.0.4.0</FileVersion>
 	  <PackageReleaseNotes>
+		  08-oct-22: Uso Microsoft.Data.SqlClient 5.0.1 en lugar de System.Data.SqlClient Versión 4.8.3
 		  06-oct-22: Convertida a C#.
 		  05-oct-22: Revisión para compilar como net6.0 sin indicar que es para Windows.
 		  Primera versión del proyecto usando .NET 6.0 (net6.0-windows)

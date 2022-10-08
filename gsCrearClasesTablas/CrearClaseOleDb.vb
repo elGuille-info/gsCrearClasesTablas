@@ -91,6 +91,10 @@ Public Class CrearClaseOleDb
     End Function
     '
     'Public Shared Function NombresTablas() As String()
+    ''' <summary>
+    ''' Devuelve una colección de tipo string con las tablas.
+    ''' </summary>
+    ''' <remarks>Antes usaba un array de tipo string.</remarks>
     Public Shared Function NombresTablas() As List(Of String)
         'Dim nomTablas() As String = Nothing
         Dim nomTablas As List(Of String) = Nothing
