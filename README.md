@@ -8,18 +8,18 @@ Mira en el blog para saber más y los enlaces a las versiones anteriores: [Gener
 <br>
 <br>
 
-_**Nota 08-oct-22 14.28:**_
+_**Nota 08-oct-22 14.28:**_ <br>
+>El proyecto gsCrearClases de Visual Basic y ano lo utilizo en ninguno de los proyectos.<br>
+>El proyecto gsCrearClases_CS (de C#) utiliza Microsoft.Data.SqlClient 5.0.1 en lugar de System.Data.SqlClient Versión 4.8.3.<br>
+>El proyecto gsCrearClasesTablas (como app de escritorio para Windows) utiliza la DLL de gsCrearClases_CS y para el acceso a las bases de datos de Access (.mdb) sigue usando la clases CrearClasesOleDb con el paquete de NuGet System.Data.OleDb 6.0.0.<br>
+>El proyecto gsCrearClasesTablas_MAUI utiliza la DLL de gsCrearClases_CS y no permite crear clases a partir de bases de datos de Access (solo de SQL Server).<br>
+>Está operativo (y funcional) tanto en Windows como en iOS (iPhone).<br>
+>En Android falla al acceder a las tablas, dando el error:<br>
+>	ERROR: A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: TCP Provider, error: 35 - An internal exception was caught).<br>
+>Ese mismo error daba en la app de escritorio si no tenía _TrustServerCertificate=True;_ en la cadena de conexión.<br>
 
->El proyecto gsCrearClases de Visual Basic y ano lo utilizo en ninguno de los proyectos.
->El proyecto gsCrearClases_CS (de C#) utiliza Microsoft.Data.SqlClient 5.0.1 en lugar de System.Data.SqlClient Versión 4.8.3.
->El proyecto gsCrearClasesTablas (como app de escritorio para Windows) utiliza la DLL de gsCrearClases_CS y para el acceso a las bases de datos de Access (.mdb) sigue usando la clases CrearClasesOleDb con el paquete de NuGet System.Data.OleDb 6.0.0.
->El proyecto gsCrearClasesTablas_MAUI utiliza la DLL de gsCrearClases_CS y no permite crear clases a partir de bases de datos de Access (solo de SQL Server).
->Está operativo (y funcional) tanto en Windows como en iOS (iPhone).
->En Android falla al acceder a las tablas, dando el error:
->	ERROR: A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: TCP Provider, error: 35 - An internal exception was caught).
->Ese mismo error daba en la app de escritorio si no tenía _TrustServerCertificate=True;_ en la cadena de conexión.
-
-
+<br>
+<br>
 
 _**Nota 06-oct-22 21.16:**_
 >He creado el proyecto de gsCrearClases en C# para poder usarlo sin problemas con la app móvil (he probado con iOS).<br>
