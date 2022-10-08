@@ -110,7 +110,11 @@ namespace gsCrearClasesTablas_MAUI
 
                 // Mostrar el error.
                 if (nomTablas != null)
+                {
                     LabelInfoTablas.Text = nomTablas[0];
+                    // Mostrarlo también en el texto del código para poder copiarlo.
+                    txtCodigo.Text = nomTablas[0];
+                }
                 else
                     LabelInfoTablas.Text = "No se ha podido mostrar las tablas.";
 

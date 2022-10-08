@@ -90,8 +90,10 @@ Public Class CrearClaseOleDb
         Return ""
     End Function
     '
-    Public Shared Function NombresTablas() As String()
-        Dim nomTablas() As String = Nothing
+    'Public Shared Function NombresTablas() As String()
+    Public Shared Function NombresTablas() As List(Of String)
+        'Dim nomTablas() As String = Nothing
+        Dim nomTablas As List(Of String) = Nothing
         Dim dt As DataTable
         Dim restrictions() As Object = {Nothing, Nothing, Nothing, "TABLE"}
         Dim dbConnection As New OleDbConnection(cadenaConexion)
@@ -99,8 +101,10 @@ Public Class CrearClaseOleDb
         Try
             dbConnection.Open()
         Catch ex As Exception
-            ReDim nomTablas(0)
-            nomTablas(0) = "ERROR: " & ex.Message
+            'ReDim nomTablas(0)
+            nomTablas = New List(Of String)
+            'nomTablas(0) = "ERROR: " & ex.Message
+            nomTablas.Add("ERROR: " & ex.Message)
             Conectado = False
             Return nomTablas
         End Try
@@ -108,10 +112,12 @@ Public Class CrearClaseOleDb
         dt = dbConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, restrictions)
         Dim i As Integer = dt.Rows.Count - 1
         If i > -1 Then
-            ReDim nomTablas(i)
+            'ReDim nomTablas(i)
+            nomTablas = New List(Of String)
             For i = 0 To dt.Rows.Count - 1
                 'nomTablas(i) = dt.Rows(i)("TABLE_NAME").ToString()
-                nomTablas(i) = dt.Rows(i).Item("TABLE_NAME").ToString()
+                'nomTablas(i) = dt.Rows(i).Item("TABLE_NAME").ToString()
+                nomTablas.Add(dt.Rows(i).Item("TABLE_NAME").ToString())
             Next
         End If
         ' 

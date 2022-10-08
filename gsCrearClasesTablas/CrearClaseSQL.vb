@@ -6,6 +6,8 @@
 '
 ' Muevo esta clase al formulario ya que en la DLL no es necesaria   (05/oct/22)
 '
+' Quito esta clase del proyecto gsCrearClasesTablas y uso la de la DLL de C#. (08/oct/22 14.05)
+'
 ' ©Guillermo 'guille' Som, 2004, 2005, 2007, 2022
 '------------------------------------------------------------------------------
 Option Strict On
@@ -15,7 +17,10 @@ Imports System
 Imports Microsoft.VisualBasic
 '
 Imports System.Data
-Imports System.Data.SqlClient
+'Imports System.Data.SqlClient
+' Usando <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
+' Ahora da el erro: ERROR: A connection was successfully established with the server, but then an error occurred during the login process. (provider: SSL Provider, error: 0 - The certificate chain was issued by an authority that is not trusted.)
+Imports Microsoft.Data.SqlClient
 
 Imports elGuille.Util.Developer
 Imports elGuille.Util.Developer.Data
@@ -53,6 +58,8 @@ Public Class CrearClaseSQL
         Else
             cadenaConexion &= "Integrated Security=yes;"
         End If
+        ' A ver si así no da error en la app de escritorio.
+        cadenaConexion &= "TrustServerCertificate=True;"
         '
         If cadenaSelect = "" Then
             ' si no se indica la cadena Select también se conecta

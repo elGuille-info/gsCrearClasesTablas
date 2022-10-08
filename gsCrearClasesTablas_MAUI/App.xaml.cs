@@ -68,7 +68,7 @@ namespace gsCrearClasesTablas_MAUI
             });
 
             // Para añadir el encoding WEST para Android. No sirve.
-            //System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             //var encoding = System.Text.Encoding.GetEncoding(1252);
 
             MainPage = new AppShell();

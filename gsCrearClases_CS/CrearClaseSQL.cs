@@ -28,7 +28,14 @@ using System.Threading.Tasks;
 using System.Data;
 
 // Con esta importación debería acceder a SqlDataAdapter y SqlConnection.
-using System.Data.SqlClient;
+// con el paquete System.Data.SqlClient Versión 4.8.3
+//using System.Data.SqlClient;
+// A ver si con esto... usando: <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
+// En Android sigue dando el mismo error:
+//      ERROR: A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: TCP Provider, error: 35 - An internal exception was caught)
+// pero en Windows e iOS funciona y
+// dicen que es mejor usar Microsoft.Data.SqlClient que System.Data.SqlClient porque el primero está más actualizado.
+using Microsoft.Data.SqlClient;
 
 //using elGuille.Util.Developer;
 //using elGuille.Util.Developer.Data;
@@ -60,6 +67,12 @@ namespace elGuille.Util.Developer.Data
             }
             else
                 cadenaConexion += "Integrated Security=yes;";
+
+            // Añadir TrustServerCertificate=True y Encrypt=false a la cadena de conexión para que funcione en Android.
+            //cadenaConexion += "TrustServerCertificate=True;Encrypt=false;";
+            //cadenaConexion += "TrustServerCertificate=True;MultiSubnetFailover=True;";
+            //cadenaConexion += "MultiSubnetFailover=True;";
+            cadenaConexion += "TrustServerCertificate=True;";
             // 
             if (cadenaSelect == "")
             {

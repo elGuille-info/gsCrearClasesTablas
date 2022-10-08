@@ -97,7 +97,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.3.3"
+            s = "3.0.3.4"
         End Try
 
         Return s
@@ -222,8 +222,10 @@ Public Class Form1
         '
         If CrearClase.Conectado = False Then Return
         '
-        Dim nomTablas() As String
+        'Dim nomTablas() As String
+        Dim nomTablas As List(Of String)
         If optSQL.Checked Then
+            ' Esto necesita usar una importación a elGuille.Util.Developer.Data
             nomTablas = CrearClaseSQL.NombresTablas()
         Else
             nomTablas = CrearClaseOleDb.NombresTablas()
@@ -238,8 +240,9 @@ Public Class Form1
         End If
         '
         cboTablas.Items.Clear()
-        If Not nomTablas Is Nothing Then
-            For i As Integer = 0 To nomTablas.Length - 1
+        If nomTablas IsNot Nothing Then
+            'For i As Integer = 0 To nomTablas.Length - 1
+            For i As Integer = 0 To nomTablas.Count - 1
                 cboTablas.Items.Add(nomTablas(i))
             Next
         End If

@@ -13,7 +13,7 @@
     <Description>Generar clases a partir de una tabla de una base de datos de SQL Server o de Access. Para .NET 6.0  (revisión del 8-oct-2022)</Description>
     <Authors>elGuille</Authors>
     <Version>3.0.3</Version>
-    <FileVersion>3.0.3.3</FileVersion>
+    <FileVersion>3.0.3.4</FileVersion>
     <PackageProjectUrl>https://www.elguillemola.com/generar-las-clases-de-una-tabla-de-sql-server-o-access-mdb/</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
@@ -25,6 +25,10 @@
 		  Primera versión del proyecto usando .NET 6.0 (net6.0-windows)</PackageReleaseNotes>
 
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CrearClaseSQL.vb" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="hoja_sql.ico" />
@@ -44,8 +48,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
     <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
   <ItemGroup>

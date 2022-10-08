@@ -27,8 +27,8 @@ using System.Threading.Tasks;
 //using Microsoft.VisualBasic;
 using System.Collections;
 using System.Data;
-using System.Data.SqlClient;
-using System.Data.OleDb;
+//using System.Data.SqlClient;
+//using System.Data.OleDb;
 using elGuille.Util.Developer;
 
 namespace elGuille.Util.Developer.Data
