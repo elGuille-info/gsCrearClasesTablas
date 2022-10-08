@@ -8,6 +8,20 @@ namespace gsCrearClasesTablas_MAUI
 {
     public partial class App : Application
     {
+        // Esto solo se asigna una vez.
+        private static Color _GrisDeshabilitado = (Color)Application.Current.Resources["GrisDeshabilitado"];
+        public static Color GrisDeshabilitado { get => _GrisDeshabilitado; }
+
+        /// <summary>
+        /// El tipo de dispositivo: Android, iOS, UWP...
+        /// </summary>
+        public static DevicePlatform DevicePlatform { get; private set; }
+
+        /// <summary>
+        /// El tipo de dispositivo: Phone, Tablet, Desktop...
+        /// </summary>
+        public static DeviceIdiom DeviceIdiom { get; private set; }
+
         /// <summary>
         /// El nombre de la aplicación.
         /// </summary>
@@ -36,6 +50,9 @@ namespace gsCrearClasesTablas_MAUI
         public App()
         {
             InitializeComponent();
+
+            DevicePlatform = DeviceInfo.Platform;
+            DeviceIdiom = DeviceInfo.Idiom;
 
             // Esto parece que no funciona en MAUI.
             //#if WINDOWS

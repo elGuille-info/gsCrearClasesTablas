@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="gsCrearClasesTablas_MAUI.MainPage"
+             xmlns:ctr="clr-namespace:gsCrearClasesTablas_MAUI.Controles" 
              Appearing="ContentPage_Appearing">
     <ScrollView Margin="0" Padding="4" Orientation="Both">
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
@@ -13,11 +14,16 @@
                        HorizontalTextAlignment="Center"/>
             </StackLayout>
             <StackLayout Margin="20,10" Spacing="6">
-                <Frame>
+                <StackLayout>
+                    
+                </StackLayout>
+                <Frame x:Name="grbSQL">
                     <!-- Con este margin se evita que se corte el borde del Frame en la pate inferior -->
                     <StackLayout Margin="4">
                         <StackLayout Orientation="Horizontal" Spacing="8">
-                            <CheckBox x:Name="optSQL" IsChecked="True" IsEnabled="False"/>
+                            <ctr:CheckLabel x:Name="optSQL" IsChecked="True" IsEnabled="False" 
+                                            Text="Usar Base de datos de SQL Server" />
+                            <!--<CheckBox x:Name="optSQL" IsChecked="True" IsEnabled="False"/>
                             <Label Text="Usar Base de datos de SQL Server">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label"
@@ -34,19 +40,21 @@
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SQLTapGestureRecognizer_Tapped"/>
                                 </Label.GestureRecognizers>
-                            </Label>
+                            </Label>-->
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Style="{StaticResource StackConMargen}">
                             <Label Text="Data source:" WidthRequest="100"/>
-                            <Entry x:Name="txtDataSource" Style="{StaticResource EntryText}" WidthRequest="400"/>
+                            <Entry x:Name="txtDataSource" Style="{StaticResource EntryText}" WidthRequest="300"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Style="{StaticResource StackConMargen}">
                             <Label Text="Initial catalog:" WidthRequest="100"/>
-                            <Entry x:Name="txtInitialCatalog" Style="{StaticResource EntryText}" WidthRequest="400"/>
+                            <Entry x:Name="txtInitialCatalog" Style="{StaticResource EntryText}" WidthRequest="300"/>
                         </StackLayout>
                         <StackLayout Style="{StaticResource StackConMargen}">
                             <StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="chkSeguridadSQL"/>
+                                <ctr:CheckLabel x:Name="chkSeguridadSQL"
+                                                Text="Usar seguridad de SQL"/>
+                                <!--<CheckBox x:Name="chkSeguridadSQL"/>
                                 <Label Text="Usar seguridad de SQL, sino la seguridad integrada (Integrated Security)">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
@@ -63,7 +71,7 @@
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SeguridadSQLTapGestureRecognizer_Tapped"/>
                                     </Label.GestureRecognizers>
-                                </Label>
+                                </Label>-->
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" Spacing="12" Margin="12,0,0,0"
                                          PropertyChanged="StackLayout_PropertyChanged">
