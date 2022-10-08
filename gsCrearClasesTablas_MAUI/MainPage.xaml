@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="gsCrearClasesTablas_MAUI.MainPage"
-             xmlns:ctr="clr-namespace:gsCrearClasesTablas_MAUI.Controles" 
              Appearing="ContentPage_Appearing">
     <ScrollView Margin="0" Padding="4" Orientation="Both">
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
@@ -20,10 +19,10 @@
                 <Frame x:Name="grbSQL">
                     <!-- Con este margin se evita que se corte el borde del Frame en la pate inferior -->
                     <StackLayout Margin="4">
+                        <!--<ctr:CheckLabel x:Name="optSQL" IsChecked="True" IsEnabled="False" 
+                                        Text="Usar Base de datos de SQL Server" />-->
                         <StackLayout Orientation="Horizontal" Spacing="8">
-                            <ctr:CheckLabel x:Name="optSQL" IsChecked="True" IsEnabled="False" 
-                                            Text="Usar Base de datos de SQL Server" />
-                            <!--<CheckBox x:Name="optSQL" IsChecked="True" IsEnabled="False"/>
+                            <CheckBox x:Name="optSQL" IsChecked="True" IsEnabled="False"/>
                             <Label Text="Usar Base de datos de SQL Server">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label"
@@ -40,7 +39,7 @@
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SQLTapGestureRecognizer_Tapped"/>
                                 </Label.GestureRecognizers>
-                            </Label>-->
+                            </Label>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Style="{StaticResource StackConMargen}">
                             <Label Text="Data source:" WidthRequest="100"/>
@@ -51,10 +50,10 @@
                             <Entry x:Name="txtInitialCatalog" Style="{StaticResource EntryText}" WidthRequest="300"/>
                         </StackLayout>
                         <StackLayout Style="{StaticResource StackConMargen}">
+                            <!--<ctr:CheckLabel x:Name="chkSeguridadSQL"
+                                            Text="Usar seguridad de SQL"/>-->
                             <StackLayout Orientation="Horizontal">
-                                <ctr:CheckLabel x:Name="chkSeguridadSQL"
-                                                Text="Usar seguridad de SQL"/>
-                                <!--<CheckBox x:Name="chkSeguridadSQL"/>
+                                <CheckBox x:Name="chkSeguridadSQL"/>
                                 <Label Text="Usar seguridad de SQL, sino la seguridad integrada (Integrated Security)">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
@@ -71,7 +70,7 @@
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SeguridadSQLTapGestureRecognizer_Tapped"/>
                                     </Label.GestureRecognizers>
-                                </Label>-->
+                                </Label>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" Spacing="12" Margin="12,0,0,0"
                                          PropertyChanged="StackLayout_PropertyChanged">
@@ -130,6 +129,10 @@
                         <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="StartAndExpand">
                             <StackLayout Orientation="Horizontal" Spacing="8">
                                 <Label Text="Tablas:" WidthRequest="100"/>
+                                <!-- TODO: Hay que arreglar esto:
+                                    Usando Picker ni en Windows se muestran los elementos.
+                                    Usando ListView en iOS no se muestran los elementos (pero están).
+                                -->
                                 <!-- Title="Selecciona la tabla a convertir"-->
                                 <!--<Picker x:Name="cboTablas" WidthRequest="300"
                                         SelectedIndexChanged="cboTablas_SelectedIndexChanged"/>-->
@@ -171,6 +174,8 @@
                                  Style="{StaticResource StackConMargen}"
                                  PropertyChanged="grbOpciones_PropertyChanged" Margin="4">
                         <StackLayout Style="{StaticResource StackConMargen}" Margin="0">
+                            <!--<ctr:CheckLabel x:Name="chkUsarDataAdapter" IsChecked="False"
+                                            Text="Usar DataAdpater en lugar de cmd.Execute"/>-->
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Usar DataAdpater en lugar de cmd.Execute">
                                     <Label.Triggers>
@@ -191,6 +196,9 @@
                                 </Label>
                                 <Switch x:Name="chkUsarDataAdapter" IsToggled="False"/>
                             </StackLayout>
+                            <!--<ctr:CheckLabel x:Name="chkUsarCommandBuilder" IsEnabled="False"
+                                            Margin="12,0,0,0"
+                                            Text="Usar CommandBuilder"/>-->
                             <StackLayout Orientation="Horizontal" Margin="12,0,0,0">
                                 <Label Text="Usar CommandBuilder" IsEnabled="False">
                                     <Label.Triggers>
@@ -224,6 +232,8 @@
                                     </Switch.Triggers>
                                 </Switch>
                             </StackLayout>
+                            <!--<ctr:CheckLabel x:Name="chkUsarAddWithValue"
+                                            Text="Usar AddWithValue"/>-->
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Usar AddWithValue">
                                     <Label.Triggers>
@@ -246,6 +256,8 @@
                             </StackLayout>
                             <Label Text="Si se utiliza AddWithValue o Add para añadir los valores a los parámetros del comando."
                                     FontSize="13" Margin="12,0,0,0"/>
+                            <!--<ctr:CheckLabel x:Name="chkUsarOverrides"
+                                            Text="Usar Overrides"/>-->
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Usar Overrides">
                                     <Label.Triggers>

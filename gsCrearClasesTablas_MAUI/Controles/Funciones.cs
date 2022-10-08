@@ -16,13 +16,17 @@ namespace gsCrearClasesTablas_MAUI.Controles
         /// <summary>
         /// Cambiar el color del CheckBox según el valor de isChecked (boolean).
         /// </summary>
-        /// <param name="chk"></param>
-        /// <param name="isChecked"></param>
+        /// <param name="chk">El control CheckBox que se cambiará de color.</param>
+        /// <param name="isChecked">El estado checked del control.</param>
         /// <param name="usarColorUnCheked">Si se debe usar el nuevo color para cuando no está seleccionado</param>
         /// <remarks>Usado desde CheckLabel.</remarks>
         public static void BackColorCheck(CheckBox chk, bool isChecked, bool usarColorUnCheked = false)
         {
             //if (comprobarEnabled && chk.IsEnabled == false)
+            //    return;
+
+            // No hacer nada si está deshabilitado.
+            //if (chk.IsEnabled == false)
             //    return;
 
             if (isChecked)

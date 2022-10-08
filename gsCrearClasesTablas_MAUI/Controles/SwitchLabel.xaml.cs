@@ -19,7 +19,7 @@ namespace gsCrearClasesTablas_MAUI.Controles
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SwitchLabel : StackLayout
     {
-        private Color thumbC;
+        private readonly Color thumbC;
         private Color labelC;
         public SwitchLabel()
         {
@@ -245,25 +245,6 @@ namespace gsCrearClasesTablas_MAUI.Controles
         //    set => Orientation = value;
         //}
 
-        public void BackColorCheck()
-        {
-            // Asignar los colores si está o no habilitado, v1.11.2.43 (14/sep/22 06.03)
-            // por si se llama a este método después de asignar IsEnabled.
-            if (chkButton.IsEnabled)
-            {
-                chkButton.ThumbColor = thumbC;
-                LabelText.TextColor = labelC;
-                // Usar el color asignado. v1.36.0.4 (27/sep/22 11.47)
-                LabelText.FontAttributes = _FontAttributes;
-            }
-            else
-            {
-                chkButton.ThumbColor = App.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
-                LabelText.TextColor = App.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
-                LabelText.FontAttributes = FontAttributes.Italic;
-            }
-        }
-
         //
         // Cambiar el orden de la etiqueta y el Switch.
         // Aunque no tiene sentido salvo que la orientación sea vertical.
@@ -431,20 +412,21 @@ namespace gsCrearClasesTablas_MAUI.Controles
             var nuevoValor = (bool)newValue;
             control.chkButton.IsEnabled = nuevoValor;
             control.LabelText.IsEnabled = nuevoValor;
-            if (nuevoValor)
-            {
-                control.chkButton.ThumbColor = control.thumbC;
-                control.LabelText.TextColor = control.labelC;
-                // Usar el valor que tuviera. v1.36.0.4 (27/sep/22 11.45)
-                control.LabelText.FontAttributes = control._FontAttributes;
-                control.BackColorCheck();
-            }
-            else
-            {
-                control.chkButton.ThumbColor = App.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
-                control.LabelText.TextColor = App.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
-                control.LabelText.FontAttributes = FontAttributes.Italic;
-            }
+            //if (nuevoValor)
+            //{
+            //    control.chkButton.ThumbColor = control.thumbC;
+            //    control.LabelText.TextColor = control.labelC;
+            //    // Usar el valor que tuviera. v1.36.0.4 (27/sep/22 11.45)
+            //    control.LabelText.FontAttributes = control._FontAttributes;
+            //    control.BackColorCheck();
+            //}
+            //else
+            //{
+            //    control.chkButton.ThumbColor = App.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
+            //    control.LabelText.TextColor = App.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
+            //    control.LabelText.FontAttributes = FontAttributes.Italic;
+            //}
+            control.BackColorCheck();
         }
 
         /// <summary>
@@ -454,6 +436,25 @@ namespace gsCrearClasesTablas_MAUI.Controles
         {
             get => (bool)GetValue(IsEnabledProperty);
             set => SetValue(IsEnabledProperty, value);
+        }
+
+        public void BackColorCheck()
+        {
+            // Asignar los colores si está o no habilitado, v1.11.2.43 (14/sep/22 06.03)
+            // por si se llama a este método después de asignar IsEnabled.
+            if (chkButton.IsEnabled)
+            {
+                chkButton.ThumbColor = thumbC;
+                LabelText.TextColor = labelC;
+                // Usar el color asignado. v1.36.0.4 (27/sep/22 11.47)
+                LabelText.FontAttributes = _FontAttributes;
+            }
+            else
+            {
+                chkButton.ThumbColor = App.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
+                LabelText.TextColor = App.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
+                LabelText.FontAttributes = FontAttributes.Italic;
+            }
         }
     }
 }

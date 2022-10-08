@@ -286,6 +286,7 @@ namespace gsCrearClasesTablas_MAUI
                 //App.HabilitarContenedor(grbOpciones, grbOpciones.IsEnabled, limpiar: false);
                 // ¡En los checkBox Funciona asignado el valor al revés! ???
                 // Los colores... ¡OJÚ!
+
                 chkUsarDataAdapter.IsEnabled = grbOpciones.IsEnabled;
                 //chkUsarCommandBuilder.IsEnabled = grbOpciones.IsEnabled;
                 chkUsarAddWithValue.IsEnabled = grbOpciones.IsEnabled;

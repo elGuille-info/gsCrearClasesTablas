@@ -69,16 +69,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Controles\**" />
 	  <AndroidResource Remove="Platforms\MacCatalyst\**" />
 	  <AndroidResource Remove="Platforms\Tizen\**" />
+	  <Compile Remove="Controles\**" />
 	  <Compile Remove="Platforms\MacCatalyst\**" />
 	  <Compile Remove="Platforms\Tizen\**" />
+	  <EmbeddedResource Remove="Controles\**" />
 	  <EmbeddedResource Remove="Platforms\MacCatalyst\**" />
 	  <EmbeddedResource Remove="Platforms\Tizen\**" />
+	  <MauiCss Remove="Controles\**" />
 	  <MauiCss Remove="Platforms\MacCatalyst\**" />
 	  <MauiCss Remove="Platforms\Tizen\**" />
+	  <MauiXaml Remove="Controles\**" />
 	  <MauiXaml Remove="Platforms\MacCatalyst\**" />
 	  <MauiXaml Remove="Platforms\Tizen\**" />
+	  <None Remove="Controles\**" />
 	  <None Remove="Platforms\MacCatalyst\**" />
 	  <None Remove="Platforms\Tizen\**" />
 	</ItemGroup>
@@ -92,12 +98,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controles\CheckLabel.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Controles\SwitchLabel.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="MainPage_ori.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
