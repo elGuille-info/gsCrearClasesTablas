@@ -9,8 +9,12 @@ namespace gsCrearClasesTablas_MAUI
     public partial class App : Application
     {
         // Todo esto da error en iOS (no se carga la app)
+
         //// Esto solo se asigna una vez.
         //private static Color _GrisDeshabilitado = (Color)Application.Current.Resources["GrisDeshabilitado"];
+        ///// <summary>
+        ///// El color gris para usar como deshabilitado (#7A7A7A).
+        ///// </summary>
         //public static Color GrisDeshabilitado { get => _GrisDeshabilitado; }
 
         ///// <summary>

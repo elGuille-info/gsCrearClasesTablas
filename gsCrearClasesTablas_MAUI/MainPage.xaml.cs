@@ -80,40 +80,47 @@ namespace gsCrearClasesTablas_MAUI
             grbOpciones.IsEnabled = CrearClase.Conectado;
             btnGenerarClase.IsEnabled = CrearClase.Conectado;
             Panel1.IsEnabled = CrearClase.Conectado;
-            //btnGuardar.IsEnabled = CrearClase.Conectado;
+            btnCopiarClipBoard.IsEnabled = CrearClase.Conectado;
             // 
             //  No se puede usar Clear si está con data source.
             //cboTablas.Items.Clear();
-            cboTablas.ItemsSource = null;
-            cboTablas.IsEnabled = false;
+            if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            {
+                listViewTablas.ItemsSource = null;
+                listViewTablas.IsEnabled = false;
+            }
+            else
+            {
+                cboTablas.ItemsSource = null;
+                cboTablas.IsEnabled = false;
+            }
 
             if (CrearClase.Conectado == false)
             {
                 btnMostrarTablas.IsEnabled = true;
                 return;
             }
-            // 
-            //string[] nomTablas = null;
-            List<string> nomTablas = null;
+            
+            List<TablaItem> nomTablas = null;
             if (optSQL.IsChecked)
-                nomTablas = CrearClaseSQL.NombresTablas();
+                nomTablas = CrearClaseSQL.NombresTablasItem();
             //else
             //    nomTablas = CrearClaseOleDb.NombresTablas();
             // 
 
-            if ((nomTablas == null) || nomTablas[0].StartsWith("ERROR"))
+            if ((nomTablas == null) || nomTablas[0].Nombre.StartsWith("ERROR"))
             {
                 grbOpciones.IsEnabled = false;
                 btnGenerarClase.IsEnabled = false;
                 Panel1.IsEnabled = false;
-                //btnGuardar.Enabled = false;
+                btnCopiarClipBoard.IsEnabled = false;
 
                 // Mostrar el error.
                 if (nomTablas != null)
                 {
-                    LabelInfoTablas.Text = nomTablas[0];
+                    LabelInfoTablas.Text = nomTablas[0].Nombre;
                     // Mostrarlo también en el texto del código para poder copiarlo.
-                    txtCodigo.Text = nomTablas[0];
+                    txtCodigo.Text = nomTablas[0].Nombre;
                 }
                 else
                     LabelInfoTablas.Text = "No se ha podido mostrar las tablas.";
@@ -125,30 +132,32 @@ namespace gsCrearClasesTablas_MAUI
 
             btnLimpiar.IsEnabled = true;
 
-            //foreach (string s in nomTablas)
-            //{
-            //    cboTablas.Items.Add(s);
-            //}
-            cboTablas.ItemsSource = nomTablas;
+            if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            {
+                listViewTablas.ItemsSource = nomTablas;
+                listViewTablas.IsEnabled = true;
+                listViewTablas.SelectedItem = nomTablas[0];
+                listViewTablas.Focus();
+            }
+            else
+            {
+                cboTablas.ItemsSource = nomTablas;
+                cboTablas.IsEnabled = true;
+                // Seleccionar el primer elemento.
+                cboTablas.SelectedItem = nomTablas[0];
 
-            cboTablas.IsEnabled = true;
-            //if (cboTablas.Items.Count > 0)
-            //    cboTablas.SelectedIndex = 0;
-            
-            // Seleccionar el primer elemento.
-            cboTablas.SelectedItem = nomTablas[0];
-
-            cboTablas.Focus();
+                cboTablas.Focus();
+            }
 
             btnMostrarTablas.IsEnabled = true;
         }
 
-        private void cboTablas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void listViewTablas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (cboTablas.SelectedItem == null)
+            if (listViewTablas.SelectedItem == null)
                 return;
 
-            string laTabla = e.SelectedItem.ToString();
+            string laTabla = (e.SelectedItem as TablaItem).Nombre; // e.SelectedItem.ToString();
             txtSelect.Text = "SELECT * FROM " + laTabla;
             int i = laTabla.IndexOf(".");
             // Si la tabla contiene espacios,                            (02/Nov/04)
@@ -158,6 +167,24 @@ namespace gsCrearClasesTablas_MAUI
                 txtClase.Text = laTabla.Substring(i + 1).Replace(" ", "_");
             else
                 txtClase.Text = laTabla.Replace(" ", "_");
+        }
+
+        private void cboTablas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboTablas.SelectedItem == null)
+                return;
+
+            string laTabla = (cboTablas.SelectedItem as TablaItem).Nombre;
+            txtSelect.Text = "SELECT * FROM " + laTabla;
+            int i = laTabla.IndexOf(".");
+            // Si la tabla contiene espacios,                            (02/Nov/04)
+            // sustituirlos por guiones bajos.
+            // Bug reportado por David Sans
+            if (i > -1)
+                txtClase.Text = laTabla.Substring(i + 1).Replace(" ", "_");
+            else
+                txtClase.Text = laTabla.Replace(" ", "_");
+
         }
 
         private void btnGenerarClase_Clicked(object sender, EventArgs e)
@@ -382,6 +409,16 @@ namespace gsCrearClasesTablas_MAUI
                 }
                 catch { }
             }
+        }
+
+        private void OpcionesSQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            grbSQL.IsVisible = !grbSQL.IsVisible;
+        }
+
+        private void OpcionesTablasTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            grbTablas.IsVisible = !grbTablas.IsVisible;
         }
     }
 }

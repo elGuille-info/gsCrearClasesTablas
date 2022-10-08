@@ -113,6 +113,58 @@ namespace elGuille.Util.Developer.Data
             return "";
         }
 
+        /// <summary>
+        /// Las tablas como una colección de TablaItem.
+        /// </summary>
+        public static List<TablaItem> NombresTablasItem()
+        {
+            List<TablaItem> nomTablas = new();
+
+            DataTable dt = new DataTable();
+            SqlConnection dbConnection = new SqlConnection(cadenaConexion);
+            
+            try
+            {
+                dbConnection.Open();
+            }
+            catch (Exception ex)
+            {
+                nomTablas.Add(new TablaItem() { Nombre = "ERROR: " + ex.Message });
+                Conectado = false;
+                return nomTablas;
+            }
+             
+            SqlDataAdapter schemaDA = new SqlDataAdapter("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' ORDER BY TABLE_TYPE", dbConnection);
+            
+            schemaDA.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    string tableName = dt.Rows[i]["TABLE_NAME"].ToString();
+                    // Comprobar que la tabla tenga texto.
+                    //  Por si es por esto por lo que no se muestra en el picker de Maui.
+                    // Pero se ve que no es esto... :-/
+                    if (string.IsNullOrWhiteSpace(tableName))
+                    {
+                        continue;
+                    }
+                    TablaItem tablaItem = new TablaItem
+                    {
+                        TABLE_SCHEMA = dt.Rows[i]["TABLE_SCHEMA"].ToString()
+                    };
+                    //tablaItem.Nombre = nombreTabla;
+                    // si el valor de TABLE_SCHEMA no es dbo, es que es una tabla de un usuario particular
+                    if (dt.Rows[i]["TABLE_SCHEMA"].ToString().ToLower() != "dbo")
+                        tablaItem.Nombre = dt.Rows[i]["TABLE_SCHEMA"].ToString() + "." + tableName;
+                    else
+                        tablaItem.Nombre = tableName;
+                    nomTablas.Add(tablaItem);
+                }
+            }
+            return nomTablas;
+        }
+
         //public static string[] NombresTablas()
 
         /// <summary>
