@@ -1,4 +1,10 @@
-﻿namespace gsCrearClasesTablas_MAUI
+﻿//#if WINDOWS
+//using Windows.UI.ViewManagement;
+//using Windows.UI.Xaml;
+//using Windows.Foundation;
+//#endif
+
+namespace gsCrearClasesTablas_MAUI
 {
     public partial class App : Application
     {
@@ -31,24 +37,39 @@
         {
             InitializeComponent();
 
+            // Esto parece que no funciona en MAUI.
+            //#if WINDOWS
+            //            // Asignar manualmente el tamaño según esté definido en la App del proyecto con la funcionalidad.
+            //            //double winWidth = 1700; //laApp.WindowsWidth;
+            //            //double winHeight = 1800; //laApp.WindowsHeight;
+
+            //            //ApplicationView.PreferredLaunchViewSize = new Windows.Foundation.Size(winWidth, winHeight);
+            //            //ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            //            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.Auto;
+
+            //#endif
+
             // Indicar el tamaño para la app de Windows.
             Microsoft.Maui.Handlers.WindowHandler.Mapper.AppendToMapping(nameof(IWindow), (handler, view) =>
             {
 #if WINDOWS
-            // Asignar manualmente el tamaño. 
-            int winWidth = 1700;
-            int winHeight = 1800;
+                        // Asignar manualmente el tamaño. 
+                        int winWidth = 1700;
+                        int winHeight = 1800;
 
-                        var mauiWindow = handler.VirtualView;
-                        var nativeWindow = handler.PlatformView;
-                        nativeWindow.Activate();
-                        IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
-                        var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(windowHandle);
-                        var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
-                        appWindow.Resize(new Windows.Graphics.SizeInt32(winWidth, winHeight));
+                                    var mauiWindow = handler.VirtualView;
+                                    var nativeWindow = handler.PlatformView;
+                                    nativeWindow.Activate();
+                                    IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
+                                    var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(windowHandle);
+                                    var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+                                    appWindow.Resize(new Windows.Graphics.SizeInt32(winWidth, winHeight));
 #endif
             });
 
+            // Para añadir el encoding WEST para Android. No sirve.
+            //System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            //var encoding = System.Text.Encoding.GetEncoding(1252);
 
             MainPage = new AppShell();
         }
@@ -79,7 +100,7 @@
         /// <summary>
         /// Poner habilitado o no el control indicado.
         /// </summary>
-        /// <param name="v">El control. Puede ser Editor, Entry, CheckBox, SwitchLabel, CheckLabelTri./param>
+        /// <param name="v">El control. Puede ser Editor, Entry, CheckBox, SwitchLabel, CheckLabelTri.</param>
         /// <param name="habilitar">Si se habilita o no. En Entry y Editor se asigna IsReadOnly en vez de IsEnabled.</param>
         /// <param name="limpiar">Si es Entry o Editor limpiar el texto, en otros casos los pone como no activados.</param>
         /// <remarks>Si es InputView se asigna readonly en vez de enabled.</remarks>

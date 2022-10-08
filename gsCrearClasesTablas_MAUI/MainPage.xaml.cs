@@ -63,6 +63,8 @@ namespace gsCrearClasesTablas_MAUI
             // Lo pongo en 1700x1800 en Windows (1118,66 x 1114,66).
             txtCodigo.Text = $"Tamaño de la ventana: Width: {Width}, Height: {Height}";
 
+            btnMostrarTablas.IsEnabled = false;
+
             GuardarConfig();
 
             btnLimpiar.IsEnabled = false;
@@ -74,6 +76,7 @@ namespace gsCrearClasesTablas_MAUI
             //else
             //    CrearClaseOleDb.Conectar(this.txtNombreBase.Text, txtSelect.Text, txtProvider.Text, txtAccessPassword.Text);
             // 
+            
             grbOpciones.IsEnabled = CrearClase.Conectado;
             btnGenerarClase.IsEnabled = CrearClase.Conectado;
             Panel1.IsEnabled = CrearClase.Conectado;
@@ -85,7 +88,10 @@ namespace gsCrearClasesTablas_MAUI
             cboTablas.IsEnabled = false;
 
             if (CrearClase.Conectado == false)
+            {
+                btnMostrarTablas.IsEnabled = true;
                 return;
+            }
             // 
             //string[] nomTablas = null;
             List<string> nomTablas = null;
@@ -94,14 +100,24 @@ namespace gsCrearClasesTablas_MAUI
             //else
             //    nomTablas = CrearClaseOleDb.NombresTablas();
             // 
+
             if ((nomTablas == null) || nomTablas[0].StartsWith("ERROR"))
             {
                 grbOpciones.IsEnabled = false;
                 btnGenerarClase.IsEnabled = false;
                 Panel1.IsEnabled = false;
                 //btnGuardar.Enabled = false;
+
+                // Mostrar el error.
+                if (nomTablas != null)
+                    LabelInfoTablas.Text = nomTablas[0];
+                else
+                    LabelInfoTablas.Text = "No se ha podido mostrar las tablas.";
+
+                btnMostrarTablas.IsEnabled = true;
                 return;
             }
+            LabelInfoTablas.Text = $"Hay {nomTablas.Count} tablas en la base de datos {txtInitialCatalog.Text}.";
 
             btnLimpiar.IsEnabled = true;
 
@@ -119,6 +135,8 @@ namespace gsCrearClasesTablas_MAUI
             cboTablas.SelectedItem = nomTablas[0];
 
             cboTablas.Focus();
+
+            btnMostrarTablas.IsEnabled = true;
         }
 
         private void cboTablas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -172,6 +190,8 @@ namespace gsCrearClasesTablas_MAUI
                 txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, cboTablas.SelectedItem.ToString(), txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
             //else
             //    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
+
+            btnCopiarClipBoard.IsEnabled = true;
         }
 
         /// <summary>
@@ -268,7 +288,10 @@ namespace gsCrearClasesTablas_MAUI
                 chkUsarOverrides.IsEnabled = grbOpciones.IsEnabled;
 
                 Panel1.IsEnabled = grbOpciones.IsEnabled;
-                //btnGenerarClase.IsEnabled = grbOpciones.IsEnabled;
+                
+                btnGenerarClase.IsEnabled = grbOpciones.IsEnabled;
+                //btnCopiarClipBoard.IsEnabled = grbOpciones.IsEnabled;
+                btnCopiarClipBoard.IsEnabled = string.IsNullOrWhiteSpace(txtCodigo.Text) == false;
             }
         }
 
@@ -339,6 +362,21 @@ namespace gsCrearClasesTablas_MAUI
             txtSelect.Text = "";
             txtClase.Text = "";
             btnLimpiar.IsEnabled = false;
+            LabelInfoTablas.Text = $"Pulsa en 'Mostrar Tablas' para ver las tablas de {txtInitialCatalog.Text}.";
+        }
+
+        private async void btnCopiarClipBoard_Clicked(object sender, EventArgs e)
+        {
+            //Device.BeginInvokeOnMainThread(() =>{});
+            if (MainThread.IsMainThread)
+            {
+                try
+                {
+                    // Code to run if this is the main thread
+                    await Clipboard.SetTextAsync(txtCodigo.Text);
+                }
+                catch { }
+            }
         }
     }
 }

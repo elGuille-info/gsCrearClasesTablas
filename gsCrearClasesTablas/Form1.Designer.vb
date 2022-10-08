@@ -528,7 +528,7 @@ Partial Class Form1
         Me.chkUsarOverrides.Size = New System.Drawing.Size(210, 37)
         Me.chkUsarOverrides.TabIndex = 3
         Me.chkUsarOverrides.Text = "usar Overrides"
-        Me.toolTip1.SetToolTip(Me.chkUsarOverrides, "Usar Overrides los métodos Actualizar, Crear y Borrar.")
+        Me.toolTip1.SetToolTip(Me.chkUsarOverrides, "Usar Overrides en los métodos Actualizar, Crear y Borrar.")
         '
         'grbOpciones
         '

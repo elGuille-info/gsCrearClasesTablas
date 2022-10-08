@@ -14,7 +14,8 @@
             </StackLayout>
             <StackLayout Margin="20,10" Spacing="6">
                 <Frame>
-                    <StackLayout>
+                    <!-- Con este margin se evita que se corte el borde del Frame en la pate inferior -->
+                    <StackLayout Margin="4">
                         <StackLayout Orientation="Horizontal" Spacing="8">
                             <CheckBox x:Name="optSQL" IsChecked="True" IsEnabled="False"/>
                             <Label Text="Usar Base de datos de SQL Server">
@@ -35,11 +36,11 @@
                                 </Label.GestureRecognizers>
                             </Label>
                         </StackLayout>
-                        <StackLayout Orientation="{OnIdiom Phone=Vertical, Default=Horizontal}" Style="{StaticResource StackConMargen}">
+                        <StackLayout Orientation="Horizontal" Style="{StaticResource StackConMargen}">
                             <Label Text="Data source:" WidthRequest="100"/>
                             <Entry x:Name="txtDataSource" Style="{StaticResource EntryText}" WidthRequest="400"/>
                         </StackLayout>
-                        <StackLayout Orientation="{OnIdiom Phone=Vertical, Default=Horizontal}" Style="{StaticResource StackConMargen}">
+                        <StackLayout Orientation="Horizontal" Style="{StaticResource StackConMargen}">
                             <Label Text="Initial catalog:" WidthRequest="100"/>
                             <Entry x:Name="txtInitialCatalog" Style="{StaticResource EntryText}" WidthRequest="400"/>
                         </StackLayout>
@@ -124,14 +125,15 @@
                                 <!-- Title="Selecciona la tabla a convertir"-->
                                 <!--<Picker x:Name="cboTablas" WidthRequest="300"
                                         SelectedIndexChanged="cboTablas_SelectedIndexChanged"/>-->
-                                <StackLayout BackgroundColor="WhiteSmoke">
+                                <StackLayout>
                                     <ListView x:Name="cboTablas" WidthRequest="300" HeightRequest="70" 
-                                              VerticalOptions="StartAndExpand"
+                                              VerticalOptions="StartAndExpand" BackgroundColor="White"
                                               ItemSelected="cboTablas_ItemSelected">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <ViewCell>
-                                                    <Label Text="{Binding .}" HeightRequest="25" />
+                                                    <Label Text="{Binding .}" HeightRequest="25" 
+                                                           BackgroundColor="White" TextColor="Black" />
                                                 </ViewCell>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
@@ -143,21 +145,24 @@
                             <Button x:Name="btnLimpiar" Text="Limpiar"
                                     Clicked="btnLimpiar_Clicked"/>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal" Spacing="8">
-                            <Label Text="Cadena select:" WidthRequest="100"/>
-                            <Entry x:Name="txtSelect" Style="{StaticResource EntryText}" WidthRequest="300"/>
+                        <StackLayout Orientation="Horizontal" Spacing="12">
+                            <StackLayout Orientation="Horizontal" Spacing="8">
+                                <Label Text="Cadena select:" WidthRequest="100"/>
+                                <Entry x:Name="txtSelect" Style="{StaticResource EntryText}" WidthRequest="300"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Spacing="8" Margin="12,0,0,0">
+                                <Label Text="Clase:" WidthRequest="100"/>
+                                <Entry x:Name="txtClase" Style="{StaticResource EntryText}" WidthRequest="200"/>
+                            </StackLayout>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal" Spacing="8">
-                            <Label Text="Clase:" WidthRequest="100"/>
-                            <Entry x:Name="txtClase" Style="{StaticResource EntryText}" WidthRequest="200"/>
-                        </StackLayout>
+                        <Label x:Name="LabelInfoTablas" FontSize="13"/>
                     </StackLayout>
                 </Frame>
                 <Frame>
                     <StackLayout x:Name="grbOpciones" Orientation="Horizontal" 
-                                 Style="{StaticResource StackConMargen}" 
-                                 PropertyChanged="grbOpciones_PropertyChanged">
-                        <StackLayout Style="{StaticResource StackConMargen}" >
+                                 Style="{StaticResource StackConMargen}"
+                                 PropertyChanged="grbOpciones_PropertyChanged" Margin="4">
+                        <StackLayout Style="{StaticResource StackConMargen}" Margin="0">
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Usar DataAdpater en lugar de cmd.Execute">
                                     <Label.Triggers>
@@ -231,10 +236,10 @@
                                 </Label>
                                 <Switch x:Name="chkUsarAddWithValue"/>
                             </StackLayout>
-                            <Label Text="Si se utiliza AddWithValue o Add  para añadir los valores a los parámetros del comando."
+                            <Label Text="Si se utiliza AddWithValue o Add para añadir los valores a los parámetros del comando."
                                     FontSize="13" Margin="12,0,0,0"/>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Usar Overrides los métodos Actualizar, Crear y Borrar.">
+                                <Label Text="Usar Overrides">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
                                                      Binding="{Binding Source={x:Reference chkUsarOverrides}, Path=IsEnabled}"
@@ -253,8 +258,10 @@
                                 </Label>
                                 <Switch x:Name="chkUsarOverrides"/>
                             </StackLayout>
+                            <Label Text="Si se debe usar Overrides en los métodos Actualizar, Crear y Borrar."
+                                    FontSize="13" Margin="12,0,0,0"/>
                         </StackLayout>
-                        <StackLayout Style="{StaticResource StackConMargen}">
+                        <StackLayout Style="{StaticResource StackConMargen}" Margin="0,8,0,0">
                             <StackLayout x:Name="Panel1" Orientation="Horizontal" 
                                          PropertyChanged="Panel1_PropertyChanged">
                                 <Label Text="Lenguaje:"/>
@@ -279,7 +286,7 @@
                                         </Switch.Triggers>
                                     </Switch>
                                 </StackLayout>
-                                <StackLayout Orientation="Horizontal" Margin="0">
+                                <StackLayout Orientation="Horizontal" Margin="12,0,0,0">
                                     <Label Text="C# ">
                                         <Label.GestureRecognizers>
                                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CSTapGestureRecognizer_Tapped"/>
@@ -301,9 +308,13 @@
                                     </Switch>
                                 </StackLayout>
                             </StackLayout>
-                            <Button x:Name="btnGenerarClase" Text="Generar Clase"
-                                    HorizontalOptions="FillAndExpand"
-                                    Clicked="btnGenerarClase_Clicked"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Button x:Name="btnGenerarClase" Text="Generar Clase"
+                                        HorizontalOptions="FillAndExpand"
+                                        Clicked="btnGenerarClase_Clicked"/>
+                                <Button x:Name="btnCopiarClipBoard" Text="Copiar Clipboard"
+                                        Clicked="btnCopiarClipBoard_Clicked" Margin="12,0,0,0"/>
+                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
