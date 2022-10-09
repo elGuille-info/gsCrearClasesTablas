@@ -334,7 +334,7 @@
                         <StackLayout x:Name="Panel1" Orientation="Horizontal" 
                                          PropertyChanged="Panel1_PropertyChanged">
                             <Label Text="Lenguaje:"/>
-                            <xct:SwitchLabel x:Name="optVB" Text="Visual Basic" 
+                            <!--<xct:SwitchLabel x:Name="optVB" Text="Visual Basic" 
                                              IsToggled="True" Margin="12,0,0,0">
                                 <xct:SwitchLabel.Triggers>
                                     <DataTrigger TargetType="xct:SwitchLabel"
@@ -348,8 +348,8 @@
                                         <Setter Property="IsToggled" Value="False" />
                                     </DataTrigger>
                                 </xct:SwitchLabel.Triggers>
-                            </xct:SwitchLabel>
-                            <!--<StackLayout Orientation="Horizontal" Margin="12,0,0,0">
+                            </xct:SwitchLabel>-->
+                            <StackLayout Orientation="Horizontal" Margin="12,0,0,0">
                                 <Label Text="Visual Basic ">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="VBTapGestureRecognizer_Tapped"/>
@@ -369,8 +369,8 @@
                                         </DataTrigger>
                                     </Switch.Triggers>
                                 </Switch>
-                            </StackLayout>-->
-                            <xct:SwitchLabel x:Name="optCS" Text="C#" 
+                            </StackLayout>
+                            <!--<xct:SwitchLabel x:Name="optCS" Text="C#" 
                                              IsToggled="False" Margin="8,0,0,0">
                                 <xct:SwitchLabel.Triggers>
                                     <DataTrigger TargetType="xct:SwitchLabel"
@@ -384,8 +384,8 @@
                                         <Setter Property="IsToggled" Value="False" />
                                     </DataTrigger>
                                 </xct:SwitchLabel.Triggers>
-                            </xct:SwitchLabel>
-                            <!--<StackLayout Orientation="Horizontal" Margin="0,0,0,0">
+                            </xct:SwitchLabel>-->
+                            <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default=0}">
                                 <Label Text="C# ">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CSTapGestureRecognizer_Tapped"/>
@@ -405,8 +405,8 @@
                                         </DataTrigger>
                                     </Switch.Triggers>
                                 </Switch>
-                            </StackLayout>-->
-                            <StackLayout Orientation="Horizontal" Margin="12,0,0,0">
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default=0}">
                                 <Button x:Name="btnGenerarClase" Text="Generar Clase"
                                         HorizontalOptions="FillAndExpand"
                                         Clicked="btnGenerarClase_Clicked"/>

@@ -407,15 +407,15 @@ namespace gsCrearClasesTablas_MAUI
             chkSeguridadSQL.IsChecked = !chkSeguridadSQL.IsChecked;
         }
 
-        //private void VBTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    optVB.IsToggled = !optVB.IsToggled;
-        //}
+        private void VBTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            optVB.IsToggled = !optVB.IsToggled;
+        }
 
-        //private void CSTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    optCS.IsToggled = !optCS.IsToggled;
-        //}
+        private void CSTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            optCS.IsToggled = !optCS.IsToggled;
+        }
 
         private void btnLimpiar_Clicked(object sender, EventArgs e)
         {
