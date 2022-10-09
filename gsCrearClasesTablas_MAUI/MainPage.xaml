@@ -139,7 +139,10 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <StackLayout BackgroundColor="{StaticResource Primary}"
+                <xct:MKNExpander x:Name="expOpcionesTablas" Margin="-10,0"
+                                 IsExpanded="True" Expanded="expOpcionesTablas_Expanded"
+                                 HeaderTitle="Opciones de las Tablas"/>
+                <!--<StackLayout BackgroundColor="{StaticResource Primary}"
                              VerticalOptions="Start" Margin="-10,0">
                     <Label Text="Opciones de las Tablas" TextColor="White"
                            FontSize="Medium"
@@ -152,7 +155,7 @@
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpcionesTablasTapGestureRecognizer_Tapped"/>
                     </StackLayout.GestureRecognizers>
-                </StackLayout>
+                </StackLayout>-->
                 <Frame x:Name="grbTablas">
                     <StackLayout Style="{StaticResource StackConMargen}">
                         <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="StartAndExpand">

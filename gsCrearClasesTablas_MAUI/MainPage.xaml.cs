@@ -48,6 +48,8 @@ namespace gsCrearClasesTablas_MAUI
 
                 expOpcionesSQL.IsExpanded = true;
                 expOpcionesSQL.Refrescar(true, true);
+                expOpcionesTablas.IsExpanded = true;
+                expOpcionesTablas.Refrescar(true, true);
 
                 grbOpciones.IsEnabled = false;
                 btnGenerarClase.IsEnabled = false;
@@ -414,19 +416,24 @@ namespace gsCrearClasesTablas_MAUI
             }
         }
 
-        private void OpcionesSQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            grbSQL.IsVisible = !grbSQL.IsVisible;
-        }
+        //private void OpcionesSQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    grbSQL.IsVisible = !grbSQL.IsVisible;
+        //}
 
-        private void OpcionesTablasTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            grbTablas.IsVisible = !grbTablas.IsVisible;
-        }
+        //private void OpcionesTablasTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    grbTablas.IsVisible = !grbTablas.IsVisible;
+        //}
 
         private void expOpcionesSQL_Expanded(object sender, bool isExpanded)
         {
             grbSQL.IsVisible = isExpanded;
+        }
+
+        private void expOpcionesTablas_Expanded(object sender, bool isExpanded)
+        {
+            grbTablas.IsVisible = isExpanded;
         }
     }
 }
