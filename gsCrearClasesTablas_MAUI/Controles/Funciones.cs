@@ -14,6 +14,12 @@ namespace gsCrearClasesTablas_MAUI.Controles
     public static class Funciones
     {
         // Esto solo se asigna una vez.
+
+        private static Color _GrisDeshabilitadoClaro = (Color)Application.Current.Resources["GrisDeshabilitadoClaro"];
+
+        public static Color GrisDeshabilitadoClaro { get => _GrisDeshabilitadoClaro; }
+
+
         private static Color _GrisDeshabilitado = (Color)Application.Current.Resources["GrisDeshabilitado"];
         /// <summary>
         /// El color gris para usar como deshabilitado (#7A7A7A).

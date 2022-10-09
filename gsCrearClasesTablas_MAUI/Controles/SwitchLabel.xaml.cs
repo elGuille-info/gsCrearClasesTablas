@@ -21,12 +21,13 @@ namespace gsCrearClasesTablas_MAUI.Controles
     {
         private readonly Color thumbC;
         private Color labelC;
+        private Color onColor;
         public SwitchLabel()
         {
             InitializeComponent();
             // A ver si poniendo otra vez el nombre que tenía funciona. v1.20.0.10 (16/sep/22 19.16)
             // Es que al ejecutar da error que no se encuentra chkButton y muestra el código (interno) de esta clase.
-            thumbC = chkButton.ThumbColor;
+            thumbC = Colors.White; // chkButton.ThumbColor;
             labelC = LabelText.TextColor;
 
             // Para usar los nuevos colores de Android. (02/sep/22 19.45)
@@ -35,7 +36,22 @@ namespace gsCrearClasesTablas_MAUI.Controles
             {
                 thumbC = (Color)Application.Current.Resources["SwitchAndroidThumb"];
                 labelC = (Color)Application.Current.Resources["SwitchAndroid"];
+                chkButton.OnColor = (Color)Application.Current.Resources["SwitchAndroid"];
             }
+            else if (DeviceInfo.Platform == DevicePlatform.iOS)
+            {
+                //thumbC = (Color)Application.Current.Resources["SwitchAndroidThumb"];
+                //labelC = (Color)Application.Current.Resources["SwitchAndroid"];
+                chkButton.OnColor = (Color)Application.Current.Resources["SwitchiOS"];
+            }
+            else //if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            {
+                //thumbC = (Color)Application.Current.Resources["SwitchAndroidThumb"];
+                //labelC = (Color)Application.Current.Resources["SwitchAndroid"];
+                chkButton.OnColor = (Color)Application.Current.Resources["SwitchUWPAzul"];
+            }
+            onColor = chkButton.OnColor;
+
             BackColorCheck();
         }
 
@@ -119,10 +135,7 @@ namespace gsCrearClasesTablas_MAUI.Controles
             get => (bool)GetValue(IsToggledProperty);
             set => SetValue(IsToggledProperty, value);
         }
-
         
-
-
         //// El código anterior con BindableProperty sin usarlo en IsToggled.
         //// Dejar el "BindableProperty" pero no usarla en IsToggled.
         ////
@@ -441,18 +454,63 @@ namespace gsCrearClasesTablas_MAUI.Controles
 
         public void BackColorCheck()
         {
+            bool esiOS = DeviceInfo.Platform == DevicePlatform.iOS;
+
             // Asignar los colores si está o no habilitado, v1.11.2.43 (14/sep/22 06.03)
             // por si se llama a este método después de asignar IsEnabled.
-            if (chkButton.IsEnabled)
+            if (IsToggled)
             {
-                chkButton.ThumbColor = thumbC;
-                LabelText.TextColor = labelC;
-                // Usar el color asignado. v1.36.0.4 (27/sep/22 11.47)
-                LabelText.FontAttributes = _FontAttributes;
+                if (esiOS)
+                {
+                    chkButton.OnColor = onColor;
+                }
+                else
+                {
+                    chkButton.ThumbColor = thumbC;
+                }
             }
             else
             {
-                chkButton.ThumbColor = Funciones.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
+                if (esiOS)
+                {
+                    chkButton.OnColor = Funciones.GrisDeshabilitadoClaro;
+                }
+                else
+                {
+                    chkButton.ThumbColor = Colors.Black;
+                }
+            }
+            if (chkButton.IsEnabled)
+            {
+                LabelText.TextColor = labelC;
+                LabelText.FontAttributes = _FontAttributes;
+                if (esiOS)
+                { 
+                    if (chkButton.IsToggled)
+                    {
+                        chkButton.OnColor = onColor;
+                    }
+                    else
+                    {
+                        chkButton.OnColor = Funciones.GrisDeshabilitadoClaro;
+                    }
+                }
+                else
+                {
+                    chkButton.OnColor = onColor;
+                }
+            }
+            else
+            {
+                //chkButton.ThumbColor = Funciones.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
+                if (esiOS)
+                {
+                    chkButton.OnColor = (Color)Application.Current.Resources["SwitchiOSDeshabilitado"];
+                }
+                else
+                {
+                    chkButton.OnColor = Funciones.GrisDeshabilitadoClaro;  // Color.FromHex("#F0CACACA"); // Funciones.GrisDeshabilitado;
+                }
                 LabelText.TextColor = Funciones.GrisDeshabilitado; // Color.FromHex("#7A7A7A"); // Color.Gray;
                 LabelText.FontAttributes = FontAttributes.Italic;
             }

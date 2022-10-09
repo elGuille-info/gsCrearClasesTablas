@@ -47,18 +47,30 @@ namespace gsCrearClasesTablas_MAUI
                 LabelVersion.Text = $"  {AppInfo.ProductName} - v{AppInfo.ProductMajorPart}.{AppInfo.ProductMinorPart}.{AppInfo.ProductBuildPart} ({AppInfo.FileVersion})  ";
 
                 expOpcionesSQL.IsExpanded = true;
-                expOpcionesSQL.Refrescar(true, true);
+                expOpcionesComandos.IsExpanded = true;
                 expOpcionesTablas.IsExpanded = true;
                 expOpcionesTablas.Refrescar(true, true);
-                expOpcionesComandos.IsExpanded = true;
-                expOpcionesComandos.Refrescar(true, true);
-                
+                expOpcionesCodigo.IsExpanded = true;
+                expOpcionesCodigo.Refrescar(true, true);
+
                 grbOpciones.IsEnabled = false;
                 btnGenerarClase.IsEnabled = false;
                 Panel1.IsEnabled = false;
                 btnLimpiar.IsEnabled = false;
 
                 LeerConfig();
+
+                // Si el servidor de SQL, la base de datos y
+                // o la seguridad integrada o el usuario/password están puestos ocultar el panel de SQL.
+                if (txtDataSource.Text.Any() && txtInitialCatalog.Text.Any() && 
+                    (chkSeguridadSQL.IsChecked == false || (chkSeguridadSQL.IsChecked && txtUserId.Text.Any() && txtPassword.Text.Any())))
+                {
+                    expOpcionesSQL.IsExpanded = false;
+                    expOpcionesComandos.IsExpanded = false;
+                }
+                expOpcionesSQL.Refrescar(true, true);
+                expOpcionesComandos.Refrescar(true, true);
+
                 LaPrimeraVez = false;
             }
         }
@@ -395,15 +407,15 @@ namespace gsCrearClasesTablas_MAUI
             chkSeguridadSQL.IsChecked = !chkSeguridadSQL.IsChecked;
         }
 
-        private void VBTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            optVB.IsToggled = !optVB.IsToggled;
-        }
+        //private void VBTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    optVB.IsToggled = !optVB.IsToggled;
+        //}
 
-        private void CSTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            optCS.IsToggled = !optCS.IsToggled;
-        }
+        //private void CSTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    optCS.IsToggled = !optCS.IsToggled;
+        //}
 
         private void btnLimpiar_Clicked(object sender, EventArgs e)
         {
@@ -453,6 +465,11 @@ namespace gsCrearClasesTablas_MAUI
         private void expOpcionesComandos_Expanded(object sender, bool isExpanded)
         {
             grbOpcionesComandos.IsVisible = isExpanded;
+        }
+
+        private void expOpcionesCodigo_Expanded(object sender, bool isExpanded)
+        {
+            grbOpcionesCodigo.IsVisible = isExpanded;
         }
     }
 }
