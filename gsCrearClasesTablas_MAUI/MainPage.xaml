@@ -204,7 +204,10 @@
                         <Label x:Name="LabelInfoTablas" FontSize="13"/>
                     </StackLayout>
                 </Frame>
-                <Frame>
+                <xct:MKNExpander x:Name="expOpcionesComandos" Margin="-10,0"
+                                 IsExpanded="True" Expanded="expOpcionesComandos_Expanded"
+                                 HeaderTitle="Opciones Comandos"/>
+                <Frame x:Name="grbOpcionesComandos">
                     <StackLayout x:Name="grbOpciones" Orientation="Horizontal" 
                                  Style="{StaticResource StackConMargen}"
                                  PropertyChanged="grbOpciones_PropertyChanged" Margin="4">

@@ -50,7 +50,9 @@ namespace gsCrearClasesTablas_MAUI
                 expOpcionesSQL.Refrescar(true, true);
                 expOpcionesTablas.IsExpanded = true;
                 expOpcionesTablas.Refrescar(true, true);
-
+                expOpcionesComandos.IsExpanded = true;
+                expOpcionesComandos.Refrescar(true, true);
+                
                 grbOpciones.IsEnabled = false;
                 btnGenerarClase.IsEnabled = false;
                 Panel1.IsEnabled = false;
@@ -215,15 +217,26 @@ namespace gsCrearClasesTablas_MAUI
             if (chkUsarCommandBuilder.IsEnabled == false)
                 usarCB = false;
 
+            string laTabla;
+
+            if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            {
+                laTabla = listViewTablas.SelectedItem.ToString();
+            }
+            else
+            {
+                laTabla = cboTablas.SelectedItem.ToString();
+            }
+
             if (optVB.IsToggled)
             {
                 if (optSQL.IsChecked)
-                    txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, cboTablas.SelectedItem.ToString(), txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
+                    txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
                 //else
                 //    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
             }
             else if (optSQL.IsChecked)
-                txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, cboTablas.SelectedItem.ToString(), txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
+                txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
             //else
             //    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
 
@@ -395,6 +408,7 @@ namespace gsCrearClasesTablas_MAUI
         private void btnLimpiar_Clicked(object sender, EventArgs e)
         {
             cboTablas.ItemsSource = null;
+            listViewTablas.ItemsSource = null;
             grbOpciones.IsEnabled = false;
             txtSelect.Text = "";
             txtClase.Text = "";
@@ -434,6 +448,11 @@ namespace gsCrearClasesTablas_MAUI
         private void expOpcionesTablas_Expanded(object sender, bool isExpanded)
         {
             grbTablas.IsVisible = isExpanded;
+        }
+
+        private void expOpcionesComandos_Expanded(object sender, bool isExpanded)
+        {
+            grbOpcionesComandos.IsVisible = isExpanded;
         }
     }
 }
