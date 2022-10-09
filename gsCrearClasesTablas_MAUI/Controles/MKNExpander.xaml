@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xct:Expander xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:xct="clr-namespace:gsCrearClasesTablas_MAUI.Controles.ExpanderToolkit"
+              x:Class="gsCrearClasesTablas_MAUI.Controles.MKNExpander" 
+              Tapped="Expander_Tapped"
+              IsExpanded="False">
+    <!-- 
+        xmlns:datos="clr-namespace:gsCrearClasesTablas_MAUI"
+        x:DataType="datos:Controles.MKNExpander"
+    -->
+    <xct:Expander.Header>
+        <StackLayout x:Name="grbHeader" x:FieldModifier="public" 
+                     Orientation="Horizontal" HorizontalOptions="FillAndExpand" 
+                     BackgroundColor="LightSkyBlue">
+            <Label x:Name="LabelHeader" x:FieldModifier="public" Text="{Binding HeaderTitleNoExpanded}" 
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Bold" FontSize="Small" HorizontalOptions="FillAndExpand"
+                   BackgroundColor="Transparent" TextColor="Navy" HeightRequest="30">
+                <Label.Triggers>
+                    <DataTrigger 
+                            TargetType="Label"
+                            Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                            Value="True">
+                        <Setter Property="Text" Value="{Binding HeaderTitleExpanded}"/>
+                    </DataTrigger>
+                    <DataTrigger 
+                            TargetType="Label"
+                            Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                            Value="False">
+                        <Setter Property="Text" Value="{Binding HeaderTitleNoExpanded}"/>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+            <!-- Usar el estilo a ver si se ve mejor la imagen en phone v1.11.2.112 (16/sep/22 04.29) -->
+            <Image x:Name="ImgExpander" Source="expand.png"
+                   Style="{StaticResource ImgExpander}"
+                   HorizontalOptions="End" x:FieldModifier="public"
+                   VerticalOptions="Start" Margin="0,0,6,0">
+            </Image>
+        </StackLayout>
+    </xct:Expander.Header>
+    <!-- Ya no puede tener contenido el expander -->
+</xct:Expander>

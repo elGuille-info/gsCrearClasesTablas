@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="clr-namespace:gsCrearClasesTablas_MAUI.Controles"
              x:Class="gsCrearClasesTablas_MAUI.MainPage"
              Appearing="ContentPage_Appearing">
     <ScrollView Margin="0" Padding="4" Orientation="Both">
@@ -13,7 +14,10 @@
                        HorizontalTextAlignment="Center"/>
             </StackLayout>
             <StackLayout Margin="20,10" Spacing="6">
-                <StackLayout BackgroundColor="{StaticResource Primary}"
+                <xct:MKNExpander x:Name="expOpcionesSQL" Margin="-10,0"
+                                 IsExpanded="True" Expanded="expOpcionesSQL_Expanded"
+                                 HeaderTitle="Opciones para SQL Server"/>
+                <!--<StackLayout BackgroundColor="{StaticResource Primary}"
                              VerticalOptions="Start" Margin="-10,0">
                     <Label Text="Opciones para SQL Server" TextColor="White"
                            FontSize="Medium"
@@ -26,7 +30,7 @@
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpcionesSQLTapGestureRecognizer_Tapped"/>
                     </StackLayout.GestureRecognizers>
-                </StackLayout>
+                </StackLayout>-->
                 <Frame x:Name="grbSQL">
                     <!-- Con este margin se evita que se corte el borde del Frame en la pate inferior -->
                     <StackLayout Margin="4">

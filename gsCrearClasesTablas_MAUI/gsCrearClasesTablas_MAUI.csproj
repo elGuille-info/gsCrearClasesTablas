@@ -85,6 +85,14 @@
 
 	<ItemGroup>
 	  <Compile Remove="CrearClaseSQL.cs" />
+	  <Compile Remove="ImageResourceExtension.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\collapse.png" />
+	  <None Remove="Resources\Images\collapse_white.png" />
+	  <None Remove="Resources\Images\expand.png" />
+	  <None Remove="Resources\Images\expand_white.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -93,6 +101,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Controles\CheckLabel.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controles\MKNExpander.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controles\SwitchLabel.xaml">

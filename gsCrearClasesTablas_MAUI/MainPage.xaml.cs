@@ -46,6 +46,9 @@ namespace gsCrearClasesTablas_MAUI
                 //LabelVersion.Text = $"  {AppInfo.ProductName} - v{AppInfo.ProductVersion} ({AppInfo.FileVersion})  ";
                 LabelVersion.Text = $"  {AppInfo.ProductName} - v{AppInfo.ProductMajorPart}.{AppInfo.ProductMinorPart}.{AppInfo.ProductBuildPart} ({AppInfo.FileVersion})  ";
 
+                expOpcionesSQL.IsExpanded = true;
+                expOpcionesSQL.Refrescar(true, true);
+
                 grbOpciones.IsEnabled = false;
                 btnGenerarClase.IsEnabled = false;
                 Panel1.IsEnabled = false;
@@ -419,6 +422,11 @@ namespace gsCrearClasesTablas_MAUI
         private void OpcionesTablasTapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             grbTablas.IsVisible = !grbTablas.IsVisible;
+        }
+
+        private void expOpcionesSQL_Expanded(object sender, bool isExpanded)
+        {
+            grbSQL.IsVisible = isExpanded;
         }
     }
 }
