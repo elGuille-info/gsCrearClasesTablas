@@ -55,7 +55,7 @@
 '   3.0.1.0             Muevo las clases CrearClaseSQL y CrearClasesOleDb a este proyecto.
 '   3.0.1.1             Quito los ByVal.
 '   3.0.2.0 06-oct-2022 Usando la DLL con el código en C#.
-'   3.0.3.0 08-oct-2022 Guardar los datos en la configuración local (como en móvil)
+'   3.0.3.0 09-oct-2022 Guardar los datos en la configuración local (como en móvil)
 '   3.0.3.2             Habilitar el grupo de grbOpciones según haya tablas en la lista
 '------------------------------------------------------------------------------
 Option Strict On
@@ -107,7 +107,7 @@ Public Class Form1
 
     Private inicializando As Boolean = True
 
-    Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ts As TimeSpan = Nothing
 
         FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
@@ -187,11 +187,11 @@ Public Class Form1
         guardarCfg()
     End Sub
     '
-    Private Sub btnSalir_Click(sender As System.Object, e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Close()
     End Sub
     '
-    Private Sub cboTablas_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboTablas.SelectedIndexChanged
+    Private Sub cboTablas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTablas.SelectedIndexChanged
         txtSelect.Text = "SELECT * FROM " & cboTablas.Text
         Dim i As Integer = cboTablas.Text.IndexOf(".")
         ' Si la tabla contiene espacios,                            (02/Nov/04)
@@ -204,7 +204,7 @@ Public Class Form1
         End If
     End Sub
     '
-    Private Sub btnMostrarTablas_Click(sender As System.Object, e As System.EventArgs) Handles btnMostrarTablas.Click
+    Private Sub btnMostrarTablas_Click(sender As Object, e As EventArgs) Handles btnMostrarTablas.Click
         guardarCfg()
 
         ' No tener en cuenta la cadena select para mostrar las tablas
@@ -251,7 +251,7 @@ Public Class Form1
         End If
     End Sub
     '
-    Private Sub btnGenerarClase_Click(sender As System.Object, e As System.EventArgs) Handles btnGenerarClase.Click
+    Private Sub btnGenerarClase_Click(sender As Object, e As EventArgs) Handles btnGenerarClase.Click
         ' generar la clase a partir de la tabla seleccionada
         If txtSelect.Text = "" Then
             MessageBox.Show("Debes especificar la cadena de selección de datos",
@@ -310,7 +310,7 @@ Public Class Form1
         End If
     End Sub
     '
-    Private Sub btnGuardar_Click(sender As System.Object, e As System.EventArgs) Handles btnGuardar.Click
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         ' guarda la clase en un fichero .vb o .cs
         Dim sFic As String = Application.StartupPath & "\" & txtClase.Text
         If optVB.Checked Then
@@ -323,7 +323,7 @@ Public Class Form1
         sw.Close()
     End Sub
     '
-    Private Sub chkSeguridadSQL_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkSeguridadSQL.CheckedChanged
+    Private Sub chkSeguridadSQL_CheckedChanged(sender As Object, e As EventArgs) Handles chkSeguridadSQL.CheckedChanged
         Dim b As Boolean = chkSeguridadSQL.Checked
         labelUser.Enabled = b
         labelPassw.Enabled = b
@@ -331,7 +331,7 @@ Public Class Form1
         txtPassword.Enabled = b
     End Sub
     '
-    Private Sub optAccess_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles optAccess.CheckedChanged
+    Private Sub optAccess_CheckedChanged(sender As Object, e As EventArgs) Handles optAccess.CheckedChanged
         If inicializando Then Return
         grbAccess.Enabled = optAccess.Checked
         ' Con Access usar DataAdapter
@@ -339,7 +339,7 @@ Public Class Form1
             chkUsarDataAdapter.Checked = True
         End If
     End Sub
-    Private Sub optSQL_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles optSQL.CheckedChanged
+    Private Sub optSQL_CheckedChanged(sender As Object, e As EventArgs) Handles optSQL.CheckedChanged
         If inicializando Then Return
         grbSQL.Enabled = optSQL.Checked
         ' Al cambiar a SQL seleccionar automáticamente Execute... es decir, desmarcar DataAdapter
@@ -368,7 +368,7 @@ Public Class Form1
         End If
     End Sub
     '
-    Private Sub btnExaminar_Click(sender As System.Object, e As System.EventArgs) Handles btnExaminar.Click
+    Private Sub btnExaminar_Click(sender As Object, e As EventArgs) Handles btnExaminar.Click
         With New OpenFileDialog
             .Title = "Seleccionar base de datos"
             .Filter = "Bases de Access (*.mdb)|*.mdb"

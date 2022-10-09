@@ -3,7 +3,7 @@
 Proyecto para generar las clases convertido a C# a partir del código de Visual Basic.
 
 
-### Actualización del 08-oct-2022
+### Actualización del 09-oct-2022
 
 Ahora utiliza Microsoft.Data.SqlClient 5.0.1 en lugar de System.Data.SqlClient Versión 4.8.3.
 La razón es (según dicen):
