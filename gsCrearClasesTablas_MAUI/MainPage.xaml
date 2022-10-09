@@ -385,7 +385,7 @@
                                     </DataTrigger>
                                 </xct:SwitchLabel.Triggers>
                             </xct:SwitchLabel>-->
-                            <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default=0}">
+                            <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default='0'}">
                                 <Label Text="C# ">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CSTapGestureRecognizer_Tapped"/>
@@ -406,7 +406,7 @@
                                     </Switch.Triggers>
                                 </Switch>
                             </StackLayout>
-                            <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default=0}">
+                            <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default='0'}">
                                 <Button x:Name="btnGenerarClase" Text="Generar Clase"
                                         HorizontalOptions="FillAndExpand"
                                         Clicked="btnGenerarClase_Clicked"/>
