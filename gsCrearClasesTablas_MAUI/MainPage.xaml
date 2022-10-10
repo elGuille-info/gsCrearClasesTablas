@@ -218,11 +218,6 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <!--<xct:MKNExpander x:Name="expOpcionesCodigo" Margin="-10,0"
-                                 IsExpanded="True" Expanded="expOpcionesCodigo_Expanded"
-                                 HeaderTitle="Opciones Generar Código"/>
-                <Frame x:Name="grbOpcionesCodigo" Margin="-8,4">
-                </Frame>-->
                 <Frame Margin="-8,4">
                     <StackLayout Style="{StaticResource StackConMargen}" Margin="2" Spacing="6">
                         <Label FontSize="13" Text="Código generado:" 
@@ -238,14 +233,14 @@
                      BackgroundColor="WhiteSmoke" Padding="2,4" Margin="6">
             <StackLayout Orientation="Horizontal" Margin="4,0">
                 <Label x:Name="LabelInfo" 
-                       HorizontalOptions="{OnPlatform WinUI=StartAndExpand,Default=Start}"
+                       HorizontalOptions="{OnPlatform WinUI=StartAndExpand, Android=StartAndExpand, Default=Start}"
                        HorizontalTextAlignment="Start"
                        VerticalOptions="Center"
                        WidthRequest="{OnPlatform WinUI=500, Default=300}" 
                        FontSize="{OnPlatform WinUI=13, Android=12, Default=11}"
                        Text="©Guillermo Som (elGuille), 2004-2022" />
                 <Label x:Name="LabelVersion" 
-                       HorizontalOptions="{OnPlatform WinUI=EndAndExpand,Default=End}"
+                       HorizontalOptions="{OnPlatform WinUI=EndAndExpand, Android=EndAndExpand, Default=End}"
                        HorizontalTextAlignment="End"
                        VerticalOptions="Center"
                        WidthRequest="{OnPlatform WinUI=300, Default=100}" 
