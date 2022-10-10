@@ -12,7 +12,14 @@ Mira en el blog para saber más y los enlaces a las versiones anteriores: [Gener
 
 Pues eso... que otras veces me ha funcionado bien elegir una imagen para crear las imágenes usadas por Windows (para poder publicarla en la Microsoft Store), pero en esta aplicación me hada dado un poquillo _polc*lo_.
 
-(ahora te pondré una captura cuando termine de compilar)
+Esta es una captura de otra aplicación (en la que sí funcionó como debía)
+
+<picture>
+<img src="https://github.com/elGuille-info/gsCrearClasesTablas/blob/master/Screenshot%202022-10-10%20231513.png" width="650">
+</picture>
+
+<br>
+<br>
 
 El tema es que te vas al manifiesto de Windows (Package.appxmanifest), te vas a la pestaña **Visual Assets**, en **Asset Generator** le indicas la imagen base que quieres utilizar, eliges los formatos a usar (Scales) y le das al botón **Generate** y te genera las imágenes.
 O eso debería hacer.
