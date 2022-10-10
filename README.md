@@ -10,6 +10,9 @@ Mira en el blog para saber más y los enlaces a las versiones anteriores: [Gener
 
 _**Nota 10-oct-22 20.36:**_ <br>
 >Quito el proyecto **gsCrearClases** de Visual Basic para .NET 6.0 porque ya no lo utilizo.<br>
+>
+>Creo la compilación para gsCrearClasesTablas para WindowsForms con .NET 6. (Release v3.0.5)<br>
+>[gsCrearClasesTablas WindowsForms](https://github.com/elGuille-info/gsCrearClasesTablas/releases/tag/v3.0.5)
 
 <br>
 <br>
