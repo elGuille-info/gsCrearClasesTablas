@@ -45,7 +45,7 @@ namespace gsCrearClasesTablas_MAUI
         /// <summary>
         /// La fecha de última actualización
         /// </summary>
-        public static string AppFechaVersion { get; } = "09-oct-2022";
+        public static string AppFechaVersion { get; } = "10-oct-2022";
 
         // Intentar no pasar de estas marcas: 60 caracteres. 2         3         4         5         6
         //                                ---------|---------|---------|---------|---------|---------|

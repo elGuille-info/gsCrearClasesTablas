@@ -42,20 +42,20 @@
 '                       No quito el uso de DataAdapter en INSERT y UPDATE
 '                       si no que se puede usar ExecuteScalar o un DataAdapter.
 '
-'   2.0016  17-abr-2021 Poder asignar rápidamente el uso de SQLExpress.
-'           02-oct-2021 Seguramente lo cambié a .NET Framework 4.8
+'   2.0016  17/abr/2021 Poder asignar rápidamente el uso de SQLExpress.
+'           02/oct/2021 Seguramente lo cambié a .NET Framework 4.8
 '
-'   2.1.0   01-oct-2022 Cambio a .NET Framework 4.8.1 y cambios en CrearClase.
-'   2.1.0.7 01-oct-2022 Añado un StatusStrip
+'   2.1.0   01/oct/2022 Cambio a .NET Framework 4.8.1 y cambios en CrearClase.
+'   2.1.0.7 01/oct/2022 Añado un StatusStrip
 '   2.1.0.8             Creo el fichero elGuille_compartido.snk para firmar los ensamblados.
 '
-'   3.0.0   01-oct-2022 Proyecto creado con .NET 6.0
-'   3.0.0.1 05-oct-2022 Ajustes en los tamaños.
+'   3.0.0   01/oct/2022 Proyecto creado con .NET 6.0
+'   3.0.0.1 05/oct/2022 Ajustes en los tamaños.
 '   3.0.0.2             El valor fijo de VersionDLL.
 '   3.0.1.0             Muevo las clases CrearClaseSQL y CrearClasesOleDb a este proyecto.
 '   3.0.1.1             Quito los ByVal.
-'   3.0.2.0 06-oct-2022 Usando la DLL con el código en C#.
-'   3.0.3.0 09-oct-2022 Guardar los datos en la configuración local (como en móvil)
+'   3.0.2.0 06/oct/2022 Usando la DLL con el código en C#.
+'   3.0.3.0 08/oct/2022 Guardar los datos en la configuración local (como en móvil)
 '   3.0.3.2             Habilitar el grupo de grbOpciones según haya tablas en la lista
 '------------------------------------------------------------------------------
 Option Strict On
