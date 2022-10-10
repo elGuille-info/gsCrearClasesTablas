@@ -21,6 +21,7 @@
 	  <OptionStrict>On</OptionStrict>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageReleaseNotes>
+		  10-oct-22: Publico la release v3.0.5 en GitHub (compilación binaria).
 		  08-oct-22: Uso Microsoft.Data.SqlClient 5.0.1 en lugar de System.Data.SqlClient Versión 4.8.3
 		  06-oct-22: Usando la DLL gsCrearClases_CS creada en C#.
 		  Primera versión del proyecto usando .NET 6.0 (net6.0-windows)</PackageReleaseNotes>
