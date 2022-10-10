@@ -234,7 +234,12 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("{0}{1}", ConvLang.Imports("System"), CrLf);
             sb.AppendFormat("{0}{1}", ConvLang.Imports("System.Data"), CrLf);
             if (esSQL)
+            {
                 sb.AppendFormat("{0}{1}", ConvLang.Imports("System.Data.SqlClient"), CrLf);
+                sb.AppendFormat("{0}{1}", ConvLang.Comentario(" Por si se utiliza Microsoft.Data en lugar de System.Data."), CrLf);
+                sb.AppendFormat("{0}{1}", ConvLang.Imports("Microsoft.Data.SqlClient"), CrLf);
+            }
+                
             else
                 sb.AppendFormat("{0}{1}", ConvLang.Imports("System.Data.OleDb"), CrLf);
             sb.AppendFormat("{0}{1}", ConvLang.Comentario(), CrLf);

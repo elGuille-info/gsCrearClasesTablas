@@ -12,9 +12,10 @@
 	  <RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
 	  <NeutralLanguage>es</NeutralLanguage>
-	  <AssemblyVersion>3.0.4</AssemblyVersion>
-	  <FileVersion>3.0.4.0</FileVersion>
+	  <AssemblyVersion>3.0.5</AssemblyVersion>
+	  <FileVersion>3.0.5.0</FileVersion>
 	  <PackageReleaseNotes>
+		  10-oct-22: Añado el fichero revisiones.md (estaba solo en el proyecto de VB).
 		  08-oct-22: Añado la clase TablaItem para leer las tablas de la base de SQL Server.
 		  08-oct-22: Uso Microsoft.Data.SqlClient 5.0.1 en lugar de System.Data.SqlClient Versión 4.8.3
 		  06-oct-22: Convertida a C#.
