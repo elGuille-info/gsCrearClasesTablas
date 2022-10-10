@@ -42,14 +42,21 @@ namespace gsCrearClasesTablas_MAUI
                 if (DeviceInfo.Platform != DevicePlatform.iOS)
                     Title = "";
 
-                var sCopyR = "©Guillermo Som (elGuille), 2004-2007, 2018-";
+                var sCopyR = "©Guillermo Som (elGuille), 2004-";
                 var elAño = 2022;
                 if (DateTime.Today.Year > 2022)
                     elAño = DateTime.Today.Year;
-                LabelInfo.Text = $"  {sCopyR}{elAño}  ";
+                LabelInfo.Text = $" {sCopyR}{elAño} ";
 
                 //LabelVersion.Text = $"  {AppInfo.ProductName} - v{AppInfo.ProductVersion} ({AppInfo.FileVersion})  ";
-                LabelVersion.Text = $"  {AppInfo.ProductName} - v{AppInfo.ProductMajorPart}.{AppInfo.ProductMinorPart}.{AppInfo.ProductBuildPart} ({AppInfo.FileVersion})  ";
+                if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                {
+                    LabelVersion.Text = $" {AppInfo.ProductName} - v{AppInfo.ProductMajorPart}.{AppInfo.ProductMinorPart}.{AppInfo.ProductBuildPart} ({AppInfo.FileVersion}) ";
+                }
+                else
+                {
+                    LabelVersion.Text = $" v{AppInfo.ProductMajorPart}.{AppInfo.ProductMinorPart}.{AppInfo.ProductBuildPart} ({AppInfo.FileVersion}) ";
+                }
 
                 expOpcionesSQL.IsExpanded = true;
                 expOpcionesComandos.IsExpanded = true;
@@ -67,12 +74,20 @@ namespace gsCrearClasesTablas_MAUI
 
                 // Si el servidor de SQL, la base de datos y
                 // o la seguridad integrada o el usuario/password están puestos ocultar el panel de SQL.
-                if (txtDataSource.Text.Any() && txtInitialCatalog.Text.Any() && 
-                    (chkSeguridadSQL.IsChecked == false || (chkSeguridadSQL.IsChecked && txtUserId.Text.Any() && txtPassword.Text.Any())))
+                // Si no hay datos previos, da error.
+                //if (txtDataSource.Text.Any() && txtInitialCatalog.Text.Any() && 
+                //    (chkSeguridadSQL.IsChecked == false || (chkSeguridadSQL.IsChecked && txtUserId.Text.Any() && txtPassword.Text.Any())))
+                //{
+                //    expOpcionesSQL.IsExpanded = false;
+                //    expOpcionesComandos.IsExpanded = false;
+                //}
+                if (string.IsNullOrWhiteSpace(txtDataSource.Text) == false && string.IsNullOrWhiteSpace(txtInitialCatalog.Text) == false &&
+                        (chkSeguridadSQL.IsChecked == false || (chkSeguridadSQL.IsChecked && string.IsNullOrWhiteSpace(txtUserId.Text) == false && string.IsNullOrWhiteSpace(txtPassword.Text) == false)))
                 {
                     expOpcionesSQL.IsExpanded = false;
                     expOpcionesComandos.IsExpanded = false;
                 }
+
                 expOpcionesSQL.Refrescar(true, true);
                 expOpcionesComandos.Refrescar(true, true);
 
