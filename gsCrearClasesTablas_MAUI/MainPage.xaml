@@ -6,9 +6,10 @@
              Appearing="ContentPage_Appearing">
     <ScrollView Margin="0" Padding="4" Orientation="Both">
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <StackLayout BackgroundColor="{StaticResource Accent}"
+            <StackLayout BackgroundColor="SteelBlue"
                          VerticalOptions="Start">
-                <Label Text="Crear Clases de Tablas" TextColor="{StaticResource ColorAzul3}"
+                <Label Text="{OnPlatform iOS='Crear Clases de Tablas', Default='Crear Clases de Tablas (gsCrearClasesTablas_MAUI)'}" 
+                       TextColor="White" Padding="2"
                        FontSize="Subtitle" FontAttributes="Bold"
                        HorizontalOptions="FillAndExpand"
                        HorizontalTextAlignment="Center"/>

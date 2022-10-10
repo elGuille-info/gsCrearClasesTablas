@@ -37,6 +37,9 @@ namespace gsCrearClasesTablas_MAUI
         {
             if (LaPrimeraVez)
             {
+                if (DeviceInfo.Platform != DevicePlatform.iOS)
+                    Title = "";
+
                 var sCopyR = "©Guillermo Som (elGuille), 2004-2007, 2018-";
                 var elAño = 2022;
                 if (DateTime.Today.Year > 2022)

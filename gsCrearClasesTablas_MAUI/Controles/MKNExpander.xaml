@@ -14,7 +14,7 @@
                      Orientation="Horizontal" HorizontalOptions="FillAndExpand" 
                      BackgroundColor="LightSkyBlue">
             <Label x:Name="LabelHeader" x:FieldModifier="public" Text="{Binding HeaderTitleNoExpanded}" 
-                   HorizontalTextAlignment="Center"
+                   HorizontalTextAlignment="Center" Padding="{OnPlatform iOS=4, Default=0}"
                    FontAttributes="Bold" FontSize="Small" 
                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                    BackgroundColor="Transparent" TextColor="Navy" HeightRequest="30">
