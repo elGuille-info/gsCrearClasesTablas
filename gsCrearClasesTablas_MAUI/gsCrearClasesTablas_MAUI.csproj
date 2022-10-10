@@ -52,7 +52,7 @@
 	  <DefaultLanguage>es</DefaultLanguage>
 	  <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
 	  <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-	  <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+	  <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
 	  <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
 	  <GenerateTestArtifacts>True</GenerateTestArtifacts>
 	  <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
