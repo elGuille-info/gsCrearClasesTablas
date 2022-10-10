@@ -5,11 +5,9 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "gsCrearClasesTablas", "gsCrearClasesTablas\gsCrearClasesTablas.vbproj", "{7C679171-01EF-4213-B29D-AD1D71BD8FC2}"
 EndProject
-Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "gsCrearClases", "gsCrearClases\gsCrearClases.vbproj", "{67FAEBD3-5E7D-4D90-BA04-FDC0A6B178A3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gsCrearClasesTablas_MAUI", "gsCrearClasesTablas_MAUI\gsCrearClasesTablas_MAUI.csproj", "{3D0317B8-BE00-4B9B-8C14-BB618136AB12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gsCrearClases_CS", "gsCrearClases_CS\gsCrearClases_CS.csproj", "{FA1AC7D8-0871-48E0-B7B7-DB1F65353264}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gsCrearClases_CS", "gsCrearClases_CS\gsCrearClases_CS.csproj", "{FA1AC7D8-0871-48E0-B7B7-DB1F65353264}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		{7C679171-01EF-4213-B29D-AD1D71BD8FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C679171-01EF-4213-B29D-AD1D71BD8FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C679171-01EF-4213-B29D-AD1D71BD8FC2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67FAEBD3-5E7D-4D90-BA04-FDC0A6B178A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67FAEBD3-5E7D-4D90-BA04-FDC0A6B178A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67FAEBD3-5E7D-4D90-BA04-FDC0A6B178A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67FAEBD3-5E7D-4D90-BA04-FDC0A6B178A3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3D0317B8-BE00-4B9B-8C14-BB618136AB12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3D0317B8-BE00-4B9B-8C14-BB618136AB12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D0317B8-BE00-4B9B-8C14-BB618136AB12}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
