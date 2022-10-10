@@ -8,6 +8,12 @@ Mira en el blog para saber más y los enlaces a las versiones anteriores: [Gener
 <br>
 <br>
 
+_**Nota 10-oct-22 20.36:**_ <br>
+>Quito el proyecto **gsCrearClases** de Visual Basic para .NET 6.0 porque ya no lo utilizo.<br>
+
+<br>
+<br>
+
 _**Nota 08-oct-22 14.28:**_ <br>
 >El proyecto **gsCrearClases** de Visual Basic ya no lo utilizo en ninguno de los proyectos.<br>
 >El proyecto **gsCrearClases_CS** (de C#) utiliza Microsoft.Data.SqlClient 5.0.1 en lugar de System.Data.SqlClient Versión 4.8.3.<br>
