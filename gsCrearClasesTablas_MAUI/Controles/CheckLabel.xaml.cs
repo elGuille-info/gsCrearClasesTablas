@@ -19,33 +19,9 @@ namespace gsCrearClasesTablas_MAUI.Controles
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CheckLabel : StackLayout
     {
-        private Color labelC;
-        private readonly Color thumbC;
-
         public CheckLabel()
         {
             InitializeComponent();
-
-            thumbC = chkButton.Color;
-            labelC = LabelText.TextColor;
-
-            // Para usar los nuevos colores de Android. (02/sep/22 19.55)
-            //if (App.DevicePlatform == DevicePlatform.Android)
-            if (DeviceInfo.Platform == DevicePlatform.Android)
-            {
-                labelC = (Color)Application.Current.Resources["SwitchAndroid"];
-                //thumbC = (Color)Application.Current.Resources["SwitchAndroidThumb"];
-                thumbC = (Color)Application.Current.Resources["SwitchAndroid"];
-            }
-            else if (DeviceInfo.Platform == DevicePlatform.iOS)
-            {
-                thumbC = (Color)Application.Current.Resources["SwitchiOS"];
-            }
-            else if (DeviceInfo.Platform == DevicePlatform.WinUI)
-            {
-                thumbC = (Color)Application.Current.Resources["CheckUWP"];
-            }
-            BackColorCheck();
         }
 
         /// <summary>
@@ -82,8 +58,6 @@ namespace gsCrearClasesTablas_MAUI.Controles
                 // Por compatibilidad.
                 control.Toggled?.Invoke(control, new ToggledEventArgs(value));
             }
-            control.BackColorCheck();
-
             control.yaEstoy = false;
         }
 
@@ -193,8 +167,6 @@ namespace gsCrearClasesTablas_MAUI.Controles
         // </Cambiar el orden de la etiqueta y el checkbox
         //
 
-
-
         // Para poder cambiar los márgenes de la etiqueta y el checkbox v1.4.17.49
 
         /// <summary>
@@ -256,24 +228,13 @@ namespace gsCrearClasesTablas_MAUI.Controles
         /// </summary>
         public string TextUnChecked { get; set; } = default; // El valor predeterminado de string es null.
 
-        ///// <summary>
-        ///// El botón asociado al que se le cambiará el texto.
-        ///// </summary>
-        ///// <remarks>Asignarlo en el contructor de la página que contiene este control.</remarks>
-        //public Button Button2Text { get; set; } = null;
-
-
         /// <summary>
         /// El color de la etiqueta.
         /// </summary>
         public Color TextColor
         {
             get => LabelText.TextColor;
-            set
-            {
-                LabelText.TextColor = value;
-                labelC = value;
-            }
+            set => LabelText.TextColor = value;
         }
 
         // Habilitado de forma predeterminada.
@@ -286,23 +247,8 @@ namespace gsCrearClasesTablas_MAUI.Controles
             var control = (CheckLabel)bindable;
 
             var nuevoValor = (bool)newValue;
-            //if (nuevoValor)
-            //{
-            //    control.LabelText.TextColor = control.labelC;
-            //    // Usar el valor que tuviera. v1.36.0.4 (27/sep/22 11.33)
-            //    control.LabelText.FontAttributes = control._FontAttributes;
-            //    //control.BackColorCheck();
-            //}
-            //else
-            //{
-            //    // Usar el color grisáceo (#7A7A7A) en todos los controles, no Gray. v1.30.0.2 (20/sep/22 07.31)
-            //    control.chkButton.Color = App.GrisDeshabilitado;
-            //    control.LabelText.TextColor = App.GrisDeshabilitado;
-            //    control.LabelText.FontAttributes = FontAttributes.Italic;
-            //}
             control.chkButton.IsEnabled = nuevoValor;
             control.LabelText.IsEnabled = nuevoValor;
-            control.BackColorCheck();
         }
 
         /// <summary>
@@ -312,30 +258,6 @@ namespace gsCrearClasesTablas_MAUI.Controles
         {
             get => (bool)GetValue(IsEnabledProperty);
             set => SetValue(IsEnabledProperty, value);
-        }
-
-        public void BackColorCheck()
-        {
-            // Cambiar el color solo si está habilitado.
-            //if (IsEnabled)
-            //{
-            //    // No comprobar si está habilitado, colorear de todas formas.
-            //    Funciones.BackColorCheck(chkButton, IsChecked, UsarColorUnCheked);
-            //}
-
-            // Usar el valor original que será el de Android o el predeterminado del control.
-            if (chkButton.IsEnabled)
-            {
-                LabelText.TextColor = labelC;
-                chkButton.Color = thumbC;
-                LabelText.FontAttributes = _FontAttributes;
-            }
-            else
-            {
-                LabelText.TextColor = Funciones.GrisDeshabilitado;
-                chkButton.Color = Funciones.GrisDeshabilitado;
-                LabelText.FontAttributes = FontAttributes.Italic;
-            }
         }
     }
 }

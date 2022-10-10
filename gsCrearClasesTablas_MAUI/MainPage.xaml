@@ -13,7 +13,7 @@
                        HorizontalOptions="FillAndExpand"
                        HorizontalTextAlignment="Center"/>
             </StackLayout>
-            <StackLayout Margin="20,10" Spacing="6">
+            <StackLayout Margin="16,10" Spacing="8">
                 <xct:MKNExpander x:Name="expOpcionesSQL" Margin="-10,0"
                                  IsExpanded="True" Expanded="expOpcionesSQL_Expanded"
                                  HeaderTitle="Opciones para SQL Server"/>
@@ -31,12 +31,12 @@
                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpcionesSQLTapGestureRecognizer_Tapped"/>
                     </StackLayout.GestureRecognizers>
                 </StackLayout>-->
-                <Frame x:Name="grbSQL">
-                    <!-- Con este margin se evita que se corte el borde del Frame en la pate inferior -->
-                    <StackLayout Margin="4">
-                        <!--<ctr:CheckLabel x:Name="optSQL" IsChecked="True" IsEnabled="False" 
-                                        Text="Usar Base de datos de SQL Server" />-->
-                        <StackLayout Orientation="Horizontal" Spacing="8">
+                <Frame x:Name="grbSQL" Margin="-8,4">
+                    <!-- Con un margin mínimo de 2 se evita que se corte el borde del Frame en la pate inferior -->
+                    <StackLayout Style="{StaticResource StackConMargen}" Margin="2">
+                        <xct:CheckLabel x:Name="optSQL" IsChecked="True" IsEnabled="False" 
+                                        Text="Usar Base de datos de SQL Server" />
+                        <!--<StackLayout Orientation="Horizontal" Spacing="8">
                             <CheckBox x:Name="optSQL" IsChecked="True" IsEnabled="False"/>
                             <Label Text="Usar Base de datos de SQL Server">
                                 <Label.Triggers>
@@ -55,19 +55,19 @@
                                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SQLTapGestureRecognizer_Tapped"/>
                                 </Label.GestureRecognizers>
                             </Label>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" Style="{StaticResource StackConMargen}">
+                        </StackLayout>-->
+                        <StackLayout Orientation="Horizontal">
                             <Label Text="Data source:" WidthRequest="100"/>
                             <Entry x:Name="txtDataSource" Style="{StaticResource EntryText}" WidthRequest="300"/>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal" Style="{StaticResource StackConMargen}">
+                        <StackLayout Orientation="Horizontal" >
                             <Label Text="Initial catalog:" WidthRequest="100"/>
                             <Entry x:Name="txtInitialCatalog" Style="{StaticResource EntryText}" WidthRequest="300"/>
                         </StackLayout>
                         <StackLayout Style="{StaticResource StackConMargen}">
-                            <!--<ctr:CheckLabel x:Name="chkSeguridadSQL"
-                                            Text="Usar seguridad de SQL"/>-->
-                            <StackLayout Orientation="Horizontal">
+                            <xct:CheckLabel x:Name="chkSeguridadSQL"
+                                            Text="Usar seguridad de SQL"/>
+                            <!--<StackLayout Orientation="Horizontal">
                                 <CheckBox x:Name="chkSeguridadSQL"/>
                                 <Label Text="Usar seguridad de SQL, sino la seguridad integrada (Integrated Security)">
                                     <Label.Triggers>
@@ -86,7 +86,7 @@
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SeguridadSQLTapGestureRecognizer_Tapped"/>
                                     </Label.GestureRecognizers>
                                 </Label>
-                            </StackLayout>
+                            </StackLayout>-->
                             <StackLayout Orientation="Horizontal" Spacing="12" Margin="12,0,0,0"
                                          PropertyChanged="StackLayout_PropertyChanged">
                                 <StackLayout.Triggers>
@@ -156,8 +156,8 @@
                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpcionesTablasTapGestureRecognizer_Tapped"/>
                     </StackLayout.GestureRecognizers>
                 </StackLayout>-->
-                <Frame x:Name="grbTablas">
-                    <StackLayout Style="{StaticResource StackConMargen}">
+                <Frame x:Name="grbTablas" Margin="-8,4">
+                    <StackLayout Style="{StaticResource StackConMargen}" Margin="2">
                         <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="StartAndExpand">
                             <StackLayout Orientation="Horizontal" Spacing="8">
                                 <Label Text="Tablas:" WidthRequest="100"/>
@@ -207,14 +207,14 @@
                 <xct:MKNExpander x:Name="expOpcionesComandos" Margin="-10,0"
                                  IsExpanded="True" Expanded="expOpcionesComandos_Expanded"
                                  HeaderTitle="Opciones de Comandos"/>
-                <Frame x:Name="grbOpcionesComandos">
+                <Frame x:Name="grbOpcionesComandos" Margin="-8,4">
                     <StackLayout x:Name="grbOpciones" Orientation="Horizontal" 
-                                 Style="{StaticResource StackConMargen}"
-                                 PropertyChanged="grbOpciones_PropertyChanged" Margin="4">
-                        <StackLayout Style="{StaticResource StackConMargen}" Margin="0">
-                            <!--<ctr:CheckLabel x:Name="chkUsarDataAdapter" IsChecked="False"
-                                            Text="Usar DataAdpater en lugar de cmd.Execute"/>-->
-                            <StackLayout Orientation="Horizontal">
+                                 Style="{StaticResource StackConMargen}" Margin="2"
+                                 PropertyChanged="grbOpciones_PropertyChanged">
+                        <StackLayout Margin="0">
+                            <xct:CheckLabel x:Name="chkUsarDataAdapter" IsChecked="False"
+                                            Text="Usar DataAdpater en lugar de cmd.Execute"/>
+                            <!--<StackLayout Orientation="Horizontal">
                                 <Label Text="Usar DataAdpater en lugar de cmd.Execute">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
@@ -233,11 +233,24 @@
                                     </Label.GestureRecognizers>
                                 </Label>
                                 <Switch x:Name="chkUsarDataAdapter" IsToggled="False"/>
-                            </StackLayout>
-                            <!--<ctr:CheckLabel x:Name="chkUsarCommandBuilder" IsEnabled="False"
+                            </StackLayout>-->
+                            <xct:CheckLabel x:Name="chkUsarCommandBuilder" IsEnabled="False"
                                             Margin="12,0,0,0"
-                                            Text="Usar CommandBuilder"/>-->
-                            <StackLayout Orientation="Horizontal" Margin="12,0,0,0">
+                                            Text="Usar CommandBuilder">
+                                <xct:CheckLabel.Triggers>
+                                    <DataTrigger TargetType="xct:CheckLabel"
+                                                 Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
+                                                 Value="False">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="xct:CheckLabel"
+                                                 Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
+                                                 Value="True">
+                                        <Setter Property="IsEnabled" Value="True" />
+                                    </DataTrigger>
+                                </xct:CheckLabel.Triggers>
+                            </xct:CheckLabel>
+                            <!--<StackLayout Orientation="Horizontal" Margin="12,0,0,0">
                                 <Label Text="Usar CommandBuilder" IsEnabled="False">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
@@ -269,10 +282,10 @@
                                         </DataTrigger>
                                     </Switch.Triggers>
                                 </Switch>
-                            </StackLayout>
-                            <!--<ctr:CheckLabel x:Name="chkUsarAddWithValue"
-                                            Text="Usar AddWithValue"/>-->
-                            <StackLayout Orientation="Horizontal">
+                            </StackLayout>-->
+                            <xct:CheckLabel x:Name="chkUsarAddWithValue"
+                                            Text="Usar AddWithValue"/>
+                            <!--<StackLayout Orientation="Horizontal">
                                 <Label Text="Usar AddWithValue">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
@@ -291,12 +304,12 @@
                                     </Label.GestureRecognizers>
                                 </Label>
                                 <Switch x:Name="chkUsarAddWithValue"/>
-                            </StackLayout>
+                            </StackLayout>-->
                             <Label Text="Si se utiliza AddWithValue o Add para añadir los valores a los parámetros del comando."
                                     FontSize="13" Margin="12,0,0,0"/>
-                            <!--<ctr:CheckLabel x:Name="chkUsarOverrides"
-                                            Text="Usar Overrides"/>-->
-                            <StackLayout Orientation="Horizontal">
+                            <xct:CheckLabel x:Name="chkUsarOverrides"
+                                            Text="Usar Overrides"/>
+                            <!--<StackLayout Orientation="Horizontal">
                                 <Label Text="Usar Overrides">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label"
@@ -315,7 +328,7 @@
                                     </Label.GestureRecognizers>
                                 </Label>
                                 <Switch x:Name="chkUsarOverrides"/>
-                            </StackLayout>
+                            </StackLayout>-->
                             <Label Text="Si se debe usar Overrides en los métodos Actualizar, Crear y Borrar."
                                     FontSize="13" Margin="12,0,0,0"/>
                         </StackLayout>
@@ -324,17 +337,17 @@
                 <xct:MKNExpander x:Name="expOpcionesCodigo" Margin="-10,0"
                                  IsExpanded="True" Expanded="expOpcionesCodigo_Expanded"
                                  HeaderTitle="Opciones Generar Código"/>
-                <Frame x:Name="grbOpcionesCodigo">
-                    <StackLayout Style="{StaticResource StackConMargen}" Margin="4">
+                <Frame x:Name="grbOpcionesCodigo" Margin="-8,4">
+                    <StackLayout Style="{StaticResource StackConMargen}" Margin="2">
                         <StackLayout Orientation="Horizontal" Spacing="8" Margin="0">
                             <Label Text="Clase:" WidthRequest="100"/>
                             <Entry x:Name="txtClase" Style="{StaticResource EntryText}" WidthRequest="200"/>
                         </StackLayout>
 
                         <StackLayout x:Name="Panel1" Orientation="Horizontal" 
-                                         PropertyChanged="Panel1_PropertyChanged">
+                                     PropertyChanged="Panel1_PropertyChanged">
                             <Label Text="Lenguaje:"/>
-                            <!--<xct:SwitchLabel x:Name="optVB" Text="Visual Basic" 
+                            <xct:SwitchLabel x:Name="optVB" Text="Visual Basic" 
                                              IsToggled="True" Margin="12,0,0,0">
                                 <xct:SwitchLabel.Triggers>
                                     <DataTrigger TargetType="xct:SwitchLabel"
@@ -348,8 +361,8 @@
                                         <Setter Property="IsToggled" Value="False" />
                                     </DataTrigger>
                                 </xct:SwitchLabel.Triggers>
-                            </xct:SwitchLabel>-->
-                            <StackLayout Orientation="Horizontal" Margin="12,0,0,0">
+                            </xct:SwitchLabel>
+                            <!--<StackLayout Orientation="Horizontal" Margin="12,0,0,0">
                                 <Label Text="Visual Basic ">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="VBTapGestureRecognizer_Tapped"/>
@@ -369,8 +382,8 @@
                                         </DataTrigger>
                                     </Switch.Triggers>
                                 </Switch>
-                            </StackLayout>
-                            <!--<xct:SwitchLabel x:Name="optCS" Text="C#" 
+                            </StackLayout>-->
+                            <xct:SwitchLabel x:Name="optCS" Text="C#" 
                                              IsToggled="False" Margin="8,0,0,0">
                                 <xct:SwitchLabel.Triggers>
                                     <DataTrigger TargetType="xct:SwitchLabel"
@@ -384,8 +397,8 @@
                                         <Setter Property="IsToggled" Value="False" />
                                     </DataTrigger>
                                 </xct:SwitchLabel.Triggers>
-                            </xct:SwitchLabel>-->
-                            <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default='0'}">
+                            </xct:SwitchLabel>
+                            <!--<StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default='0'}">
                                 <Label Text="C# ">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CSTapGestureRecognizer_Tapped"/>
@@ -405,7 +418,7 @@
                                         </DataTrigger>
                                     </Switch.Triggers>
                                 </Switch>
-                            </StackLayout>
+                            </StackLayout>-->
                             <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default='0'}">
                                 <Button x:Name="btnGenerarClase" Text="Generar Clase"
                                         HorizontalOptions="FillAndExpand"
@@ -416,14 +429,16 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <StackLayout Style="{StaticResource StackConMargen}" Margin="8">
-                    <Label FontSize="13" Text="Código generado:"/>
-                    <Editor x:Name="txtCodigo" FontFamily="Consolas" FontSize="14"
-                            HeightRequest="500"/>
-                </StackLayout>
+                <Frame Margin="-8,4">
+                    <StackLayout Style="{StaticResource StackConMargen}" Margin="2">
+                        <Label FontSize="13" Text="Código generado:"/>
+                        <Editor x:Name="txtCodigo" FontFamily="Consolas" FontSize="14"
+                                HeightRequest="500"/>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
             <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"
-                         Margin="6">
+                         Margin="6" BackgroundColor="WhiteSmoke" Padding="2,4">
                 <StackLayout Orientation="Horizontal" Margin="6,0,12,0">
                     <Label x:Name="LabelInfo" HorizontalOptions="StartAndExpand"
                            WidthRequest="500" FontSize="13"

@@ -15,7 +15,8 @@
                      BackgroundColor="LightSkyBlue">
             <Label x:Name="LabelHeader" x:FieldModifier="public" Text="{Binding HeaderTitleNoExpanded}" 
                    HorizontalTextAlignment="Center"
-                   FontAttributes="Bold" FontSize="Small" HorizontalOptions="FillAndExpand"
+                   FontAttributes="Bold" FontSize="Small" 
+                   HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                    BackgroundColor="Transparent" TextColor="Navy" HeightRequest="30">
                 <Label.Triggers>
                     <DataTrigger 

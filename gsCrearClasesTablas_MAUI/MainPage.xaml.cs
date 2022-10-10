@@ -217,15 +217,15 @@ namespace gsCrearClasesTablas_MAUI
             txtClase.Text = txtClase.Text.Replace(" ", "_");
 
             // Lo asigno en la clase base ya que son métodos compartidos (22/Mar/19)
-            CrearClase.UsarDataAdapter = chkUsarDataAdapter.IsToggled;
-            if (chkUsarDataAdapter.IsToggled == false)
+            CrearClase.UsarDataAdapter = chkUsarDataAdapter.IsChecked;
+            if (chkUsarDataAdapter.IsChecked == false)
                 chkUsarCommandBuilder.IsEnabled = false;
-            CrearClase.UsarAddWithValue = chkUsarAddWithValue.IsToggled;
-            CrearClase.UsarOverrides = chkUsarOverrides.IsToggled;
+            CrearClase.UsarAddWithValue = chkUsarAddWithValue.IsChecked;
+            CrearClase.UsarOverrides = chkUsarOverrides.IsChecked;
 
             // Si no está habilitado es que no se utiliza                (07/Abr/19)
             // ya que solo se usa con DataAdapter
-            bool usarCB = chkUsarCommandBuilder.IsToggled;
+            bool usarCB = chkUsarCommandBuilder.IsChecked;
             if (chkUsarCommandBuilder.IsEnabled == false)
                 usarCB = false;
 
@@ -294,26 +294,26 @@ namespace gsCrearClasesTablas_MAUI
                 sTmp = "1";
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
-                chkUsarDataAdapter.IsToggled = sTmp == "1";
+                chkUsarDataAdapter.IsChecked = sTmp == "1";
                 sTmp = "1";
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
-                chkUsarCommandBuilder.IsToggled = sTmp == "1";
+                chkUsarCommandBuilder.IsChecked = sTmp == "1";
                 sTmp = "1";
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
-                chkUsarAddWithValue.IsToggled = sTmp == "1";
+                chkUsarAddWithValue.IsChecked = sTmp == "1";
                 sTmp = "1";
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
-                chkUsarOverrides.IsToggled = sTmp == "1";
+                chkUsarOverrides.IsChecked = sTmp == "1";
                 sTmp = "1";
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
                 optVB.IsToggled = sTmp == "1";
                 //optCS.IsToggled = ! optVB.IsToggled;
             }
-            chkUsarCommandBuilder.IsEnabled = chkUsarDataAdapter.IsToggled;
+            chkUsarCommandBuilder.IsEnabled = chkUsarDataAdapter.IsChecked;
         }
         /// <summary>
         /// Guardar los valores en la configuración (local).
@@ -328,10 +328,10 @@ namespace gsCrearClasesTablas_MAUI
                 sw.WriteLine(chkSeguridadSQL.IsChecked ? "1" : "0");
                 sw.WriteLine(txtUserId.Text);
                 sw.WriteLine(txtPassword.Text);
-                sw.WriteLine(chkUsarDataAdapter.IsToggled ? "1" : "0");
-                sw.WriteLine(chkUsarCommandBuilder.IsToggled ? "1" : "0");
-                sw.WriteLine(chkUsarAddWithValue.IsToggled ? "1" : "0");
-                sw.WriteLine(chkUsarOverrides.IsToggled ? "1" : "0");
+                sw.WriteLine(chkUsarDataAdapter.IsChecked ? "1" : "0");
+                sw.WriteLine(chkUsarCommandBuilder.IsChecked ? "1" : "0");
+                sw.WriteLine(chkUsarAddWithValue.IsChecked ? "1" : "0");
+                sw.WriteLine(chkUsarOverrides.IsChecked ? "1" : "0");
                 sw.WriteLine(optVB.IsToggled ? "1" : "0");
             }
         }
@@ -377,45 +377,45 @@ namespace gsCrearClasesTablas_MAUI
             }
         }
 
-        private void UsarDataAdapterTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            chkUsarDataAdapter.IsToggled = !chkUsarDataAdapter.IsToggled;
-        }
+        //private void UsarDataAdapterTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    chkUsarDataAdapter.IsChecked = !chkUsarDataAdapter.IsChecked;
+        //}
 
-        private void UsarCommandBuilderTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            chkUsarCommandBuilder.IsToggled = !chkUsarCommandBuilder.IsToggled;
-        }
+        //private void UsarCommandBuilderTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    chkUsarCommandBuilder.IsChecked = !chkUsarCommandBuilder.IsChecked;
+        //}
 
-        private void UsarAddWithValueTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            chkUsarAddWithValue.IsToggled = !chkUsarAddWithValue.IsToggled;
-        }
+        //private void UsarAddWithValueTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    chkUsarAddWithValue.IsChecked = !chkUsarAddWithValue.IsChecked;
+        //}
 
-        private void UsarOverridesTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            chkUsarOverrides.IsToggled = !chkUsarOverrides.IsToggled;
-        }
+        //private void UsarOverridesTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    chkUsarOverrides.IsChecked = !chkUsarOverrides.IsChecked;
+        //}
 
-        private void SQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            optSQL.IsChecked = !optSQL.IsChecked;
-        }
+        //private void SQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    optSQL.IsChecked = !optSQL.IsChecked;
+        //}
 
-        private void SeguridadSQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            chkSeguridadSQL.IsChecked = !chkSeguridadSQL.IsChecked;
-        }
+        //private void SeguridadSQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    chkSeguridadSQL.IsChecked = !chkSeguridadSQL.IsChecked;
+        //}
 
-        private void VBTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            optVB.IsToggled = !optVB.IsToggled;
-        }
+        //private void VBTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    optVB.IsToggled = !optVB.IsToggled;
+        //}
 
-        private void CSTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            optCS.IsToggled = !optCS.IsToggled;
-        }
+        //private void CSTapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    optCS.IsToggled = !optCS.IsToggled;
+        //}
 
         private void btnLimpiar_Clicked(object sender, EventArgs e)
         {

@@ -11,6 +11,7 @@
               IsVisible="True" HorizontalOptions="Start"
               CheckedChanged="chkButton_Checked"/>
     <Label x:Name="LabelText" Text="" VerticalOptions="Center" BackgroundColor="Transparent"
+           Margin="8,0,0,0"
            FontSize="{OnPlatform WinUI=13, Default=Micro}">
         <Label.GestureRecognizers>
             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />

@@ -140,9 +140,10 @@
         <Color x:Key="IWTextReadOnly0Dark">White</Color>
         <Color x:Key="IWTextReadOnly1Light">DarkGreen</Color>
         <Color x:Key="IWTextReadOnly1Dark">Azure</Color>
-
+        
+        <!-- Las definiciones genéricas de los controles -->
         <Style TargetType="{x:Type Frame}">
-            <Setter Property="Margin" Value="6"/>
+            <Setter Property="Margin" Value="4"/>
             <Setter Property="BorderColor" Value="{StaticResource ColorGrisNegro}"/>
             <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="HasShadow" Value="True"/>
@@ -155,8 +156,6 @@
             <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
             <Setter Property="VerticalOptions"  Value="Start" />
             <Setter Property="TitleColor" Value="{AppThemeBinding Light=SteelBlue, Dark=White}"/>
-            <!--<Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}"/>-->
-            <!--<Setter Property="BackgroundColor" Value="{AppThemeBinding Light=Transparent, Dark=SteelBlue}"/>-->
             <Setter Property="TextColor" Value="SteelBlue"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
             <Setter Property="HeightRequest" Value="35"/>
@@ -168,18 +167,6 @@
             <Setter Property="HeightRequest" Value="35"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
             <Setter Property="VerticalOptions" Value="Center"/>
-            <!--<Style.Triggers>
-                <Trigger TargetType="CheckBox"
-                         Property="IsEnabled"
-                         Value="True">
-                    <Setter Property="Color" Value="{OnPlatform Android={StaticResource SwitchAndroid}, iOS={StaticResource SwitchiOS}, WinUI={StaticResource CheckUWP}}"/>
-                </Trigger>
-                <Trigger TargetType="CheckBox"
-                         Property="IsEnabled"
-                         Value="False">
-                    <Setter Property="Color" Value="{StaticResource GrisDeshabilitado}" />
-                </Trigger>
-            </Style.Triggers>-->
         </Style>
         
         <Style TargetType="Switch">
@@ -212,17 +199,12 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="EntryText" TargetType="{x:Type Entry}">
-            <Setter Property="Keyboard" Value="Text"/>
-            <Setter Property="WidthRequest" Value="150"/>
-        </Style>
+        
         <Style TargetType="{x:Type Label}" ApplyToDerivedTypes="True" CanCascade="True">
             <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource ColorAzul1},Dark={StaticResource ColorBlanco}}"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
             <Setter Property="VerticalOptions" Value="Center"/>
-            <!--<Setter Property="WidthRequest" Value="150"/>-->
             <Setter Property="FontAttributes" Value="None" />
-            <!--<Setter Property="FontSize" Value="{OnIdiom Phone=Small, Tablet=Small, Default=Micro}"/>-->
             <Setter Property="FontSize" Value="14" />
             <Setter Property="HorizontalOptions" Value="Start" />
             <Style.Triggers>
@@ -240,6 +222,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
         <Style TargetType="{x:Type Button}" ApplyToDerivedTypes="True" CanCascade="True">
             <!--<Setter Property="FontSize" Value="{OnIdiom Phone=Small, Tablet=Small, Default=Micro}"/>-->
             <Setter Property="FontSize" Value="14"/>
@@ -260,10 +243,14 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
+        <!-- Las definiciones con nombre de los controles -->
+        <Style x:Key="EntryText" TargetType="{x:Type Entry}">
+            <Setter Property="Keyboard" Value="Text"/>
+            <Setter Property="WidthRequest" Value="150"/>
+        </Style>
+
         <Style x:Key="StackConMargen" TargetType="{x:Type StackLayout}">
-            <!--<Setter Property="Orientation" Value="Vertical"/>
-            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-            <Setter Property="VerticalOptions" Value="EndAndExpand"/>-->
             <Setter Property="Spacing" Value="8"/>
             <Setter Property="Margin" Value="0,8"/>
         </Style>
@@ -275,10 +262,7 @@
             <Setter Property="HeightRequest" Value="20"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
         </Style>
-        <!--<Style x:Key="StackExpander" TargetType="{x:Type StackLayout}">
-            <Setter Property="Margin" Value="6,12,6,6"/>
-        </Style>-->
-
+        
         <!--<ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
