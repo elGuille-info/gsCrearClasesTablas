@@ -3,14 +3,16 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap rescap">
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  IgnorableNamespaces="uap rescap mp">
 
-  <Identity Name="maui-package-name-placeholder" Publisher="CN=User Name" Version="0.0.0.0" />
+  <Identity Name="30481elGuille.info.49663C03BCA84" Publisher="CN=F38F01A4-356D-413A-9B95-191B2D6030BD" Version="3.0.6.0" />
+	<mp:PhoneIdentity PhoneProductId="443fd6fc-db51-4ce5-b634-fbcd05abf8bb" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>$placeholder$</DisplayName>
-    <PublisherDisplayName>User Name</PublisherDisplayName>
-    <Logo>$placeholder$.png</Logo>
+    <DisplayName>gsCrearClasesTablas_MAUI</DisplayName>
+    <PublisherDisplayName>elguille.info</PublisherDisplayName>
+    <Logo>Platforms\Windows\Assets\StoreLogo.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -25,19 +27,24 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="$placeholder$"
+        DisplayName="gsCrearClasesTablas_MAUI"
         Description="$placeholder$"
-        Square150x150Logo="$placeholder$.png"
-        Square44x44Logo="$placeholder$.png"
-        BackgroundColor="transparent">
-        <uap:DefaultTile Square71x71Logo="$placeholder$.png" Wide310x150Logo="$placeholder$.png" Square310x310Logo="$placeholder$.png" />
-        <uap:SplashScreen Image="$placeholder$.png" />
+        BackgroundColor="transparent" Square150x150Logo="Platforms\Windows\Assets\Square150x150Logo.png" Square44x44Logo="Platforms\Windows\Assets\Square44x44Logo.png">
+        <uap:DefaultTile  Wide310x150Logo="Platforms\Windows\Assets\Wide310x150Logo.png" Square310x310Logo="Platforms\Windows\Assets\LargeTile.png" Square71x71Logo="Platforms\Windows\Assets\SmallTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
+        <uap:SplashScreen Image="Platforms\Windows\Assets\SplashScreen.png"/>
       </uap:VisualElements>
     </Application>
   </Applications>
 
   <Capabilities>
-    <rescap:Capability Name="runFullTrust" />
+	  <Capability Name="internetClient" />
+    <!--<rescap:Capability Name="runFullTrust" />-->
   </Capabilities>
 
 </Package>

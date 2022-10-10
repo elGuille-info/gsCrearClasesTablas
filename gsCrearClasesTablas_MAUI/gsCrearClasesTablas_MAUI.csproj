@@ -49,6 +49,13 @@
 
 	<PropertyGroup>
 	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.22621.0</TargetFrameworks>
+	  <DefaultLanguage>es</DefaultLanguage>
+	  <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+	  <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+	  <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+	  <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+	  <GenerateTestArtifacts>True</GenerateTestArtifacts>
+	  <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -90,10 +97,67 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Windows\Assets\LargeTile.scale-100.png" />
+	  <None Remove="Platforms\Windows\Assets\LargeTile.scale-200.png" />
+	  <None Remove="Platforms\Windows\Assets\LargeTile.scale-400.png" />
+	  <None Remove="Platforms\Windows\Assets\SmallTile.scale-100.png" />
+	  <None Remove="Platforms\Windows\Assets\SmallTile.scale-200.png" />
+	  <None Remove="Platforms\Windows\Assets\SmallTile.scale-400.png" />
+	  <None Remove="Platforms\Windows\Assets\SplashScreen.scale-100.png" />
+	  <None Remove="Platforms\Windows\Assets\SplashScreen.scale-200.png" />
+	  <None Remove="Platforms\Windows\Assets\SplashScreen.scale-400.png" />
+	  <None Remove="Platforms\Windows\Assets\Square150x150Logo.scale-100.png" />
+	  <None Remove="Platforms\Windows\Assets\Square150x150Logo.scale-200.png" />
+	  <None Remove="Platforms\Windows\Assets\Square150x150Logo.scale-400.png" />
+	  <None Remove="Platforms\Windows\Assets\Square44x44Logo.scale-100.png" />
+	  <None Remove="Platforms\Windows\Assets\Square44x44Logo.scale-200.png" />
+	  <None Remove="Platforms\Windows\Assets\Square44x44Logo.scale-400.png" />
+	  <None Remove="Platforms\Windows\Assets\Square44x44Logo.targetsize-16.png" />
+	  <None Remove="Platforms\Windows\Assets\Square44x44Logo.targetsize-16_altform-unplated.png" />
+	  <None Remove="Platforms\Windows\Assets\Square44x44Logo.targetsize-256.png" />
+	  <None Remove="Platforms\Windows\Assets\Square44x44Logo.targetsize-256_altform-unplated.png" />
+	  <None Remove="Platforms\Windows\Assets\Square44x44Logo.targetsize-48.png" />
+	  <None Remove="Platforms\Windows\Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
+	  <None Remove="Platforms\Windows\Assets\StoreLogo.scale-100.png" />
+	  <None Remove="Platforms\Windows\Assets\StoreLogo.scale-200.png" />
+	  <None Remove="Platforms\Windows\Assets\StoreLogo.scale-400.png" />
+	  <None Remove="Platforms\Windows\Assets\Wide310x150Logo.scale-100.png" />
+	  <None Remove="Platforms\Windows\Assets\Wide310x150Logo.scale-200.png" />
+	  <None Remove="Platforms\Windows\Assets\Wide310x150Logo.scale-400.png" />
 	  <None Remove="Resources\Images\collapse.png" />
 	  <None Remove="Resources\Images\collapse_white.png" />
 	  <None Remove="Resources\Images\expand.png" />
 	  <None Remove="Resources\Images\expand_white.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Platforms\Windows\Assets\LargeTile.scale-100.png" />
+	  <Content Include="Platforms\Windows\Assets\LargeTile.scale-200.png" />
+	  <Content Include="Platforms\Windows\Assets\LargeTile.scale-400.png" />
+	  <Content Include="Platforms\Windows\Assets\SmallTile.scale-100.png" />
+	  <Content Include="Platforms\Windows\Assets\SmallTile.scale-200.png" />
+	  <Content Include="Platforms\Windows\Assets\SmallTile.scale-400.png" />
+	  <Content Include="Platforms\Windows\Assets\SplashScreen.scale-100.png" />
+	  <Content Include="Platforms\Windows\Assets\SplashScreen.scale-200.png" />
+	  <Content Include="Platforms\Windows\Assets\SplashScreen.scale-400.png" />
+	  <Content Include="Platforms\Windows\Assets\Square150x150Logo.scale-100.png" />
+	  <Content Include="Platforms\Windows\Assets\Square150x150Logo.scale-200.png" />
+	  <Content Include="Platforms\Windows\Assets\Square150x150Logo.scale-400.png" />
+	  <Content Include="Platforms\Windows\Assets\Square44x44Logo.scale-100.png" />
+	  <Content Include="Platforms\Windows\Assets\Square44x44Logo.scale-200.png" />
+	  <Content Include="Platforms\Windows\Assets\Square44x44Logo.scale-400.png" />
+	  <Content Include="Platforms\Windows\Assets\Square44x44Logo.targetsize-16.png" />
+	  <Content Include="Platforms\Windows\Assets\Square44x44Logo.targetsize-16_altform-unplated.png" />
+	  <Content Include="Platforms\Windows\Assets\Square44x44Logo.targetsize-256.png" />
+	  <Content Include="Platforms\Windows\Assets\Square44x44Logo.targetsize-256_altform-unplated.png" />
+	  <Content Include="Platforms\Windows\Assets\Square44x44Logo.targetsize-48.png" />
+	  <Content Include="Platforms\Windows\Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
+	  <Content Include="Platforms\Windows\Assets\StoreLogo.scale-100.png" />
+	  <Content Include="Platforms\Windows\Assets\StoreLogo.scale-200.png" />
+	  <Content Include="Platforms\Windows\Assets\StoreLogo.scale-400.png" />
+	  <Content Include="Platforms\Windows\Assets\Wide310x150Logo.scale-100.png" />
+	  <Content Include="Platforms\Windows\Assets\Wide310x150Logo.scale-200.png" />
+	  <Content Include="Platforms\Windows\Assets\Wide310x150Logo.scale-400.png" />
 	</ItemGroup>
 
 	<ItemGroup>
