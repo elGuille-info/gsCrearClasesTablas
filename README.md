@@ -8,6 +8,30 @@ Mira en el blog para saber más y los enlaces a las versiones anteriores: [Gener
 <br>
 <br>
 
+### El _nightmare_ de los assets para windows
+
+Pues eso... que otras veces me ha funcionado bien elegir una imagen para crear las imágenes usadas por Windows (para poder publicarla en la Microsoft Store), pero en esta aplicación me hada dado un poquillo _polc*lo_.
+
+Esta es una captura de otra aplicación (en la que sí funcionó como debía)
+
+<picture>
+<img src="https://github.com/elGuille-info/gsCrearClasesTablas/blob/master/Screenshot%202022-10-10%20231513.png" width="650">
+</picture>
+
+<br>
+<br>
+
+El tema es que te vas al manifiesto de Windows (Package.appxmanifest), te vas a la pestaña **Visual Assets**, en **Asset Generator** le indicas la imagen base que quieres utilizar, eliges los formatos a usar (Scales) y le das al botón **Generate** y te genera las imágenes.
+O eso debería hacer.
+Pero en esta aplicación en vez de los nombres predeterminados para cada tipo (Small Tile, Medium Tile, etc.) pone $placeholder$.png y... aunque lo he cambiado, sigue usando ese nombre (que no es válido para una imagen).
+
+Al final he tenido que generar cada tipo de imagen por separado y cambiando los nombres de los ficheros para que en vez de usar $placeholder$ tenga el prefijo del nombre del tipo de imagen, y después ir eligiendo las imágenes correspondientes (teniendo cuidado de poner el nombre correcto en vez del _placeholder_ ese de las narices.
+
+
+<br>
+<br>
+
+
 _**Nota 10-oct-22 20.36:**_ <br>
 >Quito el proyecto **gsCrearClases** de Visual Basic para .NET 6.0 porque ya no lo utilizo.<br>
 >
