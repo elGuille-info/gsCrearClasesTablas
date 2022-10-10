@@ -12,6 +12,17 @@
 '   FechaModificacion:= "10/Oct/2022", _
 '   Tester:= "elGuille", _
 '   FechaReporte:= "10/Oct/2022", _
+'   Tipo:= "TODO", _
+'   Clases:= "CrearClase", _
+'   Miembro:= "generarClase", _
+'   Motivo:= "Definir las propiedades que no son de tipo string como propiedades auto-implementadas.", _
+'   Solucion:= "", _
+'   Comentarios:= "Para facilitar la lectura del código.")>
+
+'<revision("3.0.5.0", _
+'   FechaModificacion:= "10/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "10/Oct/2022", _
 '   Tipo:= "Revisión", _
 '   Clases:= "CrearClase", _
 '   Miembro:= "generarClase", _
