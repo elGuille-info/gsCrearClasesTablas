@@ -29,7 +29,6 @@ namespace gsCrearClasesTablas_MAUI
             AppInfo = FileVersionInfo.GetVersionInfo(ensamblado.Location);
 
             FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-            //FicConfig = Path.Combine(FolderPath, $"{App.AppName}.txt");
             FicConfig = Path.Combine(FolderPath, "gsCrearClasesTablas.txt");
         }
 
@@ -213,7 +212,7 @@ namespace gsCrearClasesTablas_MAUI
         {
             txtCodigo.Text = "";
             GuardarConfig();
-            // 
+            
             // Si la tabla contiene espacios,                            (02/Nov/04)
             // sustituirlos por guiones bajos.
             // Bug reportado por David Sans
@@ -314,10 +313,10 @@ namespace gsCrearClasesTablas_MAUI
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
                 optVB.IsToggled = sTmp == "1";
-                //optCS.IsToggled = ! optVB.IsToggled;
             }
             chkUsarCommandBuilder.IsEnabled = chkUsarDataAdapter.IsChecked;
         }
+
         /// <summary>
         /// Guardar los valores en la configuración (local).
         /// </summary>
@@ -343,19 +342,13 @@ namespace gsCrearClasesTablas_MAUI
         {
             if (e.PropertyName == "IsEnabled")
             {
-                //App.HabilitarContenedor(grbOpciones, grbOpciones.IsEnabled, limpiar: false);
-                // ¡En los checkBox Funciona asignado el valor al revés! ???
-                // Los colores... ¡OJÚ!
-
                 chkUsarDataAdapter.IsEnabled = grbOpciones.IsEnabled;
-                //chkUsarCommandBuilder.IsEnabled = grbOpciones.IsEnabled;
                 chkUsarAddWithValue.IsEnabled = grbOpciones.IsEnabled;
                 chkUsarOverrides.IsEnabled = grbOpciones.IsEnabled;
 
                 Panel1.IsEnabled = grbOpciones.IsEnabled;
                 
                 btnGenerarClase.IsEnabled = grbOpciones.IsEnabled;
-                //btnCopiarClipBoard.IsEnabled = grbOpciones.IsEnabled;
                 btnCopiarClipBoard.IsEnabled = string.IsNullOrWhiteSpace(txtCodigo.Text) == false;
             }
         }
@@ -379,46 +372,6 @@ namespace gsCrearClasesTablas_MAUI
                 txtPassword.IsEnabled = txtUserId.IsEnabled;
             }
         }
-
-        //private void UsarDataAdapterTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    chkUsarDataAdapter.IsChecked = !chkUsarDataAdapter.IsChecked;
-        //}
-
-        //private void UsarCommandBuilderTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    chkUsarCommandBuilder.IsChecked = !chkUsarCommandBuilder.IsChecked;
-        //}
-
-        //private void UsarAddWithValueTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    chkUsarAddWithValue.IsChecked = !chkUsarAddWithValue.IsChecked;
-        //}
-
-        //private void UsarOverridesTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    chkUsarOverrides.IsChecked = !chkUsarOverrides.IsChecked;
-        //}
-
-        //private void SQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    optSQL.IsChecked = !optSQL.IsChecked;
-        //}
-
-        //private void SeguridadSQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    chkSeguridadSQL.IsChecked = !chkSeguridadSQL.IsChecked;
-        //}
-
-        //private void VBTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    optVB.IsToggled = !optVB.IsToggled;
-        //}
-
-        //private void CSTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    optCS.IsToggled = !optCS.IsToggled;
-        //}
 
         private void btnLimpiar_Clicked(object sender, EventArgs e)
         {
@@ -444,16 +397,6 @@ namespace gsCrearClasesTablas_MAUI
                 catch { }
             }
         }
-
-        //private void OpcionesSQLTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    grbSQL.IsVisible = !grbSQL.IsVisible;
-        //}
-
-        //private void OpcionesTablasTapGestureRecognizer_Tapped(object sender, EventArgs e)
-        //{
-        //    grbTablas.IsVisible = !grbTablas.IsVisible;
-        //}
 
         private void expOpcionesSQL_Expanded(object sender, bool isExpanded)
         {
