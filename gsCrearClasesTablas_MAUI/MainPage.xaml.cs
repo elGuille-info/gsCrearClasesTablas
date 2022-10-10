@@ -17,6 +17,9 @@ namespace gsCrearClasesTablas_MAUI
         /// </summary>
         private string FicConfig { get; set; }
 
+        /// <summary>
+        /// Si es la primera vez que se muestra la ventana.
+        /// </summary>
         private bool LaPrimeraVez { get; set; } = true;
 
         private FileVersionInfo AppInfo { get; set; }
@@ -52,12 +55,12 @@ namespace gsCrearClasesTablas_MAUI
                 expOpcionesComandos.IsExpanded = true;
                 expOpcionesTablas.IsExpanded = true;
                 expOpcionesTablas.Refrescar(true, true);
-                expOpcionesCodigo.IsExpanded = false;
-                expOpcionesCodigo.Refrescar(true, true);
+                //expOpcionesCodigo.IsExpanded = false;
+                //expOpcionesCodigo.Refrescar(true, true);
 
                 grbOpciones.IsEnabled = false;
                 btnGenerarClase.IsEnabled = false;
-                Panel1.IsEnabled = false;
+                grbLenguaje.IsEnabled = false;
                 btnLimpiar.IsEnabled = false;
 
                 LeerConfig();
@@ -100,7 +103,7 @@ namespace gsCrearClasesTablas_MAUI
             
             grbOpciones.IsEnabled = CrearClase.Conectado;
             btnGenerarClase.IsEnabled = CrearClase.Conectado;
-            Panel1.IsEnabled = CrearClase.Conectado;
+            grbLenguaje.IsEnabled = CrearClase.Conectado;
             btnCopiarClipBoard.IsEnabled = CrearClase.Conectado;
             // 
             //  No se puede usar Clear si está con data source.
@@ -133,7 +136,7 @@ namespace gsCrearClasesTablas_MAUI
             {
                 grbOpciones.IsEnabled = false;
                 btnGenerarClase.IsEnabled = false;
-                Panel1.IsEnabled = false;
+                grbLenguaje.IsEnabled = false;
                 btnCopiarClipBoard.IsEnabled = false;
 
                 // Mostrar el error.
@@ -171,52 +174,17 @@ namespace gsCrearClasesTablas_MAUI
             }
 
             // Mostrar el expander de generar código después de mostrar las tablas.
-            expOpcionesCodigo.IsExpanded = true;
-            expOpcionesCodigo.Refrescar(true, true);
+            //expOpcionesCodigo.IsExpanded = true;
+            //expOpcionesCodigo.Refrescar(true, true);
 
             btnMostrarTablas.IsEnabled = true;
-        }
-
-        private void listViewTablas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            if (listViewTablas.SelectedItem == null)
-                return;
-
-            string laTabla = (e.SelectedItem as TablaItem).Nombre; // e.SelectedItem.ToString();
-            txtSelect.Text = "SELECT * FROM " + laTabla;
-            int i = laTabla.IndexOf(".");
-            // Si la tabla contiene espacios,                            (02/Nov/04)
-            // sustituirlos por guiones bajos.
-            // Bug reportado por David Sans
-            if (i > -1)
-                txtClase.Text = laTabla.Substring(i + 1).Replace(" ", "_");
-            else
-                txtClase.Text = laTabla.Replace(" ", "_");
-        }
-
-        private void cboTablas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cboTablas.SelectedItem == null)
-                return;
-
-            string laTabla = (cboTablas.SelectedItem as TablaItem).Nombre;
-            txtSelect.Text = "SELECT * FROM " + laTabla;
-            int i = laTabla.IndexOf(".");
-            // Si la tabla contiene espacios,                            (02/Nov/04)
-            // sustituirlos por guiones bajos.
-            // Bug reportado por David Sans
-            if (i > -1)
-                txtClase.Text = laTabla.Substring(i + 1).Replace(" ", "_");
-            else
-                txtClase.Text = laTabla.Replace(" ", "_");
-
         }
 
         private void btnGenerarClase_Clicked(object sender, EventArgs e)
         {
             txtCodigo.Text = "";
             GuardarConfig();
-            
+
             // Si la tabla contiene espacios,                            (02/Nov/04)
             // sustituirlos por guiones bajos.
             // Bug reportado por David Sans
@@ -259,6 +227,70 @@ namespace gsCrearClasesTablas_MAUI
             //    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
 
             btnCopiarClipBoard.IsEnabled = true;
+        }
+
+        private void btnLimpiar_Clicked(object sender, EventArgs e)
+        {
+            cboTablas.ItemsSource = null;
+            listViewTablas.ItemsSource = null;
+            grbOpciones.IsEnabled = false;
+            txtSelect.Text = "";
+            txtClase.Text = "";
+            btnLimpiar.IsEnabled = false;
+            LabelInfoTablas.Text = $"Pulsa en 'Mostrar Tablas' para ver las tablas de {txtInitialCatalog.Text}.";
+
+            // Ocultar el expander de generar código al limpiar las tablas.
+            //expOpcionesCodigo.IsExpanded = false;
+            //expOpcionesCodigo.Refrescar(true, true);
+        }
+
+        private async void btnCopiarClipBoard_Clicked(object sender, EventArgs e)
+        {
+            //Device.BeginInvokeOnMainThread(() =>{});
+            if (MainThread.IsMainThread)
+            {
+                try
+                {
+                    // Code to run if this is the main thread
+                    await Clipboard.SetTextAsync(txtCodigo.Text);
+                }
+                catch { }
+            }
+        }
+
+        private void listViewTablas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (listViewTablas.SelectedItem == null)
+                return;
+
+            string laTabla = (e.SelectedItem as TablaItem).Nombre; // e.SelectedItem.ToString();
+            txtSelect.Text = "SELECT * FROM " + laTabla;
+            int i = laTabla.IndexOf(".");
+            // Si la tabla contiene espacios,                            (02/Nov/04)
+            // sustituirlos por guiones bajos.
+            // Bug reportado por David Sans
+            if (i > -1)
+                txtClase.Text = laTabla.Substring(i + 1).Replace(" ", "_");
+            else
+                txtClase.Text = laTabla.Replace(" ", "_");
+        }
+
+        private void cboTablas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboTablas.SelectedItem == null)
+                return;
+
+            string laTabla = (cboTablas.SelectedItem as TablaItem).Nombre;
+            txtSelect.Text = "SELECT * FROM " + laTabla;
+            int i = laTabla.IndexOf(".");
+            // Si la tabla contiene espacios,                            (02/Nov/04)
+            // sustituirlos por guiones bajos.
+            // Bug reportado por David Sans
+            if (i > -1)
+                txtClase.Text = laTabla.Substring(i + 1).Replace(" ", "_");
+            else
+                txtClase.Text = laTabla.Replace(" ", "_");
+
         }
 
         /// <summary>
@@ -350,19 +382,19 @@ namespace gsCrearClasesTablas_MAUI
                 chkUsarAddWithValue.IsEnabled = grbOpciones.IsEnabled;
                 chkUsarOverrides.IsEnabled = grbOpciones.IsEnabled;
 
-                Panel1.IsEnabled = grbOpciones.IsEnabled;
+                grbLenguaje.IsEnabled = grbOpciones.IsEnabled;
                 
                 btnGenerarClase.IsEnabled = grbOpciones.IsEnabled;
                 btnCopiarClipBoard.IsEnabled = string.IsNullOrWhiteSpace(txtCodigo.Text) == false;
             }
         }
 
-        private void Panel1_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void grbLenguaje_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "IsEnabled")
             {
-                optCS.IsEnabled = Panel1.IsEnabled;
-                optVB.IsEnabled = Panel1.IsEnabled;
+                optCS.IsEnabled = grbLenguaje.IsEnabled;
+                optVB.IsEnabled = grbLenguaje.IsEnabled;
             }
         }
 
@@ -374,35 +406,6 @@ namespace gsCrearClasesTablas_MAUI
 
                 txtUserId.IsEnabled = (sender as StackLayout).IsEnabled;
                 txtPassword.IsEnabled = txtUserId.IsEnabled;
-            }
-        }
-
-        private void btnLimpiar_Clicked(object sender, EventArgs e)
-        {
-            cboTablas.ItemsSource = null;
-            listViewTablas.ItemsSource = null;
-            grbOpciones.IsEnabled = false;
-            txtSelect.Text = "";
-            txtClase.Text = "";
-            btnLimpiar.IsEnabled = false;
-            LabelInfoTablas.Text = $"Pulsa en 'Mostrar Tablas' para ver las tablas de {txtInitialCatalog.Text}.";
-
-            // Ocultar el expander de generar código al limpiar las tablas.
-            expOpcionesCodigo.IsExpanded = false;
-            expOpcionesCodigo.Refrescar(true, true);
-        }
-
-        private async void btnCopiarClipBoard_Clicked(object sender, EventArgs e)
-        {
-            //Device.BeginInvokeOnMainThread(() =>{});
-            if (MainThread.IsMainThread)
-            {
-                try
-                {
-                    // Code to run if this is the main thread
-                    await Clipboard.SetTextAsync(txtCodigo.Text);
-                }
-                catch { }
             }
         }
 
@@ -421,9 +424,9 @@ namespace gsCrearClasesTablas_MAUI
             grbOpcionesComandos.IsVisible = isExpanded;
         }
 
-        private void expOpcionesCodigo_Expanded(object sender, bool isExpanded)
-        {
-            grbOpcionesCodigo.IsVisible = isExpanded;
-        }
+        //private void expOpcionesCodigo_Expanded(object sender, bool isExpanded)
+        //{
+        //    grbOpcionesCodigo.IsVisible = isExpanded;
+        //}
     }
 }

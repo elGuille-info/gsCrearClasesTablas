@@ -15,12 +15,12 @@
 		<ApplicationTitle>gsCrearClasesTablas_MAUI</ApplicationTitle>
 		<Title>gsCrearClasesTablas_MAUI</Title>
 		<!-- Versions -->
-		<ApplicationDisplayVersion>3.0.4</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>3.0.5</ApplicationDisplayVersion>
 		<!-- este valor en Android debe ser un número entero -->
 		<ApplicationVersion>3</ApplicationVersion>
 		
-		<Version>3.0.4</Version>
-		<FileVersion>3.0.4.0</FileVersion>
+		<Version>3.0.5</Version>
+		<FileVersion>3.0.5.0</FileVersion>
 		<Copyright>©Guillermo Som (elGuille), 2022</Copyright>
 		<Description>Generar clases a partir de una tabla de una base de datos de SQL Server. Usando .NET MAUI con .NET 6.0  (revisión del 10-oct-2022)</Description>
 		<Authors>elGuille</Authors>
@@ -30,6 +30,7 @@
 		<NeutralLanguage>es</NeutralLanguage>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageReleaseNotes>
+			10-oct-22: Usando controles personalizados y Grid para separar la cabecera y el pie del contenido.
 			07-oct-22: Con funcionalidad como la app de escritorio.
 			06-oct-22: Usando la DLL gsCrearClases_CS creada en C#.
 		</PackageReleaseNotes>

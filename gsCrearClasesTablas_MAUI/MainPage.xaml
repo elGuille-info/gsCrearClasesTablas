@@ -4,17 +4,18 @@
              xmlns:xct="clr-namespace:gsCrearClasesTablas_MAUI.Controles"
              x:Class="gsCrearClasesTablas_MAUI.MainPage"
              Appearing="ContentPage_Appearing">
-    <ScrollView Margin="0" Padding="4" Orientation="Both">
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <StackLayout BackgroundColor="SteelBlue"
-                         VerticalOptions="Start">
-                <Label Text="{OnPlatform iOS='Crear Clases de Tablas', Default='Crear Clases de Tablas (gsCrearClasesTablas_MAUI)'}" 
-                       TextColor="White" Padding="2"
-                       FontSize="Subtitle" FontAttributes="Bold"
-                       HorizontalOptions="FillAndExpand"
-                       HorizontalTextAlignment="Center"/>
-            </StackLayout>
-            <StackLayout Margin="16,10" Spacing="8">
+    <Grid ColumnDefinitions="*" RowDefinitions="40,*,30">
+        <!-- Título -->
+        <StackLayout Grid.Row="0" BackgroundColor="SteelBlue" VerticalOptions="Center" Padding="4">
+            <Label Text="{OnPlatform iOS='Crear Clases de Tablas', Default='Crear Clases de Tablas (gsCrearClasesTablas_MAUI)'}" 
+                   TextColor="White" Padding="2"
+                   FontSize="Subtitle" FontAttributes="Bold"
+                   HorizontalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center"/>
+        </StackLayout>
+        <!-- Contenido -->
+        <ScrollView Grid.Row="1" Margin="0" Padding="4" Orientation="Both">
+            <StackLayout Margin="16,4" Spacing="8">
                 <xct:MKNExpander x:Name="expOpcionesSQL" Margin="-10,0"
                                  IsExpanded="True" Expanded="expOpcionesSQL_Expanded"
                                  HeaderTitle="Opciones para SQL Server"/>
@@ -86,6 +87,43 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
+                <xct:MKNExpander x:Name="expOpcionesComandos" Margin="-10,0"
+                                 IsExpanded="True" Expanded="expOpcionesComandos_Expanded"
+                                 HeaderTitle="Opciones de Comandos"/>
+                <Frame x:Name="grbOpcionesComandos" Margin="-8,4">
+                    <StackLayout x:Name="grbOpciones" Orientation="Horizontal" 
+                                 Style="{StaticResource StackConMargen}" Margin="2"
+                                 PropertyChanged="grbOpciones_PropertyChanged">
+                        <StackLayout Margin="0">
+                            <xct:CheckLabel x:Name="chkUsarDataAdapter" IsChecked="False"
+                                            Text="Usar DataAdpater en lugar de cmd.Execute"/>
+                            <xct:CheckLabel x:Name="chkUsarCommandBuilder" IsEnabled="False"
+                                            Margin="12,0,0,0"
+                                            Text="Usar CommandBuilder">
+                                <xct:CheckLabel.Triggers>
+                                    <DataTrigger TargetType="xct:CheckLabel"
+                                                 Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
+                                                 Value="False">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="xct:CheckLabel"
+                                                 Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
+                                                 Value="True">
+                                        <Setter Property="IsEnabled" Value="True" />
+                                    </DataTrigger>
+                                </xct:CheckLabel.Triggers>
+                            </xct:CheckLabel>
+                            <xct:CheckLabel x:Name="chkUsarAddWithValue"
+                                            Text="Usar AddWithValue"/>
+                            <Label Text="Si se utiliza AddWithValue o Add para añadir los valores a los parámetros del comando."
+                                    FontSize="13" Margin="12,0,0,0"/>
+                            <xct:CheckLabel x:Name="chkUsarOverrides"
+                                            Text="Usar Overrides"/>
+                            <Label Text="Si se debe usar Overrides en los métodos Actualizar, Crear y Borrar."
+                                    FontSize="13" Margin="12,0,0,0"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
                 <xct:MKNExpander x:Name="expOpcionesTablas" Margin="-10,0"
                                  IsExpanded="True" Expanded="expOpcionesTablas_Expanded"
                                  HeaderTitle="Opciones de las Tablas"/>
@@ -131,118 +169,82 @@
                             </StackLayout>
                         </StackLayout>
                         <Label x:Name="LabelInfoTablas" FontSize="13"/>
-                    </StackLayout>
-                </Frame>
-                <xct:MKNExpander x:Name="expOpcionesComandos" Margin="-10,0"
-                                 IsExpanded="True" Expanded="expOpcionesComandos_Expanded"
-                                 HeaderTitle="Opciones de Comandos"/>
-                <Frame x:Name="grbOpcionesComandos" Margin="-8,4">
-                    <StackLayout x:Name="grbOpciones" Orientation="Horizontal" 
-                                 Style="{StaticResource StackConMargen}" Margin="2"
-                                 PropertyChanged="grbOpciones_PropertyChanged">
-                        <StackLayout Margin="0">
-                            <xct:CheckLabel x:Name="chkUsarDataAdapter" IsChecked="False"
-                                            Text="Usar DataAdpater en lugar de cmd.Execute"/>
-                            <xct:CheckLabel x:Name="chkUsarCommandBuilder" IsEnabled="False"
-                                            Margin="12,0,0,0"
-                                            Text="Usar CommandBuilder">
-                                <xct:CheckLabel.Triggers>
-                                    <DataTrigger TargetType="xct:CheckLabel"
-                                                 Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
-                                                 Value="False">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="xct:CheckLabel"
-                                                 Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
-                                                 Value="True">
-                                        <Setter Property="IsEnabled" Value="True" />
-                                    </DataTrigger>
-                                </xct:CheckLabel.Triggers>
-                            </xct:CheckLabel>
-                            <xct:CheckLabel x:Name="chkUsarAddWithValue"
-                                            Text="Usar AddWithValue"/>
-                            <Label Text="Si se utiliza AddWithValue o Add para añadir los valores a los parámetros del comando."
-                                    FontSize="13" Margin="12,0,0,0"/>
-                            <xct:CheckLabel x:Name="chkUsarOverrides"
-                                            Text="Usar Overrides"/>
-                            <Label Text="Si se debe usar Overrides en los métodos Actualizar, Crear y Borrar."
-                                    FontSize="13" Margin="12,0,0,0"/>
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
-                <xct:MKNExpander x:Name="expOpcionesCodigo" Margin="-10,0"
-                                 IsExpanded="True" Expanded="expOpcionesCodigo_Expanded"
-                                 HeaderTitle="Opciones Generar Código"/>
-                <Frame x:Name="grbOpcionesCodigo" Margin="-8,4">
-                    <StackLayout Style="{StaticResource StackConMargen}" Margin="2">
-                        <StackLayout Orientation="Horizontal" Spacing="8" Margin="0">
-                            <Label Text="Clase:" WidthRequest="100"/>
-                            <Entry x:Name="txtClase" Style="{StaticResource EntryText}" WidthRequest="200"/>
-                        </StackLayout>
-
-                        <StackLayout x:Name="Panel1" Orientation="Horizontal" 
-                                     PropertyChanged="Panel1_PropertyChanged">
-                            <Label Text="Lenguaje:"/>
-                            <xct:SwitchLabel x:Name="optVB" Text="Visual Basic" 
+                        <StackLayout Style="{StaticResource StackConMargen}" Margin="2">
+                            <StackLayout Orientation="Horizontal" Spacing="8" Margin="0">
+                                <Label Text="Clase:" WidthRequest="100"/>
+                                <Entry x:Name="txtClase" Style="{StaticResource EntryText}" WidthRequest="200"/>
+                            </StackLayout>
+                            <StackLayout x:Name="grbLenguaje" Orientation="Horizontal" 
+                                     PropertyChanged="grbLenguaje_PropertyChanged">
+                                <Label Text="Lenguaje:"/>
+                                <xct:SwitchLabel x:Name="optVB" Text="Visual Basic" 
                                              IsToggled="True" Margin="12,0,0,0">
-                                <xct:SwitchLabel.Triggers>
-                                    <DataTrigger TargetType="xct:SwitchLabel"
+                                    <xct:SwitchLabel.Triggers>
+                                        <DataTrigger TargetType="xct:SwitchLabel"
                                                  Binding="{Binding Source={x:Reference optCS}, Path=IsToggled}"
                                                  Value="False">
-                                        <Setter Property="IsToggled" Value="True" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="xct:SwitchLabel"
+                                            <Setter Property="IsToggled" Value="True" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="xct:SwitchLabel"
                                                  Binding="{Binding Source={x:Reference optCS}, Path=IsToggled}"
                                                  Value="True">
-                                        <Setter Property="IsToggled" Value="False" />
-                                    </DataTrigger>
-                                </xct:SwitchLabel.Triggers>
-                            </xct:SwitchLabel>
-                            <xct:SwitchLabel x:Name="optCS" Text="C#" 
+                                            <Setter Property="IsToggled" Value="False" />
+                                        </DataTrigger>
+                                    </xct:SwitchLabel.Triggers>
+                                </xct:SwitchLabel>
+                                <xct:SwitchLabel x:Name="optCS" Text="C#" 
                                              IsToggled="False" Margin="8,0,0,0">
-                                <xct:SwitchLabel.Triggers>
-                                    <DataTrigger TargetType="xct:SwitchLabel"
+                                    <xct:SwitchLabel.Triggers>
+                                        <DataTrigger TargetType="xct:SwitchLabel"
                                                  Binding="{Binding Source={x:Reference optVB}, Path=IsToggled}"
                                                  Value="False">
-                                        <Setter Property="IsToggled" Value="True" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="xct:SwitchLabel"
+                                            <Setter Property="IsToggled" Value="True" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="xct:SwitchLabel"
                                                  Binding="{Binding Source={x:Reference optVB}, Path=IsToggled}"
                                                  Value="True">
-                                        <Setter Property="IsToggled" Value="False" />
-                                    </DataTrigger>
-                                </xct:SwitchLabel.Triggers>
-                            </xct:SwitchLabel>
-                            <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default='0'}">
-                                <Button x:Name="btnGenerarClase" Text="Generar Clase"
+                                            <Setter Property="IsToggled" Value="False" />
+                                        </DataTrigger>
+                                    </xct:SwitchLabel.Triggers>
+                                </xct:SwitchLabel>
+                                <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default='0'}">
+                                    <Button x:Name="btnGenerarClase" Text="Generar Clase"
                                         HorizontalOptions="FillAndExpand"
                                         Clicked="btnGenerarClase_Clicked"/>
-                                <Button x:Name="btnCopiarClipBoard" Text="Copiar Clipboard"
+                                    <Button x:Name="btnCopiarClipBoard" Text="Copiar Clipboard"
                                         Clicked="btnCopiarClipBoard_Clicked" Margin="12,0,0,0"/>
+                                </StackLayout>
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
+                <!--<xct:MKNExpander x:Name="expOpcionesCodigo" Margin="-10,0"
+                                 IsExpanded="True" Expanded="expOpcionesCodigo_Expanded"
+                                 HeaderTitle="Opciones Generar Código"/>
+                <Frame x:Name="grbOpcionesCodigo" Margin="-8,4">
+                </Frame>-->
                 <Frame Margin="-8,4">
-                    <StackLayout Style="{StaticResource StackConMargen}" Margin="2">
-                        <Label FontSize="13" Text="Código generado:"/>
+                    <StackLayout Style="{StaticResource StackConMargen}" Margin="2" Spacing="6">
+                        <Label FontSize="13" Text="Código generado:" 
+                               Padding="4" BackgroundColor="WhiteSmoke" HorizontalOptions="FillAndExpand"/>
                         <Editor x:Name="txtCodigo" FontFamily="Consolas" FontSize="14"
                                 HeightRequest="500"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>
-            <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand"
-                         Margin="6" BackgroundColor="WhiteSmoke" Padding="2,4">
-                <StackLayout Orientation="Horizontal" Margin="6,0,12,0">
-                    <Label x:Name="LabelInfo" HorizontalOptions="StartAndExpand"
-                           WidthRequest="500" FontSize="13"
-                           Text="©Guillermo Som (elGuille), 2004-2007, 2018-2022"/>
-                    <Label x:Name="LabelVersion" HorizontalOptions="EndAndExpand"
-                           HorizontalTextAlignment="End"
-                           WidthRequest="300" FontSize="13"
-                           Text="v3.0.3 (3.0.3.0)"/>
-                </StackLayout>
+        </ScrollView>
+        <!-- Pie de página -->
+        <StackLayout Grid.Row="2" 
+                     Margin="6" BackgroundColor="WhiteSmoke" Padding="2,4">
+            <StackLayout Orientation="Horizontal" Margin="6,0,12,0">
+                <Label x:Name="LabelInfo" HorizontalOptions="StartAndExpand"
+                       WidthRequest="500" FontSize="13"
+                       Text="©Guillermo Som (elGuille), 2004-2007, 2018-2022"/>
+                <Label x:Name="LabelVersion" HorizontalOptions="EndAndExpand"
+                       HorizontalTextAlignment="End"
+                       WidthRequest="300" FontSize="13"
+                       Text="v3.0.5 (3.0.5.0)"/>
             </StackLayout>
         </StackLayout>
-    </ScrollView>
+    </Grid>
 </ContentPage>

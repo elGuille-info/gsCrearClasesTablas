@@ -77,7 +77,7 @@ namespace gsCrearClasesTablas_MAUI
 #if WINDOWS
                         // Asignar manualmente el tamaño. 
                         int winWidth = 1700;
-                        int winHeight = 1800;
+                        int winHeight = 1600; //1800
 
                                     var mauiWindow = handler.VirtualView;
                                     var nativeWindow = handler.PlatformView;
