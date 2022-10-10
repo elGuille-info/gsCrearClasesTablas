@@ -52,7 +52,7 @@ namespace gsCrearClasesTablas_MAUI
                 expOpcionesComandos.IsExpanded = true;
                 expOpcionesTablas.IsExpanded = true;
                 expOpcionesTablas.Refrescar(true, true);
-                expOpcionesCodigo.IsExpanded = true;
+                expOpcionesCodigo.IsExpanded = false;
                 expOpcionesCodigo.Refrescar(true, true);
 
                 grbOpciones.IsEnabled = false;
@@ -169,6 +169,10 @@ namespace gsCrearClasesTablas_MAUI
 
                 cboTablas.Focus();
             }
+
+            // Mostrar el expander de generar código después de mostrar las tablas.
+            expOpcionesCodigo.IsExpanded = true;
+            expOpcionesCodigo.Refrescar(true, true);
 
             btnMostrarTablas.IsEnabled = true;
         }
@@ -382,6 +386,10 @@ namespace gsCrearClasesTablas_MAUI
             txtClase.Text = "";
             btnLimpiar.IsEnabled = false;
             LabelInfoTablas.Text = $"Pulsa en 'Mostrar Tablas' para ver las tablas de {txtInitialCatalog.Text}.";
+
+            // Ocultar el expander de generar código al limpiar las tablas.
+            expOpcionesCodigo.IsExpanded = false;
+            expOpcionesCodigo.Refrescar(true, true);
         }
 
         private async void btnCopiarClipBoard_Clicked(object sender, EventArgs e)
