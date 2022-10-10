@@ -14,6 +14,8 @@
 // ------------------------------------------------------------------------------
 using System;
 
+using elGuille.Util.Developer.Data;
+
 //using Microsoft.VisualBasic;
 
 namespace elGuille.Util.Developer
@@ -94,16 +96,17 @@ namespace elGuille.Util.Developer
         public static string DocumentacionXML(string indentacion, params string[] coments)
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            var iniDocXML = "";
+            string iniDocXML;
 
             if (Lang == eLenguaje.eCS)
-                iniDocXML = "///";
+                iniDocXML = "/// ";
             else
-                iniDocXML = "'''";
-            sb.AppendFormat("{0}{1}<summary>{2}", indentacion, iniDocXML, "\n\r");
+                iniDocXML = "''' ";
+
+            sb.AppendFormat("{0}{1}<summary>{2}", indentacion, iniDocXML, CrearClase.CrLf);
             for (var i = 0; i <= coments.Length - 1; i++)
-                sb.AppendFormat("{0}{1}{2}{3}", indentacion, iniDocXML, coments[i], "\n\r");
-            sb.AppendFormat("{0}{1}</summary>{2}", indentacion, iniDocXML, "\n\r");
+                sb.AppendFormat("{0}{1}{2}{3}", indentacion, iniDocXML, coments[i], CrearClase.CrLf);
+            sb.AppendFormat("{0}{1}</summary>{2}", indentacion, iniDocXML, CrearClase.CrLf);
 
             return sb.ToString();
         }

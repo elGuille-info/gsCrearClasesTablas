@@ -113,14 +113,26 @@
                                     </DataTrigger>
                                 </xct:CheckLabel.Triggers>
                             </xct:CheckLabel>
-                            <xct:CheckLabel x:Name="chkUsarAddWithValue"
-                                            Text="Usar AddWithValue"/>
-                            <Label Text="Si se utiliza AddWithValue o Add para añadir los valores a los parámetros del comando."
-                                    FontSize="13" Margin="12,0,0,0"/>
-                            <xct:CheckLabel x:Name="chkUsarOverrides"
-                                            Text="Usar Overrides"/>
-                            <Label Text="Si se debe usar Overrides en los métodos Actualizar, Crear y Borrar."
-                                    FontSize="13" Margin="12,0,0,0"/>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout>
+                                    <xct:CheckLabel x:Name="chkUsarAddWithValue"
+                                                    Text="Usar AddWithValue"/>
+                                    <Label Text="Si se utiliza AddWithValue o Add para añadir los valores a los parámetros del comando."
+                                           FontSize="13" Margin="12,0,0,0"/>
+                                </StackLayout>
+                                <StackLayout>
+                                    <xct:CheckLabel x:Name="chkUsarOverrides"
+                                                    Text="Usar Overrides"/>
+                                    <Label Text="Si se debe usar Overrides en los métodos Actualizar, Crear y Borrar."
+                                           FontSize="13" Margin="12,0,0,0"/>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout>
+                                <xct:CheckLabel x:Name="chkPropiedadAuto" IsChecked="True"
+                                                Text="Propiedades auto-implementadas"/>
+                                <Label Text="Cuando el tipo no es String usar propiedades auto-implementadas (sin cuerpo get/set)."
+                                       FontSize="13" Margin="12,0,0,0"/>
+                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Frame>

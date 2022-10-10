@@ -12,8 +12,8 @@
     <Copyright>©Guillermo Som (elGuille), 2004-2007, 2018-2022</Copyright>
     <Description>Generar clases a partir de una tabla de una base de datos de SQL Server o de Access. Para .NET 6.0  (revisión del 10-oct-2022)</Description>
     <Authors>elGuille</Authors>
-    <Version>3.0.4</Version>
-    <FileVersion>3.0.4.0</FileVersion>
+    <Version>3.0.5</Version>
+    <FileVersion>3.0.5.0</FileVersion>
     <PackageProjectUrl>https://www.elguillemola.com/generar-las-clases-de-una-tabla-de-sql-server-o-access-mdb/</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
@@ -66,6 +66,7 @@
     <Compile Update="My Project\Settings.Designer.vb">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
 

@@ -211,6 +211,7 @@ namespace gsCrearClasesTablas_MAUI
                 chkUsarCommandBuilder.IsEnabled = false;
             CrearClase.UsarAddWithValue = chkUsarAddWithValue.IsChecked;
             CrearClase.UsarOverrides = chkUsarOverrides.IsChecked;
+            CrearClase.PropiedadAuto = chkPropiedadAuto.IsChecked;
 
             // Si no está habilitado es que no se utiliza                (07/Abr/19)
             // ya que solo se usa con DataAdapter
@@ -222,11 +223,11 @@ namespace gsCrearClasesTablas_MAUI
 
             if (DeviceInfo.Platform == DevicePlatform.WinUI)
             {
-                laTabla = listViewTablas.SelectedItem.ToString();
+                laTabla = (listViewTablas.SelectedItem as TablaItem).Nombre;
             }
             else
             {
-                laTabla = cboTablas.SelectedItem.ToString();
+                laTabla = (cboTablas.SelectedItem as TablaItem).Nombre;
             }
 
             if (optVB.IsToggled)
@@ -364,6 +365,12 @@ namespace gsCrearClasesTablas_MAUI
                 if (!sr.EndOfStream)
                     sTmp = sr.ReadLine();
                 optVB.IsToggled = sTmp == "1";
+                // Que tenga true como valore predeterminado.
+                if (!sr.EndOfStream)
+                    sTmp = sr.ReadLine();
+                else
+                    sTmp = "1";
+                chkPropiedadAuto.IsChecked = sTmp == "1";
             }
             chkUsarCommandBuilder.IsEnabled = chkUsarDataAdapter.IsChecked;
         }
@@ -386,6 +393,7 @@ namespace gsCrearClasesTablas_MAUI
                 sw.WriteLine(chkUsarAddWithValue.IsChecked ? "1" : "0");
                 sw.WriteLine(chkUsarOverrides.IsChecked ? "1" : "0");
                 sw.WriteLine(optVB.IsToggled ? "1" : "0");
+                sw.WriteLine(chkPropiedadAuto.IsChecked ? "1" : "0");
             }
         }
 
@@ -396,6 +404,7 @@ namespace gsCrearClasesTablas_MAUI
                 chkUsarDataAdapter.IsEnabled = grbOpciones.IsEnabled;
                 chkUsarAddWithValue.IsEnabled = grbOpciones.IsEnabled;
                 chkUsarOverrides.IsEnabled = grbOpciones.IsEnabled;
+                chkPropiedadAuto.IsEnabled = grbOpciones.IsEnabled;
 
                 grbLenguaje.IsEnabled = grbOpciones.IsEnabled;
                 

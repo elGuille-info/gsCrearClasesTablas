@@ -8,11 +8,22 @@
 ### Revisiones de 2022
 
 ```
-'<revision("3.0.5.0", _
+'<revision("3.0.7.0", _
 '   FechaModificacion:= "10/Oct/2022", _
 '   Tester:= "elGuille", _
 '   FechaReporte:= "10/Oct/2022", _
-'   Tipo:= "TODO", _
+'   Tipo:= "Revisión", _
+'   Clases:= "ConvLang", _
+'   Miembro:= "DocumentacionXML", _
+'   Motivo:= "Añadía líneas en blanco.", _
+'   Solucion:= "Era porque usaba \n\r en vez de \r\n para el cambio de línea.", _
+'   Comentarios:= "Ahora usa la constante CrearClase.CrLf.")>
+
+'<revision("3.0.6.0", _
+'   FechaModificacion:= "10/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "10/Oct/2022", _
+'   Tipo:= "Mejora", _
 '   Clases:= "CrearClase", _
 '   Miembro:= "generarClase", _
 '   Motivo:= "Definir las propiedades que no son de tipo string como propiedades auto-implementadas.", _

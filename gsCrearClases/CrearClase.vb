@@ -279,7 +279,6 @@ Namespace elGuille.Util.Developer.Data
                     Else
                         sb.AppendFormat("    {0}{1}", ConvLang.Property("Public", col.DataType.ToString, campos(col.ColumnName).ToString), vbCrLf)
                     End If
-
                 End If
                 sb.AppendFormat("        {0}{1}", ConvLang.Get(), vbCrLf)
                 If col.DataType.ToString <> "System.String" Then

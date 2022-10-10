@@ -7,7 +7,7 @@
 '
 ' Quitar de gitHub los ficheros elguille.snk                    (01/oct/22 12.52)
 '
-' ©Guillermo 'guille' Som, 2004-2005, 2007, 2018-2019, 2021-2022
+' ©Guillermo Som (elGuille), 2004-2005, 2007, 2018-2019, 2021-2022
 '------------------------------------------------------------------------------
 ' Revisiones:
 '   0.0000  07/Jul/2004 Empiezo con los cambios para usar tablas SQL
@@ -57,6 +57,7 @@
 '   3.0.2.0 06/oct/2022 Usando la DLL con el código en C#.
 '   3.0.3.0 08/oct/2022 Guardar los datos en la configuración local (como en móvil)
 '   3.0.3.2             Habilitar el grupo de grbOpciones según haya tablas en la lista
+'   3.0.5.0 10/oct/2022 Opción para las propiedades auto-implementadas.
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -97,7 +98,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.4.0"
+            s = "3.0.5.0"
         End Try
 
         Return s
@@ -176,6 +177,8 @@ Public Class Form1
         chkUsarAddWithValue.Checked = My.Settings.UsarAddWithValue
         chkUsarDataAdapter.Checked = My.Settings.UsarExecuteScalar
         chkUsarOverrides.Checked = My.Settings.usarOverrides
+        ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.30)
+        chkPropiedadAuto.Checked = My.Settings.PropiedadAuto
         '
         btnGuardar.Enabled = False
         grbOpciones.Enabled = btnGuardar.Enabled
@@ -277,6 +280,8 @@ Public Class Form1
         End If
         CrearClase.UsarAddWithValue = chkUsarAddWithValue.Checked
         CrearClase.UsarOverrides = chkUsarOverrides.Checked
+        ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.34)
+        CrearClase.PropiedadAuto = chkPropiedadAuto.Checked
 
         ' Si no está habilitado es que no se utiliza                (07/Abr/19)
         ' ya que solo se usa con DataAdapter
@@ -404,6 +409,8 @@ Public Class Form1
         My.Settings.UsarAddWithValue = chkUsarAddWithValue.Checked
         My.Settings.UsarExecuteScalar = chkUsarDataAdapter.Checked
         My.Settings.usarOverrides = chkUsarOverrides.Checked
+        ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.34)
+        My.Settings.PropiedadAuto = chkPropiedadAuto.Checked
         '
         If WindowState = FormWindowState.Normal Then
             My.Settings.Left = Me.Left
@@ -429,6 +436,7 @@ Public Class Form1
             sw.WriteLine(If(chkUsarAddWithValue.Checked, "1", "0"))
             sw.WriteLine(If(chkUsarOverrides.Checked, "1", "0"))
             sw.WriteLine(If(optVB.Checked, "1", "0"))
+            sw.WriteLine(If(chkPropiedadAuto.Checked, "1", "0"))
         End Using
     End Sub
 
@@ -465,6 +473,7 @@ Public Class Form1
             sw.WriteLine(If(chkUsarAddWithValue.Checked, "1", "0"))
             sw.WriteLine(If(chkUsarOverrides.Checked, "1", "0"))
             sw.WriteLine(If(optVB.Checked, "1", "0"))
+            sw.WriteLine(If(chkPropiedadAuto.Checked, "1", "0"))
         End Using
     End Sub
 End Class

@@ -42,7 +42,7 @@ namespace elGuille.Util.Developer.Data
         // 
         protected static DataTable mDataTable = new DataTable();
         protected static string cadenaConexion;
-        protected static string nombreTabla = "Tabla1";
+        protected static string nombreTabla { get; set; } = "Tabla1";
         // 
         public static bool Conectado;
         // 
@@ -69,40 +69,36 @@ namespace elGuille.Util.Developer.Data
         // Si se usa ExecuteScalar / NonQuery en vez de DataAdapter
 
         /// <summary>
-        ///         ''' Si se usa DataAdapter o ExecuteScalar ExecuteNonQuery
-        ///         ''' </summary>
-        ///         ''' <remarks>07/Abr/19 13.17
-        ///         ''' Ya lo tenía con UsarExecuteScalar del 23/Mar/19
-        ///         ''' </remarks>
+        /// Si se usa DataAdapter o ExecuteScalar ExecuteNonQuery
+        /// </summary>
+        /// <remarks>07/Abr/19 13.17
+        /// Ya lo tenía con UsarExecuteScalar del 23/Mar/19
+        /// </remarks>
         public static bool UsarDataAdapter { get; set; } = true;
 
         // Si se utiliza .Parameters.Add o .Parameters.AddWithValue  (19/Mar/19)
 
         /// <summary>
-        ///         ''' Si se utiliza .Parameters.Add o .Parameters.AddWithValue.
-        ///         ''' True  usará .Parameters.AddWithValue
-        ///         ''' False usará .Parameters.Add
-        ///         ''' Valor predeterminado = True
-        ///         ''' </summary>
-        ///         ''' <remarks>19/Mar/2019</remarks>
+        /// Si se utiliza .Parameters.Add o .Parameters.AddWithValue.
+        /// True  usará .Parameters.AddWithValue
+        /// False usará .Parameters.Add
+        /// Valor predeterminado = True
+        /// </summary>
+        /// <remarks>19/Mar/2019</remarks>
         public static bool UsarAddWithValue { get; set; } = true;
 
         /// <summary>
-        ///         ''' Si se usa Overrides (override en C#) en los métodos
-        ///         ''' Actualizar, Crear y Borrar.
-        ///         ''' </summary>
-        ///         ''' <remarks>25/Mar/2019</remarks>
+        /// Si se usa Overrides (override en C#) en los métodos
+        /// Actualizar, Crear y Borrar.
+        /// </summary>
+        /// <remarks>25/Mar/2019</remarks>
         public static bool UsarOverrides { get; set; } = true;
 
-        // ''' <summary>
-        // ''' Si se usa Command con ExecuteScalar en lugar de DataAdapter
-        // ''' en los comandos UPDATE e INSERT.
-        // ''' Si se usa ExecuteScalar no se tendrá en cuenta UsarStringBuilder.
-        // ''' </summary>
-        // ''' <remarks>23/Mar/2019</remarks>
-        // Public Shared Property UsarExecuteScalar As Boolean = False
+        /// <summary>
+        /// Para definir las propiedades autoimplementadas (salvo cuando es string).
+        /// </summary>
+        public static bool PropiedadAuto { get; set; } = true;
 
-        // 
         // estos métodos sólo se usarán desde las clases derivadas
         protected static string GenerarClaseOleDb(eLenguaje lang, bool usarCommandBuilder, string nombreClase, string baseDeDatos, string cadenaSelect, string password, string provider)
         {
@@ -215,9 +211,9 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("{0}{1}", ConvLang.Comentario(), CrLf);
             // Cambio 'guille' por (elGuille)                        (22/Mar/19)
             if (DateTime.Now.Year > 2022)
-                sb.AppendFormat("{0}{1}", ConvLang.Comentario(string.Format(" ©Guillermo (elGuille) Som, 2004-{0}", DateTime.Now.Year)), CrLf);
+                sb.AppendFormat("{0}{1}", ConvLang.Comentario(string.Format(" ©Guillermo Som (elGuille), 2004-{0}", DateTime.Now.Year)), CrLf);
             else
-                sb.AppendFormat("{0}{1}", ConvLang.Comentario(" ©Guillermo (elGuille) Som, 2004-2022"), CrLf);
+                sb.AppendFormat("{0}{1}", ConvLang.Comentario(" ©Guillermo Som (elGuille), 2004-2022"), CrLf);
             sb.AppendFormat("{0}{1}", ConvLang.Comentario("------------------------------------------------------------------------------"), CrLf);
             // 
             if (lang == eLenguaje.eVBNET)
@@ -252,9 +248,24 @@ namespace elGuille.Util.Developer.Data
             // ------------------------------------------------------------------
             sb.AppendFormat("    {0}{1}", ConvLang.Comentario(" Las variables privadas"), CrLf);
             sb.AppendFormat("    {0}{1}", ConvLang.Comentario(" TODO: Revisar los tipos de los campos"), CrLf);
-            foreach (DataColumn col in mDataTable.Columns)
+            // Si se usan las propiedades autoimplementadas solo crear las variables privadas para el tipo string.
+            if (PropiedadAuto)
+            {
                 // Los nombres de los campos privados empiezan con m_ (30/Nov/18)
-                sb.AppendFormat("    {0}{1}", ConvLang.Variable("Private", "m_" + campos[col.ColumnName].ToString(), col.DataType.ToString()), CrLf);
+                foreach (DataColumn col in mDataTable.Columns)
+                {
+                    if (col.DataType.ToString() == "System.String")
+                    {
+                        sb.AppendFormat("    {0}{1}", ConvLang.Variable("Private", "m_" + campos[col.ColumnName].ToString(), col.DataType.ToString()), CrLf);
+                    }
+                }
+            }
+            else
+            {
+                foreach (DataColumn col in mDataTable.Columns)
+                    // Los nombres de los campos privados empiezan con m_ (30/Nov/18)
+                    sb.AppendFormat("    {0}{1}", ConvLang.Variable("Private", "m_" + campos[col.ColumnName].ToString(), col.DataType.ToString()), CrLf);
+            }
             sb.AppendFormat("    {0}{1}", ConvLang.Comentario(""), CrLf);
             // 
             // ajustarAncho: método privado para ajustar los caracteres de los campos de tipo String
@@ -281,33 +292,57 @@ namespace elGuille.Util.Developer.Data
             foreach (DataColumn col in mDataTable.Columns)
             {
                 if (col.DataType.ToString() == "System.Byte[]")
-                    sb.AppendFormat("    {0}{1}", ConvLang.Property("Public", "System.Byte()", campos[col.ColumnName].ToString()), CrLf);
-                else
-                   // Si se usa Overrides, y es autoincrement,      (13/Abr/19)
-                   // añadirle el Overrides
-                   if (UsarOverrides && col.AutoIncrement == true)
-                    sb.AppendFormat("    {0}{1}", ConvLang.Property("Public Overrides", col.DataType.ToString(), campos[col.ColumnName].ToString()), CrLf);
-                else
-                    sb.AppendFormat("    {0}{1}", ConvLang.Property("Public", col.DataType.ToString(), campos[col.ColumnName].ToString()), CrLf);
-                sb.AppendFormat("        {0}{1}", ConvLang.Get(), CrLf);
-                if (col.DataType.ToString() != "System.String")
-                    sb.AppendFormat("            {0}{1}", ConvLang.Return(" m_" + campos[col.ColumnName].ToString()), CrLf);
-                else if (col.MaxLength > 255)
                 {
-                    sb.AppendFormat("            {0}{1}", ConvLang.Comentario(" Seguramente sería mejor sin ajustar el ancho..."), CrLf);
-                    sb.AppendFormat("            {0}{1}", ConvLang.Comentario(ConvLang.Return(string.Format("ajustarAncho(m_{0},{1})", campos[col.ColumnName].ToString(), col.MaxLength))), CrLf);
-                    sb.AppendFormat("            {0}{1}", ConvLang.Return(" m_" + campos[col.ColumnName].ToString()), CrLf);
+                    sb.AppendFormat("    {0}{1}", ConvLang.Property("Public", "System.Byte()", campos[col.ColumnName].ToString()), CrLf);
                 }
                 else
-                    sb.AppendFormat("            {0}{1}", ConvLang.Return(string.Format("ajustarAncho(m_{0},{1})", campos[col.ColumnName].ToString(), col.MaxLength)), CrLf);
-                sb.AppendFormat("        {0}{1}", ConvLang.EndGet(), CrLf);
-                if (col.DataType.ToString() == "System.Byte[]")
-                    sb.AppendFormat("        {0}{1}", ConvLang.Set("System.Byte()"), CrLf);
+                {
+                    // Si se usa Overrides, y es autoincrement,      (13/Abr/19)
+                    // añadirle el Overrides
+                    if (UsarOverrides && col.AutoIncrement == true)
+                        sb.AppendFormat("    {0}{1}", ConvLang.Property("Public Overrides", col.DataType.ToString(), campos[col.ColumnName].ToString()), CrLf);
+                    else
+                        sb.AppendFormat("    {0}{1}", ConvLang.Property("Public", col.DataType.ToString(), campos[col.ColumnName].ToString()), CrLf);
+                }
+                if (PropiedadAuto == false || col.DataType.ToString() == "System.String")
+                {
+                    sb.AppendFormat("        {0}{1}", ConvLang.Get(), CrLf);
+
+                    if (col.DataType.ToString() != "System.String")
+                    {
+                        sb.AppendFormat("            {0}{1}", ConvLang.Return(" m_" + campos[col.ColumnName].ToString()), CrLf);
+                    }
+                    else if (col.MaxLength > 255)
+                    {
+                        sb.AppendFormat("            {0}{1}", ConvLang.Comentario(" Seguramente sería mejor sin ajustar el ancho..."), CrLf);
+                        sb.AppendFormat("            {0}{1}", ConvLang.Comentario(ConvLang.Return(string.Format("ajustarAncho(m_{0},{1})", campos[col.ColumnName].ToString(), col.MaxLength))), CrLf);
+                        sb.AppendFormat("            {0}{1}", ConvLang.Return(" m_" + campos[col.ColumnName].ToString()), CrLf);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("            {0}{1}", ConvLang.Return(string.Format("ajustarAncho(m_{0},{1})", campos[col.ColumnName].ToString(), col.MaxLength)), CrLf);
+                    }
+                    sb.AppendFormat("        {0}{1}", ConvLang.EndGet(), CrLf);
+
+                    if (col.DataType.ToString() == "System.Byte[]")
+                    {
+                        sb.AppendFormat("        {0}{1}", ConvLang.Set("System.Byte()"), CrLf);
+                    }
+                    else
+                    {
+                        sb.AppendFormat("        {0}{1}", ConvLang.Set(col.DataType.ToString()), CrLf);
+                    }
+                    sb.AppendFormat("            {0}{1}", ConvLang.Asigna("m_" + campos[col.ColumnName].ToString(), "value"), CrLf);
+                    sb.AppendFormat("        {0}{1}", ConvLang.EndSet(), CrLf);
+                    sb.AppendFormat("    {0}{1}", ConvLang.EndProperty(), CrLf);
+                }
                 else
-                    sb.AppendFormat("        {0}{1}", ConvLang.Set(col.DataType.ToString()), CrLf);
-                sb.AppendFormat("            {0}{1}", ConvLang.Asigna("m_" + campos[col.ColumnName].ToString(), "value"), CrLf);
-                sb.AppendFormat("        {0}{1}", ConvLang.EndSet(), CrLf);
-                sb.AppendFormat("    {0}{1}", ConvLang.EndProperty(), CrLf);
+                {
+                    if (lang == eLenguaje.eCS)
+                    {
+                        sb.AppendFormat("        get; set; }}{0}", CrLf);
+                    }
+                }
             }
             sb.AppendLine();
             // 

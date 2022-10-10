@@ -68,6 +68,7 @@ Partial Class Form1
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LabelInfo = New System.Windows.Forms.ToolStripStatusLabel()
         Me.LabelVersion = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.chkPropiedadAuto = New System.Windows.Forms.CheckBox()
         Me.grbAccess.SuspendLayout()
         Me.grbSQL.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -137,11 +138,11 @@ Partial Class Form1
         '
         Me.btnGenerarClase.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnGenerarClase.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnGenerarClase.Location = New System.Drawing.Point(427, 152)
+        Me.btnGenerarClase.Location = New System.Drawing.Point(914, 102)
         Me.btnGenerarClase.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnGenerarClase.Name = "btnGenerarClase"
         Me.btnGenerarClase.Size = New System.Drawing.Size(172, 42)
-        Me.btnGenerarClase.TabIndex = 5
+        Me.btnGenerarClase.TabIndex = 6
         Me.btnGenerarClase.Text = "Generar &Clase"
         Me.toolTip1.SetToolTip(Me.btnGenerarClase, " Generar el código de la clase en el lenguaje indicado ")
         '
@@ -419,11 +420,11 @@ Partial Class Form1
         Me.Panel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.optCS)
         Me.Panel1.Controls.Add(Me.optVB)
-        Me.Panel1.Location = New System.Drawing.Point(427, 100)
+        Me.Panel1.Location = New System.Drawing.Point(914, 50)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(172, 44)
-        Me.Panel1.TabIndex = 4
+        Me.Panel1.TabIndex = 5
         '
         'optCS
         '
@@ -522,7 +523,7 @@ Partial Class Form1
         Me.chkUsarOverrides.Checked = True
         Me.chkUsarOverrides.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkUsarOverrides.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.chkUsarOverrides.Location = New System.Drawing.Point(10, 152)
+        Me.chkUsarOverrides.Location = New System.Drawing.Point(442, 19)
         Me.chkUsarOverrides.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkUsarOverrides.Name = "chkUsarOverrides"
         Me.chkUsarOverrides.Size = New System.Drawing.Size(210, 37)
@@ -534,17 +535,18 @@ Partial Class Form1
         '
         Me.grbOpciones.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grbOpciones.Controls.Add(Me.chkPropiedadAuto)
         Me.grbOpciones.Controls.Add(Me.chkUsarCommandBuilder)
         Me.grbOpciones.Controls.Add(Me.chkUsarOverrides)
         Me.grbOpciones.Controls.Add(Me.chkUsarAddWithValue)
         Me.grbOpciones.Controls.Add(Me.chkUsarDataAdapter)
         Me.grbOpciones.Controls.Add(Me.Panel1)
         Me.grbOpciones.Controls.Add(Me.btnGenerarClase)
-        Me.grbOpciones.Location = New System.Drawing.Point(510, 583)
+        Me.grbOpciones.Location = New System.Drawing.Point(23, 633)
         Me.grbOpciones.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.grbOpciones.Name = "grbOpciones"
         Me.grbOpciones.Padding = New System.Windows.Forms.Padding(5, 6, 5, 6)
-        Me.grbOpciones.Size = New System.Drawing.Size(607, 204)
+        Me.grbOpciones.Size = New System.Drawing.Size(1094, 154)
         Me.grbOpciones.TabIndex = 11
         Me.grbOpciones.TabStop = False
         '
@@ -575,6 +577,21 @@ Partial Class Form1
         Me.LabelVersion.Name = "LabelVersion"
         Me.LabelVersion.Size = New System.Drawing.Size(130, 29)
         Me.LabelVersion.Text = "v3.0.0 (3.0.0.0)"
+        '
+        'chkPropiedadAuto
+        '
+        Me.chkPropiedadAuto.AutoSize = True
+        Me.chkPropiedadAuto.Checked = True
+        Me.chkPropiedadAuto.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkPropiedadAuto.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.chkPropiedadAuto.Location = New System.Drawing.Point(442, 64)
+        Me.chkPropiedadAuto.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.chkPropiedadAuto.Name = "chkPropiedadAuto"
+        Me.chkPropiedadAuto.Size = New System.Drawing.Size(319, 30)
+        Me.chkPropiedadAuto.TabIndex = 4
+        Me.chkPropiedadAuto.Text = "Propiedades auto-implementadas"
+        Me.toolTip1.SetToolTip(Me.chkPropiedadAuto, "Cuando el tipo no es String usar propiedades auto-implementadas (sin cuerpo get/s" &
+        "et)")
         '
         'Form1
         '
@@ -662,5 +679,5 @@ Partial Class Form1
     Friend WithEvents StatusStrip1 As StatusStrip
     Private WithEvents LabelInfo As ToolStripStatusLabel
     Friend WithEvents LabelVersion As ToolStripStatusLabel
-
+    Private WithEvents chkPropiedadAuto As CheckBox
 End Class
