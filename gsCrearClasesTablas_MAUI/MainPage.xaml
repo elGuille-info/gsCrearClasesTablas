@@ -17,45 +17,11 @@
                 <xct:MKNExpander x:Name="expOpcionesSQL" Margin="-10,0"
                                  IsExpanded="True" Expanded="expOpcionesSQL_Expanded"
                                  HeaderTitle="Opciones para SQL Server"/>
-                <!--<StackLayout BackgroundColor="{StaticResource Primary}"
-                             VerticalOptions="Start" Margin="-10,0">
-                    <Label Text="Opciones para SQL Server" TextColor="White"
-                           FontSize="Medium"
-                           HorizontalOptions="FillAndExpand"
-                           HorizontalTextAlignment="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpcionesSQLTapGestureRecognizer_Tapped"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpcionesSQLTapGestureRecognizer_Tapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>-->
                 <Frame x:Name="grbSQL" Margin="-8,4">
                     <!-- Con un margin mínimo de 2 se evita que se corte el borde del Frame en la pate inferior -->
                     <StackLayout Style="{StaticResource StackConMargen}" Margin="2">
                         <xct:CheckLabel x:Name="optSQL" IsChecked="True" IsEnabled="False" 
                                         Text="Usar Base de datos de SQL Server" />
-                        <!--<StackLayout Orientation="Horizontal" Spacing="8">
-                            <CheckBox x:Name="optSQL" IsChecked="True" IsEnabled="False"/>
-                            <Label Text="Usar Base de datos de SQL Server">
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label"
-                                                 Binding="{Binding Source={x:Reference optSQL}, Path=IsEnabled}"
-                                                 Value="False">
-                                        <Setter Property="IsEnabled" Value="False" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Label"
-                                                 Binding="{Binding Source={x:Reference optSQL}, Path=IsEnabled}"
-                                                 Value="True">
-                                        <Setter Property="IsEnabled" Value="True" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SQLTapGestureRecognizer_Tapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </StackLayout>-->
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Data source:" WidthRequest="100"/>
                             <Entry x:Name="txtDataSource" Style="{StaticResource EntryText}" WidthRequest="300"/>
@@ -67,26 +33,6 @@
                         <StackLayout Style="{StaticResource StackConMargen}">
                             <xct:CheckLabel x:Name="chkSeguridadSQL"
                                             Text="Usar seguridad de SQL"/>
-                            <!--<StackLayout Orientation="Horizontal">
-                                <CheckBox x:Name="chkSeguridadSQL"/>
-                                <Label Text="Usar seguridad de SQL, sino la seguridad integrada (Integrated Security)">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference chkSeguridadSQL}, Path=IsEnabled}"
-                                                     Value="False">
-                                            <Setter Property="IsEnabled" Value="False" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference chkSeguridadSQL}, Path=IsEnabled}"
-                                                     Value="True">
-                                            <Setter Property="IsEnabled" Value="True" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SeguridadSQLTapGestureRecognizer_Tapped"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                            </StackLayout>-->
                             <StackLayout Orientation="Horizontal" Spacing="12" Margin="12,0,0,0"
                                          PropertyChanged="StackLayout_PropertyChanged">
                                 <StackLayout.Triggers>
@@ -142,20 +88,6 @@
                 <xct:MKNExpander x:Name="expOpcionesTablas" Margin="-10,0"
                                  IsExpanded="True" Expanded="expOpcionesTablas_Expanded"
                                  HeaderTitle="Opciones de las Tablas"/>
-                <!--<StackLayout BackgroundColor="{StaticResource Primary}"
-                             VerticalOptions="Start" Margin="-10,0">
-                    <Label Text="Opciones de las Tablas" TextColor="White"
-                           FontSize="Medium"
-                           HorizontalOptions="FillAndExpand"
-                           HorizontalTextAlignment="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpcionesTablasTapGestureRecognizer_Tapped"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OpcionesTablasTapGestureRecognizer_Tapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>-->
                 <Frame x:Name="grbTablas" Margin="-8,4">
                     <StackLayout Style="{StaticResource StackConMargen}" Margin="2">
                         <StackLayout Orientation="Horizontal" Spacing="8" HorizontalOptions="StartAndExpand">
@@ -196,10 +128,6 @@
                                 <Label Text="Cadena select:" WidthRequest="100"/>
                                 <Entry x:Name="txtSelect" Style="{StaticResource EntryText}" WidthRequest="300"/>
                             </StackLayout>
-                            <!--<StackLayout Orientation="Horizontal" Spacing="8" Margin="12,0,0,0">
-                                <Label Text="Clase:" WidthRequest="100"/>
-                                <Entry x:Name="txtClase" Style="{StaticResource EntryText}" WidthRequest="200"/>
-                            </StackLayout>-->
                         </StackLayout>
                         <Label x:Name="LabelInfoTablas" FontSize="13"/>
                     </StackLayout>
@@ -214,26 +142,6 @@
                         <StackLayout Margin="0">
                             <xct:CheckLabel x:Name="chkUsarDataAdapter" IsChecked="False"
                                             Text="Usar DataAdpater en lugar de cmd.Execute"/>
-                            <!--<StackLayout Orientation="Horizontal">
-                                <Label Text="Usar DataAdpater en lugar de cmd.Execute">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsEnabled}"
-                                                     Value="False">
-                                            <Setter Property="IsEnabled" Value="False" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsEnabled}"
-                                                     Value="True">
-                                            <Setter Property="IsEnabled" Value="True" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarDataAdapterTapGestureRecognizer_Tapped"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                                <Switch x:Name="chkUsarDataAdapter" IsToggled="False"/>
-                            </StackLayout>-->
                             <xct:CheckLabel x:Name="chkUsarCommandBuilder" IsEnabled="False"
                                             Margin="12,0,0,0"
                                             Text="Usar CommandBuilder">
@@ -250,85 +158,12 @@
                                     </DataTrigger>
                                 </xct:CheckLabel.Triggers>
                             </xct:CheckLabel>
-                            <!--<StackLayout Orientation="Horizontal" Margin="12,0,0,0">
-                                <Label Text="Usar CommandBuilder" IsEnabled="False">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference chkUsarCommandBuilder}, Path=IsEnabled}"
-                                                     Value="False">
-                                            <Setter Property="IsEnabled" Value="False" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference chkUsarCommandBuilder}, Path=IsEnabled}"
-                                                     Value="True">
-                                            <Setter Property="IsEnabled" Value="True" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarCommandBuilderTapGestureRecognizer_Tapped"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                                <Switch x:Name="chkUsarCommandBuilder" IsEnabled="False">
-                                    <Switch.Triggers>
-                                        <DataTrigger TargetType="Switch"
-                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsToggled}"
-                                                     Value="False">
-                                            <Setter Property="IsEnabled" Value="False" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Switch"
-                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsToggled}"
-                                                     Value="True">
-                                            <Setter Property="IsEnabled" Value="True" />
-                                        </DataTrigger>
-                                    </Switch.Triggers>
-                                </Switch>
-                            </StackLayout>-->
                             <xct:CheckLabel x:Name="chkUsarAddWithValue"
                                             Text="Usar AddWithValue"/>
-                            <!--<StackLayout Orientation="Horizontal">
-                                <Label Text="Usar AddWithValue">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference chkUsarAddWithValue}, Path=IsEnabled}"
-                                                     Value="False">
-                                            <Setter Property="IsEnabled" Value="False" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference chkUsarAddWithValue}, Path=IsEnabled}"
-                                                     Value="True">
-                                            <Setter Property="IsEnabled" Value="True" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarAddWithValueTapGestureRecognizer_Tapped"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                                <Switch x:Name="chkUsarAddWithValue"/>
-                            </StackLayout>-->
                             <Label Text="Si se utiliza AddWithValue o Add para añadir los valores a los parámetros del comando."
                                     FontSize="13" Margin="12,0,0,0"/>
                             <xct:CheckLabel x:Name="chkUsarOverrides"
                                             Text="Usar Overrides"/>
-                            <!--<StackLayout Orientation="Horizontal">
-                                <Label Text="Usar Overrides">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference chkUsarOverrides}, Path=IsEnabled}"
-                                                     Value="False">
-                                            <Setter Property="IsEnabled" Value="False" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label"
-                                                     Binding="{Binding Source={x:Reference chkUsarOverrides}, Path=IsEnabled}"
-                                                     Value="True">
-                                            <Setter Property="IsEnabled" Value="True" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="UsarOverridesTapGestureRecognizer_Tapped"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                                <Switch x:Name="chkUsarOverrides"/>
-                            </StackLayout>-->
                             <Label Text="Si se debe usar Overrides en los métodos Actualizar, Crear y Borrar."
                                     FontSize="13" Margin="12,0,0,0"/>
                         </StackLayout>
@@ -362,27 +197,6 @@
                                     </DataTrigger>
                                 </xct:SwitchLabel.Triggers>
                             </xct:SwitchLabel>
-                            <!--<StackLayout Orientation="Horizontal" Margin="12,0,0,0">
-                                <Label Text="Visual Basic ">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="VBTapGestureRecognizer_Tapped"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                                <Switch x:Name="optVB" IsToggled="True">
-                                    <Switch.Triggers>
-                                        <DataTrigger TargetType="Switch"
-                                                     Binding="{Binding Source={x:Reference optCS}, Path=IsToggled}"
-                                                     Value="False">
-                                            <Setter Property="IsToggled" Value="True" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Switch"
-                                                     Binding="{Binding Source={x:Reference optCS}, Path=IsToggled}"
-                                                     Value="True">
-                                            <Setter Property="IsToggled" Value="False" />
-                                        </DataTrigger>
-                                    </Switch.Triggers>
-                                </Switch>
-                            </StackLayout>-->
                             <xct:SwitchLabel x:Name="optCS" Text="C#" 
                                              IsToggled="False" Margin="8,0,0,0">
                                 <xct:SwitchLabel.Triggers>
@@ -398,27 +212,6 @@
                                     </DataTrigger>
                                 </xct:SwitchLabel.Triggers>
                             </xct:SwitchLabel>
-                            <!--<StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default='0'}">
-                                <Label Text="C# ">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CSTapGestureRecognizer_Tapped"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                                <Switch x:Name="optCS">
-                                    <Switch.Triggers>
-                                        <DataTrigger TargetType="Switch"
-                                                         Binding="{Binding Source={x:Reference optVB}, Path=IsToggled}"
-                                                         Value="False">
-                                            <Setter Property="IsToggled" Value="True" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Switch"
-                                                         Binding="{Binding Source={x:Reference optVB}, Path=IsToggled}"
-                                                         Value="True">
-                                            <Setter Property="IsToggled" Value="False" />
-                                        </DataTrigger>
-                                    </Switch.Triggers>
-                                </Switch>
-                            </StackLayout>-->
                             <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default='0'}">
                                 <Button x:Name="btnGenerarClase" Text="Generar Clase"
                                         HorizontalOptions="FillAndExpand"
