@@ -215,7 +215,11 @@ namespace gsCrearClasesTablas_MAUI
             // Lo asigno en la clase base ya que son métodos compartidos (22/Mar/19)
             CrearClase.UsarDataAdapter = chkUsarDataAdapter.IsChecked;
             if (chkUsarDataAdapter.IsChecked == false)
+            {
                 chkUsarCommandBuilder.IsEnabled = false;
+                // chkUsarAddWithValue solo se usa con chkUsarDataAdapter (11/oct/22 22.03)
+                chkUsarAddWithValue.IsEnabled = false;
+            }
             CrearClase.UsarAddWithValue = chkUsarAddWithValue.IsChecked;
             CrearClase.UsarOverrides = chkUsarOverrides.IsChecked;
             CrearClase.PropiedadAuto = chkPropiedadAuto.IsChecked;
@@ -380,6 +384,7 @@ namespace gsCrearClasesTablas_MAUI
                 chkPropiedadAuto.IsChecked = sTmp == "1";
             }
             chkUsarCommandBuilder.IsEnabled = chkUsarDataAdapter.IsChecked;
+            chkUsarAddWithValue.IsEnabled = chkUsarDataAdapter.IsChecked;
         }
 
         /// <summary>
@@ -409,7 +414,7 @@ namespace gsCrearClasesTablas_MAUI
             if (e.PropertyName == "IsEnabled")
             {
                 chkUsarDataAdapter.IsEnabled = grbOpciones.IsEnabled;
-                chkUsarAddWithValue.IsEnabled = grbOpciones.IsEnabled;
+                //chkUsarAddWithValue.IsEnabled = grbOpciones.IsEnabled;
                 chkUsarOverrides.IsEnabled = grbOpciones.IsEnabled;
                 chkPropiedadAuto.IsEnabled = grbOpciones.IsEnabled;
 

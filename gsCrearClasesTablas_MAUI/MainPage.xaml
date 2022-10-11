@@ -99,7 +99,7 @@
                         <!-- Esto estará en la parte izquierda -->
                         <StackLayout Margin="0">
                             <xct:CheckLabel x:Name="chkUsarDataAdapter" IsChecked="False"
-                                            Text="Usar DataAdpater en lugar de cmd.Execute"/>
+                                            Text="Usar DataAdapater en lugar de cmd.Execute"/>
                             <xct:CheckLabel x:Name="chkUsarCommandBuilder" IsEnabled="False"
                                             Margin="12,0,0,0"
                                             Text="Usar CommandBuilder">
@@ -116,13 +116,26 @@
                                     </DataTrigger>
                                 </xct:CheckLabel.Triggers>
                             </xct:CheckLabel>
+                            <StackLayout Margin="12,0,0,0">
+                                <xct:CheckLabel x:Name="chkUsarAddWithValue"
+                                                Text="Usar AddWithValue">
+                                    <xct:CheckLabel.Triggers>
+                                        <DataTrigger TargetType="xct:CheckLabel"
+                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
+                                                     Value="False">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="xct:CheckLabel"
+                                                     Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
+                                                     Value="True">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </DataTrigger>
+                                    </xct:CheckLabel.Triggers>
+                                </xct:CheckLabel>
+                                <Label Text="Usar AddWithValue o Add para añadir los valores a los parámetros del comando."
+                                       FontSize="13" Margin="12,0,0,0"/>
+                            </StackLayout>
                             <StackLayout>
-                                <StackLayout>
-                                    <xct:CheckLabel x:Name="chkUsarAddWithValue"
-                                                    Text="Usar AddWithValue"/>
-                                    <Label Text="Usar AddWithValue o Add para añadir los valores a los parámetros del comando."
-                                           FontSize="13" Margin="12,0,0,0"/>
-                                </StackLayout>
                                 <StackLayout>
                                     <xct:CheckLabel x:Name="chkUsarOverrides"
                                                     Text="Usar Overrides"/>

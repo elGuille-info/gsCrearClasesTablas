@@ -511,9 +511,9 @@ Partial Class Form1
         Me.chkUsarDataAdapter.Location = New System.Drawing.Point(10, 23)
         Me.chkUsarDataAdapter.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkUsarDataAdapter.Name = "chkUsarDataAdapter"
-        Me.chkUsarDataAdapter.Size = New System.Drawing.Size(386, 29)
+        Me.chkUsarDataAdapter.Size = New System.Drawing.Size(395, 29)
         Me.chkUsarDataAdapter.TabIndex = 0
-        Me.chkUsarDataAdapter.Text = "usar DataAdpater en lugar de cmd.Execute..."
+        Me.chkUsarDataAdapter.Text = "usar DataAdapater en lugar de cmd.Execute..."
         Me.toolTip1.SetToolTip(Me.chkUsarDataAdapter, "Marca esta opción si quieres usar DataAdapter en vez de ExecuteNonQuery en UPDATE" &
         " y DELETE o ExecuteScalar en INSERT." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Al usar cmd.Execute en SQL se usarán tran" &
         "sacciones)")
