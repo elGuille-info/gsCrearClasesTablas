@@ -118,7 +118,7 @@
                             </xct:CheckLabel>
                             <StackLayout Margin="12,0,0,0">
                                 <xct:CheckLabel x:Name="chkUsarAddWithValue"
-                                                Text="Usar AddWithValue">
+                                                Text="Usar AddWithValue (o Value)">
                                     <xct:CheckLabel.Triggers>
                                         <DataTrigger TargetType="xct:CheckLabel"
                                                      Binding="{Binding Source={x:Reference chkUsarDataAdapter}, Path=IsChecked}"
@@ -132,29 +132,29 @@
                                         </DataTrigger>
                                     </xct:CheckLabel.Triggers>
                                 </xct:CheckLabel>
-                                <Label Text="Usar AddWithValue o Add para añadir los valores a los parámetros del comando."
-                                       FontSize="13" Margin="12,0,0,0"/>
+                                <!--<Label Text="Usar AddWithValue o Add para añadir los valores a los parámetros del comando."
+                                       FontSize="13" Margin="12,0,0,0"/>-->
                             </StackLayout>
                         </StackLayout>
                         <!-- Esto estará en la parte derecha -->
                         <StackLayout Margin="12,0,0,0">
                             <StackLayout>
                                 <xct:CheckLabel x:Name="chkUsarOverrides"
-                                                Text="Usar Overrides"/>
-                                <Label Text="Usar Overrides en los métodos Actualizar, Crear y Borrar."
-                                       FontSize="13" Margin="12,0,0,0"/>
+                                                Text="Usar Overrides en Actualizar, Crear y Borrar"/>
+                                <!--<Label Text="Usar Overrides en los métodos Actualizar, Crear y Borrar."
+                                       FontSize="13" Margin="12,0,0,0"/>-->
                             </StackLayout>
                             <StackLayout>
                                 <xct:CheckLabel x:Name="chkPropiedadAuto" IsChecked="True"
-                                                Text="Propiedades auto-implementadas"/>
-                                <Label Text="Usar propiedades auto-implementadas si el tipo no es String."
-                                       FontSize="13" Margin="12,0,0,0"/>
+                                                Text="Propiedades auto-implementadas (si no es string)"/>
+                                <!--<Label Text="Usar propiedades auto-implementadas si el tipo no es String."
+                                       FontSize="13" Margin="12,0,0,0"/>-->
                             </StackLayout>
                             <StackLayout>
                                 <xct:CheckLabel x:Name="chkCrearIndizador" IsChecked="False"
                                                 Text="Crear indizador (Default Property)"/>
-                                <Label Text="Crear el indizador o propiedad predeterminada (en VB)."
-                                       FontSize="13" Margin="12,0,0,0"/>
+                                <!--<Label Text="Crear el indizador o propiedad predeterminada (en VB)."
+                                       FontSize="13" Margin="12,0,0,0"/>-->
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>
