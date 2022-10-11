@@ -49,7 +49,7 @@ namespace gsCrearClasesTablas_MAUI
 
         // Intentar no pasar de estas marcas: 60 caracteres. 2         3         4         5         6
         //                                ---------|---------|---------|---------|---------|---------|
-        //[COPIAR]AppDescripcionCopia = " usando v3.0.8 de gsCrearClases_CS"
+        //[COPIAR]AppDescripcionCopia = " usando v3.0.9 de gsCrearClases_CS"
 
 
         public App()
