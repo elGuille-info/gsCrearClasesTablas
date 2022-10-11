@@ -10,7 +10,7 @@
     <ApplicationIcon>hoja_sql.ico</ApplicationIcon>
     <Title>gsCrearClasesTablas</Title>
     <Copyright>©Guillermo Som (elGuille), 2004-2007, 2018-2022</Copyright>
-    <Description>Generar clases a partir de una tabla de una base de datos de SQL Server o de Access. Para .NET 6.0  (revisión del 11-oct-2022)</Description>
+    <Description>Generar clases a partir de una tabla de una base de datos de SQL Server o de Access. Para .NET 6.0  (revisión del 12-oct-2022)</Description>
     <Authors>elGuille</Authors>
     <Version>3.0.7</Version>
     <FileVersion>3.0.7.0</FileVersion>
