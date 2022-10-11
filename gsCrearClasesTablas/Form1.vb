@@ -58,6 +58,7 @@
 '   3.0.3.0 08/oct/2022 Guardar los datos en la configuración local (como en móvil)
 '   3.0.3.2             Habilitar el grupo de grbOpciones según haya tablas en la lista
 '   3.0.5.0 10/oct/2022 Opción para las propiedades auto-implementadas.
+'   3.0.6.0 11/oct/2022 Usando la versión 3.0.8 de gsCrearClases_CS
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -98,7 +99,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.5.0"
+            s = "3.0.6.0"
         End Try
 
         Return s

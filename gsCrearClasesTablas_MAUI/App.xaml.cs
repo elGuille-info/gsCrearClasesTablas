@@ -35,21 +35,21 @@ namespace gsCrearClasesTablas_MAUI
         /// <summary>
         /// La versión de la aplicación.
         /// </summary>
-        public static string AppVersion { get; } = "3.0.4";
+        public static string AppVersion { get; } = "3.0.7";
 
         /// <summary>
         /// La versión del fichero (la revisión)
         /// </summary>
-        public static string AppFileVersion { get; } = "3.0.4.0";
+        public static string AppFileVersion { get; } = "3.0.7.0";
 
         /// <summary>
         /// La fecha de última actualización
         /// </summary>
-        public static string AppFechaVersion { get; } = "10-oct-2022";
+        public static string AppFechaVersion { get; } = "11-oct-2022";
 
         // Intentar no pasar de estas marcas: 60 caracteres. 2         3         4         5         6
         //                                ---------|---------|---------|---------|---------|---------|
-        //[COPIAR]AppDescripcionCopia = " preparando el interfaz"
+        //[COPIAR]AppDescripcionCopia = " usando v3.0.8 de gsCrearClases_CS"
 
 
         public App()
@@ -86,11 +86,14 @@ namespace gsCrearClasesTablas_MAUI
                                     var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(windowHandle);
                                     var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
                                     appWindow.Resize(new Windows.Graphics.SizeInt32(winWidth, winHeight));
+                                    // Posicionarlo manualmente. (11/oct/22 11.35)
+                                    appWindow.Move(new Windows.Graphics.PointInt32(1200 - winWidth / 2, 100));
+                                    //appWindow.Title = "gsCrearClasesTablas_Maui";
 #endif
             });
 
             // Para añadir el encoding WEST para Android. No sirve.
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            //System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             //var encoding = System.Text.Encoding.GetEncoding(1252);
 
             MainPage = new AppShell();

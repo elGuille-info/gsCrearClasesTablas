@@ -564,12 +564,44 @@ namespace elGuille.Util.Developer
 
         public static string Asigna(string var, string valor)
         {
+            string varRet = var;
+            string valorRet = valor;
+
+            // Si es una asignación simple (ni var ni valor tienen espacios) devolver la asignación. (11/oct/22 12.09)
+            // Comprobar si tiene espacio o punto.
+            // con el punto puede querer convertir Me.Notas y lo haría mal al convertirlo como 'this. ! as'
+            if (var.IndexOfAny(" .".ToCharArray()) > -1)
+            {
+                // Analizar solo lo que hay antes del punto.
+                var i = var.IndexOf('.');
+                if (i > -1)
+                {
+                    // Incluir el punto.
+                    varRet = comprobarParam(var.Substring(0, i + 1)) + var.Substring(i + 1);
+                }
+                else
+                {
+                    varRet = comprobarParam(var);
+                }
+            }
+            if (valor.IndexOfAny(" .".ToCharArray()) > -1)
+            {
+                valorRet = comprobarParam(valor);
+            }
+
             if (Lang == eLenguaje.eCS)
-                return string.Format("{0} = {1};", comprobarParam(var), comprobarParam(valor));
+            {
+                return string.Format("{0} = {1};", varRet, valorRet);
+                //return string.Format("{0} = {1};", comprobarParam(var), comprobarParam(valor));
+            }
             else if (valor.StartsWith("\"") == false)
+            {
                 return string.Format("{0} = {1}", var, valor).Replace("[", "(").Replace("]", ")");
+            }
             else
+            {
                 return string.Format("{0} = {1}", var, valor);
+            }
         }
         public static string AsignaNew(string var, string valor)
         {
@@ -734,21 +766,29 @@ namespace elGuille.Util.Developer
             else
                 return string.Format("{0} {1} As New {2}({3})", modif, nombre, elTipo, param);
         }
-        // 
+        
         // comprobar si tiene New...
         private static string comprobarParam(string var)
         {
+            // Si es la función ajustarAncho no hacer conversión. (11/oct/22 12.04)
+            if (var.StartsWith("ajustarAncho"))
+            {
+                return var;
+            }
             // por ejemplo, en un parámetro se puede indicar "New LosQueSea"
             if (Lang == eLenguaje.eCS)
             {
                 // Habría que comprobar si hay más de una instrucción en la cadena a evaluar. (01/oct/22 10.24)
-                for (int i = 0; i <= instrVB.Length - 1; i++)
+                for (int i = 0; i < instrVB.Length; i++)
+                {
                     var = (" " + var).Replace(instrVB[i], instrCS[i]).Substring(1);
-                // 
-                return var; // (" " & var).Replace("New ", "new ").Replace(" Me.", " this.").Replace(" Me(", " this(").Replace(" Me,", " this,").Replace("(Me,", "(this,").Replace(" True", " true").Replace(" False", " false")
+                }
+                return var;
             }
             else
+            {
                 return var;
+            }
         }
     }
 }

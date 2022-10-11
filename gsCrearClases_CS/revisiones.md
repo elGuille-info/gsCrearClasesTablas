@@ -8,6 +8,28 @@
 ### Revisiones de 2022
 
 ```
+'<revision("3.0.8.0", _
+'   FechaModificacion:= "11/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "11/Oct/2022", _
+'   Tipo:= "BUG", _
+'   Clases:= "", _
+'   Miembro:= "", _
+'   Motivo:= "Hay que usar conversiones del sistema en lugar de usar la clase ConversorTipos.", _
+'   Solucion:= "", _
+'   Comentarios:= "Si esa clase no se incluye en el proyecto que usa el código convertido fallará al convertir los tipos.")>
+
+'<revision("3.0.8.0", _
+'   FechaModificacion:= "11/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "11/Oct/2022", _
+'   Tipo:= "BUG", _
+'   Clases:= "ConvLang", _
+'   Miembro:= "comprobarParam y Asigna", _
+'   Motivo:= "Si el nombre de alguna tabla tiene instrucciones de VB com parte del nombre, en C# lo cambia por lo que corresponda.", _
+'   Solucion:= "En comprobarParam si es ajustarAncho no convertir, en Asigna si tiene punto en la parte izquierda de la asignación analiza con el punto (será Me.) y si tiene espacios lo analiza también.", _
+'   Comentarios:= "Por ejemplo, si hay un campo Notas en C# la pone como ''! as'' en vez de ''Notas''.")>
+
 '<revision("3.0.7.0", _
 '   FechaModificacion:= "10/Oct/2022", _
 '   Tester:= "elGuille", _
