@@ -406,7 +406,7 @@ namespace elGuille.Util.Developer.Data
                     case "System.Char":
                     case "System.TimeSpan":
                         {
-                            sb.AppendFormat("        {0}{1}", ConvLang.Asigna(string.Format("Me.{1}", nombreClase, campos[col.ColumnName].ToString()), string.Format("ConversorTipos.{1}Data(value)", col.ColumnName, col.DataType.ToString().Replace("System.", ""))), CrLf);
+                            sb.AppendFormat("                {0}{1}", ConvLang.Asigna(string.Format("Me.{1}", nombreClase, campos[col.ColumnName].ToString()), string.Format("ConversorTipos.{1}Data(value)", col.ColumnName, col.DataType.ToString().Replace("System.", ""))), CrLf);
                             break;
                         }
 
@@ -490,7 +490,7 @@ namespace elGuille.Util.Developer.Data
                     case "System.Char":
                     case "System.TimeSpan":
                         {
-                            sb.AppendFormat("        {0}{1}", ConvLang.Asigna(string.Format("Me.{1}", nombreClase, campos[col.ColumnName].ToString()), string.Format("ConversorTipos.{1}Data(value)", col.ColumnName, col.DataType.ToString().Replace("System.", ""))), CrLf);
+                            sb.AppendFormat("                {0}{1}", ConvLang.Asigna(string.Format("Me.{1}", nombreClase, campos[col.ColumnName].ToString()), string.Format("ConversorTipos.{1}Data(value)", col.ColumnName, col.DataType.ToString().Replace("System.", ""))), CrLf);
                             break;
                         }
 

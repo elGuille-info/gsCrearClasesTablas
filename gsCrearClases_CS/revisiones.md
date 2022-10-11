@@ -8,6 +8,17 @@
 ### Revisiones de 2022
 
 ```
+'<revision("3.0.9.0", _
+'   FechaModificacion:= "11/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "11/Oct/2022", _
+'   Tipo:= "Revisión", _
+'   Clases:= "CrearClase", _
+'   Miembro:= "generarClase", _
+'   Motivo:= "No están bien indentados los set del indizador.", _
+'   Solucion:= "Añadirle 16 espacios en vez de los 8 que tenía para ajustarlos.", _
+'   Comentarios:= "")>
+
 '<revision("3.0.8.0", _
 '   FechaModificacion:= "11/Oct/2022", _
 '   Tester:= "elGuille", _
