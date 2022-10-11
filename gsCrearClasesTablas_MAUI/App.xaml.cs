@@ -40,7 +40,7 @@ namespace gsCrearClasesTablas_MAUI
         /// <summary>
         /// La versión del fichero (la revisión)
         /// </summary>
-        public static string AppFileVersion { get; } = "3.0.7.4";
+        public static string AppFileVersion { get; } = "3.0.7.5";
 
         /// <summary>
         /// La fecha de última actualización
@@ -49,7 +49,7 @@ namespace gsCrearClasesTablas_MAUI
 
         // Intentar no pasar de estas marcas: 60 caracteres. 2         3         4         5         6
         //                                ---------|---------|---------|---------|---------|---------|
-        //[COPIAR]AppDescripcionCopia = " usando v3.0.11 de gsCrearClases_CS"
+        //[COPIAR]AppDescripcionCopia = " cambio versión al poder usar el indizador"
 
 
         public App()

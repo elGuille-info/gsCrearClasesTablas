@@ -62,7 +62,7 @@
 '   3.0.6.2             chkUsarAddWithValue solo se usa con chkUsarDataAdapter
 '   3.0.6.3             Usando la versión 3.0.9 de gsCrearClases_CS
 '   3.0.6.4             Usando la versión 3.0.10 de gsCrearClases_CS
-'   3.0.6.5             Usando la versión 3.0.11 de gsCrearClases_CS
+'   3.0.6.5~6           Usando la versión 3.0.11 de gsCrearClases_CS
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -103,7 +103,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.6.5"
+            s = "3.0.6.6"
         End Try
 
         Return s
