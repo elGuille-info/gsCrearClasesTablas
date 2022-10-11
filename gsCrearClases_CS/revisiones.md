@@ -8,6 +8,17 @@
 ### Revisiones de 2022
 
 ```
+'<revision("3.0.10.0", _
+'   FechaModificacion:= "11/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "11/Oct/2022", _
+'   Tipo:= "Revisión", _
+'   Clases:= "CrearClase", _
+'   Miembro:= "generarClase", _
+'   Motivo:= "Quitar código que seguramente no se usará (los métodos estáticos privados).", _
+'   Solucion:= "Por ahora comento el código que lo genera.", _
+'   Comentarios:= "Los métodos: Row2Tipo, CLASE2Row y nuevoCLASE no se suelen usar, quitarlos.")>
+
 '<revision("3.0.9.0", _
 '   FechaModificacion:= "11/Oct/2022", _
 '   Tester:= "elGuille", _
@@ -23,7 +34,7 @@
 '   FechaModificacion:= "11/Oct/2022", _
 '   Tester:= "elGuille", _
 '   FechaReporte:= "11/Oct/2022", _
-'   Tipo:= "BUG", _
+'   Tipo:= "TODO: Mejora", _
 '   Clases:= "", _
 '   Miembro:= "", _
 '   Motivo:= "Hay que usar conversiones del sistema en lugar de usar la clase ConversorTipos.", _

@@ -566,6 +566,9 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("        {0}{1}", ConvLang.Asigna("CadenaConexion", "conex"), CrLf);
             sb.AppendFormat("    {0}{1}", ConvLang.EndSub(), CrLf);
 
+            // TODO: Esto o se quita o se pone opcional. (11/oct/22 22.33)
+            #region Este código no se usa, lo quito
+            /*
             sb.AppendLine();
             sb.AppendFormat("    {0}{1}", ConvLang.Comentario("-----------------------------------------"), CrLf);
             sb.AppendFormat("    {0}{1}", ConvLang.Comentario(" Métodos compartidos (estáticos) privados"), CrLf);
@@ -678,6 +681,12 @@ namespace elGuille.Util.Developer.Data
             sb.AppendLine();
             sb.AppendFormat("        {0}{1}", ConvLang.Instruccion("dt.Rows.Add(dr)"), CrLf);
             sb.AppendFormat("    {0}{1}", ConvLang.EndSub(), CrLf);
+
+            */
+            #endregion
+
+            //</Quitar todo esto
+
             // 
             // Métodos públicos compartidos (estáticos)
             // 
