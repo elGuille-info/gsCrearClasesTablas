@@ -64,11 +64,11 @@ Partial Class Form1
         Me.chkUsarAddWithValue = New System.Windows.Forms.CheckBox()
         Me.chkUsarDataAdapter = New System.Windows.Forms.CheckBox()
         Me.chkUsarOverrides = New System.Windows.Forms.CheckBox()
+        Me.chkPropiedadAuto = New System.Windows.Forms.CheckBox()
         Me.grbOpciones = New System.Windows.Forms.GroupBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LabelInfo = New System.Windows.Forms.ToolStripStatusLabel()
         Me.LabelVersion = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.chkPropiedadAuto = New System.Windows.Forms.CheckBox()
         Me.grbAccess.SuspendLayout()
         Me.grbSQL.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -100,7 +100,7 @@ Partial Class Form1
         '
         'Label3
         '
-        Me.Label3.Location = New System.Drawing.Point(23, 483)
+        Me.Label3.Location = New System.Drawing.Point(24, 486)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(178, 37)
         Me.Label3.TabIndex = 4
@@ -110,7 +110,7 @@ Partial Class Form1
         'btnMostrarTablas
         '
         Me.btnMostrarTablas.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnMostrarTablas.Location = New System.Drawing.Point(563, 483)
+        Me.btnMostrarTablas.Location = New System.Drawing.Point(563, 477)
         Me.btnMostrarTablas.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnMostrarTablas.Name = "btnMostrarTablas"
         Me.btnMostrarTablas.Size = New System.Drawing.Size(192, 42)
@@ -148,7 +148,7 @@ Partial Class Form1
         '
         'Label5
         '
-        Me.Label5.Location = New System.Drawing.Point(23, 592)
+        Me.Label5.Location = New System.Drawing.Point(24, 595)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(178, 37)
         Me.Label5.TabIndex = 9
@@ -178,7 +178,7 @@ Partial Class Form1
         '
         'Label7
         '
-        Me.Label7.Location = New System.Drawing.Point(23, 541)
+        Me.Label7.Location = New System.Drawing.Point(24, 544)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(178, 37)
         Me.Label7.TabIndex = 7
@@ -217,7 +217,7 @@ Partial Class Form1
         '
         'Label4
         '
-        Me.Label4.Location = New System.Drawing.Point(22, 138)
+        Me.Label4.Location = New System.Drawing.Point(23, 141)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(178, 37)
         Me.Label4.TabIndex = 5
@@ -237,7 +237,7 @@ Partial Class Form1
         '
         'Label6
         '
-        Me.Label6.Location = New System.Drawing.Point(22, 94)
+        Me.Label6.Location = New System.Drawing.Point(23, 97)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(178, 37)
         Me.Label6.TabIndex = 3
@@ -260,7 +260,7 @@ Partial Class Form1
         '
         Me.btnExaminar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnExaminar.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnExaminar.Location = New System.Drawing.Point(943, 44)
+        Me.btnExaminar.Location = New System.Drawing.Point(954, 38)
         Me.btnExaminar.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnExaminar.Name = "btnExaminar"
         Me.btnExaminar.Size = New System.Drawing.Size(133, 42)
@@ -282,7 +282,7 @@ Partial Class Form1
         '
         'Label8
         '
-        Me.Label8.Location = New System.Drawing.Point(22, 44)
+        Me.Label8.Location = New System.Drawing.Point(23, 47)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(178, 37)
         Me.Label8.TabIndex = 0
@@ -314,8 +314,9 @@ Partial Class Form1
         '
         'chkUsarSQLEXpress
         '
+        Me.chkUsarSQLEXpress.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkUsarSQLEXpress.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.chkUsarSQLEXpress.Location = New System.Drawing.Point(910, -1)
+        Me.chkUsarSQLEXpress.Location = New System.Drawing.Point(910, -3)
         Me.chkUsarSQLEXpress.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkUsarSQLEXpress.Name = "chkUsarSQLEXpress"
         Me.chkUsarSQLEXpress.Size = New System.Drawing.Size(184, 37)
@@ -380,7 +381,7 @@ Partial Class Form1
         'labelPassw
         '
         Me.labelPassw.Enabled = False
-        Me.labelPassw.Location = New System.Drawing.Point(392, 206)
+        Me.labelPassw.Location = New System.Drawing.Point(393, 201)
         Me.labelPassw.Name = "labelPassw"
         Me.labelPassw.Size = New System.Drawing.Size(128, 37)
         Me.labelPassw.TabIndex = 7
@@ -390,7 +391,7 @@ Partial Class Form1
         'labelUser
         '
         Me.labelUser.Enabled = False
-        Me.labelUser.Location = New System.Drawing.Point(50, 206)
+        Me.labelUser.Location = New System.Drawing.Point(51, 201)
         Me.labelUser.Name = "labelUser"
         Me.labelUser.Size = New System.Drawing.Size(128, 37)
         Me.labelUser.TabIndex = 5
@@ -399,7 +400,7 @@ Partial Class Form1
         '
         'Label2
         '
-        Me.Label2.Location = New System.Drawing.Point(22, 94)
+        Me.Label2.Location = New System.Drawing.Point(23, 97)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(178, 37)
         Me.Label2.TabIndex = 2
@@ -408,7 +409,7 @@ Partial Class Form1
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(22, 44)
+        Me.Label1.Location = New System.Drawing.Point(23, 47)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(178, 37)
         Me.Label1.TabIndex = 0
@@ -466,7 +467,7 @@ Partial Class Form1
         '
         Me.optSQL.Checked = True
         Me.optSQL.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.optSQL.Location = New System.Drawing.Point(42, 212)
+        Me.optSQL.Location = New System.Drawing.Point(42, 208)
         Me.optSQL.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.optSQL.Name = "optSQL"
         Me.optSQL.Size = New System.Drawing.Size(370, 44)
@@ -531,6 +532,21 @@ Partial Class Form1
         Me.chkUsarOverrides.Text = "usar Overrides"
         Me.toolTip1.SetToolTip(Me.chkUsarOverrides, "Usar Overrides en los métodos Actualizar, Crear y Borrar.")
         '
+        'chkPropiedadAuto
+        '
+        Me.chkPropiedadAuto.AutoSize = True
+        Me.chkPropiedadAuto.Checked = True
+        Me.chkPropiedadAuto.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkPropiedadAuto.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.chkPropiedadAuto.Location = New System.Drawing.Point(442, 64)
+        Me.chkPropiedadAuto.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.chkPropiedadAuto.Name = "chkPropiedadAuto"
+        Me.chkPropiedadAuto.Size = New System.Drawing.Size(319, 30)
+        Me.chkPropiedadAuto.TabIndex = 4
+        Me.chkPropiedadAuto.Text = "Propiedades auto-implementadas"
+        Me.toolTip1.SetToolTip(Me.chkPropiedadAuto, "Cuando el tipo no es String usar propiedades auto-implementadas (sin cuerpo get/s" &
+        "et)")
+        '
         'grbOpciones
         '
         Me.grbOpciones.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -577,21 +593,6 @@ Partial Class Form1
         Me.LabelVersion.Name = "LabelVersion"
         Me.LabelVersion.Size = New System.Drawing.Size(130, 29)
         Me.LabelVersion.Text = "v3.0.0 (3.0.0.0)"
-        '
-        'chkPropiedadAuto
-        '
-        Me.chkPropiedadAuto.AutoSize = True
-        Me.chkPropiedadAuto.Checked = True
-        Me.chkPropiedadAuto.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkPropiedadAuto.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.chkPropiedadAuto.Location = New System.Drawing.Point(442, 64)
-        Me.chkPropiedadAuto.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.chkPropiedadAuto.Name = "chkPropiedadAuto"
-        Me.chkPropiedadAuto.Size = New System.Drawing.Size(319, 30)
-        Me.chkPropiedadAuto.TabIndex = 4
-        Me.chkPropiedadAuto.Text = "Propiedades auto-implementadas"
-        Me.toolTip1.SetToolTip(Me.chkPropiedadAuto, "Cuando el tipo no es String usar propiedades auto-implementadas (sin cuerpo get/s" &
-        "et)")
         '
         'Form1
         '
