@@ -12,8 +12,8 @@
 	  <RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
 	  <NeutralLanguage>es</NeutralLanguage>
-	  <AssemblyVersion>3.0.11</AssemblyVersion>
-	  <FileVersion>3.0.11.0</FileVersion>
+	  <AssemblyVersion>3.0.12</AssemblyVersion>
+	  <FileVersion>3.0.12.0</FileVersion>
 	  <PackageReleaseNotes>
 		  10-oct-22: Opción para crear las propiedades auto-implementadas.
 		  10-oct-22: Añado el fichero revisiones.md (estaba solo en el proyecto de VB).

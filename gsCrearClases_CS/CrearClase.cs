@@ -557,13 +557,30 @@ namespace elGuille.Util.Developer.Data
             sb1.Append("\"");
             // Añado Property a CadenaConexion y CadenaSelect        (13/Abr/19)
             // para que sea más fácil saber las referencias que tienen.
-            sb.AppendFormat("    {0}{1}", ConvLang.DeclaraVariable("Public Shared Property", "CadenaConexion", "String", sb1.ToString()), CrLf);
-            // 
+            // En VB como propiedad, en C# como campo. (11/oct/22 23.21)
+            if (lang == eLenguaje.eVBNET)
+            {
+                sb.AppendFormat("    {0}{1}", ConvLang.DeclaraVariable("Public Shared Property", "CadenaConexion", "String", sb1.ToString()), CrLf);
+            }
+            else
+            {
+                sb.AppendFormat("    {0}{1}", ConvLang.DeclaraVariable("Public Shared", "CadenaConexion", "String", sb1.ToString()), CrLf);
+            }
+
             // ------------------------------------------------------------------
             // la cadena de selección (campo público)
             // ------------------------------------------------------------------
             sb.AppendFormat("    {0}{1}", ConvLang.DocumentacionXML(" La cadena de selección"), CrLf);
-            sb.AppendFormat("    {0}{1}", ConvLang.DeclaraVariable("Public Shared Property", "CadenaSelect", "String", "\"" + cadenaSelect + "\""), CrLf);
+            // En VB como propiedad, en C# como campo. (11/oct/22 23.21)
+            if (lang == eLenguaje.eVBNET)
+            {
+                sb.AppendFormat("    {0}{1}", ConvLang.DeclaraVariable("Public Shared Property", "CadenaSelect", "String", "\"" + cadenaSelect + "\""), CrLf);
+            }
+            else
+            {
+                sb.AppendFormat("    {0}{1}", ConvLang.DeclaraVariable("Public Shared", "CadenaSelect", "String", "\"" + cadenaSelect + "\""), CrLf);
+            }
+            
             sb.AppendLine();
 
             // ------------------------------------------------------------------

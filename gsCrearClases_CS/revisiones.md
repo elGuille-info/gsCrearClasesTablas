@@ -8,6 +8,17 @@
 ### Revisiones de 2022
 
 ```
+'<revision("3.0.12.0", _
+'   FechaModificacion:= "11/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "11/Oct/2022", _
+'   Tipo:= "Revisión", _
+'   Clases:= "CrearClase", _
+'   Miembro:= "generarClase", _
+'   Motivo:= "Poner CadenaConexion y CadenaSelect en VB como propiedad y en C# como campo.", _
+'   Solucion:= "Antes en C# se definía como en VB.", _
+'   Comentarios:= "")>
+
 '<revision("3.0.11.0", _
 '   FechaModificacion:= "11/Oct/2022", _
 '   Tester:= "elGuille", _
