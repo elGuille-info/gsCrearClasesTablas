@@ -76,29 +76,46 @@ namespace gsCrearClasesTablas_MAUI
             {
 #if WINDOWS
 
-                        // Asignar manualmente el tamaño. 
-                        int winWidth = 1700;
-                        int winHeight = 1600; //1800
+                // Asignar manualmente el tamaño. 
+                int winWidth = 1700;
+                int winHeight = 1600; //1800
 
-            // get screen size
-            var disp = DeviceDisplay.Current.MainDisplayInfo;
-            // Aquí aún no tiene tamaño asignado.
-            var x = (disp.Width / disp.Density - winWidth) / 2;
-            var y = (disp.Height / disp.Density - winHeight) / 2;
+                var mauiWindow = handler.VirtualView;
+                var nativeWindow = handler.PlatformView;
+                nativeWindow.Activate();
+                IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
+                var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(windowHandle);
+                var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+                appWindow.Resize(new Windows.Graphics.SizeInt32(winWidth, winHeight));
+                // Posicionarlo manualmente. (11/oct/22 11.35)
+                //appWindow.Move(new Windows.Graphics.PointInt32(1200 - winWidth / 2, 100));
+                //appWindow.Move(new Windows.Graphics.PointInt32(0, 0));
+                //appWindow.Title = "Crear Clases Tablas (MAUI)";
 
-                                    var mauiWindow = handler.VirtualView;
-                                    var nativeWindow = handler.PlatformView;
-                                    nativeWindow.Activate();
-                                    IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
-                                    var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(windowHandle);
-                                    var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
-                                    appWindow.Resize(new Windows.Graphics.SizeInt32(winWidth, winHeight));
-                                    // Posicionarlo manualmente. (11/oct/22 11.35)
-                                    //appWindow.Move(new Windows.Graphics.PointInt32(1200 - winWidth / 2, 100));
-                                    appWindow.Move(new Windows.Graphics.PointInt32(0, 0));
-                                    //appWindow.Title = "gsCrearClasesTablas_Maui";
+                // get screen size
+                DisplayInfo disp = DeviceDisplay.Current.MainDisplayInfo;
+                double x, y;
 
-                                    //appWindow.Move(new Windows.Graphics.PointInt32((int)x, (int)y);
+                // dispatcher is used to give the window time to actually resize
+                Dispatcher.Dispatch(() =>
+                {
+                    disp = DeviceDisplay.Current.MainDisplayInfo;
+                    x = (disp.Width / disp.Density - winWidth) / 2;
+                    if (x < 0) 
+                    {
+                        x = 0;
+                    }
+                    y = (disp.Height / disp.Density - winHeight) / 2;
+                    if (y < 0)
+                    {
+                        y = 0;
+                    }
+                    appWindow.Move(new Windows.Graphics.PointInt32((int)x, (int)y));
+                    appWindow.Title = "Crear Clases Tablas (MAUI)";
+                    appWindow.TitleBar.BackgroundColor = Microsoft.UI.ColorHelper.FromArgb(255, 0, 120, 212);// .Colors.SkyBlue;
+                    appWindow.TitleBar.ForegroundColor = Microsoft.UI.Colors.White;
+                });
+
 #endif
             });
 
