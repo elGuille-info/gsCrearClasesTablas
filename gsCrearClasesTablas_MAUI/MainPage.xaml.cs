@@ -100,7 +100,8 @@ namespace gsCrearClasesTablas_MAUI
             // Para ver el tamaño de la ventana:
             // el ancho más adecuado es 1170, con un alto de 1150
             // Lo pongo en 1700x1800 en Windows (1118,66 x 1114,66).
-            txtCodigo.Text = $"Tamaño de la ventana: Width: {Width}, Height: {Height}";
+            txtCodigo.Text = $"Tamaño de la ventana: Width: {Width}, Height: {Height}" + CrearClase.CrLf +
+                             $"Posición: Left: {Bounds.Left}, Top: {Bounds.Top}";
 
             btnMostrarTablas.IsEnabled = false;
 

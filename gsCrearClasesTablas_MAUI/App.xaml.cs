@@ -87,7 +87,8 @@ namespace gsCrearClasesTablas_MAUI
                                     var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
                                     appWindow.Resize(new Windows.Graphics.SizeInt32(winWidth, winHeight));
                                     // Posicionarlo manualmente. (11/oct/22 11.35)
-                                    appWindow.Move(new Windows.Graphics.PointInt32(1200 - winWidth / 2, 100));
+                                    //appWindow.Move(new Windows.Graphics.PointInt32(1200 - winWidth / 2, 100));
+                                    appWindow.Move(new Windows.Graphics.PointInt32(0, 0));
                                     //appWindow.Title = "gsCrearClasesTablas_Maui";
 #endif
             });
