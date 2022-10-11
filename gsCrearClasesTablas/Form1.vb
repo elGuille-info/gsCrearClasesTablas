@@ -59,6 +59,7 @@
 '   3.0.3.2             Habilitar el grupo de grbOpciones según haya tablas en la lista
 '   3.0.5.0 10/oct/2022 Opción para las propiedades auto-implementadas.
 '   3.0.6.0 11/oct/2022 Usando la versión 3.0.8 de gsCrearClases_CS
+'   3.0.6.2             chkUsarAddWithValue solo se usa con chkUsarDataAdapter
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -99,7 +100,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.6.1"
+            s = "3.0.6.2"
         End Try
 
         Return s
@@ -444,6 +445,8 @@ Public Class Form1
     Private Sub chkUsarDataAdapter_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsarDataAdapter.CheckedChanged
         If inicializando Then Return
         chkUsarCommandBuilder.Enabled = chkUsarDataAdapter.Checked
+        ' Esto solo se usa con UsarDataAdapter. (11/oct/22 21.57)
+        chkUsarAddWithValue.Enabled = chkUsarDataAdapter.Checked
     End Sub
 
     Private Sub chkUsarSQLEXpress_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsarSQLEXpress.CheckedChanged

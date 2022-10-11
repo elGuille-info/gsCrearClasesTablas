@@ -494,14 +494,14 @@ Partial Class Form1
         Me.chkUsarAddWithValue.Checked = True
         Me.chkUsarAddWithValue.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkUsarAddWithValue.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.chkUsarAddWithValue.Location = New System.Drawing.Point(10, 108)
+        Me.chkUsarAddWithValue.Location = New System.Drawing.Point(40, 108)
         Me.chkUsarAddWithValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkUsarAddWithValue.Name = "chkUsarAddWithValue"
         Me.chkUsarAddWithValue.Size = New System.Drawing.Size(210, 37)
         Me.chkUsarAddWithValue.TabIndex = 2
         Me.chkUsarAddWithValue.Text = "usar AddWithValue"
         Me.toolTip1.SetToolTip(Me.chkUsarAddWithValue, " Si se utiliza AddWithValue o Add  para añadir los valores a los parámetros del c" &
-        "omando.")
+        "omando (cuando se usa DataAdapter).")
         '
         'chkUsarDataAdapter
         '
