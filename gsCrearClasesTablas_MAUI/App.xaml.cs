@@ -35,12 +35,12 @@ namespace gsCrearClasesTablas_MAUI
         /// <summary>
         /// La versión de la aplicación.
         /// </summary>
-        public static string AppVersion { get; } = "3.0.7";
+        public static string AppVersion { get; } = "3.0.8";
 
         /// <summary>
         /// La versión del fichero (la revisión)
         /// </summary>
-        public static string AppFileVersion { get; } = "3.0.7.5";
+        public static string AppFileVersion { get; } = "3.0.8.0";
 
         /// <summary>
         /// La fecha de última actualización
