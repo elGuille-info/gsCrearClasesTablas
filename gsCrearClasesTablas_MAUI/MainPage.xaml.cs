@@ -100,8 +100,14 @@ namespace gsCrearClasesTablas_MAUI
             // Para ver el tamaño de la ventana:
             // el ancho más adecuado es 1170, con un alto de 1150
             // Lo pongo en 1700x1800 en Windows (1118,66 x 1114,66).
-            txtCodigo.Text = $"Tamaño de la ventana: Width: {Width}, Height: {Height}" + CrearClase.CrLf +
-                             $"Posición: Left: {Bounds.Left}, Top: {Bounds.Top}";
+            // La posición que muestra es la original, no se actualiza al cambiar la posición.
+            var disp = DeviceDisplay.Current.MainDisplayInfo;
+            txtCodigo.Text = $"Tamaño de la pantalla: Width: {disp.Width}, Height: {disp.Height}" + CrearClase.CrLf +
+                             $"Tamaño de la ventana: Width: {Width}, Height: {Height}" + CrearClase.CrLf +
+                             $"Posición: Left: {AppShell.Current.Bounds.Left}, Top: {AppShell.Current.Bounds.Top}";
+
+            //txtCodigo.Text = $"Tamaño de la ventana: Width: {Width}, Height: {Height}" + CrearClase.CrLf +
+            //                 $"Posición: Left: {AppShell.Current.Bounds.Left}, Top: {AppShell.Current.Bounds.Top}";
 
             btnMostrarTablas.IsEnabled = false;
 

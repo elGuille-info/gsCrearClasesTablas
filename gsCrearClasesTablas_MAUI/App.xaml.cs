@@ -75,9 +75,16 @@ namespace gsCrearClasesTablas_MAUI
             Microsoft.Maui.Handlers.WindowHandler.Mapper.AppendToMapping(nameof(IWindow), (handler, view) =>
             {
 #if WINDOWS
+
                         // Asignar manualmente el tamaño. 
                         int winWidth = 1700;
                         int winHeight = 1600; //1800
+
+            // get screen size
+            var disp = DeviceDisplay.Current.MainDisplayInfo;
+            // Aquí aún no tiene tamaño asignado.
+            var x = (disp.Width / disp.Density - winWidth) / 2;
+            var y = (disp.Height / disp.Density - winHeight) / 2;
 
                                     var mauiWindow = handler.VirtualView;
                                     var nativeWindow = handler.PlatformView;
@@ -90,6 +97,8 @@ namespace gsCrearClasesTablas_MAUI
                                     //appWindow.Move(new Windows.Graphics.PointInt32(1200 - winWidth / 2, 100));
                                     appWindow.Move(new Windows.Graphics.PointInt32(0, 0));
                                     //appWindow.Title = "gsCrearClasesTablas_Maui";
+
+                                    //appWindow.Move(new Windows.Graphics.PointInt32((int)x, (int)y);
 #endif
             });
 
