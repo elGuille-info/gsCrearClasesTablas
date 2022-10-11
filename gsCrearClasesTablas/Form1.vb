@@ -62,6 +62,7 @@
 '   3.0.6.2             chkUsarAddWithValue solo se usa con chkUsarDataAdapter
 '   3.0.6.3             Usando la versión 3.0.9 de gsCrearClases_CS
 '   3.0.6.4             Usando la versión 3.0.10 de gsCrearClases_CS
+'   3.0.6.5             Usando la versión 3.0.11 de gsCrearClases_CS
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -102,7 +103,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.6.4"
+            s = "3.0.6.5"
         End Try
 
         Return s
@@ -183,7 +184,9 @@ Public Class Form1
         chkUsarOverrides.Checked = My.Settings.usarOverrides
         ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.30)
         chkPropiedadAuto.Checked = My.Settings.PropiedadAuto
-        '
+        ' Opción para crear el indizador/default property. (11/oct/22 22.58)
+        chkCrearIndizador.Checked = My.Settings.CrearIndizador
+
         btnGuardar.Enabled = False
         grbOpciones.Enabled = btnGuardar.Enabled
         btnGenerarClase.Enabled = False
@@ -415,6 +418,8 @@ Public Class Form1
         My.Settings.usarOverrides = chkUsarOverrides.Checked
         ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.34)
         My.Settings.PropiedadAuto = chkPropiedadAuto.Checked
+        ' Opción para crear el indizador/default property. (11/oct/22 22.58)
+        My.Settings.CrearIndizador = chkCrearIndizador.Checked
         '
         If WindowState = FormWindowState.Normal Then
             My.Settings.Left = Me.Left
@@ -428,20 +433,7 @@ Public Class Form1
         My.Settings.CopyrightVersion = My.Application.Info.Version.ToString
 
         ' Guardar los valore por compatibilidad con la app móvil (.NET MAUI)
-        Using sw = New StreamWriter(FicConfig, False, System.Text.Encoding.Default)
-            sw.WriteLine(If(optSQL.Checked, "1", "0"))
-            sw.WriteLine(txtDataSource.Text)
-            sw.WriteLine(txtInitialCatalog.Text)
-            sw.WriteLine(If(chkSeguridadSQL.Checked, "1", "0"))
-            sw.WriteLine(txtUserId.Text)
-            sw.WriteLine(txtPassword.Text)
-            sw.WriteLine(If(chkUsarDataAdapter.Checked, "1", "0"))
-            sw.WriteLine(If(chkUsarCommandBuilder.Checked, "1", "0"))
-            sw.WriteLine(If(chkUsarAddWithValue.Checked, "1", "0"))
-            sw.WriteLine(If(chkUsarOverrides.Checked, "1", "0"))
-            sw.WriteLine(If(optVB.Checked, "1", "0"))
-            sw.WriteLine(If(chkPropiedadAuto.Checked, "1", "0"))
-        End Using
+        GuardarConfig()
     End Sub
 
     Private Sub chkUsarDataAdapter_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsarDataAdapter.CheckedChanged
@@ -480,6 +472,15 @@ Public Class Form1
             sw.WriteLine(If(chkUsarOverrides.Checked, "1", "0"))
             sw.WriteLine(If(optVB.Checked, "1", "0"))
             sw.WriteLine(If(chkPropiedadAuto.Checked, "1", "0"))
+            sw.WriteLine(If(chkCrearIndizador.Checked, "1", "0"))
         End Using
+    End Sub
+
+    Private Sub optVB_CheckedChanged(sender As Object, e As EventArgs) Handles optVB.CheckedChanged, optCS.CheckedChanged
+        If optVB.Checked Then
+            chkCrearIndizador.Text = "Crear Default Property"
+        Else
+            chkCrearIndizador.Text = "Crear indizador"
+        End If
     End Sub
 End Class

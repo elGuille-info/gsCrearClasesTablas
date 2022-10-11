@@ -99,6 +99,11 @@ namespace elGuille.Util.Developer.Data
         /// </summary>
         public static bool PropiedadAuto { get; set; } = true;
 
+        /// <summary>
+        /// Si se crea la propiedad predeterminada (Item) de VB o el indizador en C#.
+        /// </summary>
+        public static bool CrearIndizador { get; set; } = false;
+
         // estos métodos sólo se usarán desde las clases derivadas
         protected static string GenerarClaseOleDb(eLenguaje lang, bool usarCommandBuilder, string nombreClase, string baseDeDatos, string cadenaSelect, string password, string provider)
         {
@@ -235,7 +240,7 @@ namespace elGuille.Util.Developer.Data
                 sb.AppendFormat("{0}{1}", ConvLang.Comentario(" Por si se utiliza Microsoft.Data en lugar de System.Data."), CrLf);
                 sb.AppendFormat("{0}{1}", ConvLang.Imports("Microsoft.Data.SqlClient"), CrLf);
             }
-                
+
             else
                 sb.AppendFormat("{0}{1}", ConvLang.Imports("System.Data.OleDb"), CrLf);
             sb.AppendFormat("{0}{1}", ConvLang.Comentario(), CrLf);
@@ -345,181 +350,186 @@ namespace elGuille.Util.Developer.Data
                 }
             }
             sb.AppendLine();
-            // 
-            // ------------------------------------------------------------------
-            // Item: propiedad predeterminada (indizador)
-            // permite acceder a los campos mediante un índice numérico
-            // ------------------------------------------------------------------
-            sb.AppendFormat("{0}", ConvLang.DocumentacionXML("    "," Propiedad predeterminada (indizador) Permite acceder mediante un índice numérico"));
-            sb.AppendFormat("    {0}{1}", ConvLang.Property("Public", "String", "index", "Integer"), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" Devuelve el contenido del campo indicado en index"), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" (el índice corresponde con la columna de la tabla)"), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.Get(), CrLf);
-            for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
+
+            // Si se debe crear la propiedad predeterminada (VB) o indizador (C#). (11/oct/22 22.50)
+            if (CrearIndizador)
             {
-                DataColumn col = mDataTable.Columns[i];
-                if (i == 0)
-                    sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "0"), CrLf);
-                else
-                    sb.AppendFormat("            {0}{1}", ConvLang.ElseIf("index", "=", i.ToString()), CrLf);
-                if (col.DataType.ToString() == "System.Byte[]")
-                    // TODO: convertir el array de bytes en una cadena...
-                    sb.AppendFormat("                {0}{1}", ConvLang.Return("<Binario largo>"), CrLf);
-                else
-                    sb.AppendFormat("                {0}{1}", ConvLang.Return("Me." + campos[col.ColumnName].ToString() + ".ToString()"), CrLf);
-            }
-            sb.AppendFormat("            {0}{1}", ConvLang.EndIf(), CrLf);
-            sb.AppendFormat("            {0}{1}", ConvLang.Comentario(" Para que no de error el compilador de C# y"), CrLf);
-            sb.AppendFormat("            {0}{1}", ConvLang.Comentario(" se devuelva el valor <NULO> en caso de que no exista ese campo."), CrLf);
-            sb.AppendFormat("            {0}{1}", ConvLang.Return("\"<NULO>\""), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.EndGet(), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.Set("String"), CrLf);
-            for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
-            {
-                DataColumn col = mDataTable.Columns[i];
-                if (i == 0)
-                    sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "0"), CrLf);
-                else
-                    sb.AppendFormat("            {0}{1}", ConvLang.ElseIf("index", "=", i.ToString()), CrLf);
-                // 
-                switch (col.DataType.ToString())
+                // ------------------------------------------------------------------
+                // Item: propiedad predeterminada (indizador)
+                // permite acceder a los campos mediante un índice numérico
+                // ------------------------------------------------------------------
+                sb.AppendFormat("{0}", ConvLang.DocumentacionXML("    ", " Propiedad predeterminada (indizador) Permite acceder mediante un índice numérico"));
+                sb.AppendFormat("    {0}{1}", ConvLang.Property("Public", "String", "index", "Integer"), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" Devuelve el contenido del campo indicado en index"), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" (el índice corresponde con la columna de la tabla)"), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.Get(), CrLf);
+                for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
                 {
-                    case "System.String":
-                        {
-                            sb.AppendFormat("                {0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), "value"), CrLf);
-                            break;
-                        }
-
-                    case "System.Int16":
-                    case "System.Int32":
-                    case "System.Int64":
-                    case "System.Single":
-                    case "System.Decimal":
-                    case "System.Double":
-                    case "System.Byte":
-                    case "System.SByte":
-                    case "System.UInt16":
-                    case "System.UInt32":
-                    case "System.UInt64":
-                    case "System.Boolean":
-                    case "System.DateTime":
-                    case "System.Char":
-                    case "System.TimeSpan":
-                        {
-                            sb.AppendFormat("                {0}{1}", ConvLang.Asigna(string.Format("Me.{1}", nombreClase, campos[col.ColumnName].ToString()), string.Format("ConversorTipos.{1}Data(value)", col.ColumnName, col.DataType.ToString().Replace("System.", ""))), CrLf);
-                            break;
-                        }
-
-                    case "System.Byte[]":
-                        {
-                            sb.AppendFormat("                {0} Es un Binario largo (array de Byte){1}", ConvLang.Comentario(), CrLf);
-                            sb.AppendFormat("                {0} y por tanto no se le puede asignar el contenido de una cadena...{1}", ConvLang.Comentario(), CrLf);
-                            break;
-                        }
-
-                    default:
-                        {
-                            sb.AppendFormat("                {0}{1}", ConvLang.Comentario(" TODO: Comprobar la conversión a realizar"), CrLf);
-                            sb.AppendFormat("                {0}{1}", ConvLang.Comentario(string.Format("       con el tipo {0}", col.DataType.ToString())), CrLf);
-                            sb.AppendFormat("                {2}{0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), "value"), CrLf, ConvLang.Comentario());
-                            sb.AppendFormat("                {0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), col.DataType.ToString() + ".Parse(value)"), CrLf);
-                            break;
-                        }
+                    DataColumn col = mDataTable.Columns[i];
+                    if (i == 0)
+                        sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "0"), CrLf);
+                    else
+                        sb.AppendFormat("            {0}{1}", ConvLang.ElseIf("index", "=", i.ToString()), CrLf);
+                    if (col.DataType.ToString() == "System.Byte[]")
+                        // TODO: convertir el array de bytes en una cadena...
+                        sb.AppendFormat("                {0}{1}", ConvLang.Return("<Binario largo>"), CrLf);
+                    else
+                        sb.AppendFormat("                {0}{1}", ConvLang.Return("Me." + campos[col.ColumnName].ToString() + ".ToString()"), CrLf);
                 }
-            }
-            sb.AppendFormat("            {0}{1}", ConvLang.EndIf(), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.EndSet(), CrLf);
-            sb.AppendFormat("    {0}{1}", ConvLang.EndProperty(), CrLf);
-            // 
-            // ------------------------------------------------------------------
-            // La propiedad Item usando el nombre de la columna      (11/Jul/04)
-            // ------------------------------------------------------------------
-            sb.AppendFormat("{0}", ConvLang.DocumentacionXML("    "," Propiedad predeterminada (indizador) Permite acceder mediante el nombre de una columna"));
-            sb.AppendFormat("    {0}{1}", ConvLang.Property("Public", "String", "index", "String"), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" Devuelve el contenido del campo indicado en index"), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" (el índice corresponde al nombre de la columna)"), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.Get(), CrLf);
-            for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
-            {
-                DataColumn col = mDataTable.Columns[i];
-                if (i == 0)
-                    sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "\"" + campos[col.ColumnName].ToString() + "\""), CrLf);
-                else
-                    sb.AppendFormat("            {0}{1}", ConvLang.ElseIf("index", "=", "\"" + campos[col.ColumnName].ToString() + "\""), CrLf);
-                if (col.DataType.ToString() == "System.Byte[]")
-                    // TODO: convertir el array de bytes en una cadena...
-                    sb.AppendFormat("                {0}{1}", ConvLang.Return("<Binario largo>"), CrLf);
-                else
-                    sb.AppendFormat("                {0}{1}", ConvLang.Return("Me." + campos[col.ColumnName].ToString() + ".ToString()"), CrLf);
-            }
-            sb.AppendFormat("            {0}{1}", ConvLang.EndIf(), CrLf);
-            sb.AppendFormat("            {0}{1}", ConvLang.Comentario(" Para que no de error el compilador de C# y"), CrLf);
-            sb.AppendFormat("            {0}{1}", ConvLang.Comentario(" se devuelva el valor <NULO> en caso de que no exista ese campo."), CrLf);
-            sb.AppendFormat("            {0}{1}", ConvLang.Return("\"" + "<NULO>" + "\""), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.EndGet(), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.Set("String"), CrLf);
-            for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
-            {
-                DataColumn col = mDataTable.Columns[i];
-                if (i == 0)
-                    sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "\"" + campos[col.ColumnName].ToString() + "\""), CrLf);
-                else
-                    sb.AppendFormat("            {0}{1}", ConvLang.ElseIf("index", "=", "\"" + campos[col.ColumnName].ToString() + "\""), CrLf);
-                // 
-                switch (col.DataType.ToString())
+                sb.AppendFormat("            {0}{1}", ConvLang.EndIf(), CrLf);
+                sb.AppendFormat("            {0}{1}", ConvLang.Comentario(" Para que no de error el compilador de C# y"), CrLf);
+                sb.AppendFormat("            {0}{1}", ConvLang.Comentario(" se devuelva el valor <NULO> en caso de que no exista ese campo."), CrLf);
+                sb.AppendFormat("            {0}{1}", ConvLang.Return("\"<NULO>\""), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.EndGet(), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.Set("String"), CrLf);
+                for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
                 {
-                    case "System.String":
-                        {
-                            sb.AppendFormat("                {0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), "value"), CrLf);
-                            break;
-                        }
+                    DataColumn col = mDataTable.Columns[i];
+                    if (i == 0)
+                        sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "0"), CrLf);
+                    else
+                        sb.AppendFormat("            {0}{1}", ConvLang.ElseIf("index", "=", i.ToString()), CrLf);
+                    // 
+                    switch (col.DataType.ToString())
+                    {
+                        case "System.String":
+                            {
+                                sb.AppendFormat("                {0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), "value"), CrLf);
+                                break;
+                            }
 
-                    case "System.Int16":
-                    case "System.Int32":
-                    case "System.Int64":
-                    case "System.Single":
-                    case "System.Decimal":
-                    case "System.Double":
-                    case "System.Byte":
-                    case "System.SByte":
-                    case "System.UInt16":
-                    case "System.UInt32":
-                    case "System.UInt64":
-                    case "System.Boolean":
-                    case "System.DateTime":
-                    case "System.Char":
-                    case "System.TimeSpan":
-                        {
-                            sb.AppendFormat("                {0}{1}", ConvLang.Asigna(string.Format("Me.{1}", nombreClase, campos[col.ColumnName].ToString()), string.Format("ConversorTipos.{1}Data(value)", col.ColumnName, col.DataType.ToString().Replace("System.", ""))), CrLf);
-                            break;
-                        }
+                        case "System.Int16":
+                        case "System.Int32":
+                        case "System.Int64":
+                        case "System.Single":
+                        case "System.Decimal":
+                        case "System.Double":
+                        case "System.Byte":
+                        case "System.SByte":
+                        case "System.UInt16":
+                        case "System.UInt32":
+                        case "System.UInt64":
+                        case "System.Boolean":
+                        case "System.DateTime":
+                        case "System.Char":
+                        case "System.TimeSpan":
+                            {
+                                sb.AppendFormat("                {0}{1}", ConvLang.Asigna(string.Format("Me.{1}", nombreClase, campos[col.ColumnName].ToString()), string.Format("ConversorTipos.{1}Data(value)", col.ColumnName, col.DataType.ToString().Replace("System.", ""))), CrLf);
+                                break;
+                            }
 
-                    case "System.Byte[]":
-                        {
-                            sb.AppendFormat("                {0} Es un Binario largo (array de Byte){1}", ConvLang.Comentario(), CrLf);
-                            sb.AppendFormat("                {0} y por tanto no se le puede asignar el contenido de una cadena...{1}", ConvLang.Comentario(), CrLf);
-                            break;
-                        }
+                        case "System.Byte[]":
+                            {
+                                sb.AppendFormat("                {0} Es un Binario largo (array de Byte){1}", ConvLang.Comentario(), CrLf);
+                                sb.AppendFormat("                {0} y por tanto no se le puede asignar el contenido de una cadena...{1}", ConvLang.Comentario(), CrLf);
+                                break;
+                            }
 
-                    default:
-                        {
-                            sb.AppendFormat("                {0}{1}", ConvLang.Comentario(" TODO: Comprobar la conversión a realizar"), CrLf);
-                            sb.AppendFormat("                {0}{1}", ConvLang.Comentario(string.Format("       con el tipo {0}", col.DataType.ToString())), CrLf);
-                            sb.AppendFormat("                {2}{0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), "value"), CrLf, ConvLang.Comentario());
-                            sb.AppendFormat("                {0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), col.DataType.ToString() + ".Parse(value)"), CrLf);
-                            break;
-                        }
+                        default:
+                            {
+                                sb.AppendFormat("                {0}{1}", ConvLang.Comentario(" TODO: Comprobar la conversión a realizar"), CrLf);
+                                sb.AppendFormat("                {0}{1}", ConvLang.Comentario(string.Format("       con el tipo {0}", col.DataType.ToString())), CrLf);
+                                sb.AppendFormat("                {2}{0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), "value"), CrLf, ConvLang.Comentario());
+                                sb.AppendFormat("                {0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), col.DataType.ToString() + ".Parse(value)"), CrLf);
+                                break;
+                            }
+                    }
                 }
-            }
-            sb.AppendFormat("            {0}{1}", ConvLang.EndIf(), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.EndSet(), CrLf);
-            sb.AppendFormat("    {0}{1}", ConvLang.EndProperty(), CrLf);
+                sb.AppendFormat("            {0}{1}", ConvLang.EndIf(), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.EndSet(), CrLf);
+                sb.AppendFormat("    {0}{1}", ConvLang.EndProperty(), CrLf);
+                // 
+                // ------------------------------------------------------------------
+                // La propiedad Item usando el nombre de la columna      (11/Jul/04)
+                // ------------------------------------------------------------------
+                sb.AppendFormat("{0}", ConvLang.DocumentacionXML("    ", " Propiedad predeterminada (indizador) Permite acceder mediante el nombre de una columna"));
+                sb.AppendFormat("    {0}{1}", ConvLang.Property("Public", "String", "index", "String"), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" Devuelve el contenido del campo indicado en index"), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" (el índice corresponde al nombre de la columna)"), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.Get(), CrLf);
+                for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
+                {
+                    DataColumn col = mDataTable.Columns[i];
+                    if (i == 0)
+                        sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "\"" + campos[col.ColumnName].ToString() + "\""), CrLf);
+                    else
+                        sb.AppendFormat("            {0}{1}", ConvLang.ElseIf("index", "=", "\"" + campos[col.ColumnName].ToString() + "\""), CrLf);
+                    if (col.DataType.ToString() == "System.Byte[]")
+                        // TODO: convertir el array de bytes en una cadena...
+                        sb.AppendFormat("                {0}{1}", ConvLang.Return("<Binario largo>"), CrLf);
+                    else
+                        sb.AppendFormat("                {0}{1}", ConvLang.Return("Me." + campos[col.ColumnName].ToString() + ".ToString()"), CrLf);
+                }
+                sb.AppendFormat("            {0}{1}", ConvLang.EndIf(), CrLf);
+                sb.AppendFormat("            {0}{1}", ConvLang.Comentario(" Para que no de error el compilador de C# y"), CrLf);
+                sb.AppendFormat("            {0}{1}", ConvLang.Comentario(" se devuelva el valor <NULO> en caso de que no exista ese campo."), CrLf);
+                sb.AppendFormat("            {0}{1}", ConvLang.Return("\"" + "<NULO>" + "\""), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.EndGet(), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.Set("String"), CrLf);
+                for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
+                {
+                    DataColumn col = mDataTable.Columns[i];
+                    if (i == 0)
+                        sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "\"" + campos[col.ColumnName].ToString() + "\""), CrLf);
+                    else
+                        sb.AppendFormat("            {0}{1}", ConvLang.ElseIf("index", "=", "\"" + campos[col.ColumnName].ToString() + "\""), CrLf);
+                    // 
+                    switch (col.DataType.ToString())
+                    {
+                        case "System.String":
+                            {
+                                sb.AppendFormat("                {0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), "value"), CrLf);
+                                break;
+                            }
 
-            sb.AppendLine();
-            sb.AppendFormat("    {0}{1}", ConvLang.Comentario("-------------------------------------------------------------------------"), CrLf);
-            sb.AppendFormat("    {0}{1}", ConvLang.Comentario(" Campos y métodos compartidos (estáticos) para gestionar la base de datos"), CrLf);
-            sb.AppendFormat("    {0}{1}", ConvLang.Comentario("-------------------------------------------------------------------------"), CrLf);
-            sb.AppendLine();
+                        case "System.Int16":
+                        case "System.Int32":
+                        case "System.Int64":
+                        case "System.Single":
+                        case "System.Decimal":
+                        case "System.Double":
+                        case "System.Byte":
+                        case "System.SByte":
+                        case "System.UInt16":
+                        case "System.UInt32":
+                        case "System.UInt64":
+                        case "System.Boolean":
+                        case "System.DateTime":
+                        case "System.Char":
+                        case "System.TimeSpan":
+                            {
+                                sb.AppendFormat("                {0}{1}", ConvLang.Asigna(string.Format("Me.{1}", nombreClase, campos[col.ColumnName].ToString()), string.Format("ConversorTipos.{1}Data(value)", col.ColumnName, col.DataType.ToString().Replace("System.", ""))), CrLf);
+                                break;
+                            }
+
+                        case "System.Byte[]":
+                            {
+                                sb.AppendFormat("                {0} Es un Binario largo (array de Byte){1}", ConvLang.Comentario(), CrLf);
+                                sb.AppendFormat("                {0} y por tanto no se le puede asignar el contenido de una cadena...{1}", ConvLang.Comentario(), CrLf);
+                                break;
+                            }
+
+                        default:
+                            {
+                                sb.AppendFormat("                {0}{1}", ConvLang.Comentario(" TODO: Comprobar la conversión a realizar"), CrLf);
+                                sb.AppendFormat("                {0}{1}", ConvLang.Comentario(string.Format("       con el tipo {0}", col.DataType.ToString())), CrLf);
+                                sb.AppendFormat("                {2}{0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), "value"), CrLf, ConvLang.Comentario());
+                                sb.AppendFormat("                {0}{1}", ConvLang.Asigna("Me." + campos[col.ColumnName].ToString(), col.DataType.ToString() + ".Parse(value)"), CrLf);
+                                break;
+                            }
+                    }
+                }
+                sb.AppendFormat("            {0}{1}", ConvLang.EndIf(), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.EndSet(), CrLf);
+                sb.AppendFormat("    {0}{1}", ConvLang.EndProperty(), CrLf);
+
+                sb.AppendLine();
+                sb.AppendFormat("    {0}{1}", ConvLang.Comentario("-------------------------------------------------------------------------"), CrLf);
+                sb.AppendFormat("    {0}{1}", ConvLang.Comentario(" Campos y métodos compartidos (estáticos) para gestionar la base de datos"), CrLf);
+                sb.AppendFormat("    {0}{1}", ConvLang.Comentario("-------------------------------------------------------------------------"), CrLf);
+                sb.AppendLine();
+            }
+            // fin de crear el indizador.
 
             // ------------------------------------------------------------------
             // la cadena de conexión
@@ -684,8 +694,6 @@ namespace elGuille.Util.Developer.Data
 
             */
             #endregion
-
-            //</Quitar todo esto
 
             // 
             // Métodos públicos compartidos (estáticos)

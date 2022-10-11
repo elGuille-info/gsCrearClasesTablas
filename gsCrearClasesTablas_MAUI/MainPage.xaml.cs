@@ -382,6 +382,12 @@ namespace gsCrearClasesTablas_MAUI
                 else
                     sTmp = "1";
                 chkPropiedadAuto.IsChecked = sTmp == "1";
+                // Que tenga false como valore predeterminado.
+                if (!sr.EndOfStream)
+                    sTmp = sr.ReadLine();
+                else
+                    sTmp = "0";
+                chkCrearIndizador.IsChecked = sTmp == "1";
             }
             chkUsarCommandBuilder.IsEnabled = chkUsarDataAdapter.IsChecked;
             chkUsarAddWithValue.IsEnabled = chkUsarDataAdapter.IsChecked;
@@ -406,6 +412,7 @@ namespace gsCrearClasesTablas_MAUI
                 sw.WriteLine(chkUsarOverrides.IsChecked ? "1" : "0");
                 sw.WriteLine(optVB.IsToggled ? "1" : "0");
                 sw.WriteLine(chkPropiedadAuto.IsChecked ? "1" : "0");
+                sw.WriteLine(chkCrearIndizador.IsChecked ? "1" : "0");
             }
         }
 
@@ -417,6 +424,7 @@ namespace gsCrearClasesTablas_MAUI
                 //chkUsarAddWithValue.IsEnabled = grbOpciones.IsEnabled;
                 chkUsarOverrides.IsEnabled = grbOpciones.IsEnabled;
                 chkPropiedadAuto.IsEnabled = grbOpciones.IsEnabled;
+                chkCrearIndizador.IsEnabled = grbOpciones.IsEnabled;
 
                 grbLenguaje.IsEnabled = grbOpciones.IsEnabled;
                 
@@ -460,9 +468,24 @@ namespace gsCrearClasesTablas_MAUI
             grbOpcionesComandos.IsVisible = isExpanded;
         }
 
-        //private void expOpcionesCodigo_Expanded(object sender, bool isExpanded)
-        //{
-        //    grbOpcionesCodigo.IsVisible = isExpanded;
-        //}
+        private void optVB_Toggled(object sender, ToggledEventArgs e)
+        {
+            /*
+                    If optVB.Checked Then
+                        chkCrearIndizador.Text = "Crear Default Property"
+                    Else
+                        chkCrearIndizador.Text = "Crear indizador"
+                    End If
+
+            */
+            if (optVB.IsToggled)
+            {
+                chkCrearIndizador.Text = "Crear Default Property";
+            }
+            else
+            {
+                chkCrearIndizador.Text = "Crear indizador";
+            }
+        }
     }
 }

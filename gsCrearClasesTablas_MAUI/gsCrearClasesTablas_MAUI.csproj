@@ -20,7 +20,7 @@
 		<ApplicationVersion>3</ApplicationVersion>
 		
 		<Version>3.0.7</Version>
-		<FileVersion>3.0.7.3</FileVersion>
+		<FileVersion>3.0.7.4</FileVersion>
 		<Copyright>©Guillermo Som (elGuille), 2022</Copyright>
 		<Description>Generar clases a partir de una tabla de una base de datos de SQL Server. Usando .NET MAUI con .NET 6.0  (revisión del 11-oct-2022)</Description>
 		<Authors>elGuille</Authors>

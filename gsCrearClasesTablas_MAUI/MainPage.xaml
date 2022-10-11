@@ -150,6 +150,12 @@
                                 <Label Text="Usar propiedades auto-implementadas si el tipo no es String."
                                        FontSize="13" Margin="12,0,0,0"/>
                             </StackLayout>
+                            <StackLayout>
+                                <xct:CheckLabel x:Name="chkCrearIndizador" IsChecked="False"
+                                                Text="Crear indizador (Default Property)"/>
+                                <Label Text="Crear el indizador o propiedad predeterminada (en VB)."
+                                       FontSize="13" Margin="12,0,0,0"/>
+                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
@@ -204,34 +210,36 @@
                                 <Entry x:Name="txtClase" Style="{StaticResource EntryText}" WidthRequest="200"/>
                             </StackLayout>
                             <StackLayout x:Name="grbLenguaje" Orientation="Horizontal" 
-                                     PropertyChanged="grbLenguaje_PropertyChanged">
+                                         PropertyChanged="grbLenguaje_PropertyChanged">
                                 <Label Text="Lenguaje:"/>
                                 <xct:SwitchLabel x:Name="optVB" Text="Visual Basic" 
-                                             IsToggled="True" Margin="12,0,0,0">
+                                                 IsToggled="True" Margin="12,0,0,0"
+                                                 Toggled="optVB_Toggled">
                                     <xct:SwitchLabel.Triggers>
                                         <DataTrigger TargetType="xct:SwitchLabel"
-                                                 Binding="{Binding Source={x:Reference optCS}, Path=IsToggled}"
-                                                 Value="False">
+                                                     Binding="{Binding Source={x:Reference optCS}, Path=IsToggled}"
+                                                     Value="False">
                                             <Setter Property="IsToggled" Value="True" />
                                         </DataTrigger>
                                         <DataTrigger TargetType="xct:SwitchLabel"
-                                                 Binding="{Binding Source={x:Reference optCS}, Path=IsToggled}"
-                                                 Value="True">
+                                                     Binding="{Binding Source={x:Reference optCS}, Path=IsToggled}"
+                                                     Value="True">
                                             <Setter Property="IsToggled" Value="False" />
                                         </DataTrigger>
                                     </xct:SwitchLabel.Triggers>
                                 </xct:SwitchLabel>
                                 <xct:SwitchLabel x:Name="optCS" Text="C#" 
-                                             IsToggled="False" Margin="8,0,0,0">
+                                                 IsToggled="False" Margin="8,0,0,0"
+                                                 Toggled="optVB_Toggled">
                                     <xct:SwitchLabel.Triggers>
                                         <DataTrigger TargetType="xct:SwitchLabel"
-                                                 Binding="{Binding Source={x:Reference optVB}, Path=IsToggled}"
-                                                 Value="False">
+                                                     Binding="{Binding Source={x:Reference optVB}, Path=IsToggled}"
+                                                     Value="False">
                                             <Setter Property="IsToggled" Value="True" />
                                         </DataTrigger>
                                         <DataTrigger TargetType="xct:SwitchLabel"
-                                                 Binding="{Binding Source={x:Reference optVB}, Path=IsToggled}"
-                                                 Value="True">
+                                                     Binding="{Binding Source={x:Reference optVB}, Path=IsToggled}"
+                                                     Value="True">
                                             <Setter Property="IsToggled" Value="False" />
                                         </DataTrigger>
                                     </xct:SwitchLabel.Triggers>

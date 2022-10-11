@@ -8,6 +8,17 @@
 ### Revisiones de 2022
 
 ```
+'<revision("3.0.11.0", _
+'   FechaModificacion:= "11/Oct/2022", _
+'   Tester:= "elGuille", _
+'   FechaReporte:= "11/Oct/2022", _
+'   Tipo:= "Revisión", _
+'   Clases:= "CrearClase", _
+'   Miembro:= "generarClase", _
+'   Motivo:= "Poner opcional la creación del indizador (propiedad predeterminada/Item).", _
+'   Solucion:= "Añadir opción CrearIndizador.", _
+'   Comentarios:= "Yo raramente los utilizo, así que lo pondré opcional.")>
+
 '<revision("3.0.10.0", _
 '   FechaModificacion:= "11/Oct/2022", _
 '   Tester:= "elGuille", _

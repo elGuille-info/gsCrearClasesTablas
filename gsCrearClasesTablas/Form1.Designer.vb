@@ -69,6 +69,7 @@ Partial Class Form1
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LabelInfo = New System.Windows.Forms.ToolStripStatusLabel()
         Me.LabelVersion = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.chkCrearIndizador = New System.Windows.Forms.CheckBox()
         Me.grbAccess.SuspendLayout()
         Me.grbSQL.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -142,7 +143,7 @@ Partial Class Form1
         Me.btnGenerarClase.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnGenerarClase.Name = "btnGenerarClase"
         Me.btnGenerarClase.Size = New System.Drawing.Size(172, 42)
-        Me.btnGenerarClase.TabIndex = 6
+        Me.btnGenerarClase.TabIndex = 7
         Me.btnGenerarClase.Text = "Generar &Clase"
         Me.toolTip1.SetToolTip(Me.btnGenerarClase, " Generar el código de la clase en el lenguaje indicado ")
         '
@@ -425,7 +426,7 @@ Partial Class Form1
         Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(172, 44)
-        Me.Panel1.TabIndex = 5
+        Me.Panel1.TabIndex = 6
         '
         'optCS
         '
@@ -551,6 +552,7 @@ Partial Class Form1
         '
         Me.grbOpciones.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grbOpciones.Controls.Add(Me.chkCrearIndizador)
         Me.grbOpciones.Controls.Add(Me.chkPropiedadAuto)
         Me.grbOpciones.Controls.Add(Me.chkUsarCommandBuilder)
         Me.grbOpciones.Controls.Add(Me.chkUsarOverrides)
@@ -593,6 +595,18 @@ Partial Class Form1
         Me.LabelVersion.Name = "LabelVersion"
         Me.LabelVersion.Size = New System.Drawing.Size(130, 29)
         Me.LabelVersion.Text = "v3.0.0 (3.0.0.0)"
+        '
+        'chkCrearIndizador
+        '
+        Me.chkCrearIndizador.AutoSize = True
+        Me.chkCrearIndizador.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.chkCrearIndizador.Location = New System.Drawing.Point(442, 102)
+        Me.chkCrearIndizador.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.chkCrearIndizador.Name = "chkCrearIndizador"
+        Me.chkCrearIndizador.Size = New System.Drawing.Size(315, 30)
+        Me.chkCrearIndizador.TabIndex = 5
+        Me.chkCrearIndizador.Text = "Crear indizador (Default Property)"
+        Me.toolTip1.SetToolTip(Me.chkCrearIndizador, "Si se debe crear la propiedad predeterminada (Item en VB) o indizador (C#)")
         '
         'Form1
         '
@@ -681,4 +695,5 @@ Partial Class Form1
     Private WithEvents LabelInfo As ToolStripStatusLabel
     Friend WithEvents LabelVersion As ToolStripStatusLabel
     Private WithEvents chkPropiedadAuto As CheckBox
+    Private WithEvents chkCrearIndizador As CheckBox
 End Class
