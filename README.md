@@ -8,7 +8,15 @@ Mira en el blog para saber más y los enlaces a las versiones anteriores: [Gener
 <br>
 <br>
 
-### El _nightmare_ de los assets para windows
+### Ya está disponible en Microsoft Store la versión de Windows
+
+Para descargar desde la app Microsoft Store: ms-windows-store://pdp/?productid=9MVGBRWG1W2V <br>
+Para descargar desde el navegador (te manda a la MS Store): [gsCrearClasesTablas_MAUI](https://www.microsoft.com/store/apps/9MVGBRWG1W2V)<br>
+
+<br>
+<br>
+
+### El _nightmare_ de los assets para Windows
 
 Pues eso... que otras veces me ha funcionado bien elegir una imagen para crear las imágenes usadas por Windows (para poder publicarla en la Microsoft Store), pero en esta aplicación me hada dado un poquillo _polc*lo_.
 
