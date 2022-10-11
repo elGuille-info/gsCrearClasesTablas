@@ -96,6 +96,7 @@
                     <StackLayout x:Name="grbOpciones" Orientation="Horizontal" 
                                  Style="{StaticResource StackConMargen}" Margin="2"
                                  PropertyChanged="grbOpciones_PropertyChanged">
+                        <!-- Esto estará en la parte izquierda -->
                         <StackLayout Margin="0">
                             <xct:CheckLabel x:Name="chkUsarDataAdapter" IsChecked="False"
                                             Text="Usar DataAdpater en lugar de cmd.Execute"/>
@@ -115,24 +116,27 @@
                                     </DataTrigger>
                                 </xct:CheckLabel.Triggers>
                             </xct:CheckLabel>
-                            <StackLayout Orientation="Horizontal">
+                            <StackLayout>
                                 <StackLayout>
                                     <xct:CheckLabel x:Name="chkUsarAddWithValue"
                                                     Text="Usar AddWithValue"/>
-                                    <Label Text="Si se utiliza AddWithValue o Add para añadir los valores a los parámetros del comando."
+                                    <Label Text="Usar AddWithValue o Add para añadir los valores a los parámetros del comando."
                                            FontSize="13" Margin="12,0,0,0"/>
                                 </StackLayout>
                                 <StackLayout>
                                     <xct:CheckLabel x:Name="chkUsarOverrides"
                                                     Text="Usar Overrides"/>
-                                    <Label Text="Si se debe usar Overrides en los métodos Actualizar, Crear y Borrar."
+                                    <Label Text="Usar Overrides en los métodos Actualizar, Crear y Borrar."
                                            FontSize="13" Margin="12,0,0,0"/>
                                 </StackLayout>
                             </StackLayout>
+                        </StackLayout>
+                        <!-- Esto estará en la parte derecha -->
+                        <StackLayout Margin="12,0,0,0">
                             <StackLayout>
                                 <xct:CheckLabel x:Name="chkPropiedadAuto" IsChecked="True"
                                                 Text="Propiedades auto-implementadas"/>
-                                <Label Text="Cuando el tipo no es String usar propiedades auto-implementadas (sin cuerpo get/set)."
+                                <Label Text="Usar propiedades auto-implementadas si el tipo no es String."
                                        FontSize="13" Margin="12,0,0,0"/>
                             </StackLayout>
                         </StackLayout>
