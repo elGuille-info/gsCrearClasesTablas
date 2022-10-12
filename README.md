@@ -13,6 +13,8 @@ Mira en el blog para saber más y los enlaces a las versiones anteriores: [Gener
 Para descargar desde la app Microsoft Store: ms-windows-store://pdp/?productid=9MVGBRWG1W2V <br>
 Para descargar desde el navegador (te manda a la MS Store): [gsCrearClasesTablas_MAUI](https://www.microsoft.com/store/apps/9MVGBRWG1W2V)<br>
 
+**12-oct-2022:** Publicada la v3.0.8 en Microsoft Store.
+
 <br>
 <br>
 
