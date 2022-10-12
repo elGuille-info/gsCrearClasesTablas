@@ -105,7 +105,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.8.0"
+            s = "3.0.8.1"
         End Try
 
         Return s

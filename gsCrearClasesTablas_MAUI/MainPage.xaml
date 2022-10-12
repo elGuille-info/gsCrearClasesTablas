@@ -260,7 +260,7 @@
                         <Label x:Name="LabelCodigo" FontSize="13" Text="Código generado:" 
                                Padding="4" BackgroundColor="WhiteSmoke" HorizontalOptions="FillAndExpand"/>
                         <Editor x:Name="txtCodigo" FontFamily="Consolas" FontSize="14"
-                                HeightRequest="500" MaxLength="99999" />
+                                HeightRequest="500" />
                     </StackLayout>
                 </Frame>
             </StackLayout>

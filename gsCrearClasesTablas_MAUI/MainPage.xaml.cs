@@ -211,9 +211,11 @@ namespace gsCrearClasesTablas_MAUI
             LabelCodigo.TextColor = Colors.White;
 
             await App.Refrescar(10);
-            // Es curioso, si esta línea está delante de las 2 anteriores,
+
+            // Es curioso, si esta línea está delante de las anteriores,
             // solo se ve la primera línea del código (aunque el resto sigue estando)
-            txtCodigo.Text = "";
+            // De todas formas, no se ve que se quita el código. Lo comento.
+            //txtCodigo.Text = "";
 
             GuardarConfig();
 

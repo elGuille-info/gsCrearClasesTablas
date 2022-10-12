@@ -611,8 +611,7 @@ Partial Class Form1
         '
         'LabelCodigo
         '
-        Me.LabelCodigo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LabelCodigo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LabelCodigo.Location = New System.Drawing.Point(952, 797)
         Me.LabelCodigo.Name = "LabelCodigo"
         Me.LabelCodigo.Size = New System.Drawing.Size(178, 37)
