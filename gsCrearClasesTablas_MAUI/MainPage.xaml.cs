@@ -202,9 +202,19 @@ namespace gsCrearClasesTablas_MAUI
             btnMostrarTablas.IsEnabled = true;
         }
 
-        private void btnGenerarClase_Clicked(object sender, EventArgs e)
+        private async void btnGenerarClase_Clicked(object sender, EventArgs e)
         {
+            Stopwatch sw = Stopwatch.StartNew();
+
+            LabelCodigo.Text = "Generando el código...";
+            LabelCodigo.BackgroundColor = Colors.MediumTurquoise;
+            LabelCodigo.TextColor = Colors.White;
+
+            await App.Refrescar(10);
+            // Es curioso, si esta línea está delante de las 2 anteriores,
+            // solo se ve la primera línea del código (aunque el resto sigue estando)
             txtCodigo.Text = "";
+
             GuardarConfig();
 
             // Si la tabla contiene espacios,                            (02/Nov/04)
@@ -241,17 +251,34 @@ namespace gsCrearClasesTablas_MAUI
                 laTabla = (cboTablas.SelectedItem as TablaItem).Nombre;
             }
 
+            string elCodigo;
+
             if (optVB.IsToggled)
             {
-                if (optSQL.IsChecked)
-                    txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
-                //else
-                //    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
+                elCodigo = CrearClaseSQL.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
+
+                //if (optSQL.IsChecked)
+                //    txtCodigo.Text = await CrearClaseSQL.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
+                ////else
+                ////    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
             }
-            else if (optSQL.IsChecked)
-                txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
-            //else
-            //    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
+            else
+            {
+                elCodigo = CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
+                //if (optSQL.IsChecked)
+                //    txtCodigo.Text = await CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
+                ////else
+                ////    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
+            }
+
+            //await App.Refrescar(10);
+            txtCodigo.Text = elCodigo;
+
+            sw.Stop();
+
+            LabelCodigo.Text = $"Código generado en {sw.Elapsed.TotalSeconds:#,##0.####} segundos";
+            LabelCodigo.BackgroundColor = Colors.WhiteSmoke;
+            LabelCodigo.TextColor = Colors.Black;
 
             btnCopiarClipBoard.IsEnabled = true;
         }

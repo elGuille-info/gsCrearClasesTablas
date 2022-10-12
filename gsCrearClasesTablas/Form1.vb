@@ -64,6 +64,7 @@
 '   3.0.6.4             Usando la versión 3.0.10 de gsCrearClases_CS
 '   3.0.6.5~6           Usando la versión 3.0.11 de gsCrearClases_CS
 '   3.0.7.0             Usando la versión 3.0.12 de gsCrearClases_CS
+'   3.0.8.0 12/oct/2022 Mostrar generando y el tiempo empleado
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -104,7 +105,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.7.0"
+            s = "3.0.8.0"
         End Try
 
         Return s
@@ -262,7 +263,16 @@ Public Class Form1
         End If
     End Sub
     '
-    Private Sub btnGenerarClase_Click(sender As Object, e As EventArgs) Handles btnGenerarClase.Click
+    Private Async Sub btnGenerarClase_Click(sender As Object, e As EventArgs) Handles btnGenerarClase.Click
+        Dim sw = Stopwatch.StartNew()
+
+        LabelCodigo.Text = "Generando..."
+        LabelCodigo.BackColor = Color.MediumTurquoise
+        LabelCodigo.ForeColor = Color.White
+        LabelCodigo.Size = New Size(178, 35)
+
+        Await Task.Delay(10)
+
         ' generar la clase a partir de la tabla seleccionada
         If txtSelect.Text = "" Then
             MessageBox.Show("Debes especificar la cadena de selección de datos",
@@ -271,7 +281,7 @@ Public Class Form1
             txtSelect.Focus()
             Return
         End If
-        '
+
         txtCodigo.Text = ""
         guardarCfg()
         '
@@ -321,6 +331,14 @@ Public Class Form1
                                                               txtSelect.Text, txtAccessPassword.Text, txtProvider.Text)
             End If
         End If
+
+        sw.Stop()
+
+        LabelCodigo.Text = $"Código generado en {sw.Elapsed.TotalSeconds:#,##0.####} segundos"
+        LabelCodigo.BackColor = Color.FromKnownColor(KnownColor.Control)
+        LabelCodigo.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
+        LabelCodigo.Size = New Size(178, 75)
+
     End Sub
     '
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click

@@ -35,12 +35,12 @@ namespace gsCrearClasesTablas_MAUI
         /// <summary>
         /// La versión de la aplicación.
         /// </summary>
-        public static string AppVersion { get; } = "3.0.8";
+        public static string AppVersion { get; } = "3.0.9";
 
         /// <summary>
         /// La versión del fichero (la revisión)
         /// </summary>
-        public static string AppFileVersion { get; } = "3.0.8.0";
+        public static string AppFileVersion { get; } = "3.0.9.0";
 
         /// <summary>
         /// La fecha de última actualización
@@ -49,7 +49,7 @@ namespace gsCrearClasesTablas_MAUI
 
         // Intentar no pasar de estas marcas: 60 caracteres. 2         3         4         5         6
         //                                ---------|---------|---------|---------|---------|---------|
-        //[COPIAR]AppDescripcionCopia = " cambio versión al poder usar el indizador"
+        //[COPIAR]AppDescripcionCopia = " Mostrar generando y el tiempo empleado"
 
 
         public App()
@@ -60,16 +60,16 @@ namespace gsCrearClasesTablas_MAUI
             //DeviceIdiom = DeviceInfo.Idiom;
 
             // Esto parece que no funciona en MAUI.
-            //#if WINDOWS
-            //            // Asignar manualmente el tamaño según esté definido en la App del proyecto con la funcionalidad.
-            //            //double winWidth = 1700; //laApp.WindowsWidth;
-            //            //double winHeight = 1800; //laApp.WindowsHeight;
+//#if WINDOWS
+//            // Asignar manualmente el tamaño según esté definido en la App del proyecto con la funcionalidad.
+//            //double winWidth = 1700; //laApp.WindowsWidth;
+//            //double winHeight = 1800; //laApp.WindowsHeight;
 
-            //            //ApplicationView.PreferredLaunchViewSize = new Windows.Foundation.Size(winWidth, winHeight);
-            //            //ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            //            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.Auto;
+//            //ApplicationView.PreferredLaunchViewSize = new Windows.Foundation.Size(winWidth, winHeight);
+//            //ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+//            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.Auto;
 
-            //#endif
+//#endif
 
             // Indicar el tamaño para la app de Windows.
             Microsoft.Maui.Handlers.WindowHandler.Mapper.AppendToMapping(nameof(IWindow), (handler, view) =>

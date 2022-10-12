@@ -246,10 +246,10 @@
                                 </xct:SwitchLabel>
                                 <StackLayout Orientation="Horizontal" Margin="{OnPlatform iOS='12,0,0,0', Default='0'}">
                                     <Button x:Name="btnGenerarClase" Text="Generar Clase"
-                                        HorizontalOptions="FillAndExpand"
-                                        Clicked="btnGenerarClase_Clicked"/>
+                                            HorizontalOptions="FillAndExpand"
+                                            Clicked="btnGenerarClase_Clicked"/>
                                     <Button x:Name="btnCopiarClipBoard" Text="Copiar Clipboard"
-                                        Clicked="btnCopiarClipBoard_Clicked" Margin="12,0,0,0"/>
+                                            Clicked="btnCopiarClipBoard_Clicked" Margin="12,0,0,0"/>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
@@ -257,10 +257,10 @@
                 </Frame>
                 <Frame Margin="-8,4">
                     <StackLayout Style="{StaticResource StackConMargen}" Margin="2" Spacing="6">
-                        <Label FontSize="13" Text="Código generado:" 
+                        <Label x:Name="LabelCodigo" FontSize="13" Text="Código generado:" 
                                Padding="4" BackgroundColor="WhiteSmoke" HorizontalOptions="FillAndExpand"/>
                         <Editor x:Name="txtCodigo" FontFamily="Consolas" FontSize="14"
-                                HeightRequest="500"/>
+                                HeightRequest="500" MaxLength="99999" />
                     </StackLayout>
                 </Frame>
             </StackLayout>

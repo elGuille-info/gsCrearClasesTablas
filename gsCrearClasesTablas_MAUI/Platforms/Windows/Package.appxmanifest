@@ -6,7 +6,7 @@
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   IgnorableNamespaces="uap rescap mp">
 
-  <Identity Name="30481elGuille.info.49663C03BCA84" Publisher="CN=F38F01A4-356D-413A-9B95-191B2D6030BD" Version="3.0.6.0" />
+  <Identity Name="30481elGuille.info.49663C03BCA84" Publisher="CN=F38F01A4-356D-413A-9B95-191B2D6030BD" Version="3.0.8.0" />
 	<mp:PhoneIdentity PhoneProductId="443fd6fc-db51-4ce5-b634-fbcd05abf8bb" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>

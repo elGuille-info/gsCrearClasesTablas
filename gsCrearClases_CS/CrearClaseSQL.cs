@@ -223,8 +223,27 @@ namespace elGuille.Util.Developer.Data
         // 
         public static string GenerarClase(eLenguaje lang, bool usarCommandBuilder, string nombreClase, string nomTabla, string dataSource, string initialCatalog, string cadenaSelect, string userId, string password, bool usarSeguridadSQL)
         {
+            //return await Task.Run(() => 
+            //{
+            //    string s;
+            //    // 
+            //    nombreTabla = nomTabla;
+            //    if (nombreTabla == "" || nombreClase == "")
+            //        return "ERROR, no se ha indicado el nombre de la tabla o de la clase.";
+            //    s = Conectar(dataSource, initialCatalog, cadenaSelect, userId, password, usarSeguridadSQL);
+            //    if (Conectado == false || s != "")
+            //        return s;
+            //    // 
+            //    // Comprobar si el nombre de la clase tiene espacios     (02/Nov/04)
+            //    // de ser así, cambiarlo por un guión bajo.
+            //    // Bug reportado por David Sans
+            //    nombreClase = nombreClase.Replace(" ", "_");
+            //    // 
+            //    return CrearClase.GenerarClaseSQL(lang, usarCommandBuilder, nombreClase, dataSource, initialCatalog, cadenaSelect, userId, password, usarSeguridadSQL);
+            //});
+
             string s;
-            // 
+            
             nombreTabla = nomTabla;
             if (nombreTabla == "" || nombreClase == "")
                 return "ERROR, no se ha indicado el nombre de la tabla o de la clase.";
