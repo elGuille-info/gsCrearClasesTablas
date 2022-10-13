@@ -10,9 +10,9 @@
     <CheckBox x:Name="chkButton" IsChecked="False" Margin="0,0,-6,0"
               IsVisible="True" HorizontalOptions="Start"
               CheckedChanged="chkButton_Checked"/>
+    <!-- Margin="8,0,0,0" -->
     <Label x:Name="LabelText" Text="" VerticalOptions="Center" BackgroundColor="Transparent"
-           Margin="8,0,0,0"
-           FontSize="{OnPlatform WinUI=13, Default=Micro}">
+           FontSize="{OnPlatform WinUI=13, Default=Micro}" Margin="8,0,0,0">
         <Label.GestureRecognizers>
             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped" />
         </Label.GestureRecognizers>

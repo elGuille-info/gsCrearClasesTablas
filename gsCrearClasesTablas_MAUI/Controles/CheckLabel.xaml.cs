@@ -129,27 +129,16 @@ namespace gsCrearClasesTablas_MAUI.Controles
             {
                 control.Children.Add(etiqueta);
                 control.Children.Add(boton);
-                boton.Margin = new Thickness(0, 0, -6, 0);
                 etiqueta.Margin = new Thickness(0, 0, 6, 0);
+                boton.Margin = new Thickness(0, 0, -6, 0);
             }
             else
             {
                 control.Children.Add(boton);
                 control.Children.Add(etiqueta);
-                // Si es android y tablet, asignar estos valores v1.4.17.48 (03/Ago/21)
-                // comprobaré si en el teléfono también pasa lo mismo
-                if (DeviceInfo.Platform == DevicePlatform.Android)
-                {
-                    etiqueta.Margin = new Thickness(0, 0, 6, 0);
-                }
-                else
-                {
-                    //etiqueta.Margin = new Thickness(-6, 0, 6, 0);
-                    etiqueta.Margin = new Thickness(0, 0, 6, 0);
-                }
-                // no lo había quitado de aquí v1.4.17.50
-                //etiqueta.Margin = new Thickness(-6, 0, 6, 0);
+                // Como en diseño
                 boton.Margin = new Thickness(0, 0, -6, 0);
+                etiqueta.Margin = new Thickness(8, 0, 0, 0);
             }
         }
 
