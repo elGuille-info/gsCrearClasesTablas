@@ -611,10 +611,10 @@ Partial Class Form1
         '
         'LabelCodigo
         '
-        Me.LabelCodigo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LabelCodigo.Location = New System.Drawing.Point(952, 797)
+        Me.LabelCodigo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LabelCodigo.Location = New System.Drawing.Point(938, 797)
         Me.LabelCodigo.Name = "LabelCodigo"
-        Me.LabelCodigo.Size = New System.Drawing.Size(178, 37)
+        Me.LabelCodigo.Size = New System.Drawing.Size(192, 37)
         Me.LabelCodigo.TabIndex = 16
         '
         'Form1

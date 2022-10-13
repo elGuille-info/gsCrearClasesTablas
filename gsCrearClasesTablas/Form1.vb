@@ -65,6 +65,7 @@
 '   3.0.6.5~6           Usando la versión 3.0.11 de gsCrearClases_CS
 '   3.0.7.0             Usando la versión 3.0.12 de gsCrearClases_CS
 '   3.0.8.0 12/oct/2022 Mostrar generando y el tiempo empleado
+'   3.0.8.2 13/oct/2022 Alinear la etiqueta de generando
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
