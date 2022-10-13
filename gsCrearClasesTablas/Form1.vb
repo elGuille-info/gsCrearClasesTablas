@@ -106,7 +106,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.8.1"
+            s = "3.0.8.3"
         End Try
 
         Return s
@@ -270,7 +270,10 @@ Public Class Form1
         LabelCodigo.Text = "Generando..."
         LabelCodigo.BackColor = Color.MediumTurquoise
         LabelCodigo.ForeColor = Color.White
-        LabelCodigo.Size = New Size(178, 35)
+        ' El tamaño es con dpi
+        Dim dpi = DeviceDpi / 144
+        'LabelCodigo.Size = New Size(192, 37)
+        LabelCodigo.Size = New Size(CInt(192 * dpi), CInt(37 * dpi))
 
         Await Task.Delay(10)
 
@@ -338,7 +341,7 @@ Public Class Form1
         LabelCodigo.Text = $"Código generado en {sw.Elapsed.TotalSeconds:#,##0.####} segundos"
         LabelCodigo.BackColor = Color.FromKnownColor(KnownColor.Control)
         LabelCodigo.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
-        LabelCodigo.Size = New Size(178, 75)
+        LabelCodigo.Size = New Size(CInt(192 * dpi), CInt(75 * dpi))
 
     End Sub
     '
