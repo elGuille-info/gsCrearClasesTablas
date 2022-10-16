@@ -8,6 +8,23 @@ Mira en el blog para saber más y los enlaces a las versiones anteriores: [Gener
 <br>
 <br>
 
+**Nota del 16-oct-22:**
+<br>
+He logrado que todo funcione en otro equipo con el Visual Studio Preview (Version 17.4.0 Preview 3.0).<br>
+En ese equipo (un laptop/portátil) solo tengo instalado ese Visual Studio con el .NET MAUI 7.0 Release Candidate 1 (7.0.100-rc.1) y .NET 7.0 Release Candidate 2 (7.0.100-rc.2.22477.23)<br>
+
+El fichero del proyecto (en ese equipo) tengo configurado el iOS Bundle Signing de esta forma: <br>
+```
+<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
+	<ProvisioningType>manual</ProvisioningType>
+	<CodesignProvision>provisioning 2022-10-15</CodesignProvision>
+	
+</PropertyGroup>
+```
+
+<br>
+<br>
+
 ### Ya está disponible en Microsoft Store la versión de Windows
 
 Para descargar desde la app Microsoft Store: ms-windows-store://pdp/?productid=9MVGBRWG1W2V <br>
