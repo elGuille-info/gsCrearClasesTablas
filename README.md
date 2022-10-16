@@ -21,6 +21,10 @@ El fichero del proyecto (en ese equipo) tengo configurado el iOS Bundle Signing 
 	
 </PropertyGroup>
 ```
+<br>
+>Para configurar el aprovisionamiento manual he seguido los pasos indicados aquí: <br>
+[Cannot load Apple certificates - Solution - Tom Talpey](https://developercommunity.visualstudio.com/t/Cannot-load-Apple-certificates/1692185#T-N1703589)
+
 
 <br>
 <br>
