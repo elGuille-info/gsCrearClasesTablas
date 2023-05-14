@@ -28,7 +28,7 @@
     </Label>
     <Switch x:Name="chkButton" IsToggled="False"
             IsVisible="True" HorizontalOptions="Start" VerticalOptions="Center"
-            Toggled="chkButton_Toggled" />
+            Toggled="ChkButton_Toggled" />
     <StackLayout.GestureRecognizers>
         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
     </StackLayout.GestureRecognizers>

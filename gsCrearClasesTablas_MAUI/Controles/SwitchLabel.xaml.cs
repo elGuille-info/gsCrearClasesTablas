@@ -85,7 +85,7 @@ namespace gsCrearClasesTablas_MAUI.Controles
             set => SetValue(IsToggledProperty, value);
         }
         
-        private void chkButton_Toggled(object sender, ToggledEventArgs e)
+        private void ChkButton_Toggled(object sender, ToggledEventArgs e)
         {
             // Si no está habilitado, no permitir hacer click. v1.35.0.2 (26/sep/22 06.05)
             if (IsEnabled == false) return;
@@ -110,7 +110,7 @@ namespace gsCrearClasesTablas_MAUI.Controles
         [TypeConverter(typeof(FontSizeConverter))]
         public double FontSize { get => LabelText.FontSize; set => LabelText.FontSize = value; }
 
-        private FontAttributes _FontAttributes = FontAttributes.None;
+        //private FontAttributes _FontAttributes = FontAttributes.None;
 
         public static readonly BindableProperty FontAttributesProperty =
             BindableProperty.Create(nameof(FontAttributes), typeof(FontAttributes), typeof(SwitchLabel), 
@@ -123,7 +123,7 @@ namespace gsCrearClasesTablas_MAUI.Controles
 
             var nuevoValor = (FontAttributes)newValue;
             control.LabelText.FontAttributes = nuevoValor;
-            control._FontAttributes = nuevoValor;
+            control.FontAttributes = nuevoValor;
         }
 
         /// <summary>

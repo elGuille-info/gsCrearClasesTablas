@@ -65,25 +65,25 @@ namespace elGuille.Util.Developer.Data
         {
             // si se produce algún error, se devuelve una cadena empezando por ERROR
             Conectado = false;
-            // 
-            cadenaConexion = "data source=" + dataSource + "; initial catalog=" + initialCatalog + ";";
-            // 
+            
+            CadenaConexion = "data source=" + dataSource + "; initial catalog=" + initialCatalog + ";";
+            
             if (seguridadSQL)
             {
                 if (userId != "")
-                    cadenaConexion += "user id=" + userId + ";";
+                    CadenaConexion += "user id=" + userId + ";";
                 if (password != "")
-                    cadenaConexion += "password=" + password + ";";
+                    CadenaConexion += "password=" + password + ";";
             }
             else
-                cadenaConexion += "Integrated Security=yes;";
+                CadenaConexion += "Integrated Security=yes;";
 
             // Añadir TrustServerCertificate=True y Encrypt=false a la cadena de conexión para que funcione en Android.
             //cadenaConexion += "TrustServerCertificate=True;Encrypt=false;";
             //cadenaConexion += "TrustServerCertificate=True;MultiSubnetFailover=True;";
             //cadenaConexion += "MultiSubnetFailover=True;";
-            cadenaConexion += "TrustServerCertificate=True;";
-            // 
+            CadenaConexion += "TrustServerCertificate=True;";
+            
             if (cadenaSelect == "")
             {
                 // si no se indica la cadena Select también se conecta
@@ -91,17 +91,20 @@ namespace elGuille.Util.Developer.Data
                 Conectado = true;
                 return "";
             }
-            // 
-            SqlDataAdapter dbDataAdapter = new SqlDataAdapter(cadenaSelect, cadenaConexion);
-            // 
-            dbDataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-            // 
-            // Limpiar el contenido de mDataTable                    (08/Jun/05)
-            mDataTable = new DataTable();
-            // 
+            
+            SqlDataAdapter dbDataAdapter = new SqlDataAdapter(cadenaSelect, CadenaConexion)
+            {
+                MissingSchemaAction = MissingSchemaAction.AddWithKey
+            };
+
+            // Limpiar el contenido de ElDataTable                    (08/Jun/05)
+            //ElDataTable = new DataTable();
+            // Usar Clear en vez de crear un neuvo objeto.  (14/may/23 11.24)
+            ElDataTable.Clear();
+            
             try
             {
-                dbDataAdapter.Fill(mDataTable);
+                dbDataAdapter.Fill(ElDataTable);
                 System.Threading.Thread.Sleep(100);
                 Conectado = true;
             }
@@ -109,7 +112,7 @@ namespace elGuille.Util.Developer.Data
             {
                 return "ERROR: en Fill: " + ex.Message;
             }// & " - " & ex.GetType().Name
-             // 
+            
             return "";
         }
 
@@ -121,7 +124,7 @@ namespace elGuille.Util.Developer.Data
             List<TablaItem> nomTablas = new();
 
             DataTable dt = new DataTable();
-            SqlConnection dbConnection = new SqlConnection(cadenaConexion);
+            SqlConnection dbConnection = new SqlConnection(CadenaConexion);
             
             try
             {
@@ -178,7 +181,7 @@ namespace elGuille.Util.Developer.Data
 
             DataTable dt = new DataTable();
             int i;
-            SqlConnection dbConnection = new SqlConnection(cadenaConexion);
+            SqlConnection dbConnection = new SqlConnection(CadenaConexion);
             // 
             try
             {
@@ -244,8 +247,8 @@ namespace elGuille.Util.Developer.Data
 
             string s;
             
-            nombreTabla = nomTabla;
-            if (nombreTabla == "" || nombreClase == "")
+            NombreTabla = nomTabla;
+            if (NombreTabla == "" || nombreClase == "")
                 return "ERROR, no se ha indicado el nombre de la tabla o de la clase.";
             s = Conectar(dataSource, initialCatalog, cadenaSelect, userId, password, usarSeguridadSQL);
             if (Conectado == false || s != "")

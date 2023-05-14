@@ -101,7 +101,7 @@ Public Class Form1
     ''' </summary>
     ''' <returns>El valor de FileVersion.</returns>
     ''' <remarks>01/Oct/22</remarks>
-    Private Function VersionDLL() As String
+    Private Shared Function VersionDLL() As String
         Dim s As String
 
         Try
@@ -112,7 +112,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.8.3"
+            s = "3.0.9.0"
         End Try
 
         Return s

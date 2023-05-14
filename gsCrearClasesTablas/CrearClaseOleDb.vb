@@ -26,55 +26,54 @@ Imports elGuille.Util.Developer.Data
 'Namespace elGuille.Util.Developer.Data
 Public Class CrearClaseOleDb
     Inherits CrearClase
-    '
-    '
+
     Public Shared Function Conectar(baseDeDatos As String) As String
         Return Conectar(baseDeDatos, "", "", "")
     End Function
     Public Shared Function Conectar(baseDeDatos As String,
-                                        cadenaSelect As String) As String
+                                    cadenaSelect As String) As String
         Return Conectar(baseDeDatos, cadenaSelect, "", "")
     End Function
     Public Shared Function Conectar(baseDeDatos As String,
-                                        cadenaSelect As String,
-                                        provider As String) As String
+                                    cadenaSelect As String,
+                                    provider As String) As String
         Return Conectar(baseDeDatos, cadenaSelect, provider, "")
     End Function
     Public Shared Function Conectar(baseDeDatos As String,
-                                        cadenaSelect As String,
-                                        provider As String,
-                                        password As String) As String
+                                    cadenaSelect As String,
+                                    provider As String,
+                                    password As String) As String
         ' si se produce algún error, se devuelve una cadena empezando por ERROR
-        '
         Conectado = False
-        '
         If provider = "" Then
             provider = "Microsoft.Jet.OLEDB.4.0"
         ElseIf provider.IndexOf("Provider=") > -1 Then
             Dim i As Integer = provider.IndexOf("=")
             provider = provider.Substring(i)
         End If
-        '
+
         If password <> "" Then
-            cadenaConexion = "Provider=" & provider & "; Data Source=" & baseDeDatos & "; Jet OLEDB:Database Password=" & password
+            CadenaConexion = "Provider=" & provider & "; Data Source=" & baseDeDatos & "; Jet OLEDB:Database Password=" & password
         Else
-            cadenaConexion = "Provider=" & provider & "; Data Source=" & baseDeDatos
+            CadenaConexion = "Provider=" & provider & "; Data Source=" & baseDeDatos
         End If
-        '
+
         If cadenaSelect = "" Then
             Conectado = True
             Return ""
         End If
-        '
-        Dim dbDataAdapter As New OleDbDataAdapter(cadenaSelect, cadenaConexion)
-        '
-        dbDataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey
-        '
-        ' Limpiar el contenido de mDataTable                    (08/Jun/05)
-        mDataTable = New DataTable
-        '
+
+        Dim dbDataAdapter As New OleDbDataAdapter(cadenaSelect, CadenaConexion) With {
+            .MissingSchemaAction = MissingSchemaAction.AddWithKey
+        }
+
+        ' Limpiar el contenido de ElDataTable                    (08/Jun/05)
+        'ElDataTable = New DataTable
+        ' Usar Clear en vez de crear un neuvo objeto.  (14/may/23 11.24)
+        ElDataTable.Clear()
+
         Try
-            dbDataAdapter.Fill(mDataTable)
+            dbDataAdapter.Fill(ElDataTable)
             System.Threading.Thread.Sleep(100)
             Conectado = True
         Catch ex As OleDbException
@@ -96,35 +95,30 @@ Public Class CrearClaseOleDb
     ''' </summary>
     ''' <remarks>Antes usaba un array de tipo string.</remarks>
     Public Shared Function NombresTablas() As List(Of String)
-        'Dim nomTablas() As String = Nothing
         Dim nomTablas As List(Of String) = Nothing
         Dim dt As DataTable
         Dim restrictions() As Object = {Nothing, Nothing, Nothing, "TABLE"}
-        Dim dbConnection As New OleDbConnection(cadenaConexion)
-        '
+        Dim dbConnection As New OleDbConnection(CadenaConexion)
+
         Try
             dbConnection.Open()
         Catch ex As Exception
-            'ReDim nomTablas(0)
-            nomTablas = New List(Of String)
-            'nomTablas(0) = "ERROR: " & ex.Message
-            nomTablas.Add("ERROR: " & ex.Message)
+            nomTablas = New List(Of String) From {
+                "ERROR: " & ex.Message
+            }
             Conectado = False
             Return nomTablas
         End Try
-        '
+
         dt = dbConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, restrictions)
         Dim i As Integer = dt.Rows.Count - 1
         If i > -1 Then
-            'ReDim nomTablas(i)
             nomTablas = New List(Of String)
             For i = 0 To dt.Rows.Count - 1
-                'nomTablas(i) = dt.Rows(i)("TABLE_NAME").ToString()
-                'nomTablas(i) = dt.Rows(i).Item("TABLE_NAME").ToString()
                 nomTablas.Add(dt.Rows(i).Item("TABLE_NAME").ToString())
             Next
         End If
-        ' 
+
         Return nomTablas
     End Function
     '
@@ -138,8 +132,8 @@ Public Class CrearClaseOleDb
                                             provider As String) As String
         Dim s As String
         '
-        nombreTabla = nomTabla
-        If nombreTabla = "" OrElse nombreClase = "" Then
+        NombreTabla = nomTabla
+        If NombreTabla = "" OrElse nombreClase = "" Then
             Return "ERROR, no se ha indicado el nombre de la tabla o de la clase."
         End If
         s = Conectar(baseDeDatos, cadenaSelect, provider, password)

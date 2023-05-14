@@ -8,6 +8,17 @@
 ### Revisiones de 2023
 
 ```
+'<revision("3.0.15.0", _
+'   FechaModificacion:= "14/May/2023", _
+'   Tester:= "Guille", _
+'   FechaReporte:= "14/May/2023", _
+'   Tipo:= "Revisión", _
+'   Clases:= "CrearClase", _
+'   Miembro:= "generarClase", _
+'   Motivo:= "Quitar código no usado y consejos de reglas de rendimiento.", _
+'   Solucion:= "Reviso el código no usado y otras correcciones al estilo C#.", _
+'   Comentarios:= "Para pulir el código más adecuado al buen estilo de programación ;-)")>
+
 '<revision("3.0.14.0", _
 '   FechaModificacion:= "14/May/2023", _
 '   Tester:= "Jesús", _

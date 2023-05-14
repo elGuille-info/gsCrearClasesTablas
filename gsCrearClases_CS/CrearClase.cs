@@ -38,11 +38,11 @@ namespace elGuille.Util.Developer.Data
         /// </summary>
         public static string CrLf => "\r\n";
         // 
-        protected static DataTable mDataTable = new DataTable();
-        protected static string cadenaConexion;
-        protected static string nombreTabla { get; set; } = "Tabla1";
+        protected static DataTable ElDataTable { get; set; } = new DataTable();
+        protected static string CadenaConexion { get; set; }
+        protected static string NombreTabla { get; set; } = "Tabla1";
         // 
-        public static bool Conectado;
+        public static bool Conectado { get; set; }
         // 
         // Campos para usar desde las clases derivadas
         // para usar con SQL
@@ -120,10 +120,10 @@ namespace elGuille.Util.Developer.Data
             // Esto es lo que hace que no funcione                   (08/Jun/05)
             // ------------------------------------------------------------------
             // crear una nueva instancia del dataTable               (07/Feb/05)
-            // mDataTable = New DataTable
+            // ElDataTable = New DataTable
             // ------------------------------------------------------------------
             // 
-            return generarClase();
+            return GenerarClase();
         }
         // 
         protected static string GenerarClaseSQL(eLenguaje lang, bool usarCommandBuilder, string nombreClase, string dataSource, string initialCatalog, string cadenaSelect, string userId, string password, bool usarSeguridadSQL)
@@ -143,18 +143,18 @@ namespace elGuille.Util.Developer.Data
             // Esto es lo que hace que no funcione                   (08/Jun/05)
             // ------------------------------------------------------------------
             // crear una nueva instancia del dataTable               (07/Feb/05)
-            // mDataTable = New DataTable
+            // ElDataTable = New DataTable
             // ------------------------------------------------------------------
             // 
-            return generarClase();
+            return GenerarClase();
         }
         // 
-        private static string generarClase()
+        private static string GenerarClase()
         {
             // generar la clase a partir de la tabla seleccionada,
             // las columnas son los campos a usar
             // 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            System.Text.StringBuilder sb = new StringBuilder();
             string s;
             System.Text.StringBuilder sb1;
             System.Text.StringBuilder sb2;
@@ -166,7 +166,7 @@ namespace elGuille.Util.Developer.Data
             // 
             // buscar el campo autoincremental de la tabla           (12/Jul/04)
             // también se buscará si es Unique
-            foreach (DataColumn col in mDataTable.Columns)
+            foreach (DataColumn col in ElDataTable.Columns)
             {
                 // comprobar si tiene caracteres no válidos          (14/Jul/04)
                 // en caso de que sea así, sustituirlos por un guión bajo
@@ -178,11 +178,11 @@ namespace elGuille.Util.Developer.Data
                     if (i > -1)
                     {
                         if (i == s.Length - 1)
-                            s = s.Substring(0, i) + "_";
+                            s = string.Concat(s.AsSpan(0, i), "_");
                         else if (i > 0)
-                            s = s.Substring(0, i) + "_" + s.Substring(i + 1);
+                            s = string.Concat(s.AsSpan(0, i), "_", s.AsSpan(i + 1));
                         else
-                            s = "_" + s.Substring(i + 1);
+                            s = string.Concat("_", s.AsSpan(i + 1));
                     }
                 }
                 while (i > -1);
@@ -202,12 +202,12 @@ namespace elGuille.Util.Developer.Data
             if (esSQL)
             {
                 sb.AppendFormat("{0} Clase {1} generada automáticamente con CrearClaseSQL{2}", ConvLang.Comentario(), nombreClase, CrLf);
-                sb.AppendFormat("{0} de la tabla '{1}' de la base '{2}'{3}", ConvLang.Comentario(), nombreTabla, initialCatalog, CrLf);
+                sb.AppendFormat("{0} de la tabla '{1}' de la base '{2}'{3}", ConvLang.Comentario(), NombreTabla, initialCatalog, CrLf);
             }
             else
             {
                 sb.AppendFormat("{0} Clase {1} generada automáticamente con CrearClaseOleDb{2}", ConvLang.Comentario(), nombreClase, CrLf);
-                sb.AppendFormat("{0} de la tabla '{1}' de la base '{2}'{3}", ConvLang.Comentario(), nombreTabla, baseDeDatos, CrLf);
+                sb.AppendFormat("{0} de la tabla '{1}' de la base '{2}'{3}", ConvLang.Comentario(), NombreTabla, baseDeDatos, CrLf);
             }
             // Al mostrar MMM/ se muestra mar./ para el mes de marzo (22/Mar/19)
             sb.AppendFormat("{0} Fecha: {1}{2}", ConvLang.Comentario(), DateTime.Now.ToString("dd/MMM/yyyy HH:mm:ss").Replace("./", "/"), CrLf);
@@ -255,7 +255,7 @@ namespace elGuille.Util.Developer.Data
             if (PropiedadAuto)
             {
                 // Los nombres de los campos privados empiezan con m_ (30/Nov/18)
-                foreach (DataColumn col in mDataTable.Columns)
+                foreach (DataColumn col in ElDataTable.Columns)
                 {
                     if (col.DataType.ToString() == "System.String")
                     {
@@ -265,7 +265,7 @@ namespace elGuille.Util.Developer.Data
             }
             else
             {
-                foreach (DataColumn col in mDataTable.Columns)
+                foreach (DataColumn col in ElDataTable.Columns)
                     // Los nombres de los campos privados empiezan con m_ (30/Nov/18)
                     sb.AppendFormat("    {0}{1}", ConvLang.Variable("Private", "m_" + campos[col.ColumnName].ToString(), col.DataType.ToString()), CrLf);
             }
@@ -292,7 +292,7 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("    {0}{1}", ConvLang.Comentario(" Las propiedades públicas"), CrLf);
             sb.AppendFormat("    {0}{1}", ConvLang.Comentario(" TODO: Revisar los tipos de las propiedades"), CrLf);
             sb.AppendFormat("    {0}{1}", ConvLang.Comentario("------------------------------------------------------------------"), CrLf);
-            foreach (DataColumn col in mDataTable.Columns)
+            foreach (DataColumn col in ElDataTable.Columns)
             {
                 if (col.DataType.ToString() == "System.Byte[]")
                 {
@@ -361,9 +361,9 @@ namespace elGuille.Util.Developer.Data
                 sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" Devuelve el contenido del campo indicado en index"), CrLf);
                 sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" (el índice corresponde con la columna de la tabla)"), CrLf);
                 sb.AppendFormat("        {0}{1}", ConvLang.Get(), CrLf);
-                for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
+                for (int i = 0; i <= ElDataTable.Columns.Count - 1; i++)
                 {
-                    DataColumn col = mDataTable.Columns[i];
+                    DataColumn col = ElDataTable.Columns[i];
                     if (i == 0)
                         sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "0"), CrLf);
                     else
@@ -380,9 +380,9 @@ namespace elGuille.Util.Developer.Data
                 sb.AppendFormat("            {0}{1}", ConvLang.Return("\"<NULO>\""), CrLf);
                 sb.AppendFormat("        {0}{1}", ConvLang.EndGet(), CrLf);
                 sb.AppendFormat("        {0}{1}", ConvLang.Set("String"), CrLf);
-                for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
+                for (int i = 0; i <= ElDataTable.Columns.Count - 1; i++)
                 {
-                    DataColumn col = mDataTable.Columns[i];
+                    DataColumn col = ElDataTable.Columns[i];
                     if (i == 0)
                         sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "0"), CrLf);
                     else
@@ -412,7 +412,7 @@ namespace elGuille.Util.Developer.Data
                         case "System.Char":
                         case "System.TimeSpan":
                             {
-                                sb.AppendFormat("                {0}{1}", ConvLang.Asigna(string.Format("Me.{1}", nombreClase, campos[col.ColumnName].ToString()), string.Format("ConversorTipos.{1}Data(value)", col.ColumnName, col.DataType.ToString().Replace("System.", ""))), CrLf);
+                                sb.AppendFormat("                {0}{1}", ConvLang.Asigna($"Me.{campos[col.ColumnName]}", $"ConversorTipos.{col.DataType.ToString().Replace("System.", "")}Data(value)"), CrLf);
                                 break;
                             }
 
@@ -445,9 +445,9 @@ namespace elGuille.Util.Developer.Data
                 sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" Devuelve el contenido del campo indicado en index"), CrLf);
                 sb.AppendFormat("        {0}{1}", ConvLang.Comentario(" (el índice corresponde al nombre de la columna)"), CrLf);
                 sb.AppendFormat("        {0}{1}", ConvLang.Get(), CrLf);
-                for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
+                for (int i = 0; i <= ElDataTable.Columns.Count - 1; i++)
                 {
-                    DataColumn col = mDataTable.Columns[i];
+                    DataColumn col = ElDataTable.Columns[i];
                     if (i == 0)
                         sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "\"" + campos[col.ColumnName].ToString() + "\""), CrLf);
                     else
@@ -464,9 +464,9 @@ namespace elGuille.Util.Developer.Data
                 sb.AppendFormat("            {0}{1}", ConvLang.Return("\"" + "<NULO>" + "\""), CrLf);
                 sb.AppendFormat("        {0}{1}", ConvLang.EndGet(), CrLf);
                 sb.AppendFormat("        {0}{1}", ConvLang.Set("String"), CrLf);
-                for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
+                for (int i = 0; i <= ElDataTable.Columns.Count - 1; i++)
                 {
-                    DataColumn col = mDataTable.Columns[i];
+                    DataColumn col = ElDataTable.Columns[i];
                     if (i == 0)
                         sb.AppendFormat("            {0}{1}", ConvLang.If("index", "=", "\"" + campos[col.ColumnName].ToString() + "\""), CrLf);
                     else
@@ -496,7 +496,7 @@ namespace elGuille.Util.Developer.Data
                         case "System.Char":
                         case "System.TimeSpan":
                             {
-                                sb.AppendFormat("                {0}{1}", ConvLang.Asigna(string.Format("Me.{1}", nombreClase, campos[col.ColumnName].ToString()), string.Format("ConversorTipos.{1}Data(value)", col.ColumnName, col.DataType.ToString().Replace("System.", ""))), CrLf);
+                                sb.AppendFormat("                {0}{1}", ConvLang.Asigna($"Me.{campos[col.ColumnName]}", $"ConversorTipos.{col.DataType.ToString().Replace("System.", "")}Data(value)"), CrLf);
                                 break;
                             }
 
@@ -538,7 +538,7 @@ namespace elGuille.Util.Developer.Data
             ), CrLf);
             sb1 = new System.Text.StringBuilder();
             if (lang == eLenguaje.eCS)
-                sb1.Append("@");
+                sb1.Append('@');
             if (esSQL)
             {
                 sb1.AppendFormat("\"Data Source={0};", dataSource);
@@ -552,7 +552,7 @@ namespace elGuille.Util.Developer.Data
                 sb1.AppendFormat("{0}Provider={1}; Data Source={2}; Jet OLEDB:Database Password={3}", "\"", provider, baseDeDatos, password);
             else
                 sb1.AppendFormat("{0}Provider={1}; Data Source={2}", "\"", provider, baseDeDatos);
-            sb1.Append("\"");
+            sb1.Append('"');
             // Añado Property a CadenaConexion y CadenaSelect        (13/Abr/19)
             // para que sea más fácil saber las referencias que tienen.
             // En VB como propiedad, en C# como campo. (11/oct/22 23.21)
@@ -608,7 +608,7 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("        {2} asigna a un objeto {0} los datos del dataRow indicado{1}", nombreClase, CrLf, ConvLang.Comentario());
             sb.AppendFormat("        {0}{1}", ConvLang.VariableNew("Dim", "o_" + nombreClase, nombreClase), CrLf);
             sb.AppendLine();
-            foreach (DataColumn col in mDataTable.Columns)
+            foreach (DataColumn col in ElDataTable.Columns)
             {
                 switch (col.DataType.ToString())
                 {
@@ -666,7 +666,7 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("{0}", ConvLang.DocumentacionXML("    ",string.Format(" Asigna un objeto {0} a la fila indicada", nombreClase)));
             sb.AppendFormat("    {0}{1}", ConvLang.Sub("Private Shared", string.Format("{0}2Row", nombreClase), "o_" + nombreClase, nombreClase, "r", "DataRow"), CrLf);
             sb.AppendFormat("        {0}{1}", ConvLang.Comentario(string.Format(" asigna un objeto {0} al dataRow indicado", nombreClase)), CrLf);
-            foreach (DataColumn col in mDataTable.Columns)
+            foreach (DataColumn col in ElDataTable.Columns)
             {
                 // Si es AutoIncrement no asignarle un valor         (10/Jul/04)
                 // si es Unique y no AutoIncrement se debe asignar   (13/Jul/04)
@@ -699,7 +699,7 @@ namespace elGuille.Util.Developer.Data
             // ------------------------------------------------------------------
             sb.AppendFormat("        {0}{1}", ConvLang.DeclaraVariable("Dim", "o_" + nombreClase.Substring(0, 1), nombreClase, "Row2Tipo" + "(dr)"), CrLf);
             sb.AppendLine();
-            foreach (DataColumn col in mDataTable.Columns)
+            foreach (DataColumn col in ElDataTable.Columns)
                 sb.AppendFormat("        o_{0}.{1} = o_{2}.{1}{3}{4}", nombreClase.Substring(0, 1), campos[col.ColumnName].ToString(), nombreClase, ConvLang.FinInstruccion(), CrLf);
             sb.AppendLine();
             sb.AppendFormat("        {0}2Row(o_{1}, dr){2}{3}", nombreClase, nombreClase.Substring(0, 1), ConvLang.FinInstruccion(), CrLf);
@@ -730,7 +730,7 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("        {0}{1}", ConvLang.Return("Tabla(CadenaSelect)"), CrLf);
             sb.AppendFormat("    {0}{1}", ConvLang.EndFunction(), CrLf);
             sb.AppendFormat("    {0}{1}", ConvLang.Function("Public Shared", "Tabla", "DataTable", "sel", "String"), CrLf);
-            sb.AppendFormat("        {0}{1}", ConvLang.Comentario(string.Format(" devuelve una tabla con los datos de la tabla {0}", nombreTabla)), CrLf);
+            sb.AppendFormat("        {0}{1}", ConvLang.Comentario(string.Format(" devuelve una tabla con los datos de la tabla {0}", NombreTabla)), CrLf);
             sb.AppendFormat("        {0}{1}", ConvLang.Variable("Dim", "da", dbPrefix + "DataAdapter"), CrLf);
             sb.AppendFormat("        {0}{1}", ConvLang.VariableNewParam("Dim", "dt", "DataTable", string.Format("{0}{1}{0}", "\"", nombreClase)), CrLf);
             sb.AppendLine();
@@ -755,7 +755,7 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("    {0}{1}", ConvLang.Function("Public Shared", "Buscar", nombreClase, "sWhere", "String"), CrLf);
             sb.AppendFormat("        {0}{1}", ConvLang.DeclaraVariable("Dim", "o_" + nombreClase, nombreClase, "Nothing"), CrLf);
             // Dim sel As String = "SELECT * FROM Clientes WHERE " & sWhere
-            sb.AppendFormat("        {0}{1}", ConvLang.Variable("Dim", "sel", "String", string.Format("{0}SELECT * FROM {1} WHERE {0} & sWhere", "\"", nombreTabla)), CrLf);
+            sb.AppendFormat("        {0}{1}", ConvLang.Variable("Dim", "sel", "String", string.Format("{0}SELECT * FROM {1} WHERE {0} & sWhere", "\"", NombreTabla)), CrLf);
             // Using con As New SqlConnection(CadenaConexion)
             sb.AppendFormat("        {0}{1}", ConvLang.Using("con", "SqlConnection", "CadenaConexion"), CrLf);
             // Dim cmd As New SqlCommand()
@@ -820,9 +820,9 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("        {0} TODO: Poner aquí la selección a realizar para acceder a este registro{1}", ConvLang.Comentario(), CrLf);
             sb.AppendFormat("        {0}       yo uso el {2} que es el identificador único de cada registro{1}", ConvLang.Comentario(), CrLf, campoIDnombre);
             if (campoIDtipo.IndexOf("String") > -1)
-                sb.AppendFormat("        {0}{1}", ConvLang.DeclaraVariable("Dim", "sel", "String", string.Format("{0}SELECT * FROM {1} WHERE {2} = '{0} & Me.{2} & {0}'{0}", "\"", nombreTabla, campoIDnombre)), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.DeclaraVariable("Dim", "sel", "String", string.Format("{0}SELECT * FROM {1} WHERE {2} = '{0} & Me.{2} & {0}'{0}", "\"", NombreTabla, campoIDnombre)), CrLf);
             else
-                sb.AppendFormat("        {0}{1}", ConvLang.DeclaraVariable("Dim", "sel", "String", string.Format("{0}SELECT * FROM {1} WHERE {2} = {0} & Me.{2}.ToString()", "\"", nombreTabla, campoIDnombre)), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.DeclaraVariable("Dim", "sel", "String", string.Format("{0}SELECT * FROM {1} WHERE {2} = {0} & Me.{2}.ToString()", "\"", NombreTabla, campoIDnombre)), CrLf);
             sb.AppendFormat("        {0}{1}", ConvLang.Return("Actualizar(sel)"), CrLf);
             sb.AppendFormat("    {0}{1}", ConvLang.EndFunction(), CrLf);
             sb.AppendLine();
@@ -895,7 +895,7 @@ namespace elGuille.Util.Developer.Data
                 // cmd.Connection = con
                 sb.AppendFormat("            {0}{1}", ConvLang.Asigna("cmd.Connection", "con"), CrLf);
                 // cmd.CommandText = "ActualizarCliente"
-                sb.AppendFormat("            {0}{1}", ConvLang.Comentario(ConvLang.Asigna("cmd.CommandText", $"\"Actualizar{nombreTabla}\"")), CrLf, "\"");
+                sb.AppendFormat("            {0}{1}", ConvLang.Comentario(ConvLang.Asigna("cmd.CommandText", $"\"Actualizar{NombreTabla}\"")), CrLf, "\"");
                 sb.AppendLine();
                 sb.AppendFormat("            {0}{1}", ConvLang.DeclaraVariable("Dim", "sCommand", "String"), CrLf);
             }
@@ -903,12 +903,12 @@ namespace elGuille.Util.Developer.Data
             sb1 = new System.Text.StringBuilder();
             sb2 = new System.Text.StringBuilder();
             // 
-            sb1.AppendFormat("{0}UPDATE {1} SET ", "\"", nombreTabla);
+            sb1.AppendFormat("{0}UPDATE {1} SET ", "\"", NombreTabla);
             // 
-            s = "";
-            for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
+            //s = "";
+            for (int i = 0; i <= ElDataTable.Columns.Count - 1; i++)
             {
-                DataColumn col = mDataTable.Columns[i];
+                DataColumn col = ElDataTable.Columns[i];
                 // si el campo tiene caracteres no válidos           (14/Jul/04)
                 // ponerlo entre corchetes
                 s = col.ColumnName;
@@ -924,7 +924,10 @@ namespace elGuille.Util.Developer.Data
             }
             s = sb2.ToString().TrimEnd();
             if (s.EndsWith(","))
-                sb1.AppendFormat("{0} ", s.Substring(0, s.Length - 1));
+            {
+                // sb1.AppendFormat("{0} ", s.Substring(0, s.Length - 1));
+                sb1.AppendFormat("{0} ", s[..^1]);
+            }
             else
                 sb1.AppendFormat("{0} ", s);
             if (esSQL)
@@ -938,7 +941,7 @@ namespace elGuille.Util.Developer.Data
                 sb.AppendFormat("        {2}{0}{1}", ConvLang.AsignaNew("da.UpdateCommand", dbPrefix + "Command", "sCommand, cnn"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                 if (esSQL)
                 {
-                    foreach (DataColumn col in mDataTable.Columns)
+                    foreach (DataColumn col in ElDataTable.Columns)
                     {
                         switch (col.DataType.ToString())
                         {
@@ -949,9 +952,9 @@ namespace elGuille.Util.Developer.Data
                                         sb.AppendFormat("        {3}{2} TODO: Este campo seguramente es MEMO y el valor debería ser cero en lugar de {0}{1}", col.MaxLength, CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
                                         if (UsarAddWithValue)
                                         {
-                                            s = string.Format("{2}@{0}{2}, {0}", col.ColumnName, col.MaxLength, "\"");
+                                            s = $"{"\""}@{col.ColumnName}{"\""}, {col.ColumnName}";
                                             sb.AppendFormat("        {3}{0}{1}{2}", ConvLang.Comentario(), ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
-                                            s = string.Format("{2}@{0}{2}, {0}", col.ColumnName, 0, "\"");
+                                            s = $"{"\""}@{col.ColumnName}{"\""}, {col.ColumnName}";
                                             sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                         }
                                         else
@@ -964,7 +967,7 @@ namespace elGuille.Util.Developer.Data
                                     }
                                     else if (UsarAddWithValue)
                                     {
-                                        s = string.Format("{2}@{0}{2}, {0}", col.ColumnName, col.MaxLength, "\"");
+                                        s = $"{"\""}@{col.ColumnName}{"\""}, {col.ColumnName}";
                                         sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                     }
                                     else
@@ -980,13 +983,14 @@ namespace elGuille.Util.Developer.Data
                                 {
                                     if (UsarAddWithValue)
                                     {
-                                        s = string.Format("{1}@{0}{1}, {0}", col.ColumnName, "\"", tipoSQL(col.DataType.ToString()));
+                                        //s = string.Format("{1}@{0}{1}, {0}", col.ColumnName, "\"", tipoSQL(col.DataType.ToString()));
+                                        s = $"{"\""}@{col.ColumnName}{"\""}, {col.ColumnName}";
                                         sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                     }
                                     else
                                     {
                                         sb.AppendFormat("        {2}{1} TODO: Comprobar el tipo de datos a usar...{0}", CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
-                                        s = string.Format("{1}@{0}{1}, {2}, 0, {1}{0}{1}", col.ColumnName, "\"", tipoSQL(col.DataType.ToString()));
+                                        s = string.Format("{1}@{0}{1}, {2}, 0, {1}{0}{1}", col.ColumnName, "\"", TipoSQL(col.DataType.ToString()));
                                         sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.Add(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                     }
 
@@ -997,7 +1001,7 @@ namespace elGuille.Util.Developer.Data
                 }
                 else
                 {
-                    int j = mDataTable.Columns.Count;
+                    int j = ElDataTable.Columns.Count;
                     int k;
                     string[] sp = new string[j + 1];
                     for (k = 0; k <= j; k++)
@@ -1005,7 +1009,7 @@ namespace elGuille.Util.Developer.Data
                     k = 0;
                     string sp1;
                     DataColumn colID = null;
-                    foreach (DataColumn col in mDataTable.Columns)
+                    foreach (DataColumn col in ElDataTable.Columns)
                     {
                         if (campos[col.ColumnName].ToString() == campoIDnombre)
                             colID = col;
@@ -1022,9 +1026,9 @@ namespace elGuille.Util.Developer.Data
                                             sb.AppendFormat("        {3}{2} TODO: Este campo seguramente es MEMO y el valor debería ser cero en lugar de {0}{1}", col.MaxLength, CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
                                             if (UsarAddWithValue)
                                             {
-                                                s = string.Format("{2}@{3}{2}, {0}", col.ColumnName, col.MaxLength, "\"", sp1);
+                                                s = $"{"\""}@{sp1}{"\""}, {col.ColumnName}";
                                                 sb.AppendFormat("        {3}{0}{1}{2}", ConvLang.Comentario(), ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
-                                                s = string.Format("{2}@{3}{2}, {0}", col.ColumnName, 0, "\"", sp1);
+                                                s = $"{"\""}@{sp1}{"\""}, {col.ColumnName}";
                                                 sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                             }
                                             else
@@ -1037,7 +1041,7 @@ namespace elGuille.Util.Developer.Data
                                         }
                                         else if (UsarAddWithValue)
                                         {
-                                            s = string.Format("{2}@{3}{2}, {0}", col.ColumnName, col.MaxLength, "\"", sp1);
+                                            s = $"{"\""}@{sp1}{"\""}, {col.ColumnName}";
                                             sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                         }
                                         else
@@ -1053,13 +1057,13 @@ namespace elGuille.Util.Developer.Data
                                     {
                                         if (UsarAddWithValue)
                                         {
-                                            s = string.Format("{1}@{3}{1}, {0}", col.ColumnName, "\"", tipoOleDb(col.DataType.ToString()), sp1);
+                                            s = $"{"\""}@{sp1}{"\""}, {col.ColumnName}";
                                             sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                         }
                                         else
                                         {
                                             sb.AppendFormat("        {2}{1} TODO: Comprobar el tipo de datos a usar...{0}", CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
-                                            s = string.Format("{1}@{3}{1}, {2}, 0, {1}{0}{1}", col.ColumnName, "\"", tipoOleDb(col.DataType.ToString()), sp1);
+                                            s = string.Format("{1}@{3}{1}, {2}, 0, {1}{0}{1}", col.ColumnName, "\"", TipoOleDb(col.DataType.ToString()), sp1);
                                             sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.Add(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                         }
 
@@ -1078,9 +1082,9 @@ namespace elGuille.Util.Developer.Data
                                     sb.AppendFormat("        {3}{2} TODO: Este campo seguramente es MEMO y el valor debería ser cero en lugar de {0}{1}", colID.MaxLength, CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
                                     if (UsarAddWithValue)
                                     {
-                                        s = string.Format("{2}@{3}{2}, {0}", colID.ColumnName, colID.MaxLength, "\"", sp1);
+                                        s = $"{"\""}@{sp1}{"\""}, {colID.ColumnName}";
                                         sb.AppendFormat("        {3}{0}{1}{2}", ConvLang.Comentario(), ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
-                                        s = string.Format("{2}@{3}{2}, {0}", colID.ColumnName, 0, "\"", sp1);
+                                        s = $"{"\""}@{sp1}{"\""}, {colID.ColumnName}";
                                         sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                     }
                                     else
@@ -1093,7 +1097,7 @@ namespace elGuille.Util.Developer.Data
                                 }
                                 else if (UsarAddWithValue)
                                 {
-                                    s = string.Format("{2}@{3}{2}, {0}", colID.ColumnName, colID.MaxLength, "\"", sp1);
+                                    s = $"{"\""}@{sp1}{"\""}, {colID.ColumnName}";
                                     sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                 }
                                 else
@@ -1109,13 +1113,13 @@ namespace elGuille.Util.Developer.Data
                             {
                                 if (UsarAddWithValue)
                                 {
-                                    s = string.Format("{1}@{3}{1}, {0}", colID.ColumnName, "\"", tipoOleDb(colID.DataType.ToString()), sp1);
+                                    s = $"{"\""}@{sp1}{"\""}, {colID.ColumnName}";
                                     sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                 }
                                 else
                                 {
                                     sb.AppendFormat("        {2}{1} TODO: Comprobar el tipo de datos a usar...{0}", CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
-                                    s = string.Format("{1}@{3}{1}, {2}, 0, {1}{0}{1}", colID.ColumnName, "\"", tipoOleDb(colID.DataType.ToString()), sp1);
+                                    s = string.Format("{1}@{3}{1}, {2}, 0, {1}{0}{1}", colID.ColumnName, "\"", TipoOleDb(colID.DataType.ToString()), sp1);
                                     sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.UpdateCommand.Parameters.Add(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                 }
 
@@ -1159,7 +1163,7 @@ namespace elGuille.Util.Developer.Data
                 // No usar With ya que C# no lo soporta... (ni lo tengo definido :-P )
                 // Nota: solo para SQL Server y AddWithValue
                 // cmd.Parameters.AddWithValue("@ID", ID)
-                foreach (DataColumn col in mDataTable.Columns)
+                foreach (DataColumn col in ElDataTable.Columns)
                 {
                     switch (col.DataType.ToString())
                     {
@@ -1297,7 +1301,7 @@ namespace elGuille.Util.Developer.Data
                 // cmd.Connection = con
                 sb.AppendFormat("                {0}{1}", ConvLang.Asigna("cmd.Connection", "con"), CrLf);
                 // cmd.CommandText = "CrearCliente"
-                sb.AppendFormat("                {0}{1}", ConvLang.Comentario(ConvLang.Asigna("cmd.CommandText", $"\"Crear{nombreTabla}\"")), CrLf, "\"");
+                sb.AppendFormat("                {0}{1}", ConvLang.Comentario(ConvLang.Asigna("cmd.CommandText", $"\"Crear{NombreTabla}\"")), CrLf, "\"");
                 sb.AppendLine();
                 sb.AppendFormat("            {0}{1}", ConvLang.DeclaraVariable("Dim", "sCommand", "String"), CrLf);
             }
@@ -1305,11 +1309,11 @@ namespace elGuille.Util.Developer.Data
             sb1 = new System.Text.StringBuilder();
             sb2 = new System.Text.StringBuilder();
             sb3 = new System.Text.StringBuilder();
-            sb1.AppendFormat("{0}INSERT INTO {1} (", "\"", nombreTabla);
+            sb1.AppendFormat("{0}INSERT INTO {1} (", "\"", NombreTabla);
             // 
-            for (int i = 0; i <= mDataTable.Columns.Count - 1; i++)
+            for (int i = 0; i <= ElDataTable.Columns.Count - 1; i++)
             {
-                DataColumn col = mDataTable.Columns[i];
+                DataColumn col = ElDataTable.Columns[i];
                 s = col.ColumnName;
                 if (campos[col.ColumnName].ToString() != s)
                     s = "[" + col.ColumnName + "]";
@@ -1325,14 +1329,14 @@ namespace elGuille.Util.Developer.Data
             }
             s = sb2.ToString().TrimEnd();
             if (s.EndsWith(","))
-                sb1.AppendFormat("{0}", s.Substring(0, s.Length - 1));
+                sb1.AppendFormat("{0}", s[..^1]);
             else
                 sb1.AppendFormat("{0}", s);
             sb1.Append(") ");
             // 
             s = sb3.ToString().TrimEnd();
             if (s.EndsWith(","))
-                sb1.AppendFormat(" VALUES({0}) ", s.Substring(0, s.Length - 1));
+                sb1.AppendFormat(" VALUES({0}) ", s[..^1]);
             else
                 sb1.AppendFormat(" VALUES({0}) ", s);
             // 
@@ -1348,7 +1352,7 @@ namespace elGuille.Util.Developer.Data
                 // 
                 if (esSQL)
                 {
-                    foreach (DataColumn col in mDataTable.Columns)
+                    foreach (DataColumn col in ElDataTable.Columns)
                     {
                         switch (col.DataType.ToString())
                         {
@@ -1359,14 +1363,14 @@ namespace elGuille.Util.Developer.Data
                                         sb.AppendFormat("        {3}{2} TODO: Este campo seguramente es MEMO y el valor debería ser cero en lugar de {0}{1}", col.MaxLength, CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
                                         if (UsarAddWithValue)
                                         {
-                                            s = string.Format("{2}@{0}{2}, {0}", col.ColumnName, col.MaxLength, "\"");
+                                            s = $"{"\""}@{col.ColumnName}{"\""}, {col.ColumnName}";
                                             sb.AppendFormat("        {3}{0}{1}{2}", ConvLang.Comentario(), ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
-                                            s = string.Format("{2}@{0}{2}, {0}", col.ColumnName, 0, "\"");
+                                            s = $"{"\""}@{col.ColumnName}{"\""}, {col.ColumnName}";
                                             sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                         }
                                         else
                                         {
-                                            s = string.Format("{2}@{0}{2}, SqlDbType.NText, {1}, {2}{0}{2}", col.ColumnName, col.MaxLength, "\"");
+                                            s = $"{"\""}@{col.ColumnName}{"\""}, SqlDbType.NText, {col.MaxLength}, {"\""}{col.ColumnName}{"\""}";
                                             sb.AppendFormat("        {3}{0}{1}{2}", ConvLang.Comentario(), ConvLang.Instruccion("da.InsertCommand.Parameters.Add(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                             s = string.Format("{2}@{0}{2}, SqlDbType.NText, {1}, {2}{0}{2}", col.ColumnName, 0, "\"");
                                             sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.Add(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
@@ -1374,7 +1378,7 @@ namespace elGuille.Util.Developer.Data
                                     }
                                     else if (UsarAddWithValue)
                                     {
-                                        s = string.Format("{2}@{0}{2}, {0}", col.ColumnName, col.MaxLength, "\"");
+                                        s = $"{"\""}@{col.ColumnName}{"\""}, {col.ColumnName}";
                                         sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                     }
                                     else
@@ -1390,13 +1394,13 @@ namespace elGuille.Util.Developer.Data
                                 {
                                     if (UsarAddWithValue)
                                     {
-                                        s = string.Format("{1}@{0}{1}, {0}", col.ColumnName, "\"", tipoSQL(col.DataType.ToString()));
+                                        s = $"{"\""}@{col.ColumnName}{"\""}, {col.ColumnName}";
                                         sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                     }
                                     else
                                     {
                                         sb.AppendFormat("        {2}{1} TODO: Comprobar el tipo de datos a usar...{0}", CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
-                                        s = string.Format("{1}@{0}{1}, {2}, 0, {1}{0}{1}", col.ColumnName, "\"", tipoSQL(col.DataType.ToString()));
+                                        s = string.Format("{1}@{0}{1}, {2}, 0, {1}{0}{1}", col.ColumnName, "\"", TipoSQL(col.DataType.ToString()));
                                         sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.Add(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                     }
 
@@ -1407,7 +1411,7 @@ namespace elGuille.Util.Developer.Data
                 }
                 else
                 {
-                    int j = mDataTable.Columns.Count;
+                    int j = ElDataTable.Columns.Count;
                     int k;
                     string[] sp = new string[j + 1];
                     for (k = 0; k <= j; k++)
@@ -1415,7 +1419,7 @@ namespace elGuille.Util.Developer.Data
                     k = 0;
                     string sp1;
                     DataColumn colID = null;
-                    foreach (DataColumn col in mDataTable.Columns)
+                    foreach (DataColumn col in ElDataTable.Columns)
                     {
                         if (campos[col.ColumnName].ToString() == campoIDnombre)
                             colID = col;
@@ -1432,9 +1436,9 @@ namespace elGuille.Util.Developer.Data
                                             sb.AppendFormat("        {3}{2} TODO: Este campo seguramente es MEMO y el valor debería ser cero en lugar de {0}{1}", col.MaxLength, CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
                                             if (UsarAddWithValue)
                                             {
-                                                s = string.Format("{2}@{3}{2}, {0}", col.ColumnName, col.MaxLength, "\"", sp1);
+                                                s = $"{"\""}@{sp1}{"\""}, {col.ColumnName}";
                                                 sb.AppendFormat("        {3}{0}{1}{2}", ConvLang.Comentario(), ConvLang.Instruccion("da.UpdateCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
-                                                s = string.Format("{2}@{3}{2}, {0}", col.ColumnName, 0, "\"", sp1);
+                                                s = $"{"\""}@{sp1}{"\""}, {col.ColumnName}";
                                                 sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                             }
                                             else
@@ -1447,7 +1451,7 @@ namespace elGuille.Util.Developer.Data
                                         }
                                         else if (UsarAddWithValue)
                                         {
-                                            s = string.Format("{2}@{3}{2}, {0}", col.ColumnName, col.MaxLength, "\"", sp1);
+                                            s = $"{"\""}@{sp1}{"\""}, {col.ColumnName}";
                                             sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                         }
                                         else
@@ -1463,13 +1467,13 @@ namespace elGuille.Util.Developer.Data
                                     {
                                         if (UsarAddWithValue)
                                         {
-                                            s = string.Format("{1}@{3}{1}, {0}", col.ColumnName, "\"", tipoOleDb(col.DataType.ToString()), sp1);
+                                            s = $"{"\""}@{sp1}{"\""}, {col.ColumnName}";
                                             sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                         }
                                         else
                                         {
                                             sb.AppendFormat("        {2}{1} TODO: Comprobar el tipo de datos a usar...{0}", CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
-                                            s = string.Format("{1}@{3}{1}, {2}, 0, {1}{0}{1}", col.ColumnName, "\"", tipoOleDb(col.DataType.ToString()), sp1);
+                                            s = string.Format("{1}@{3}{1}, {2}, 0, {1}{0}{1}", col.ColumnName, "\"", TipoOleDb(col.DataType.ToString()), sp1);
                                             sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.Add(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                         }
 
@@ -1488,9 +1492,9 @@ namespace elGuille.Util.Developer.Data
                                     sb.AppendFormat("        {3}{2} TODO: Este campo seguramente es MEMO y el valor debería ser cero en lugar de {0}{1}", colID.MaxLength, CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
                                     if (UsarAddWithValue)
                                     {
-                                        s = string.Format("{2}@{3}{2}, {0}", colID.ColumnName, colID.MaxLength, "\"", sp1);
+                                        s = $"{"\""}@{sp1}{"\""}, {colID.ColumnName}";
                                         sb.AppendFormat("        {3}{0}{1}{2}", ConvLang.Comentario(), ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
-                                        s = string.Format("{2}@{3}{2}, {0}", colID.ColumnName, 0, "\"", sp1);
+                                        s = $"{"\""}@{sp1}{"\""}, {colID.ColumnName}";
                                         sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                     }
                                     else
@@ -1503,7 +1507,7 @@ namespace elGuille.Util.Developer.Data
                                 }
                                 else if (UsarAddWithValue)
                                 {
-                                    s = string.Format("{2}@{3}{2}, {0}", colID.ColumnName, colID.MaxLength, "\"", sp1);
+                                    s = $"{"\""}@{sp1}{"\""}, {colID.ColumnName}";
                                     sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                 }
                                 else
@@ -1519,13 +1523,13 @@ namespace elGuille.Util.Developer.Data
                             {
                                 if (UsarAddWithValue)
                                 {
-                                    s = string.Format("{1}@{3}{1}, {0}", colID.ColumnName, "\"", tipoOleDb(colID.DataType.ToString()), sp1);
+                                    s = $"{"\""}@{sp1}{"\""}, {colID.ColumnName}";
                                     sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.AddWithValue(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                 }
                                 else
                                 {
                                     sb.AppendFormat("        {2}{1} TODO: Comprobar el tipo de datos a usar...{0}", CrLf, ConvLang.Comentario(), ConvLang.Comentario(usarCommandBuilder));
-                                    s = string.Format("{1}@{3}{1}, {2}, 0, {1}{0}{1}", colID.ColumnName, "\"", tipoOleDb(colID.DataType.ToString()), sp1);
+                                    s = string.Format("{1}@{3}{1}, {2}, 0, {1}{0}{1}", colID.ColumnName, "\"", TipoOleDb(colID.DataType.ToString()), sp1);
                                     sb.AppendFormat("        {2}{0}{1}", ConvLang.Instruccion("da.InsertCommand.Parameters.Add(" + s + ")"), CrLf, ConvLang.Comentario(usarCommandBuilder));
                                 }
 
@@ -1563,7 +1567,7 @@ namespace elGuille.Util.Developer.Data
                 // No usar With ya que C# no lo soporta... (ni lo tengo definido :-P )
                 // Nota: solo para SQL Server y AddWithValue
                 // cmd.Parameters.AddWithValue("@ID", ID)
-                foreach (DataColumn col in mDataTable.Columns)
+                foreach (DataColumn col in ElDataTable.Columns)
                 {
                     if (col.AutoIncrement == false)
                     {
@@ -1610,10 +1614,10 @@ namespace elGuille.Util.Developer.Data
                 sb.AppendFormat("            {0}{1}", ConvLang.Else(), CrLf);
                 // id = CInt(obj)
                 sb.AppendFormat("                {0}{1}", ConvLang.Asigna("id", "CInt(obj)"), CrLf);
-                object obj;
-                obj = "1";
-                int iObj;
-                iObj = System.Convert.ToInt32(obj);
+                //object obj;
+                //obj = "1";
+                //int iObj = 1;
+                //iObj = System.Convert.ToInt32(obj);
                 // End If
                 sb.AppendFormat("            {0}{1}", ConvLang.EndIf(), CrLf);
                 // 
@@ -1688,9 +1692,9 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("        {0} TODO: Poner aquí la selección a realizar para acceder a este registro{1}", ConvLang.Comentario(), CrLf);
             sb.AppendFormat("        {0}       yo uso el {2} que es el identificador único de cada registro{1}", ConvLang.Comentario(), CrLf, campoIDnombre);
             if (campoIDtipo.IndexOf("String") > -1)
-                sb.AppendFormat("        {0}{1}", ConvLang.DeclaraVariable("Dim", "where", "String", string.Format("{0}{2} = '{0} & Me.{2} & {0}'{0}", "\"", nombreTabla, campoIDnombre)), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.DeclaraVariable("Dim", "where", "String", $"{"\""}{campoIDnombre} = '{"\""} & Me.{campoIDnombre} & {"\""}'{"\""}"), CrLf);
             else
-                sb.AppendFormat("        {0}{1}", ConvLang.DeclaraVariable("Dim", "where", "String", string.Format("{0}{2} = {0} & Me.{2}.ToString()", "\"", nombreTabla, campoIDnombre)), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.DeclaraVariable("Dim", "where", "String", $"{"\""}{campoIDnombre} = {"\""} & Me.{campoIDnombre}.ToString()"), CrLf);
             sb.AppendLine();
             sb.AppendFormat("        {0}{1}", ConvLang.Return("Borrar(where)"), CrLf);
             sb.AppendFormat("    {0}{1}", ConvLang.EndFunction(), CrLf);
@@ -1718,7 +1722,7 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("                {0}{1}", ConvLang.Comentario(ConvLang.Asigna("cmd.CommandType", "CommandType.StoredProcedure")), CrLf);
             sb.AppendFormat("                {0}{1}", ConvLang.Asigna("cmd.CommandType", "CommandType.Text"), CrLf);
             sb.AppendFormat("                {0}{1}", ConvLang.Asigna("cmd.Connection", "con"), CrLf);
-            sb.AppendFormat("                {0}{1}", ConvLang.Comentario(ConvLang.Asigna("cmd.CommandText", $"\"Borrar{nombreTabla}\"")), CrLf, "\"");
+            sb.AppendFormat("                {0}{1}", ConvLang.Comentario(ConvLang.Asigna("cmd.CommandText", $"\"Borrar{NombreTabla}\"")), CrLf, "\"");
             sb.AppendFormat("                {0}{1}", ConvLang.Asigna("cmd.CommandText", "sel"), CrLf);
             sb.AppendLine();
             sb.AppendFormat("                {0}{1}", ConvLang.Instruccion("con.Open()"), CrLf);
@@ -1793,7 +1797,7 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("    {0}{1}", ConvLang.Function("Public Shared", "Reader2Tipo", nombreClase, "r", "SqlDataReader"), CrLf);
             sb.AppendFormat("        {0}{1}", ConvLang.VariableNew("Dim", "o_" + nombreClase, nombreClase), CrLf);
             sb.AppendLine();
-            foreach (DataColumn col in mDataTable.Columns)
+            foreach (DataColumn col in ElDataTable.Columns)
             {
                 switch (col.DataType.ToString())
                 {
@@ -1850,7 +1854,7 @@ namespace elGuille.Util.Developer.Data
             return sb.ToString();
         }
         // 
-        private static string tipoSQL(string elTipo)
+        private static string TipoSQL(string elTipo)
         {
             string[] aCTS = new[] { "System.Boolean", "System.Int16", "System.Int32", "System.Int64", "System.Decimal", "System.Single", "System.Double", "System.Byte", "System.DateTime", "System.Guid", "System.Object" };
             string[] aSQL = new[] { "Bit", "SmallInt", "Int", "BigInt", "Decimal", "Real", "Float", "TinyInt", "DateTime", "UniqueIdentifier", "Variant" };
@@ -1860,7 +1864,7 @@ namespace elGuille.Util.Developer.Data
             return "SqlDbType.Int";
         }
         // 
-        private static string tipoOleDb(string elTipo)
+        private static string TipoOleDb(string elTipo)
         {
             string[] aCTS = new[] { "System.Byte[]", "System.Boolean", "System.Int16", "System.Int32", "System.Int64", "System.Decimal", "System.Single", "System.Double", "System.Byte", "System.DateTime", "System.Guid", "System.Object", "System.String" };
             string[] aOle = new[] { "LongVarBinary", "Boolean", "SmallInt", "Integer", "BigInt", "Decimal", "Single", "Double", "UnsignedTinyInt", "Date", "Guid", "Variant", "VarWChar" };
