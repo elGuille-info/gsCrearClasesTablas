@@ -7,6 +7,9 @@ Proyecto para generar las clases convertido a C# a partir del código de Visual 
 
 Añado las clases ConversorTipos para Visual Basic y C#, estas clases no se usan en esta DLL, pero las utilizan los programas que usen el código generado por esta biblioteca de clases.
 
+He actualizado el paquete de NuGet para Microsoft.Data.SqlClient (v5.1.1)
+
+
 ### Actualización del 09-oct-22
 
 Añado la clase TablaItem para los nombres de las tablas de SQL Server para añadir a las listas que muestran las tablas.
