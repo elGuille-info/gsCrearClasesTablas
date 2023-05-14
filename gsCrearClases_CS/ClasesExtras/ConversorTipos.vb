@@ -27,13 +27,13 @@ Imports System
 Public Class ConversorTipos
 
     ' Esta propiedad la usaba desde Extensiones.vb          (14/may/23 10.07)
-    Private _CultureES As System.Globalization.CultureInfo
+    Private Shared _CultureES As System.Globalization.CultureInfo
 
     ''' <summary>
     ''' Devuelve un objeto con el valor de la cultura en español-España (es-ES).
     ''' </summary>
     ''' <returns>Un objeto del tipo <see cref="CultureInfo"/> con la cultura para es-ES.</returns>
-    Private ReadOnly Property CultureES As System.Globalization.CultureInfo
+    Private Shared ReadOnly Property CultureES As System.Globalization.CultureInfo
         Get
             If _CultureES Is Nothing Then
                 _CultureES = System.Globalization.CultureInfo.CreateSpecificCulture("es-ES")
