@@ -43,8 +43,8 @@ namespace gsCrearClasesTablas_MAUI
                     Title = "";
 
                 var sCopyR = "©Guillermo Som (elGuille), 2004-";
-                var elAño = 2022;
-                if (DateTime.Today.Year > 2022)
+                var elAño = 2023;
+                if (DateTime.Today.Year > elAño)
                     elAño = DateTime.Today.Year;
                 LabelInfo.Text = $" {sCopyR}{elAño} ";
 
@@ -106,9 +106,6 @@ namespace gsCrearClasesTablas_MAUI
                              $"Tamaño de la ventana: Width: {Width}, Height: {Height}" + CrearClase.CrLf +
                              $"Posición: Left: {AppShell.Current.Bounds.Left}, Top: {AppShell.Current.Bounds.Top}";
 
-            //txtCodigo.Text = $"Tamaño de la ventana: Width: {Width}, Height: {Height}" + CrearClase.CrLf +
-            //                 $"Posición: Left: {AppShell.Current.Bounds.Left}, Top: {AppShell.Current.Bounds.Top}";
-
             btnMostrarTablas.IsEnabled = false;
 
             GuardarConfig();
@@ -119,9 +116,6 @@ namespace gsCrearClasesTablas_MAUI
             txtSelect.Text = "";
             if (optSQL.IsChecked)
                 CrearClaseSQL.Conectar(txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
-            //else
-            //    CrearClaseOleDb.Conectar(this.txtNombreBase.Text, txtSelect.Text, txtProvider.Text, txtAccessPassword.Text);
-            // 
             
             grbOpciones.IsEnabled = CrearClase.Conectado;
             btnGenerarClase.IsEnabled = CrearClase.Conectado;
@@ -258,19 +252,10 @@ namespace gsCrearClasesTablas_MAUI
             if (optVB.IsToggled)
             {
                 elCodigo = CrearClaseSQL.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
-
-                //if (optSQL.IsChecked)
-                //    txtCodigo.Text = await CrearClaseSQL.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
-                ////else
-                ////    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
             }
             else
             {
                 elCodigo = CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
-                //if (optSQL.IsChecked)
-                //    txtCodigo.Text = await CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
-                ////else
-                ////    txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, cboTablas.Text, txtNombreBase.Text, txtSelect.Text, txtAccessPassword.Text, txtProvider.Text);
             }
 
             //await App.Refrescar(10);
@@ -499,14 +484,6 @@ namespace gsCrearClasesTablas_MAUI
 
         private void optVB_Toggled(object sender, ToggledEventArgs e)
         {
-            /*
-                    If optVB.Checked Then
-                        chkCrearIndizador.Text = "Crear Default Property"
-                    Else
-                        chkCrearIndizador.Text = "Crear indizador"
-                    End If
-
-            */
             if (optVB.IsToggled)
             {
                 chkCrearIndizador.Text = "Crear Default Property";
