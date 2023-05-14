@@ -72,6 +72,7 @@
 '                       si se llama desde mostrar tablas
 '                       LeerConfig para no depender de settings.
 '   3.0.9.0             Para 2023 y los cambios en CrearClases.
+'   3.1.0.0             Quito <MyType>WindowsForms</MyType> y Application.*.
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -91,13 +92,27 @@ Public Class Form1
 
     ' Para los texto, etc. al hacer la copia con este programa.
     ' p-u-blic static string AppFileVersion { get; } = "8.8.1.0";
-    Private Const AppFileVersion As String = "3.0.9.0"
+    Private Const AppFileVersion As String = "3.1.0.0"
     ' p-u-blic static string AppFechaVersion { get; } = "26-abr-2023";
     Private Const AppFechaVersion As String = "14-may-2023"
     ' Intentar no pasar de estas marcas: 60 caracteres.
     '                                            10        20        30        40        50        60
     '                                   ---------|---------|---------|---------|---------|---------|
-    ' //[COPIAR]AppDescripcionCopia = " varias comprobaciones y actualizar la DLL CrearClases"
+    ' //[COPIAR]AppDescripcionCopia = " compilar sin usar My"
+
+    Private Shared Property VersionInfo As FileVersionInfo
+
+    ''' <summary>
+    ''' Constructor compartido.
+    ''' </summary>
+    Shared Sub New()
+        Try
+            Dim ensamblado = GetType(Form1).Assembly
+            VersionInfo = FileVersionInfo.GetVersionInfo(ensamblado.Location)
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message)
+        End Try
+    End Sub
 
     ''' <summary>
     ''' El path local de la aplicación.
@@ -114,17 +129,18 @@ Public Class Form1
     ''' <returns>El valor de FileVersion.</returns>
     ''' <remarks>01/Oct/22</remarks>
     Private Shared Function VersionDLL() As String
-        Dim s As String
+        Dim s As String = AppFileVersion
 
         Try
-            Dim ensamblado = GetType(Form1).Assembly
-            'Dim ensamblado = System.Reflection.Assembly.GetExecutingAssembly()
-            Dim fvi = FileVersionInfo.GetVersionInfo(ensamblado.Location)
-            ' FileDescription en realidad muestra (o eso parece) lo mismo de ProductName
-            s = fvi.FileVersion
-
+            'Dim ensamblado = GetType(Form1).Assembly
+            ''Dim ensamblado = System.Reflection.Assembly.GetExecutingAssembly()
+            'Dim fvi = FileVersionInfo.GetVersionInfo(ensamblado.Location)
+            '' FileDescription en realidad muestra (o eso parece) lo mismo de ProductName
+            's = fvi.FileVersion
+            If VersionInfo IsNot Nothing Then
+                s = VersionInfo.FileVersion
+            End If
         Catch ex As Exception
-            s = AppFileVersion
         End Try
 
         Return s
@@ -164,7 +180,8 @@ Public Class Form1
         End If
         LabelInfo.Text = $"  {sCopyR}{elAño}  "
         ' Usando My.Application.Info.Version.ToString(3) devuelve solo las 3 primeras cifras.
-        LabelVersion.Text = $"  {My.Application.Info.ProductName} - v{My.Application.Info.Version.ToString(3)} ({VersionDLL()})  "
+        'LabelVersion.Text = $"  {My.Application.Info.ProductName} - v{My.Application.Info.Version.ToString(3)} ({VersionDLL()})  "
+        LabelVersion.Text = $"  {VersionInfo.ProductName} - v{VersionInfo.ProductVersion} ({VersionDLL()})  "
 
         txtSelect.Text = ""
         txtCodigo.Text = ""
@@ -463,38 +480,6 @@ Public Class Form1
     ''' </summary>
     ''' <param name="soloConexion">True para solo los de la conexión, etc.</param>
     Private Sub guardarCfg(soloConexion As Boolean)
-        'My.Settings.SQLDataSource = txtDataSource.Text
-        'My.Settings.SQLInitialCatalog = txtInitialCatalog.Text
-        'My.Settings.SQLSeguridad = chkSeguridadSQL.Checked
-        'My.Settings.SQLUserId = txtUserId.Text
-        '' guardar siempre una cadena vacía en el password
-        '' le indico que la guarde                                   (21/Dic/20)
-        'My.Settings.SQLPassword = txtPassword.Text
-
-        'My.Settings.OleDbBaseDeDatos = txtNombreBase.Text
-        'My.Settings.OleDbProvider = txtProvider.Text
-        'My.Settings.OleDbPassword = "" 'txtAccessPassword.Text
-
-        'My.Settings.UsarSQL = optSQL.Checked
-
-        'If soloConexion = False Then
-        '    If optVB.Checked Then
-        '        My.Settings.Lenguaje = "VB"
-        '    Else
-        '        My.Settings.Lenguaje = "C#"
-        '    End If
-
-        '    My.Settings.UsarCommandBuilder = chkUsarCommandBuilder.Checked
-        '    My.Settings.UsarAddWithValue = chkUsarAddWithValue.Checked
-        '    My.Settings.UsarExecuteScalar = chkUsarDataAdapter.Checked
-        '    My.Settings.usarOverrides = chkUsarOverrides.Checked
-        '    ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.34)
-        '    My.Settings.PropiedadAuto = chkPropiedadAuto.Checked
-        '    ' Opción para crear el indizador/default property. (11/oct/22 22.58)
-        '    My.Settings.CrearIndizador = chkCrearIndizador.Checked
-
-        'End If
-
         If WindowState = FormWindowState.Normal Then
             My.Settings.Left = Me.Left
             My.Settings.Top = Me.Top
@@ -504,7 +489,8 @@ Public Class Form1
         End If
 
         My.Settings.CopyrightAutor = "Guillermo Som (elGuille)"
-        My.Settings.CopyrightVersion = My.Application.Info.Version.ToString
+        'My.Settings.CopyrightVersion = My.Application.Info.Version.ToString
+        My.Settings.CopyrightVersion = Form1.VersionInfo.FileVersion
 
         ' Por si no está puesto que se guarde.                  (14/may/23 09.04)
         My.Settings.Save()
