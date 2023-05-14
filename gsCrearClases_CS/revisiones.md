@@ -8,6 +8,17 @@
 ### Revisiones de 2023
 
 ```
+'<revision("3.0.16.0", _
+'   FechaModificacion:= "14/May/2023", _
+'   Tester:= "Guille", _
+'   FechaReporte:= "14/May/2023", _
+'   Tipo:= "Revisión", _
+'   Clases:= "CrearClase", _
+'   Miembro:= "generarClase", _
+'   Motivo:= "Asegurarse que la conexión se cierra si da error.", _
+'   Solucion:= "Todos los Try/Catch que usan con.Close() he puesto Finally con comprobación si la conexión sigue abierta que la cierre.", _
+'   Comentarios:= "Para que el objeto con se cierre, aunque al estar en un Using no es necesario, pero...")>
+
 '<revision("3.0.15.0", _
 '   FechaModificacion:= "14/May/2023", _
 '   Tester:= "Guille", _

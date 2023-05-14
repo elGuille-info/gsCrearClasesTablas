@@ -787,6 +787,16 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("                {0}{1}", ConvLang.Instruccion("con.Close()"), CrLf);
             sb.AppendFormat("            {0}{1}", ConvLang.Catch("ex", "Exception"), CrLf);
             sb.AppendFormat("                {0}{1}", ConvLang.Return("Nothing"), CrLf);
+            sb.AppendLine();
+            sb.AppendFormat("            {0}{1}", ConvLang.Finally(), CrLf);
+            sb.AppendFormat("              {0}{1}", ConvLang.Comentario(" Comprobar si la conexión sigue abierta. (14/may/23)"), CrLf);
+            // If Not (con is nothing) then
+            sb.AppendFormat("              {0}{1}", ConvLang.If("", "Not", "(con Is Nothing)"), CrLf);
+            // con.Close()
+            sb.AppendFormat("                  {0}{1}", ConvLang.Instruccion("con.Close()"), CrLf);
+            // End If
+            sb.AppendFormat("              {0}{1}", ConvLang.EndIf(), CrLf);
+            // End Try
             sb.AppendFormat("            {0}{1}", ConvLang.EndTry(), CrLf);
             sb.AppendFormat("        {0}{1}", ConvLang.EndUsing(), CrLf);
             sb.AppendLine();
@@ -1785,6 +1795,15 @@ namespace elGuille.Util.Developer.Data
             sb.AppendFormat("                {0}{1}", ConvLang.Instruccion("con.Close()"), CrLf);
             sb.AppendFormat("            {0}{1}", ConvLang.Catch("ex", "Exception"), CrLf);
             sb.AppendFormat("                {0}{1}", ConvLang.Return("col"), CrLf);
+            sb.AppendLine();
+            sb.AppendFormat("            {0}{1}", ConvLang.Finally(), CrLf);
+            sb.AppendFormat("              {0}{1}", ConvLang.Comentario(" Comprobar si la conexión sigue abierta. (14/may/23)"), CrLf);
+            // If Not (con is nothing) then
+            sb.AppendFormat("              {0}{1}", ConvLang.If("", "Not", "(con Is Nothing)"), CrLf);
+            // con.Close()
+            sb.AppendFormat("                  {0}{1}", ConvLang.Instruccion("con.Close()"), CrLf);
+            // End If
+            sb.AppendFormat("              {0}{1}", ConvLang.EndIf(), CrLf);
             sb.AppendFormat("            {0}{1}", ConvLang.EndTry(), CrLf);
             sb.AppendFormat("        {0}{1}", ConvLang.EndUsing(), CrLf);
             sb.AppendLine();
