@@ -6,14 +6,14 @@
     <!--<Nullable>enable</Nullable>-->
 	  <Authors>elGuille</Authors>
 	  <Description>Generar clases a partir de tablas de bases de datos. Para .NET 6.0  (revisión del 14-may-2023)</Description>
-	  <Copyright>©Guillermo Som (elGuille), 2007, 2018-2022</Copyright>
+	  <Copyright>©Guillermo Som (elGuille), 2007, 2018-2023</Copyright>
 	  <PackageProjectUrl>https://www.elguillemola.com/generar-las-clases-de-una-tabla-de-sql-server-o-access-mdb/</PackageProjectUrl>
 	  <Title>gsCrearClases</Title>
 	  <RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
 	  <NeutralLanguage>es</NeutralLanguage>
-	  <AssemblyVersion>3.0.14</AssemblyVersion>
-	  <FileVersion>3.0.14.0</FileVersion>
+	  <AssemblyVersion>3.0.15</AssemblyVersion>
+	  <FileVersion>3.0.15.0</FileVersion>
 	  <PackageReleaseNotes>
           14-may-23: Actualizo Microsoft.Data.SqlClient 5.1.1
           14-may-23: Añado las clases ConversorTipos para VB y C#

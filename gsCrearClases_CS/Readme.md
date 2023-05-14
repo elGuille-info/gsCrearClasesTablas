@@ -2,6 +2,11 @@
 
 Proyecto para generar las clases convertido a C# a partir del código de Visual Basic.
 
+
+### Actualización del 14-may-23
+
+Añado las clases ConversorTipos para Visual Basic y C#, estas clases no se usan en esta DLL, pero las utilizan los programas que usen el código generado por esta biblioteca de clases.
+
 ### Actualización del 09-oct-22
 
 Añado la clase TablaItem para los nombres de las tablas de SQL Server para añadir a las listas que muestran las tablas.
