@@ -87,6 +87,18 @@ Imports System.IO
 
 Public Class Form1
 
+    ' Para la utilidad de copiar.                           (14/may/23 13.29)
+
+    ' Para los texto, etc. al hacer la copia con este programa.
+    ' p-u-blic static string AppFileVersion { get; } = "8.8.1.0";
+    Private Const AppFileVersion As String = "3.0.9.0"
+    ' p-u-blic static string AppFechaVersion { get; } = "26-abr-2023";
+    Private Const AppFechaVersion As String = "14-may-2023"
+    ' Intentar no pasar de estas marcas: 60 caracteres.
+    '                                            10        20        30        40        50        60
+    '                                   ---------|---------|---------|---------|---------|---------|
+    ' //[COPIAR]AppDescripcionCopia = " varias comprobaciones y actualizar la DLL CrearClases"
+
     ''' <summary>
     ''' El path local de la aplicación.
     ''' </summary>
@@ -112,7 +124,7 @@ Public Class Form1
             s = fvi.FileVersion
 
         Catch ex As Exception
-            s = "3.0.9.0"
+            s = AppFileVersion
         End Try
 
         Return s
@@ -189,7 +201,7 @@ Public Class Form1
         'End If
 
         ' Guardar los valores iniciales, por si se usa chkUsarSQLEXpress (17/Abr/21)
-        ValoresAntSQLExpress = (optSQL.Checked, chkSeguridadSQL.Checked, txtDataSource.Text, txtInitialCatalog.Text)
+        ValoresAntSQLExpress = (optSQL.Checked, chkSeguridadSQL.Checked, txtSqlDataSource.Text, txtSqlInitialCatalog.Text)
 
         inicializando = False
 
@@ -206,6 +218,9 @@ Public Class Form1
         grbOpciones.Enabled = btnGuardar.Enabled
         btnGenerarClase.Enabled = False
         Panel1.Enabled = False
+
+        chkUsarCommandBuilder.Enabled = chkUsarDataAdapter.Checked
+        chkUsarAddWithValue.Enabled = chkUsarDataAdapter.Checked
     End Sub
     '
     Private Sub Form1_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
@@ -243,19 +258,18 @@ Public Class Form1
         ' No tener en cuenta la cadena select para mostrar las tablas
         txtSelect.Text = ""
         If optSQL.Checked Then
-            CrearClaseSQL.Conectar(txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.Checked)
+            CrearClaseSQL.Conectar(txtSqlDataSource.Text, txtSqlInitialCatalog.Text, txtSelect.Text, txtSqlUserId.Text, txtSqlPassword.Text, chkSeguridadSQL.Checked)
         Else
-            CrearClaseOleDb.Conectar(Me.txtNombreBase.Text, txtSelect.Text, txtProvider.Text, txtAccessPassword.Text)
+            CrearClaseOleDb.Conectar(Me.txtAccessNombreBase.Text, txtSelect.Text, txtAccessProvider.Text, txtAccessPassword.Text)
         End If
-        '
+
         btnGuardar.Enabled = CrearClase.Conectado
         grbOpciones.Enabled = btnGuardar.Enabled
         btnGenerarClase.Enabled = CrearClase.Conectado
         Panel1.Enabled = CrearClase.Conectado
-        '
+
         If CrearClase.Conectado = False Then Return
-        '
-        'Dim nomTablas() As String
+
         Dim nomTablas As List(Of String)
         If optSQL.Checked Then
             ' Esto necesita usar una importación a elGuille.Util.Developer.Data
@@ -263,7 +277,7 @@ Public Class Form1
         Else
             nomTablas = CrearClaseOleDb.NombresTablas()
         End If
-        '
+
         If (nomTablas Is Nothing) OrElse nomTablas(0).StartsWith("ERROR") Then
             btnGuardar.Enabled = False
             grbOpciones.Enabled = btnGuardar.Enabled
@@ -271,7 +285,7 @@ Public Class Form1
             Panel1.Enabled = False
             'Return
         End If
-        '
+
         cboTablas.Items.Clear()
         If nomTablas IsNot Nothing Then
             'For i As Integer = 0 To nomTablas.Length - 1
@@ -282,6 +296,9 @@ Public Class Form1
         If cboTablas.Items.Count > 0 Then
             cboTablas.SelectedIndex = 0
         End If
+
+        chkUsarCommandBuilder.Enabled = chkUsarDataAdapter.Checked
+        chkUsarAddWithValue.Enabled = chkUsarDataAdapter.Checked
     End Sub
     '
     Private Async Sub btnGenerarClase_Click(sender As Object, e As EventArgs) Handles btnGenerarClase.Click
@@ -317,10 +334,13 @@ Public Class Form1
 
         ' Lo asigno en la clase base ya que son métodos compartidos (22/Mar/19)
         CrearClase.UsarDataAdapter = chkUsarDataAdapter.Checked
-        If chkUsarDataAdapter.Checked = False Then
-            'chkUsarCommandBuilder.Checked = False
-            chkUsarCommandBuilder.Enabled = False
-        End If
+        'If chkUsarDataAdapter.Checked = False Then
+        '    chkUsarCommandBuilder.Enabled = False
+        '    chkUsarAddWithValue.Enabled = False
+        'End If
+        chkUsarCommandBuilder.Enabled = chkUsarDataAdapter.Checked
+        chkUsarAddWithValue.Enabled = chkUsarDataAdapter.Checked
+
         CrearClase.UsarAddWithValue = chkUsarAddWithValue.Checked
         CrearClase.UsarOverrides = chkUsarOverrides.Checked
         ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.34)
@@ -338,25 +358,25 @@ Public Class Form1
         End If
         If optVB.Checked Then
             If optSQL.Checked Then
-                txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eVBNET, usarCB,
-                                                            txtClase.Text, cboTablas.Text, txtDataSource.Text,
-                                                            txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text,
-                                                            txtPassword.Text, chkSeguridadSQL.Checked)
+                txtCodigo.Text = CrearClaseSQL.GenerarClase(Lenguajes.eVBNET, usarCB,
+                                                            txtClase.Text, cboTablas.Text, txtSqlDataSource.Text,
+                                                            txtSqlInitialCatalog.Text, txtSelect.Text, txtSqlUserId.Text,
+                                                            txtSqlPassword.Text, chkSeguridadSQL.Checked)
             Else
-                txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eVBNET, usarCB,
-                                                              txtClase.Text, cboTablas.Text, txtNombreBase.Text,
-                                                              txtSelect.Text, txtAccessPassword.Text, txtProvider.Text)
+                txtCodigo.Text = CrearClaseOleDb.GenerarClase(Lenguajes.eVBNET, usarCB,
+                                                              txtClase.Text, cboTablas.Text, txtAccessNombreBase.Text,
+                                                              txtSelect.Text, txtAccessPassword.Text, txtAccessProvider.Text)
             End If
         Else
             If optSQL.Checked Then
-                txtCodigo.Text = CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB,
-                                                            txtClase.Text, cboTablas.Text, txtDataSource.Text,
-                                                            txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text,
-                                                            txtPassword.Text, chkSeguridadSQL.Checked)
+                txtCodigo.Text = CrearClaseSQL.GenerarClase(Lenguajes.eCS, usarCB,
+                                                            txtClase.Text, cboTablas.Text, txtSqlDataSource.Text,
+                                                            txtSqlInitialCatalog.Text, txtSelect.Text, txtSqlUserId.Text,
+                                                            txtSqlPassword.Text, chkSeguridadSQL.Checked)
             Else
-                txtCodigo.Text = CrearClaseOleDb.GenerarClase(eLenguaje.eCS, usarCB,
-                                                              txtClase.Text, cboTablas.Text, txtNombreBase.Text,
-                                                              txtSelect.Text, txtAccessPassword.Text, txtProvider.Text)
+                txtCodigo.Text = CrearClaseOleDb.GenerarClase(Lenguajes.eCS, usarCB,
+                                                              txtClase.Text, cboTablas.Text, txtAccessNombreBase.Text,
+                                                              txtSelect.Text, txtAccessPassword.Text, txtAccessProvider.Text)
             End If
         End If
 
@@ -386,8 +406,8 @@ Public Class Form1
         Dim b As Boolean = chkSeguridadSQL.Checked
         labelUser.Enabled = b
         labelPassw.Enabled = b
-        txtUserId.Enabled = b
-        txtPassword.Enabled = b
+        txtSqlUserId.Enabled = b
+        txtSqlPassword.Enabled = b
     End Sub
     '
     Private Sub optAccess_CheckedChanged(sender As Object, e As EventArgs) Handles optAccess.CheckedChanged
@@ -410,20 +430,20 @@ Public Class Form1
     Private Sub txtNombreBase_DragOver(
                     sender As Object,
                     e As System.Windows.Forms.DragEventArgs) _
-                    Handles txtNombreBase.DragOver, MyBase.DragOver
+                    Handles txtAccessNombreBase.DragOver, MyBase.DragOver
         e.Effect = DragDropEffects.Copy
     End Sub
     '
     Private Sub txtNombreBase_DragDrop(
                     sender As Object,
                     e As System.Windows.Forms.DragEventArgs) _
-                    Handles txtNombreBase.DragDrop, MyBase.DragDrop
+                    Handles txtAccessNombreBase.DragDrop, MyBase.DragDrop
         Dim archivos() As String
         '
         If e.Data.GetDataPresent("FileDrop") Then
             archivos = CType(e.Data.GetData("FileDrop"), String())
-            txtNombreBase.Text = archivos(0)
-            txtNombreBase.SelectionStart = txtNombreBase.Text.Length
+            txtAccessNombreBase.Text = archivos(0)
+            txtAccessNombreBase.SelectionStart = txtAccessNombreBase.Text.Length
         End If
     End Sub
     '
@@ -431,9 +451,9 @@ Public Class Form1
         With New OpenFileDialog
             .Title = "Seleccionar base de datos"
             .Filter = "Bases de Access (*.mdb)|*.mdb"
-            .FileName = txtNombreBase.Text
+            .FileName = txtAccessNombreBase.Text
             If .ShowDialog = DialogResult.OK Then
-                txtNombreBase.Text = .FileName
+                txtAccessNombreBase.Text = .FileName
             End If
         End With
     End Sub
@@ -503,15 +523,15 @@ Public Class Form1
     Private Sub chkUsarSQLEXpress_CheckedChanged(sender As Object, e As EventArgs) Handles chkUsarSQLEXpress.CheckedChanged
         If inicializando Then Return
         If chkUsarSQLEXpress.Checked Then
-            ValoresAntSQLExpress = (optSQL.Checked, chkSeguridadSQL.Checked, txtDataSource.Text, txtInitialCatalog.Text)
+            ValoresAntSQLExpress = (optSQL.Checked, chkSeguridadSQL.Checked, txtSqlDataSource.Text, txtSqlInitialCatalog.Text)
             optSQL.Checked = True
             chkSeguridadSQL.Checked = False
-            txtDataSource.Text = ".\SQLEXPRESS"
+            txtSqlDataSource.Text = ".\SQLEXPRESS"
         Else
             optSQL.Checked = ValoresAntSQLExpress.usarSQL
             chkSeguridadSQL.Checked = ValoresAntSQLExpress.segIntegrada
-            txtDataSource.Text = ValoresAntSQLExpress.dataSource
-            txtInitialCatalog.Text = ValoresAntSQLExpress.initialCatalog
+            txtSqlDataSource.Text = ValoresAntSQLExpress.dataSource
+            txtSqlInitialCatalog.Text = ValoresAntSQLExpress.initialCatalog
         End If
     End Sub
 
@@ -521,11 +541,11 @@ Public Class Form1
     Private Sub GuardarConfig()
         Using sw = New StreamWriter(FicConfig, False, System.Text.Encoding.Default)
             sw.WriteLine(If(optSQL.Checked, "1", "0"))
-            sw.WriteLine(txtDataSource.Text)
-            sw.WriteLine(txtInitialCatalog.Text)
+            sw.WriteLine(txtSqlDataSource.Text)
+            sw.WriteLine(txtSqlInitialCatalog.Text)
             sw.WriteLine(If(chkSeguridadSQL.Checked, "1", "0"))
-            sw.WriteLine(txtUserId.Text)
-            sw.WriteLine(txtPassword.Text)
+            sw.WriteLine(txtSqlUserId.Text)
+            sw.WriteLine(txtSqlPassword.Text)
             sw.WriteLine(If(chkUsarDataAdapter.Checked, "1", "0"))
             sw.WriteLine(If(chkUsarCommandBuilder.Checked, "1", "0"))
             sw.WriteLine(If(chkUsarAddWithValue.Checked, "1", "0"))
@@ -535,6 +555,9 @@ Public Class Form1
             sw.WriteLine(If(chkCrearIndizador.Checked, "1", "0"))
             ' Guardar el password de access                 (14/may/23 09.32)
             sw.WriteLine(txtAccessPassword.Text)
+            ' También los otros 2 valores.                  (14/may/23 17.56)
+            sw.WriteLine(txtAccessNombreBase.Text)
+            sw.WriteLine(txtAccessProvider.Text)
         End Using
     End Sub
 
@@ -557,13 +580,13 @@ Public Class Form1
                 Else
                     s = sr.ReadLine()
                 End If
-                txtDataSource.Text = s
+                txtSqlDataSource.Text = s
                 If sr.EndOfStream Then
                     s = ""
                 Else
                     s = sr.ReadLine()
                 End If
-                txtInitialCatalog.Text = s
+                txtSqlInitialCatalog.Text = s
                 If sr.EndOfStream Then
                     s = "0"
                 Else
@@ -575,13 +598,13 @@ Public Class Form1
                 Else
                     s = sr.ReadLine()
                 End If
-                txtUserId.Text = s
+                txtSqlUserId.Text = s
                 If sr.EndOfStream Then
                     s = ""
                 Else
                     s = sr.ReadLine()
                 End If
-                txtPassword.Text = s
+                txtSqlPassword.Text = s
                 If sr.EndOfStream Then
                     s = "0"
                 Else
@@ -630,15 +653,27 @@ Public Class Form1
                     s = sr.ReadLine()
                 End If
                 txtAccessPassword.Text = s
+                If sr.EndOfStream Then
+                    s = ""
+                Else
+                    s = sr.ReadLine()
+                End If
+                txtAccessNombreBase.Text = s
+                If sr.EndOfStream Then
+                    s = ""
+                Else
+                    s = sr.ReadLine()
+                End If
+                txtAccessProvider.Text = s
             End Using
         Else
-            txtDataSource.Text = ""
-            txtInitialCatalog.Text = ""
+            txtSqlDataSource.Text = ""
+            txtSqlInitialCatalog.Text = ""
             chkSeguridadSQL.Checked = True
-            txtUserId.Text = ""
-            txtPassword.Text = ""
-            txtNombreBase.Text = ""
-            txtProvider.Text = ""
+            txtSqlUserId.Text = ""
+            txtSqlPassword.Text = ""
+            txtAccessNombreBase.Text = ""
+            txtAccessProvider.Text = ""
             txtAccessPassword.Text = ""
             optSQL.Checked = True
             optVB.Checked = True
@@ -649,28 +684,6 @@ Public Class Form1
             chkPropiedadAuto.Checked = True
             chkCrearIndizador.Checked = True
         End If
-        ' Asignar los valores de Settings                   (14/may/23 09.25)
-        ' según lo leído de la configuración
-        'My.Settings.SQLDataSource = txtDataSource.Text
-        'My.Settings.SQLInitialCatalog = txtInitialCatalog.Text
-        'My.Settings.SQLSeguridad = chkSeguridadSQL.Checked
-        'My.Settings.SQLUserId = txtUserId.Text
-        'My.Settings.SQLPassword = txtPassword.Text
-        'My.Settings.OleDbBaseDeDatos = txtNombreBase.Text
-        'My.Settings.OleDbProvider = txtProvider.Text
-        'My.Settings.OleDbPassword = txtAccessPassword.Text
-        'My.Settings.UsarSQL = optSQL.Checked
-        'If optVB.Checked Then
-        '    My.Settings.Lenguaje = "VB"
-        'Else
-        '    My.Settings.Lenguaje = "C#"
-        'End If
-        'My.Settings.UsarCommandBuilder = chkUsarCommandBuilder.Checked
-        'My.Settings.UsarAddWithValue = chkUsarAddWithValue.Checked
-        'My.Settings.UsarExecuteScalar = chkUsarDataAdapter.Checked
-        'My.Settings.usarOverrides = chkUsarOverrides.Checked
-        'My.Settings.PropiedadAuto = chkPropiedadAuto.Checked
-        'My.Settings.CrearIndizador = chkCrearIndizador.Checked
     End Sub
 
     Private Sub optVB_CheckedChanged(sender As Object, e As EventArgs) Handles optVB.CheckedChanged, optCS.CheckedChanged

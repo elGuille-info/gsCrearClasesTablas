@@ -122,7 +122,7 @@ Public Class CrearClaseOleDb
         Return nomTablas
     End Function
     '
-    Public Shared Function GenerarClase(lang As eLenguaje,
+    Public Shared Function GenerarClase(lang As Lenguajes,
                                             usarCommandBuilder As Boolean,
                                             nombreClase As String,
                                             nomTabla As String,
@@ -148,7 +148,7 @@ Public Class CrearClaseOleDb
         '
         Return CrearClase.GenerarClaseOleDb(lang, usarCommandBuilder, nombreClase, baseDeDatos, cadenaSelect, password, provider)
     End Function
-    Public Shared Function GenerarClase(lang As eLenguaje,
+    Public Shared Function GenerarClase(lang As Lenguajes,
                                             usarCommandBuilder As Boolean,
                                             nombreClase As String,
                                             nomTabla As String,
@@ -157,7 +157,7 @@ Public Class CrearClaseOleDb
         '
         Return GenerarClase(lang, usarCommandBuilder, nombreClase, nomTabla, baseDeDatos, cadenaSelect, "", "")
     End Function
-    Public Shared Function GenerarClase(lang As eLenguaje,
+    Public Shared Function GenerarClase(lang As Lenguajes,
                                             usarCommandBuilder As Boolean,
                                             nombreClase As String,
                                             nomTabla As String,

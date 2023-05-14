@@ -251,11 +251,11 @@ namespace gsCrearClasesTablas_MAUI
 
             if (optVB.IsToggled)
             {
-                elCodigo = CrearClaseSQL.GenerarClase(eLenguaje.eVBNET, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
+                elCodigo = CrearClaseSQL.GenerarClase(Lenguajes.eVBNET, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
             }
             else
             {
-                elCodigo = CrearClaseSQL.GenerarClase(eLenguaje.eCS, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
+                elCodigo = CrearClaseSQL.GenerarClase(Lenguajes.eCS, usarCB, txtClase.Text, laTabla, txtDataSource.Text, txtInitialCatalog.Text, txtSelect.Text, txtUserId.Text, txtPassword.Text, chkSeguridadSQL.IsChecked);
             }
 
             //await App.Refrescar(10);

@@ -60,7 +60,7 @@ namespace elGuille.Util.Developer.Data
         private static string dbPrefix = "Sql";
         private static string password;
         private static bool esSQL;
-        private static eLenguaje lang;
+        private static Lenguajes lang;
         private static string nombreClase;
         private static string cadenaSelect;
 
@@ -103,7 +103,7 @@ namespace elGuille.Util.Developer.Data
         public static bool CrearIndizador { get; set; } = false;
 
         // estos métodos sólo se usarán desde las clases derivadas
-        protected static string GenerarClaseOleDb(eLenguaje lang, bool usarCommandBuilder, string nombreClase, string baseDeDatos, string cadenaSelect, string password, string provider)
+        protected static string GenerarClaseOleDb(Lenguajes lang, bool usarCommandBuilder, string nombreClase, string baseDeDatos, string cadenaSelect, string password, string provider)
         {
             esSQL = false;
             if (provider == "")
@@ -126,7 +126,7 @@ namespace elGuille.Util.Developer.Data
             return GenerarClase();
         }
         // 
-        protected static string GenerarClaseSQL(eLenguaje lang, bool usarCommandBuilder, string nombreClase, string dataSource, string initialCatalog, string cadenaSelect, string userId, string password, bool usarSeguridadSQL)
+        protected static string GenerarClaseSQL(Lenguajes lang, bool usarCommandBuilder, string nombreClase, string dataSource, string initialCatalog, string cadenaSelect, string userId, string password, bool usarSeguridadSQL)
         {
             esSQL = true;
             CrearClase.lang = lang;
@@ -195,8 +195,7 @@ namespace elGuille.Util.Developer.Data
                     campoIDtipo = col.DataType.ToString();
                 }
             }
-            // 
-            // 
+                         
             ConvLang.Lang = lang;
             sb.AppendFormat("{0}{1}", ConvLang.Comentario("------------------------------------------------------------------------------"), CrLf);
             if (esSQL)
@@ -219,7 +218,7 @@ namespace elGuille.Util.Developer.Data
                 sb.AppendFormat("{0}{1}", ConvLang.Comentario(" ©Guillermo Som (elGuille), 2004-2022"), CrLf);
             sb.AppendFormat("{0}{1}", ConvLang.Comentario("------------------------------------------------------------------------------"), CrLf);
             // 
-            if (lang == eLenguaje.eVBNET)
+            if (lang == Lenguajes.eVBNET)
             {
                 sb.AppendFormat("Option Strict On{0}", CrLf);
                 // Añado Option Infer On                             (17/Nov/18)
@@ -341,7 +340,7 @@ namespace elGuille.Util.Developer.Data
                 }
                 else
                 {
-                    if (lang == eLenguaje.eCS)
+                    if (lang == Lenguajes.eCS)
                     {
                         sb.AppendFormat("        get; set; }}{0}", CrLf);
                     }
@@ -537,7 +536,7 @@ namespace elGuille.Util.Developer.Data
                 " por si se usan diferentes bases de datos."
             ), CrLf);
             sb1 = new System.Text.StringBuilder();
-            if (lang == eLenguaje.eCS)
+            if (lang == Lenguajes.eCS)
                 sb1.Append('@');
             if (esSQL)
             {
@@ -556,7 +555,7 @@ namespace elGuille.Util.Developer.Data
             // Añado Property a CadenaConexion y CadenaSelect        (13/Abr/19)
             // para que sea más fácil saber las referencias que tienen.
             // En VB como propiedad, en C# como campo. (11/oct/22 23.21)
-            if (lang == eLenguaje.eVBNET)
+            if (lang == Lenguajes.eVBNET)
             {
                 sb.AppendFormat("    {0}{1}", ConvLang.DeclaraVariable("Public Shared Property", "CadenaConexion", "String", sb1.ToString()), CrLf);
             }
@@ -570,7 +569,7 @@ namespace elGuille.Util.Developer.Data
             // ------------------------------------------------------------------
             sb.AppendFormat("    {0}{1}", ConvLang.DocumentacionXML(" La cadena de selección"), CrLf);
             // En VB como propiedad, en C# como campo. (11/oct/22 23.21)
-            if (lang == eLenguaje.eVBNET)
+            if (lang == Lenguajes.eVBNET)
             {
                 sb.AppendFormat("    {0}{1}", ConvLang.DeclaraVariable("Public Shared Property", "CadenaSelect", "String", "\"" + cadenaSelect + "\""), CrLf);
             }
@@ -1241,10 +1240,10 @@ namespace elGuille.Util.Developer.Data
                 sb.AppendFormat("            {0}{1}", ConvLang.EndTry(), CrLf);
                 sb.AppendLine();
                 // End Using
-                sb.AppendFormat("            {0}{1}", ConvLang.EndUsing(), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.EndUsing(), CrLf);
                 sb.AppendLine();
                 // Return msg
-                sb.AppendFormat("            {0}{1}", ConvLang.Return("msg"), CrLf);
+                sb.AppendFormat("        {0}{1}", ConvLang.Return("msg"), CrLf);
             }
             // 
             sb.AppendFormat("    {0}{1}", ConvLang.EndFunction(), CrLf);

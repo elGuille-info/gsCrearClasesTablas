@@ -10,7 +10,7 @@
 // https://converter.telerik.com/
 // Con algo de ayuda
 // 
-// ©Guillermo 'guille' Som, 2004, 2005, 2007, 2022
+// ©Guillermo 'guille' Som, 2004, 2005, 2007, 2022-2023
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,6 @@ using System.Runtime.CompilerServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-//using Microsoft.VisualBasic;
 
 using System.Data;
 
@@ -44,8 +43,6 @@ namespace elGuille.Util.Developer.Data
 {
     public class CrearClaseSQL : CrearClase
     {
-        // 
-        // 
         public static string Conectar(string dataSource, string initialCatalog, string cadenaSelect)
         {
             return Conectar(dataSource, initialCatalog, cadenaSelect, "", "", false);
@@ -168,8 +165,6 @@ namespace elGuille.Util.Developer.Data
             return nomTablas;
         }
 
-        //public static string[] NombresTablas()
-
         /// <summary>
         /// Devuelve una colección de tipo string con los nombres de las tablas.
         /// </summary>
@@ -220,31 +215,12 @@ namespace elGuille.Util.Developer.Data
                         nomTablas.Add(tableName);
                 }
             }
-            // 
+            
             return nomTablas;
         }
-        // 
-        public static string GenerarClase(eLenguaje lang, bool usarCommandBuilder, string nombreClase, string nomTabla, string dataSource, string initialCatalog, string cadenaSelect, string userId, string password, bool usarSeguridadSQL)
+        
+        public static string GenerarClase(Lenguajes lang, bool usarCommandBuilder, string nombreClase, string nomTabla, string dataSource, string initialCatalog, string cadenaSelect, string userId, string password, bool usarSeguridadSQL)
         {
-            //return await Task.Run(() => 
-            //{
-            //    string s;
-            //    // 
-            //    nombreTabla = nomTabla;
-            //    if (nombreTabla == "" || nombreClase == "")
-            //        return "ERROR, no se ha indicado el nombre de la tabla o de la clase.";
-            //    s = Conectar(dataSource, initialCatalog, cadenaSelect, userId, password, usarSeguridadSQL);
-            //    if (Conectado == false || s != "")
-            //        return s;
-            //    // 
-            //    // Comprobar si el nombre de la clase tiene espacios     (02/Nov/04)
-            //    // de ser así, cambiarlo por un guión bajo.
-            //    // Bug reportado por David Sans
-            //    nombreClase = nombreClase.Replace(" ", "_");
-            //    // 
-            //    return CrearClase.GenerarClaseSQL(lang, usarCommandBuilder, nombreClase, dataSource, initialCatalog, cadenaSelect, userId, password, usarSeguridadSQL);
-            //});
-
             string s;
             
             NombreTabla = nomTabla;
@@ -253,17 +229,16 @@ namespace elGuille.Util.Developer.Data
             s = Conectar(dataSource, initialCatalog, cadenaSelect, userId, password, usarSeguridadSQL);
             if (Conectado == false || s != "")
                 return s;
-            // 
+            
             // Comprobar si el nombre de la clase tiene espacios     (02/Nov/04)
             // de ser así, cambiarlo por un guión bajo.
             // Bug reportado por David Sans
             nombreClase = nombreClase.Replace(" ", "_");
-            // 
+            
             return CrearClase.GenerarClaseSQL(lang, usarCommandBuilder, nombreClase, dataSource, initialCatalog, cadenaSelect, userId, password, usarSeguridadSQL);
         }
-        public static string GenerarClase(eLenguaje lang, bool usarCommandBuilder, string nombreClase, string nomTabla, string dataSource, string initialCatalog, string cadenaSelect)
+        public static string GenerarClase(Lenguajes lang, bool usarCommandBuilder, string nombreClase, string nomTabla, string dataSource, string initialCatalog, string cadenaSelect)
         {
-            // 
             return GenerarClase(lang, usarCommandBuilder, nombreClase, nomTabla, dataSource, initialCatalog, cadenaSelect, "", "", false);
         }
     }

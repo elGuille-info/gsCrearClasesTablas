@@ -12,9 +12,10 @@
 	  <RepositoryUrl>https://github.com/elGuille-info/gsCrearClasesTablas</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
 	  <NeutralLanguage>es</NeutralLanguage>
-	  <AssemblyVersion>3.0.16</AssemblyVersion>
-	  <FileVersion>3.0.16.0</FileVersion>
+	  <AssemblyVersion>3.1.0</AssemblyVersion>
+	  <FileVersion>3.1.0.0</FileVersion>
 	  <PackageReleaseNotes>
+          14-may-23: Cambio la versión a 3.1.0
           14-may-23: Actualizo Microsoft.Data.SqlClient 5.1.1
           14-may-23: Añado las clases ConversorTipos para VB y C#
           10-oct-22: Opción para crear las propiedades auto-implementadas.
