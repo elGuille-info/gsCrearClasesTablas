@@ -5,11 +5,16 @@ Versión para .NET 6.0 para Windows basado en el código publicado en: [CrearCla
 
 Mira en el blog para saber más y los enlaces a las versiones anteriores: [Generar las clases (de VB o C#) de una tabla de SQL Server o Access (mdb)](https://www.elguillemola.com/generar-las-clases-de-una-tabla-de-sql-server-o-access-mdb/)
 
-<br>
-<br>
+**Nota del 14-may-23:**
+
+He publicado un pague en NuGet con la DLL que genera las clases, por si así te resulta más fácil añadirla a algún proyecto que quieras crear para genera las clases.
+
+La versión actual publicada es la 3.1.0 y la puedes descargar desde: [gsCrearClases_CS/3.1.0](https://www.nuget.org/packages/gsCrearClases_CS/3.1.0)
+
+
 
 **Nota del 16-oct-22:**
-<br>
+
 He logrado que todo funcione en otro equipo con el Visual Studio Preview (Version 17.4.0 Preview 3.0).<br>
 En ese equipo (un laptop/portátil) solo tengo instalado ese Visual Studio con el .NET MAUI 7.0 Release Candidate 1 (7.0.100-rc.1) y .NET 7.0 Release Candidate 2 (7.0.100-rc.2.22477.23)<br>
 
@@ -21,14 +26,12 @@ El fichero del proyecto (en ese equipo) tengo configurado el iOS Bundle Signing 
 	
 </PropertyGroup>
 ```
-<br>
 
 >Para configurar el aprovisionamiento manual he seguido los pasos indicados aquí: <br>
 >[Cannot load Apple certificates - Solution - Tom Talpey](https://developercommunity.visualstudio.com/t/Cannot-load-Apple-certificates/1692185#T-N1703589)
 
 
-<br>
-<br>
+
 
 ### Ya está disponible en Microsoft Store la versión de Windows
 
@@ -37,8 +40,6 @@ Para descargar desde el navegador (te manda a la MS Store): [gsCrearClasesTablas
 
 **12-oct-2022:** Publicando la v3.0.9 en Microsoft Store.
 
-<br>
-<br>
 
 ### El _nightmare_ de los assets para Windows
 
