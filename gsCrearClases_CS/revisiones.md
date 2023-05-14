@@ -5,6 +5,45 @@
 ' Revisiones de la aplicación y las de esta biblioteca de clases<br>
 '------------------------------------------------------------------------------<br>
 
+### Revisiones de 2023
+
+```
+'<revision("3.0.14.0", _
+'   FechaModificacion:= "14/May/2023", _
+'   Tester:= "Jesús", _
+'   FechaReporte:= "10/Ene/2023", _
+'   Tipo:= "BUG", _
+'   Clases:= "CrearClase", _
+'   Miembro:= "generarClase", _
+'   Motivo:= "Al usar la clase generada falta el tipo ConversorTipos.", _
+'   Solucion:= "En el código se distribuye la clase ConversorTipos tanto para VB como C#.", _
+'   Comentarios:= "Clase de C# convertida (y optimizada) a partir de la de VB.")>
+
+'<revision("3.0.13.0", _
+'   FechaModificacion:= "14/May/2023", _
+'   Tester:= "Jesús", _
+'   FechaReporte:= "10/Ene/2023", _
+'   Tipo:= "BUG", _
+'   Clases:= "CrearClase", _
+'   Miembro:= "generarClase", _
+'   Motivo:= "Al usar la clase generada falta el tipo ConversorTipos.", _
+'   Solucion:= "En el código se distribuye la clase ConversorTipos tanto para VB como C#.", _
+'   Comentarios:= "Falta convertir la clase de VB a C#.")>
+
+'<revision("3.0.12.0", _
+'   FechaModificacion:= "11/Ene/2023", _
+'   Tester:= "Jesús", _
+'   FechaReporte:= "10/Ene/2023", _
+'   Tipo:= "BUG", _
+'   Clases:= "CrearClase", _
+'   Miembro:= "generarClase", _
+'   Motivo:= "Al usar la clase generada falta el tipo ConversorTipos.", _
+'   Solucion:= "Hay que distribuir la clase ConversorTipos tanto para VB como C#.", _
+'   Comentarios:= "Esto aún no está solucionado, es un TODO.")>
+
+```
+
+
 ### Revisiones de 2022
 
 ```

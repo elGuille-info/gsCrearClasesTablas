@@ -11,7 +11,7 @@
 // https://converter.telerik.com/
 // Con bastante ayuda
 // 
-// ©Guillermo 'guille' Som, 2004, 2005, 2007, 2018-2022
+// ©Guillermo 'guille' Som, 2004, 2005, 2007, 2018-2023
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -24,12 +24,10 @@ using System.Runtime.CompilerServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-//using Microsoft.VisualBasic;
 using System.Collections;
 using System.Data;
-//using System.Data.SqlClient;
-//using System.Data.OleDb;
-using elGuille.Util.Developer;
+
+//using elGuille.Util.Developer;
 
 namespace elGuille.Util.Developer.Data
 {

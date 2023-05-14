@@ -7,7 +7,7 @@
 '
 ' Quitar de gitHub los ficheros elguille.snk                    (01/oct/22 12.52)
 '
-' ©Guillermo Som (elGuille), 2004-2005, 2007, 2018-2019, 2021-2022
+' ©Guillermo Som (elGuille), 2004-2005, 2007, 2018-2019, 2021-2023
 '------------------------------------------------------------------------------
 ' Revisiones:
 '   0.0000  07/Jul/2004 Empiezo con los cambios para usar tablas SQL
@@ -66,6 +66,12 @@
 '   3.0.7.0             Usando la versión 3.0.12 de gsCrearClases_CS
 '   3.0.8.0 12/oct/2022 Mostrar generando y el tiempo empleado
 '   3.0.8.2 13/oct/2022 Alinear la etiqueta de generando
+'
+'   3.0.8.4 14/may/2023 Indicar si se crea el indizador
+'   3.0.8.5             No guardar todos los valores de configuración
+'                       si se llama desde mostrar tablas
+'                       LeerConfig para no depender de settings.
+'   3.0.9.0             Para 2023 y los cambios en CrearClases.
 '------------------------------------------------------------------------------
 Option Strict On
 Option Explicit On
@@ -122,6 +128,8 @@ Public Class Form1
         FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData))
         FicConfig = Path.Combine(FolderPath, "gsCrearClasesTablas.txt")
 
+        ' Quito todo lo relacionado con My.Sttings          (14/may/23 09.38)
+        ' Salvo para el tamaño y posición de la ventana.
         ' Actualizar la versión de los settings para no perder los valores anteriores. (05/oct/22 12.17)
         My.Settings.Upgrade()
         My.Settings.Save()
@@ -138,8 +146,8 @@ Public Class Form1
         End If
         ' Añdir información al status. (01/oct/22 11.55)
         Dim sCopyR = "©Guillermo Som (elGuille), 2004-2007, 2018-"
-        Dim elAño = 2022
-        If Date.Today.Year > 2022 Then
+        Dim elAño = 2023
+        If Date.Today.Year > elAño Then
             elAño = Date.Today.Year
         End If
         LabelInfo.Text = $"  {sCopyR}{elAño}  "
@@ -149,46 +157,50 @@ Public Class Form1
         txtSelect.Text = ""
         txtCodigo.Text = ""
         txtClase.Text = ""
-        '
-        txtDataSource.Text = My.Settings.SQLDataSource
-        txtInitialCatalog.Text = My.Settings.SQLInitialCatalog
-        chkSeguridadSQL.Checked = My.Settings.SQLSeguridad
-        txtUserId.Text = My.Settings.SQLUserId
-        txtPassword.Text = My.Settings.SQLPassword
-        '
-        txtNombreBase.Text = My.Settings.OleDbBaseDeDatos
-        txtProvider.Text = My.Settings.OleDbProvider
-        txtAccessPassword.Text = My.Settings.OleDbPassword
-        '
-        If My.Settings.UsarSQL Then
-            optAccess.Checked = False
-            optSQL.Checked = True
-        Else
-            optAccess.Checked = True
-            optSQL.Checked = False
-        End If
+
+        LeerConfig()
+
+        'txtDataSource.Text = My.Settings.SQLDataSource
+        'txtInitialCatalog.Text = My.Settings.SQLInitialCatalog
+        'chkSeguridadSQL.Checked = My.Settings.SQLSeguridad
+        'txtUserId.Text = My.Settings.SQLUserId
+        'txtPassword.Text = My.Settings.SQLPassword
+
+        'txtNombreBase.Text = My.Settings.OleDbBaseDeDatos
+        'txtProvider.Text = My.Settings.OleDbProvider
+        'txtAccessPassword.Text = My.Settings.OleDbPassword
+
+        'If My.Settings.UsarSQL Then
+        '    optAccess.Checked = False
+        '    optSQL.Checked = True
+        'Else
+        '    optSQL.Checked = False
+        '    optAccess.Checked = True
+        'End If
         grbSQL.Enabled = optSQL.Checked
         grbAccess.Enabled = optAccess.Checked
-        '
-        If My.Settings.Lenguaje.ToLower() = "vb" Then
-            optVB.Checked = True
-        Else
-            optCS.Checked = True
-        End If
+
+        'If My.Settings.Lenguaje = "VB" Then
+        '    optCS.Checked = False
+        '    optVB.Checked = True
+        'Else
+        '    optVB.Checked = False
+        '    optCS.Checked = True
+        'End If
 
         ' Guardar los valores iniciales, por si se usa chkUsarSQLEXpress (17/Abr/21)
         ValoresAntSQLExpress = (optSQL.Checked, chkSeguridadSQL.Checked, txtDataSource.Text, txtInitialCatalog.Text)
 
         inicializando = False
 
-        chkUsarCommandBuilder.Checked = My.Settings.UsarCommandBuilder
-        chkUsarAddWithValue.Checked = My.Settings.UsarAddWithValue
-        chkUsarDataAdapter.Checked = My.Settings.UsarExecuteScalar
-        chkUsarOverrides.Checked = My.Settings.usarOverrides
-        ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.30)
-        chkPropiedadAuto.Checked = My.Settings.PropiedadAuto
-        ' Opción para crear el indizador/default property. (11/oct/22 22.58)
-        chkCrearIndizador.Checked = My.Settings.CrearIndizador
+        'chkUsarCommandBuilder.Checked = My.Settings.UsarCommandBuilder
+        'chkUsarAddWithValue.Checked = My.Settings.UsarAddWithValue
+        'chkUsarDataAdapter.Checked = My.Settings.UsarExecuteScalar
+        'chkUsarOverrides.Checked = My.Settings.usarOverrides
+        '' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.30)
+        'chkPropiedadAuto.Checked = My.Settings.PropiedadAuto
+        '' Opción para crear el indizador/default property. (11/oct/22 22.58)
+        'chkCrearIndizador.Checked = My.Settings.CrearIndizador
 
         btnGuardar.Enabled = False
         grbOpciones.Enabled = btnGuardar.Enabled
@@ -197,7 +209,14 @@ Public Class Form1
     End Sub
     '
     Private Sub Form1_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
-        guardarCfg()
+        ' Guardar todos los valores.                        (14/may/23 08.50)
+        ' Cuando está depurando, si se hace parada          (14/may/23 09.06)
+        ' en el código desde esta llamada, da error.
+        Try
+            guardarCfg(soloConexion:=False)
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message)
+        End Try
     End Sub
     '
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
@@ -218,7 +237,8 @@ Public Class Form1
     End Sub
     '
     Private Sub btnMostrarTablas_Click(sender As Object, e As EventArgs) Handles btnMostrarTablas.Click
-        guardarCfg()
+        ' Solo asignar los datos de conexión, etc.          (14/may/23 08.47)
+        guardarCfg(soloConexion:=True)
 
         ' No tener en cuenta la cadena select para mostrar las tablas
         txtSelect.Text = ""
@@ -287,7 +307,8 @@ Public Class Form1
         End If
 
         txtCodigo.Text = ""
-        guardarCfg()
+        ' Guardar todos los valores.                        (14/may/23 08.50)
+        guardarCfg(soloConexion:=False)
         '
         ' Si la tabla contiene espacios,                            (02/Nov/04)
         ' sustituirlos por guiones bajos.
@@ -304,6 +325,9 @@ Public Class Form1
         CrearClase.UsarOverrides = chkUsarOverrides.Checked
         ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.34)
         CrearClase.PropiedadAuto = chkPropiedadAuto.Checked
+
+        ' Si se debe crear el indizador.                    (14/may/23 08.33)
+        CrearClase.CrearIndizador = chkCrearIndizador.Checked
 
         ' Si no está habilitado es que no se utiliza                (07/Abr/19)
         ' ya que solo se usa con DataAdapter
@@ -413,37 +437,44 @@ Public Class Form1
             End If
         End With
     End Sub
-    '
-    Private Sub guardarCfg()
-        My.Settings.SQLDataSource = txtDataSource.Text
-        My.Settings.SQLInitialCatalog = txtInitialCatalog.Text
-        My.Settings.SQLSeguridad = chkSeguridadSQL.Checked
-        My.Settings.SQLUserId = txtUserId.Text
-        ' guardar siempre una cadena vacía en el password
-        ' le indico que la guarde                                   (21/Dic/20)
-        My.Settings.SQLPassword = txtPassword.Text
 
-        My.Settings.OleDbBaseDeDatos = txtNombreBase.Text
-        My.Settings.OleDbProvider = txtProvider.Text
-        My.Settings.OleDbPassword = "" 'txtAccessPassword.Text
-        '
-        My.Settings.UsarSQL = optSQL.Checked
-        '
-        If optVB.Checked Then
-            My.Settings.Lenguaje = "VB"
-        Else
-            My.Settings.Lenguaje = "C#"
-        End If
-        '
-        My.Settings.UsarCommandBuilder = chkUsarCommandBuilder.Checked
-        My.Settings.UsarAddWithValue = chkUsarAddWithValue.Checked
-        My.Settings.UsarExecuteScalar = chkUsarDataAdapter.Checked
-        My.Settings.usarOverrides = chkUsarOverrides.Checked
-        ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.34)
-        My.Settings.PropiedadAuto = chkPropiedadAuto.Checked
-        ' Opción para crear el indizador/default property. (11/oct/22 22.58)
-        My.Settings.CrearIndizador = chkCrearIndizador.Checked
-        '
+    ''' <summary>
+    ''' Guardar los datos de configuración.
+    ''' </summary>
+    ''' <param name="soloConexion">True para solo los de la conexión, etc.</param>
+    Private Sub guardarCfg(soloConexion As Boolean)
+        'My.Settings.SQLDataSource = txtDataSource.Text
+        'My.Settings.SQLInitialCatalog = txtInitialCatalog.Text
+        'My.Settings.SQLSeguridad = chkSeguridadSQL.Checked
+        'My.Settings.SQLUserId = txtUserId.Text
+        '' guardar siempre una cadena vacía en el password
+        '' le indico que la guarde                                   (21/Dic/20)
+        'My.Settings.SQLPassword = txtPassword.Text
+
+        'My.Settings.OleDbBaseDeDatos = txtNombreBase.Text
+        'My.Settings.OleDbProvider = txtProvider.Text
+        'My.Settings.OleDbPassword = "" 'txtAccessPassword.Text
+
+        'My.Settings.UsarSQL = optSQL.Checked
+
+        'If soloConexion = False Then
+        '    If optVB.Checked Then
+        '        My.Settings.Lenguaje = "VB"
+        '    Else
+        '        My.Settings.Lenguaje = "C#"
+        '    End If
+
+        '    My.Settings.UsarCommandBuilder = chkUsarCommandBuilder.Checked
+        '    My.Settings.UsarAddWithValue = chkUsarAddWithValue.Checked
+        '    My.Settings.UsarExecuteScalar = chkUsarDataAdapter.Checked
+        '    My.Settings.usarOverrides = chkUsarOverrides.Checked
+        '    ' Opción para usar las propiedades auto-implementadas. (10/oct/22 19.34)
+        '    My.Settings.PropiedadAuto = chkPropiedadAuto.Checked
+        '    ' Opción para crear el indizador/default property. (11/oct/22 22.58)
+        '    My.Settings.CrearIndizador = chkCrearIndizador.Checked
+
+        'End If
+
         If WindowState = FormWindowState.Normal Then
             My.Settings.Left = Me.Left
             My.Settings.Top = Me.Top
@@ -451,9 +482,12 @@ Public Class Form1
             My.Settings.Left = Me.RestoreBounds.Left
             My.Settings.Top = Me.RestoreBounds.Top
         End If
-        '
+
         My.Settings.CopyrightAutor = "Guillermo Som (elGuille)"
         My.Settings.CopyrightVersion = My.Application.Info.Version.ToString
+
+        ' Por si no está puesto que se guarde.                  (14/may/23 09.04)
+        My.Settings.Save()
 
         ' Guardar los valore por compatibilidad con la app móvil (.NET MAUI)
         GuardarConfig()
@@ -481,6 +515,9 @@ Public Class Form1
         End If
     End Sub
 
+    ''' <summary>
+    ''' Guardar los datos de configuración.
+    ''' </summary>
     Private Sub GuardarConfig()
         Using sw = New StreamWriter(FicConfig, False, System.Text.Encoding.Default)
             sw.WriteLine(If(optSQL.Checked, "1", "0"))
@@ -496,7 +533,144 @@ Public Class Form1
             sw.WriteLine(If(optVB.Checked, "1", "0"))
             sw.WriteLine(If(chkPropiedadAuto.Checked, "1", "0"))
             sw.WriteLine(If(chkCrearIndizador.Checked, "1", "0"))
+            ' Guardar el password de access                 (14/may/23 09.32)
+            sw.WriteLine(txtAccessPassword.Text)
         End Using
+    End Sub
+
+    ''' <summary>
+    ''' Leer los datos de configuración, para no usar los settings
+    ''' </summary>
+    ''' <remarks>La comprobación de EndOfStream es por si no existía el fichero.</remarks>
+    Private Sub LeerConfig()
+        If File.Exists(FicConfig) Then
+            Dim s As String
+            Using sr = New StreamReader(FicConfig, System.Text.Encoding.Default, True)
+                If sr.EndOfStream Then
+                    s = "1"
+                Else
+                    s = sr.ReadLine()
+                End If
+                optSQL.Checked = s = "1"
+                If sr.EndOfStream Then
+                    s = ""
+                Else
+                    s = sr.ReadLine()
+                End If
+                txtDataSource.Text = s
+                If sr.EndOfStream Then
+                    s = ""
+                Else
+                    s = sr.ReadLine()
+                End If
+                txtInitialCatalog.Text = s
+                If sr.EndOfStream Then
+                    s = "0"
+                Else
+                    s = sr.ReadLine()
+                End If
+                chkSeguridadSQL.Checked = s = "1"
+                If sr.EndOfStream Then
+                    s = ""
+                Else
+                    s = sr.ReadLine()
+                End If
+                txtUserId.Text = s
+                If sr.EndOfStream Then
+                    s = ""
+                Else
+                    s = sr.ReadLine()
+                End If
+                txtPassword.Text = s
+                If sr.EndOfStream Then
+                    s = "0"
+                Else
+                    s = sr.ReadLine()
+                End If
+                chkUsarDataAdapter.Checked = s = "1"
+                If sr.EndOfStream Then
+                    s = "0"
+                Else
+                    s = sr.ReadLine()
+                End If
+                chkUsarCommandBuilder.Checked = s = "1"
+                If sr.EndOfStream Then
+                    s = "0"
+                Else
+                    s = sr.ReadLine()
+                End If
+                chkUsarAddWithValue.Checked = s = "1"
+                If sr.EndOfStream Then
+                    s = "1"
+                Else
+                    s = sr.ReadLine()
+                End If
+                chkUsarOverrides.Checked = s = "1"
+                If sr.EndOfStream Then
+                    s = "1"
+                Else
+                    s = sr.ReadLine()
+                End If
+                optVB.Checked = s = "1"
+                If sr.EndOfStream Then
+                    s = "1"
+                Else
+                    s = sr.ReadLine()
+                End If
+                chkPropiedadAuto.Checked = s = "1"
+                If sr.EndOfStream Then
+                    s = "1"
+                Else
+                    s = sr.ReadLine()
+                End If
+                chkCrearIndizador.Checked = s = "1"
+                If sr.EndOfStream Then
+                    s = ""
+                Else
+                    s = sr.ReadLine()
+                End If
+                txtAccessPassword.Text = s
+            End Using
+        Else
+            txtDataSource.Text = ""
+            txtInitialCatalog.Text = ""
+            chkSeguridadSQL.Checked = True
+            txtUserId.Text = ""
+            txtPassword.Text = ""
+            txtNombreBase.Text = ""
+            txtProvider.Text = ""
+            txtAccessPassword.Text = ""
+            optSQL.Checked = True
+            optVB.Checked = True
+            chkUsarCommandBuilder.Checked = False
+            chkUsarAddWithValue.Checked = False
+            chkUsarDataAdapter.Checked = False
+            chkUsarOverrides.Checked = True
+            chkPropiedadAuto.Checked = True
+            chkCrearIndizador.Checked = True
+        End If
+        ' Asignar los valores de Settings                   (14/may/23 09.25)
+        ' según lo leído de la configuración
+        'My.Settings.SQLDataSource = txtDataSource.Text
+        'My.Settings.SQLInitialCatalog = txtInitialCatalog.Text
+        'My.Settings.SQLSeguridad = chkSeguridadSQL.Checked
+        'My.Settings.SQLUserId = txtUserId.Text
+        'My.Settings.SQLPassword = txtPassword.Text
+        'My.Settings.OleDbBaseDeDatos = txtNombreBase.Text
+        'My.Settings.OleDbProvider = txtProvider.Text
+        'My.Settings.OleDbPassword = txtAccessPassword.Text
+        'My.Settings.UsarSQL = optSQL.Checked
+        'If optVB.Checked Then
+        '    My.Settings.Lenguaje = "VB"
+        'Else
+        '    My.Settings.Lenguaje = "C#"
+        'End If
+        'My.Settings.UsarCommandBuilder = chkUsarCommandBuilder.Checked
+        'My.Settings.UsarAddWithValue = chkUsarAddWithValue.Checked
+        'My.Settings.UsarExecuteScalar = chkUsarDataAdapter.Checked
+        'My.Settings.usarOverrides = chkUsarOverrides.Checked
+        'My.Settings.PropiedadAuto = chkPropiedadAuto.Checked
+        'My.Settings.CrearIndizador = chkCrearIndizador.Checked
     End Sub
 
     Private Sub optVB_CheckedChanged(sender As Object, e As EventArgs) Handles optVB.CheckedChanged, optCS.CheckedChanged
